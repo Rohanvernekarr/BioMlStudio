@@ -1,5 +1,5 @@
 """
-Storage service for managing files and model artifacts
+Storage service for managing files and model artifacts using local filesystem only.
 """
 
 import logging
@@ -7,251 +7,117 @@ from io import BytesIO
 from pathlib import Path
 from typing import Any, Dict, Optional
 
-from minio import Minio
-from minio.error import S3Error
-
 from app.core.config import settings
 
 logger = logging.getLogger(__name__)
 
 
 class StorageService:
-    """Service for file and artifact storage"""
-    
+    """Service for file and artifact storage (local filesystem)."""
+
     def __init__(self):
         self.logger = logging.getLogger(__name__)
-        
-        # Initialize MinIO client
-        self.client = Minio(
-            settings.MINIO_ENDPOINT,
-            access_key=settings.MINIO_ACCESS_KEY,
-            secret_key=settings.MINIO_SECRET_KEY,
-            secure=settings.MINIO_SECURE
-        )
-        
-        # Ensure bucket exists
-        self._ensure_bucket_exists()
-    
-    def _ensure_bucket_exists(self) -> None:
-        """Ensure the storage bucket exists"""
-        try:
-            if not self.client.bucket_exists(settings.MINIO_BUCKET_NAME):
-                self.client.make_bucket(settings.MINIO_BUCKET_NAME)
-                self.logger.info(f"Created bucket: {settings.MINIO_BUCKET_NAME}")
-        except S3Error as e:
-            self.logger.error(f"Error creating bucket: {e}")
-            raise
-    
+        self.base_path = Path(settings.LOCAL_STORAGE_PATH)
+        self.base_path.mkdir(parents=True, exist_ok=True)
+
+    def _resolve_path(self, object_name: str) -> Path:
+        """Resolve object path safely within base_path."""
+        object_path = self.base_path / object_name
+        object_path.parent.mkdir(parents=True, exist_ok=True)
+        return object_path
+
     async def upload_file(
         self,
         file_path: str,
         object_name: str,
-        metadata: Optional[Dict[str, str]] = None
+        metadata: Optional[Dict[str, str]] = None,
     ) -> str:
-        """
-        Upload file to storage.
-        
-        Args:
-            file_path: Local file path
-            object_name: Object name in storage
-            metadata: Optional metadata
-            
-        Returns:
-            str: Storage object path
-        """
+        """Copy a local file into storage directory."""
+        src = Path(file_path)
+        dest = self._resolve_path(object_name)
+        dest.write_bytes(src.read_bytes())
+        self.logger.info(f"File uploaded: {src} -> {dest}")
+        return str(dest.relative_to(self.base_path))
+
+    async def download_file(self, object_name: str, file_path: str) -> bool:
+        """Copy a stored file to a target local path."""
         try:
-            self.client.fput_object(
-                settings.MINIO_BUCKET_NAME,
-                object_name,
-                file_path,
-                metadata=metadata
-            )
-            
-            self.logger.info(f"File uploaded: {object_name}")
-            return f"{settings.MINIO_BUCKET_NAME}/{object_name}"
-            
-        except S3Error as e:
-            self.logger.error(f"Error uploading file {object_name}: {e}")
-            raise
-    
-    async def download_file(
-        self,
-        object_name: str,
-        file_path: str
-    ) -> bool:
-        """
-        Download file from storage.
-        
-        Args:
-            object_name: Object name in storage
-            file_path: Local file path to save
-            
-        Returns:
-            bool: True if downloaded successfully
-        """
-        try:
-            self.client.fget_object(
-                settings.MINIO_BUCKET_NAME,
-                object_name,
-                file_path
-            )
-            
-            self.logger.info(f"File downloaded: {object_name} -> {file_path}")
+            src = self._resolve_path(object_name)
+            dest = Path(file_path)
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_bytes(src.read_bytes())
+            self.logger.info(f"File downloaded: {src} -> {dest}")
             return True
-            
-        except S3Error as e:
-            self.logger.error(f"Error downloading file {object_name}: {e}")
+        except FileNotFoundError:
+            self.logger.error(f"File not found: {object_name}")
             return False
-    
+
     async def get_file_stream(self, object_name: str) -> BytesIO:
-        """
-        Get file as stream.
-        
-        Args:
-            object_name: Object name in storage
-            
-        Returns:
-            BytesIO: File stream
-        """
-        try:
-            response = self.client.get_object(
-                settings.MINIO_BUCKET_NAME,
-                object_name
-            )
-            
-            data = response.read()
-            return BytesIO(data)
-            
-        except S3Error as e:
-            self.logger.error(f"Error getting file stream {object_name}: {e}")
-            raise
-    
+        """Return a BytesIO stream for the stored file."""
+        path = self._resolve_path(object_name)
+        return BytesIO(path.read_bytes())
+
     async def delete_file(self, object_name: str) -> bool:
-        """
-        Delete file from storage.
-        
-        Args:
-            object_name: Object name to delete
-            
-        Returns:
-            bool: True if deleted successfully
-        """
+        """Delete a stored file."""
         try:
-            self.client.remove_object(
-                settings.MINIO_BUCKET_NAME,
-                object_name
-            )
-            
-            self.logger.info(f"File deleted: {object_name}")
-            return True
-            
-        except S3Error as e:
+            path = self._resolve_path(object_name)
+            if path.exists():
+                path.unlink()
+                self.logger.info(f"File deleted: {object_name}")
+                return True
+            return False
+        except Exception as e:
             self.logger.error(f"Error deleting file {object_name}: {e}")
             return False
-    
+
     async def list_files(self, prefix: str = "") -> list:
-        """
-        List files with optional prefix.
-        
-        Args:
-            prefix: Object name prefix
-            
-        Returns:
-            list: List of object information
-        """
-        try:
-            objects = self.client.list_objects(
-                settings.MINIO_BUCKET_NAME,
-                prefix=prefix,
-                recursive=True
-            )
-            
-            return [
-                {
-                    'name': obj.object_name,
-                    'size': obj.size,
-                    'last_modified': obj.last_modified,
-                    'etag': obj.etag
-                }
-                for obj in objects
-            ]
-            
-        except S3Error as e:
-            self.logger.error(f"Error listing files with prefix {prefix}: {e}")
+        """List files under prefix directory."""
+        base = self.base_path / prefix if prefix else self.base_path
+        if not base.exists():
             return []
-    
+        results = []
+        for path in base.rglob("*"):
+            if path.is_file():
+                rel = path.relative_to(self.base_path)
+                stat = path.stat()
+                results.append(
+                    {
+                        "name": str(rel),
+                        "size": stat.st_size,
+                        "last_modified": stat.st_mtime,
+                        "etag": None,
+                    }
+                )
+        return results
+
     async def get_file_info(self, object_name: str) -> Optional[Dict[str, Any]]:
-        """
-        Get file information.
-        
-        Args:
-            object_name: Object name
-            
-        Returns:
-            Dict: File information or None if not found
-        """
-        try:
-            stat = self.client.stat_object(
-                settings.MINIO_BUCKET_NAME,
-                object_name
-            )
-            
-            return {
-                'name': object_name,
-                'size': stat.size,
-                'last_modified': stat.last_modified,
-                'etag': stat.etag,
-                'content_type': stat.content_type,
-                'metadata': stat.metadata
-            }
-            
-        except S3Error as e:
-            if e.code == 'NoSuchKey':
-                return None
-            self.logger.error(f"Error getting file info {object_name}: {e}")
-            raise
-    
-    async def get_model_file(
-        self,
-        model_path: str,
-        format: str = "joblib"
-    ) -> BytesIO:
-        """
-        Get model file in specified format.
-        
-        Args:
-            model_path: Path to model file
-            format: Export format (joblib, pickle, onnx)
-            
-        Returns:
-            BytesIO: Model file stream
-        """
-        # For now, just return the original file
-        # In future, could implement format conversion
+        """Get local file metadata."""
+        path = self._resolve_path(object_name)
+        if not path.exists():
+            return None
+        stat = path.stat()
+        return {
+            "name": object_name,
+            "size": stat.st_size,
+            "last_modified": stat.st_mtime,
+            "etag": None,
+            "content_type": None,
+            "metadata": None,
+        }
+
+    async def get_model_file(self, model_path: str, format: str = "joblib") -> BytesIO:
+        """Return the model file stream (no conversion)."""
         return await self.get_file_stream(model_path)
-    
+
     async def delete_model_files(self, model_path: str) -> bool:
-        """
-        Delete all files associated with a model.
-        
-        Args:
-            model_path: Base model path
-            
-        Returns:
-            bool: True if deleted successfully
-        """
+        """Delete all files under the model directory prefix."""
         try:
-            # List all files with model path as prefix
             model_dir = str(Path(model_path).parent)
             files = await self.list_files(prefix=model_dir)
-            
-            # Delete all associated files
             for file_info in files:
-                await self.delete_file(file_info['name'])
-            
+                await self.delete_file(file_info["name"])
             self.logger.info(f"Model files deleted: {model_path}")
             return True
-            
         except Exception as e:
             self.logger.error(f"Error deleting model files {model_path}: {e}")
             return False

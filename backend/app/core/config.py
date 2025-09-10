@@ -3,6 +3,7 @@ Configuration management using Pydantic Settings
 """
 
 import secrets
+import os
 from typing import List, Optional, Union
 
 from pydantic import AnyHttpUrl, BaseSettings, EmailStr, validator
@@ -28,11 +29,15 @@ class Settings(BaseSettings):
     CELERY_BROKER_URL: str = "redis://localhost:6379/0"
     CELERY_RESULT_BACKEND: str = "redis://localhost:6379/0"
     
-    # MinIO/S3 Storage
-    MINIO_ENDPOINT: str = "localhost:9000"
-    MINIO_ACCESS_KEY: str = "minio"
-    MINIO_SECRET_KEY: str = "miniosecret"
-    MINIO_BUCKET_NAME: str = "bioml-storage"
+    # Storage Configuration
+    STORAGE_TYPE: str = "local"  # 'local' or 's3' or 'minio'
+    LOCAL_STORAGE_PATH: str = "storage"
+    
+    # MinIO/S3 Storage (disabled by default)
+    MINIO_ENDPOINT: Optional[str] = None
+    MINIO_ACCESS_KEY: Optional[str] = None
+    MINIO_SECRET_KEY: Optional[str] = None
+    MINIO_BUCKET_NAME: Optional[str] = None
     MINIO_SECURE: bool = False
     
     # AWS S3 (alternative)
@@ -40,6 +45,12 @@ class Settings(BaseSettings):
     AWS_SECRET_ACCESS_KEY: Optional[str] = None
     AWS_DEFAULT_REGION: str = "us-east-1"
     AWS_S3_BUCKET: Optional[str] = None
+    
+    def __init__(self, **values):
+        super().__init__(**values)
+        # Ensure local storage directory exists
+        if self.STORAGE_TYPE == 'local':
+            os.makedirs(self.LOCAL_STORAGE_PATH, exist_ok=True)
     
     # Security
     ALGORITHM: str = "HS256"
@@ -105,8 +116,15 @@ class Settings(BaseSettings):
     
     @validator("DATABASE_URL", pre=True)
     def validate_database_url(cls, v: str) -> str:
-        if v and not v.startswith(("postgresql://", "sqlite:///")):
-            raise ValueError("Database URL must start with postgresql:// or sqlite:///")
+        if v and not v.startswith((
+            "postgresql://",
+            "postgresql+psycopg2://",
+            "postgresql+psycopg://",
+            "sqlite:///",
+        )):
+            raise ValueError(
+                "Database URL must start with postgresql://, postgresql+psycopg2://, postgresql+psycopg:// or sqlite:///"
+            )
         return v
     
     class Config:
