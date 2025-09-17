@@ -1,0 +1,648 @@
+{"timestamp": "2025-09-17 20:26:03", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [34476]"}
+{"timestamp": "2025-09-17 20:26:03", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-09-17 20:26:03", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-09-17 20:26:08", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-09-17 20:26:08", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-09-17 20:26:08", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-09-17 20:26:35", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/docs"}
+{"timestamp": "2025-09-17 20:26:35", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/docs - 200 - 0.0024s"}
+{"timestamp": "2025-09-17 20:26:35", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:58153 - "GET /api/v1/docs HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 20:26:37", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/openapi.json"}
+{"timestamp": "2025-09-17 20:26:37", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/openapi.json - 200 - 0.0549s"}
+{"timestamp": "2025-09-17 20:26:37", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:58153 - "GET /api/v1/openapi.json HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 20:26:51", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/auth/register"}
+{"timestamp": "2025-09-17 20:26:51", "name": "app.api.deps", "level": "ERROR", "message": "Database session error: Column expression expected for argument 'remote_side'; got <built-in function id>."}
+{"timestamp": "2025-09-17 20:26:51", "name": "app.main", "level": "ERROR", "message": "Unexpected error: Column expression expected for argument 'remote_side'; got <built-in function id>."}
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 108, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\app\main.py", line 99, in process_time_middleware
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 84, in call_next
+    raise app_exc
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 70, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 79, in __call__
+    raise exc
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\routing.py", line 66, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\routing.py", line 274, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\app\api\routes\auth.py", line 44, in register_user
+    existing_user = db.query(User).filter(User.email == user_data.email).first()
+                    ^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2912, in query
+    return self._query_cls(entities, self, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\query.py", line 276, in __init__
+    self._set_entities(entities)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\query.py", line 289, in _set_entities
+    coercions.expect(
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\sql\coercions.py", line 406, in expect
+    insp._post_inspect
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 1260, in __get__
+    obj.__dict__[self.__name__] = result = self.fget(obj)
+                                           ^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2707, in _post_inspect
+    self._check_configure()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2386, in _check_configure
+    _configure_registries({self.registry}, cascade=True)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 4199, in _configure_registries
+    _do_configure_registries(registries, cascade)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 4240, in _do_configure_registries
+    mapper._post_configure_properties()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2403, in _post_configure_properties
+    prop.init()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\interfaces.py", line 579, in init
+    self.do_init()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\relationships.py", line 1634, in do_init
+    self._process_dependent_arguments()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\relationships.py", line 1721, in _process_dependent_arguments
+    self.remote_side = util.column_set(
+                       ^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\relationships.py", line 1722, in <genexpr>
+    coercions.expect(
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\sql\coercions.py", line 413, in expect
+    resolved = impl._literal_coercion(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\sql\coercions.py", line 621, in _literal_coercion
+    self._raise_for_expected(element, argname)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\sql\coercions.py", line 535, in _raise_for_expected
+    raise exc.ArgumentError(msg, code=code) from err
+sqlalchemy.exc.ArgumentError: Column expression expected for argument 'remote_side'; got <built-in function id>.
+{"timestamp": "2025-09-17 20:26:51", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:58201 - "POST /api/v1/auth/register HTTP/1.1" 500"}
+{"timestamp": "2025-09-17 20:26:51", "name": "uvicorn.error", "level": "ERROR", "message": "Exception in ASGI application
+"}
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py", line 426, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 84, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\applications.py", line 1106, in __call__
+    await super().__call__(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\applications.py", line 122, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\errors.py", line 184, in __call__
+    raise exc
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 108, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\app\main.py", line 99, in process_time_middleware
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 84, in call_next
+    raise app_exc
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 70, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 79, in __call__
+    raise exc
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\routing.py", line 66, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\routing.py", line 274, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\app\api\routes\auth.py", line 44, in register_user
+    existing_user = db.query(User).filter(User.email == user_data.email).first()
+                    ^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2912, in query
+    return self._query_cls(entities, self, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\query.py", line 276, in __init__
+    self._set_entities(entities)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\query.py", line 289, in _set_entities
+    coercions.expect(
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\sql\coercions.py", line 406, in expect
+    insp._post_inspect
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 1260, in __get__
+    obj.__dict__[self.__name__] = result = self.fget(obj)
+                                           ^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2707, in _post_inspect
+    self._check_configure()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2386, in _check_configure
+    _configure_registries({self.registry}, cascade=True)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 4199, in _configure_registries
+    _do_configure_registries(registries, cascade)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 4240, in _do_configure_registries
+    mapper._post_configure_properties()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2403, in _post_configure_properties
+    prop.init()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\interfaces.py", line 579, in init
+    self.do_init()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\relationships.py", line 1634, in do_init
+    self._process_dependent_arguments()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\relationships.py", line 1721, in _process_dependent_arguments
+    self.remote_side = util.column_set(
+                       ^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\relationships.py", line 1722, in <genexpr>
+    coercions.expect(
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\sql\coercions.py", line 413, in expect
+    resolved = impl._literal_coercion(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\sql\coercions.py", line 621, in _literal_coercion
+    self._raise_for_expected(element, argname)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\sql\coercions.py", line 535, in _raise_for_expected
+    raise exc.ArgumentError(msg, code=code) from err
+sqlalchemy.exc.ArgumentError: Column expression expected for argument 'remote_side'; got <built-in function id>.
+{"timestamp": "2025-09-17 20:27:30", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-09-17 20:27:30", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application shutdown."}
+{"timestamp": "2025-09-17 20:27:30", "name": "app.main", "level": "INFO", "message": "🛑 Shutting down BioMLStudio API..."}
+{"timestamp": "2025-09-17 20:27:30", "name": "uvicorn.error", "level": "INFO", "message": "Application shutdown complete."}
+{"timestamp": "2025-09-17 20:27:30", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [34476]"}
+{"timestamp": "2025-09-17 20:27:49", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [12876]"}
+{"timestamp": "2025-09-17 20:27:49", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-09-17 20:27:49", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-09-17 20:27:53", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-09-17 20:27:53", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-09-17 20:27:53", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-09-17 20:31:52", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/docs"}
+{"timestamp": "2025-09-17 20:31:52", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/docs - 200 - 0.0016s"}
+{"timestamp": "2025-09-17 20:31:52", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:58690 - "GET /api/v1/docs HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 20:31:54", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/openapi.json"}
+{"timestamp": "2025-09-17 20:31:54", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/openapi.json - 200 - 0.0510s"}
+{"timestamp": "2025-09-17 20:31:54", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:58690 - "GET /api/v1/openapi.json HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 20:32:27", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/auth/register"}
+{"timestamp": "2025-09-17 20:32:27", "name": "app.api.deps", "level": "ERROR", "message": "Database session error: Column expression expected for argument 'remote_side'; got <built-in function id>."}
+{"timestamp": "2025-09-17 20:32:27", "name": "app.main", "level": "ERROR", "message": "Unexpected error: Column expression expected for argument 'remote_side'; got <built-in function id>."}
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 108, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\app\main.py", line 99, in process_time_middleware
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 84, in call_next
+    raise app_exc
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 70, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 79, in __call__
+    raise exc
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\routing.py", line 66, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\routing.py", line 274, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\app\api\routes\auth.py", line 44, in register_user
+    existing_user = db.query(User).filter(User.email == user_data.email).first()
+                    ^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2912, in query
+    return self._query_cls(entities, self, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\query.py", line 276, in __init__
+    self._set_entities(entities)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\query.py", line 289, in _set_entities
+    coercions.expect(
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\sql\coercions.py", line 406, in expect
+    insp._post_inspect
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 1260, in __get__
+    obj.__dict__[self.__name__] = result = self.fget(obj)
+                                           ^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2707, in _post_inspect
+    self._check_configure()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2386, in _check_configure
+    _configure_registries({self.registry}, cascade=True)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 4199, in _configure_registries
+    _do_configure_registries(registries, cascade)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 4240, in _do_configure_registries
+    mapper._post_configure_properties()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2403, in _post_configure_properties
+    prop.init()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\interfaces.py", line 579, in init
+    self.do_init()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\relationships.py", line 1634, in do_init
+    self._process_dependent_arguments()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\relationships.py", line 1721, in _process_dependent_arguments
+    self.remote_side = util.column_set(
+                       ^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\relationships.py", line 1722, in <genexpr>
+    coercions.expect(
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\sql\coercions.py", line 413, in expect
+    resolved = impl._literal_coercion(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\sql\coercions.py", line 621, in _literal_coercion
+    self._raise_for_expected(element, argname)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\sql\coercions.py", line 535, in _raise_for_expected
+    raise exc.ArgumentError(msg, code=code) from err
+sqlalchemy.exc.ArgumentError: Column expression expected for argument 'remote_side'; got <built-in function id>.
+{"timestamp": "2025-09-17 20:32:27", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:58747 - "POST /api/v1/auth/register HTTP/1.1" 500"}
+{"timestamp": "2025-09-17 20:32:27", "name": "uvicorn.error", "level": "ERROR", "message": "Exception in ASGI application
+"}
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py", line 426, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 84, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\applications.py", line 1106, in __call__
+    await super().__call__(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\applications.py", line 122, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\errors.py", line 184, in __call__
+    raise exc
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 108, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\app\main.py", line 99, in process_time_middleware
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 84, in call_next
+    raise app_exc
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 70, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 79, in __call__
+    raise exc
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\routing.py", line 66, in app
+    response = await func(request)
+               ^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\routing.py", line 274, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\routing.py", line 191, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\app\api\routes\auth.py", line 44, in register_user
+    existing_user = db.query(User).filter(User.email == user_data.email).first()
+                    ^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2912, in query
+    return self._query_cls(entities, self, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\query.py", line 276, in __init__
+    self._set_entities(entities)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\query.py", line 289, in _set_entities
+    coercions.expect(
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\sql\coercions.py", line 406, in expect
+    insp._post_inspect
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 1260, in __get__
+    obj.__dict__[self.__name__] = result = self.fget(obj)
+                                           ^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2707, in _post_inspect
+    self._check_configure()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2386, in _check_configure
+    _configure_registries({self.registry}, cascade=True)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 4199, in _configure_registries
+    _do_configure_registries(registries, cascade)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 4240, in _do_configure_registries
+    mapper._post_configure_properties()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2403, in _post_configure_properties
+    prop.init()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\interfaces.py", line 579, in init
+    self.do_init()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\relationships.py", line 1634, in do_init
+    self._process_dependent_arguments()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\relationships.py", line 1721, in _process_dependent_arguments
+    self.remote_side = util.column_set(
+                       ^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\relationships.py", line 1722, in <genexpr>
+    coercions.expect(
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\sql\coercions.py", line 413, in expect
+    resolved = impl._literal_coercion(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\sql\coercions.py", line 621, in _literal_coercion
+    self._raise_for_expected(element, argname)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\sql\coercions.py", line 535, in _raise_for_expected
+    raise exc.ArgumentError(msg, code=code) from err
+sqlalchemy.exc.ArgumentError: Column expression expected for argument 'remote_side'; got <built-in function id>.
+{"timestamp": "2025-09-17 20:35:19", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-09-17 20:35:19", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application shutdown."}
+{"timestamp": "2025-09-17 20:35:19", "name": "app.main", "level": "INFO", "message": "🛑 Shutting down BioMLStudio API..."}
+{"timestamp": "2025-09-17 20:35:19", "name": "uvicorn.error", "level": "INFO", "message": "Application shutdown complete."}
+{"timestamp": "2025-09-17 20:35:19", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [12876]"}
+{"timestamp": "2025-09-17 20:35:23", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [35204]"}
+{"timestamp": "2025-09-17 20:35:23", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-09-17 20:35:23", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-09-17 20:35:25", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-09-17 20:35:25", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-09-17 20:35:25", "name": "uvicorn.error", "level": "ERROR", "message": "Traceback (most recent call last):
+  File "C:\Python312\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    await self.startup(sockets=sockets)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\server.py", line 89, in startup
+    await self.lifespan.startup()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
+    await self.startup_event.wait()
+  File "C:\Python312\Lib\asyncio\locks.py", line 212, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python312\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\routing.py", line 686, in lifespan
+    await receive()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError
+"}
+{"timestamp": "2025-09-17 20:35:29", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [20748]"}
+{"timestamp": "2025-09-17 20:35:29", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-09-17 20:35:29", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-09-17 20:35:31", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-09-17 20:35:31", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-09-17 20:35:31", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-09-17 20:35:45", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/docs"}
+{"timestamp": "2025-09-17 20:35:45", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/docs - 200 - 0.0021s"}
+{"timestamp": "2025-09-17 20:35:45", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59055 - "GET /api/v1/docs HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 20:35:45", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/openapi.json"}
+{"timestamp": "2025-09-17 20:35:46", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/openapi.json - 200 - 0.0606s"}
+{"timestamp": "2025-09-17 20:35:46", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59055 - "GET /api/v1/openapi.json HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 20:35:53", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/auth/register"}
+{"timestamp": "2025-09-17 20:35:53", "name": "passlib.handlers.bcrypt", "level": "WARNING", "message": "(trapped) error reading bcrypt version"}
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+{"timestamp": "2025-09-17 20:35:54", "name": "app.api.routes.auth", "level": "INFO", "message": "New user registered: user@example.com"}
+{"timestamp": "2025-09-17 20:35:54", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/auth/register - 200 - 0.8016s"}
+{"timestamp": "2025-09-17 20:35:54", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59066 - "POST /api/v1/auth/register HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 20:38:19", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/health"}
+{"timestamp": "2025-09-17 20:38:19", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/health - 200 - 0.0010s"}
+{"timestamp": "2025-09-17 20:38:19", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59281 - "GET /api/v1/health HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 20:38:27", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/health/detailed"}
+{"timestamp": "2025-09-17 20:38:27", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/health/detailed - 200 - 0.3286s"}
+{"timestamp": "2025-09-17 20:38:27", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59292 - "GET /api/v1/health/detailed HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 20:38:40", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/ready"}
+{"timestamp": "2025-09-17 20:38:40", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/ready - 200 - 0.1622s"}
+{"timestamp": "2025-09-17 20:38:40", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59311 - "GET /api/v1/ready HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 20:38:47", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/live"}
+{"timestamp": "2025-09-17 20:38:47", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/live - 200 - 0.0016s"}
+{"timestamp": "2025-09-17 20:38:47", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59319 - "GET /api/v1/live HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 20:39:25", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/auth/login"}
+{"timestamp": "2025-09-17 20:39:26", "name": "app.api.routes.auth", "level": "WARNING", "message": "Failed login attempt for: string"}
+{"timestamp": "2025-09-17 20:39:26", "name": "app.api.deps", "level": "ERROR", "message": "Database session error: "}
+{"timestamp": "2025-09-17 20:39:26", "name": "app.main", "level": "WARNING", "message": "HTTP Exception: Incorrect email or password"}
+{"timestamp": "2025-09-17 20:39:26", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/auth/login - 401 - 0.5717s"}
+{"timestamp": "2025-09-17 20:39:26", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59368 - "POST /api/v1/auth/login HTTP/1.1" 401"}
+{"timestamp": "2025-09-17 20:39:52", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/auth/login"}
+{"timestamp": "2025-09-17 20:39:53", "name": "app.api.routes.auth", "level": "INFO", "message": "User logged in: user@example.com"}
+{"timestamp": "2025-09-17 20:39:53", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/auth/login - 200 - 0.8124s"}
+{"timestamp": "2025-09-17 20:39:53", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59424 - "POST /api/v1/auth/login HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 20:44:14", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/auth/me"}
+{"timestamp": "2025-09-17 20:44:14", "name": "app.main", "level": "WARNING", "message": "HTTP Exception: Not authenticated"}
+{"timestamp": "2025-09-17 20:44:14", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/auth/me - 403 - 0.0010s"}
+{"timestamp": "2025-09-17 20:44:14", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59811 - "GET /api/v1/auth/me HTTP/1.1" 403"}
+{"timestamp": "2025-09-17 20:59:44", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/auth/login"}
+{"timestamp": "2025-09-17 20:59:44", "name": "app.main", "level": "INFO", "message": "✅ POST /api/auth/login - 404 - 0.0010s"}
+{"timestamp": "2025-09-17 20:59:44", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:61620 - "POST /api/auth/login HTTP/1.1" 404"}
+{"timestamp": "2025-09-17 20:59:51", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/auth/login"}
+{"timestamp": "2025-09-17 20:59:51", "name": "app.main", "level": "INFO", "message": "✅ POST /api/auth/login - 404 - 0.0006s"}
+{"timestamp": "2025-09-17 20:59:51", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:61621 - "POST /api/auth/login HTTP/1.1" 404"}
+{"timestamp": "2025-09-17 21:01:21", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/auth/login"}
+{"timestamp": "2025-09-17 21:01:21", "name": "app.main", "level": "INFO", "message": "✅ POST /api/auth/login - 404 - 0.0000s"}
+{"timestamp": "2025-09-17 21:01:21", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:61839 - "POST /api/auth/login HTTP/1.1" 404"}
+{"timestamp": "2025-09-17 21:01:51", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/auth/register"}
+{"timestamp": "2025-09-17 21:01:51", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/auth/register - 200 - 0.0010s"}
+{"timestamp": "2025-09-17 21:01:51", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:61908 - "OPTIONS /api/auth/register HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 21:01:51", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/auth/register"}
+{"timestamp": "2025-09-17 21:01:51", "name": "app.main", "level": "INFO", "message": "✅ POST /api/auth/register - 404 - 0.0010s"}
+{"timestamp": "2025-09-17 21:01:51", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:61908 - "POST /api/auth/register HTTP/1.1" 404"}
+{"timestamp": "2025-09-17 21:02:05", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/auth/register"}
+{"timestamp": "2025-09-17 21:02:05", "name": "app.main", "level": "INFO", "message": "✅ POST /api/auth/register - 404 - 0.0012s"}
+{"timestamp": "2025-09-17 21:02:05", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:61929 - "POST /api/auth/register HTTP/1.1" 404"}
+{"timestamp": "2025-09-17 21:03:24", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/auth/login"}
+{"timestamp": "2025-09-17 21:03:25", "name": "app.api.routes.auth", "level": "INFO", "message": "User logged in: user@example.com"}
+{"timestamp": "2025-09-17 21:03:25", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/auth/login - 200 - 1.0938s"}
+{"timestamp": "2025-09-17 21:03:25", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:62089 - "POST /api/v1/auth/login HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 21:10:53", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/datasets/upload"}
+{"timestamp": "2025-09-17 21:10:54", "name": "app.main", "level": "WARNING", "message": "HTTP Exception: Not authenticated"}
+{"timestamp": "2025-09-17 21:10:54", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/datasets/upload - 403 - 0.1186s"}
+{"timestamp": "2025-09-17 21:10:54", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:62704 - "POST /api/v1/datasets/upload HTTP/1.1" 403"}
+{"timestamp": "2025-09-17 21:11:05", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/datasets/upload"}
+{"timestamp": "2025-09-17 21:11:05", "name": "app.main", "level": "WARNING", "message": "HTTP Exception: Not authenticated"}
+{"timestamp": "2025-09-17 21:11:05", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/datasets/upload - 403 - 0.0019s"}
+{"timestamp": "2025-09-17 21:11:05", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:62721 - "POST /api/v1/datasets/upload HTTP/1.1" 403"}
+{"timestamp": "2025-09-17 21:11:50", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/auth/login"}
+{"timestamp": "2025-09-17 21:11:52", "name": "app.api.routes.auth", "level": "INFO", "message": "User logged in: user@example.com"}
+{"timestamp": "2025-09-17 21:11:52", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/auth/login - 200 - 1.9164s"}
+{"timestamp": "2025-09-17 21:11:52", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:62818 - "POST /api/v1/auth/login HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 21:11:57", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/datasets/upload"}
+{"timestamp": "2025-09-17 21:11:57", "name": "app.main", "level": "WARNING", "message": "HTTP Exception: Not authenticated"}
+{"timestamp": "2025-09-17 21:11:57", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/datasets/upload - 403 - 0.0026s"}
+{"timestamp": "2025-09-17 21:11:57", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:62835 - "POST /api/v1/datasets/upload HTTP/1.1" 403"}
+{"timestamp": "2025-09-17 21:15:01", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/auth/login"}
+{"timestamp": "2025-09-17 21:15:03", "name": "app.api.routes.auth", "level": "INFO", "message": "User logged in: user@example.com"}
+{"timestamp": "2025-09-17 21:15:03", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/auth/login - 200 - 2.2581s"}
+{"timestamp": "2025-09-17 21:15:03", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:63120 - "POST /api/v1/auth/login HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 21:15:28", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/auth/login"}
+{"timestamp": "2025-09-17 21:15:29", "name": "app.api.routes.auth", "level": "INFO", "message": "User logged in: user@example.com"}
+{"timestamp": "2025-09-17 21:15:29", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/auth/login - 200 - 1.0115s"}
+{"timestamp": "2025-09-17 21:15:29", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:63175 - "POST /api/v1/auth/login HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 21:15:39", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/datasets/upload"}
+{"timestamp": "2025-09-17 21:15:39", "name": "app.api.deps", "level": "WARNING", "message": "JWT decode error: Signature verification failed."}
+{"timestamp": "2025-09-17 21:15:39", "name": "app.api.deps", "level": "ERROR", "message": "Database session error: "}
+{"timestamp": "2025-09-17 21:15:39", "name": "app.main", "level": "WARNING", "message": "HTTP Exception: Could not validate credentials"}
+{"timestamp": "2025-09-17 21:15:39", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/datasets/upload - 401 - 0.0201s"}
+{"timestamp": "2025-09-17 21:15:39", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:63197 - "POST /api/v1/datasets/upload HTTP/1.1" 401"}
+{"timestamp": "2025-09-17 21:16:20", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/datasets/upload"}
+{"timestamp": "2025-09-17 21:16:21", "name": "app.api.deps", "level": "ERROR", "message": "Database session error: "}
+{"timestamp": "2025-09-17 21:16:21", "name": "app.main", "level": "WARNING", "message": "HTTP Exception: Unsupported file type. Allowed: csv, txt, fasta, fa, fastq, fq, json, xlsx"}
+{"timestamp": "2025-09-17 21:16:21", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/datasets/upload - 415 - 0.9109s"}
+{"timestamp": "2025-09-17 21:16:21", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:63291 - "POST /api/v1/datasets/upload HTTP/1.1" 415"}
+{"timestamp": "2025-09-17 21:18:04", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/datasets/upload"}
+{"timestamp": "2025-09-17 21:18:04", "name": "app.api.deps", "level": "ERROR", "message": "Database session error: "}
+{"timestamp": "2025-09-17 21:18:05", "name": "app.main", "level": "WARNING", "message": "HTTP Exception: Unsupported file type. Allowed: csv, txt, fasta, fa, fastq, fq, json, xlsx"}
+{"timestamp": "2025-09-17 21:18:05", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/datasets/upload - 415 - 1.4396s"}
+{"timestamp": "2025-09-17 21:18:05", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:63481 - "POST /api/v1/datasets/upload HTTP/1.1" 415"}
+{"timestamp": "2025-09-17 21:55:18", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-09-17 21:55:18", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application shutdown."}
+{"timestamp": "2025-09-17 21:55:18", "name": "app.main", "level": "INFO", "message": "🛑 Shutting down BioMLStudio API..."}
+{"timestamp": "2025-09-17 21:55:18", "name": "uvicorn.error", "level": "INFO", "message": "Application shutdown complete."}
+{"timestamp": "2025-09-17 21:55:18", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [20748]"}
+{"timestamp": "2025-09-17 21:55:30", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [38592]"}
+{"timestamp": "2025-09-17 21:55:30", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-09-17 21:55:30", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-09-17 21:55:32", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-09-17 21:55:32", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-09-17 21:55:32", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-09-17 21:55:43", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/auth/login"}
+{"timestamp": "2025-09-17 21:55:43", "name": "passlib.handlers.bcrypt", "level": "WARNING", "message": "(trapped) error reading bcrypt version"}
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+{"timestamp": "2025-09-17 21:55:45", "name": "app.api.routes.auth", "level": "INFO", "message": "User logged in: user@example.com"}
+{"timestamp": "2025-09-17 21:55:45", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/auth/login - 200 - 2.0936s"}
+{"timestamp": "2025-09-17 21:55:45", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64184 - "POST /api/v1/auth/login HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 21:56:13", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/datasets/upload"}
+{"timestamp": "2025-09-17 21:56:13", "name": "app.services.dataset_service", "level": "ERROR", "message": "Error analyzing general dataset: No columns to parse from file"}
+{"timestamp": "2025-09-17 21:56:13", "name": "app.services.dataset_service", "level": "ERROR", "message": "Error analyzing dataset uploads\1\1_64c19ce9_dna.csv: No columns to parse from file"}
+{"timestamp": "2025-09-17 21:56:14", "name": "app.api.routes.datasets", "level": "INFO", "message": "Dataset uploaded: 1 by user 1"}
+{"timestamp": "2025-09-17 21:56:14", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/datasets/upload - 200 - 1.1837s"}
+{"timestamp": "2025-09-17 21:56:14", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64238 - "POST /api/v1/datasets/upload HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 21:56:33", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/datasets/upload"}
+{"timestamp": "2025-09-17 21:56:34", "name": "app.api.routes.datasets", "level": "INFO", "message": "Dataset uploaded: 2 by user 1"}
+{"timestamp": "2025-09-17 21:56:34", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/datasets/upload - 200 - 1.3182s"}
+{"timestamp": "2025-09-17 21:56:34", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64273 - "POST /api/v1/datasets/upload HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 22:05:21", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-09-17 22:05:21", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application shutdown."}
+{"timestamp": "2025-09-17 22:05:21", "name": "app.main", "level": "INFO", "message": "🛑 Shutting down BioMLStudio API..."}
+{"timestamp": "2025-09-17 22:05:21", "name": "uvicorn.error", "level": "INFO", "message": "Application shutdown complete."}
+{"timestamp": "2025-09-17 22:05:21", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [38592]"}
+{"timestamp": "2025-09-17 22:05:29", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [32748]"}
+{"timestamp": "2025-09-17 22:05:29", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-09-17 22:05:29", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-09-17 22:06:00", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-09-17 22:06:00", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-09-17 22:06:00", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-09-17 22:06:17", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/datasets/upload"}
+{"timestamp": "2025-09-17 22:06:19", "name": "app.api.routes.datasets", "level": "INFO", "message": "Dataset uploaded: 3 by user 1"}
+{"timestamp": "2025-09-17 22:06:19", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/datasets/upload - 200 - 2.0204s"}
+{"timestamp": "2025-09-17 22:06:19", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:65409 - "POST /api/v1/datasets/upload HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 22:27:14", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-09-17 22:27:15", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application shutdown."}
+{"timestamp": "2025-09-17 22:27:15", "name": "app.main", "level": "INFO", "message": "🛑 Shutting down BioMLStudio API..."}
+{"timestamp": "2025-09-17 22:27:15", "name": "uvicorn.error", "level": "INFO", "message": "Application shutdown complete."}
+{"timestamp": "2025-09-17 22:27:15", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [32748]"}
+{"timestamp": "2025-09-17 22:28:27", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [28904]"}
+{"timestamp": "2025-09-17 22:28:27", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-09-17 22:28:27", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-09-17 22:28:32", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-09-17 22:28:32", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-09-17 22:28:32", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-09-17 22:28:32", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/docs"}
+{"timestamp": "2025-09-17 22:28:32", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/docs - 200 - 0.0010s"}
+{"timestamp": "2025-09-17 22:28:32", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:51990 - "GET /api/v1/docs HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 22:28:39", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/openapi.json"}
+{"timestamp": "2025-09-17 22:28:39", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/openapi.json - 200 - 0.0870s"}
+{"timestamp": "2025-09-17 22:28:39", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:52093 - "GET /api/v1/openapi.json HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 22:32:01", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/upload"}
+{"timestamp": "2025-09-17 22:32:01", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/upload - 200 - 0.0010s"}
+{"timestamp": "2025-09-17 22:32:01", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:52427 - "OPTIONS /api/v1/datasets/upload HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 22:32:01", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/datasets/upload"}
+{"timestamp": "2025-09-17 22:32:01", "name": "app.api.deps", "level": "WARNING", "message": "JWT decode error: Signature has expired."}
+{"timestamp": "2025-09-17 22:32:01", "name": "app.api.deps", "level": "ERROR", "message": "Database session error: "}
+{"timestamp": "2025-09-17 22:32:01", "name": "app.main", "level": "WARNING", "message": "HTTP Exception: Could not validate credentials"}
+{"timestamp": "2025-09-17 22:32:01", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/datasets/upload - 401 - 0.0488s"}
+{"timestamp": "2025-09-17 22:32:01", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:52427 - "POST /api/v1/datasets/upload HTTP/1.1" 401"}
+{"timestamp": "2025-09-17 22:33:04", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/datasets/upload"}
+{"timestamp": "2025-09-17 22:33:04", "name": "app.api.deps", "level": "WARNING", "message": "JWT decode error: Signature has expired."}
+{"timestamp": "2025-09-17 22:33:04", "name": "app.api.deps", "level": "ERROR", "message": "Database session error: "}
+{"timestamp": "2025-09-17 22:33:04", "name": "app.main", "level": "WARNING", "message": "HTTP Exception: Could not validate credentials"}
+{"timestamp": "2025-09-17 22:33:04", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/datasets/upload - 401 - 0.0231s"}
+{"timestamp": "2025-09-17 22:33:04", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:52520 - "POST /api/v1/datasets/upload HTTP/1.1" 401"}
+{"timestamp": "2025-09-17 22:34:45", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/datasets/upload"}
+{"timestamp": "2025-09-17 22:34:45", "name": "app.api.deps", "level": "WARNING", "message": "JWT decode error: Signature verification failed."}
+{"timestamp": "2025-09-17 22:34:45", "name": "app.api.deps", "level": "ERROR", "message": "Database session error: "}
+{"timestamp": "2025-09-17 22:34:45", "name": "app.main", "level": "WARNING", "message": "HTTP Exception: Could not validate credentials"}
+{"timestamp": "2025-09-17 22:34:45", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/datasets/upload - 401 - 0.1105s"}
+{"timestamp": "2025-09-17 22:34:45", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:52756 - "POST /api/v1/datasets/upload HTTP/1.1" 401"}
+{"timestamp": "2025-09-17 22:35:18", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/auth/login"}
+{"timestamp": "2025-09-17 22:35:22", "name": "passlib.handlers.bcrypt", "level": "WARNING", "message": "(trapped) error reading bcrypt version"}
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+{"timestamp": "2025-09-17 22:35:35", "name": "app.api.routes.auth", "level": "INFO", "message": "User logged in: user@example.com"}
+{"timestamp": "2025-09-17 22:35:35", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/auth/login - 200 - 17.1798s"}
+{"timestamp": "2025-09-17 22:35:35", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:52814 - "POST /api/v1/auth/login HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 22:36:35", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/datasets/upload"}
+{"timestamp": "2025-09-17 22:36:54", "name": "app.api.routes.datasets", "level": "INFO", "message": "Dataset uploaded: 4 by user 1"}
+{"timestamp": "2025-09-17 22:36:54", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/datasets/upload - 200 - 18.7067s"}
+{"timestamp": "2025-09-17 22:36:54", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:52961 - "POST /api/v1/datasets/upload HTTP/1.1" 200"}
+{"timestamp": "2025-09-17 22:45:54", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/datasets/upload"}
+{"timestamp": "2025-09-17 22:45:54", "name": "app.services.dataset_service", "level": "ERROR", "message": "Error analyzing general dataset: No columns to parse from file"}
+{"timestamp": "2025-09-17 22:45:55", "name": "app.services.dataset_service", "level": "ERROR", "message": "Error analyzing dataset uploads\1\1_b6e3bf64_dna.csv: No columns to parse from file"}
+{"timestamp": "2025-09-17 22:45:55", "name": "app.api.routes.datasets", "level": "INFO", "message": "Dataset uploaded: 5 by user 1"}
+{"timestamp": "2025-09-17 22:45:55", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/datasets/upload - 200 - 0.8544s"}
+{"timestamp": "2025-09-17 22:45:55", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:54292 - "POST /api/v1/datasets/upload HTTP/1.1" 200"}

@@ -53,8 +53,13 @@ class MLModel(Base):
     
     # Model version and lineage
     version = Column(String(50), default="1.0.0")
-    parent_model_id = Column(Integer, ForeignKey("ml_models.id"))
-    parent_model = relationship("MLModel", remote_side=[id], backref="derived_models")
+    parent_model_id = Column(Integer, ForeignKey("ml_models.id"), index=True)
+    parent_model = relationship(
+        "MLModel", 
+        remote_side="MLModel.id",  # Use string to avoid circular imports
+        backref="derived_models",
+        foreign_keys=[parent_model_id]
+    )
     
     # Model artifacts
     artifact_path = Column(String(500))  # Path to serialized model file

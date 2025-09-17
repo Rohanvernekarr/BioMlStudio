@@ -27,7 +27,7 @@ from app.schemas.dataset import (
 )
 from app.services.dataset_service import DatasetService
 from app.services.storage_service import StorageService
-from app.utils.bioinformatics import validate_biological_file
+from app.utils.bioinformatics import validate_biological_file, convert_fasta_to_csv
 from app.utils.file_handlers import get_file_info, generate_unique_filename
 
 logger = logging.getLogger(__name__)
@@ -61,7 +61,9 @@ async def upload_dataset(
     """
     # Validate file
     file_info = get_file_info(file.filename)
-    await validate_file_upload(file.size, file_info['extension'])
+    # Strip leading '.' to match settings.ALLOWED_FILE_EXTENSIONS entries
+    file_ext = file_info['extension'].lstrip('.') if file_info.get('extension') else ''
+    await validate_file_upload(file.size, file_ext)
     
     # Validate biological file format if needed
     if dataset_type in ['dna', 'protein', 'rna']:
@@ -339,6 +341,57 @@ async def download_dataset(
             "Content-Disposition": f"attachment; filename={dataset.filename}"
         }
     )
+
+
+@router.post("/convert/fasta-to-csv")
+async def convert_fasta_endpoint(
+    file: UploadFile = File(...),
+    add_composition: bool = Form(False),
+    add_kmers: bool = Form(False),
+    kmer_size: int = Form(3),
+    max_sequences: int = Form(0),
+    current_user: User = Depends(get_current_active_user),
+) -> Dict[str, Any]:
+    """
+    Convert a FASTA file into CSV with optional features (composition and k-mers).
+
+    Returns a JSON object with the output path and columns.
+    """
+    try:
+        # Save uploaded FASTA to a temp user folder
+        upload_dir = Path(settings.UPLOAD_DIR) / str(current_user.id) / "conversions"
+        upload_dir.mkdir(parents=True, exist_ok=True)
+        fasta_path = upload_dir / (Path(file.filename).stem + ".fasta")
+
+        async with aiofiles.open(fasta_path, 'wb') as f:
+            content = await file.read()
+            await f.write(content)
+
+        # Prepare output path
+        csv_path = upload_dir / (Path(file.filename).stem + ".csv")
+
+        config = {
+            'add_composition': add_composition,
+            'add_kmers': add_kmers,
+            'kmer_size': kmer_size,
+            'max_sequences': max_sequences if max_sequences > 0 else None,
+        }
+
+        result = convert_fasta_to_csv(str(fasta_path), str(csv_path), config)
+        if not result.get('success'):
+            raise HTTPException(status_code=400, detail=result.get('error', 'Conversion failed'))
+
+        return {
+            'message': 'Conversion successful',
+            'output_path': result['output_path'],
+            'sequences_converted': result['sequences_converted'],
+            'columns': result['columns'],
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error converting FASTA to CSV: {e}")
+        raise HTTPException(status_code=500, detail="Internal error during conversion")
 
 
 @router.put("/{dataset_id}", response_model=DatasetResponse)

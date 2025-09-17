@@ -16,7 +16,7 @@ from app.core.database import get_db_context
 from app.models.dataset import Dataset
 from app.utils.bioinformatics import (
     detect_sequence_type, validate_fasta_format, 
-    calculate_sequence_stats
+    calculate_sequence_composition
 )
 
 logger = logging.getLogger(__name__)
@@ -45,10 +45,23 @@ class DatasetService:
         """
         try:
             stats = {}
+            file_extension = file_path.suffix.lower()
             
-            if dataset_type in ['dna', 'rna', 'protein']:
+            # First check file extension to determine analysis method
+            is_biological_extension = file_extension in ['.fasta', '.fa', '.fas', '.fastq', '.fq']
+            is_general_extension = file_extension in ['.csv', '.tsv']
+            
+            if is_biological_extension:
+                # If file is FASTA/FASTQ, analyze as biological data regardless of dataset_type
+                stats = await self._analyze_biological_dataset(file_path, dataset_type)
+            elif is_general_extension and dataset_type == 'general':
+                # Only analyze as general dataset if explicitly marked as 'general' type
+                stats = await self._analyze_general_dataset(file_path)
+            elif dataset_type in ['dna', 'rna', 'protein']:
+                # Fall back to biological analysis if dataset_type is specified
                 stats = await self._analyze_biological_dataset(file_path, dataset_type)
             else:
+                # Default to general analysis
                 stats = await self._analyze_general_dataset(file_path)
             
             # Add file hash for integrity checking

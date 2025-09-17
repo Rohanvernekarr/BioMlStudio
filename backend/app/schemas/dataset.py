@@ -12,7 +12,7 @@ class DatasetBase(BaseModel):
     """Base dataset schema"""
     name: str = Field(..., min_length=1, max_length=255)
     description: Optional[str] = Field(None, max_length=1000)
-    dataset_type: str = Field(..., regex="^(dna|rna|protein|general)$")
+    dataset_type: str = Field(..., pattern="^(dna|rna|protein|general)$")
     is_public: bool = False
 
 

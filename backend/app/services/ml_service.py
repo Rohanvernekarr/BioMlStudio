@@ -36,7 +36,7 @@ class MLService:
         self.model_storage_path = Path(settings.MODEL_STORAGE_PATH)
         self.model_storage_path.mkdir(exist_ok=True)
     
-    async def train_classification_model(
+    def train_classification_model(
         self, 
         job_id: int,
         dataset_path: str,
@@ -55,7 +55,7 @@ class MLService:
         """
         try:
             # Load and prepare data
-            X, y = await self._load_and_prepare_data(
+            X, y = self._load_and_prepare_data(
                 dataset_path, 
                 config.get('target_column', 'target'),
                 config.get('feature_columns')
@@ -101,7 +101,7 @@ class MLService:
                 feature_importance = dict(zip(feature_names, model.feature_importances_))
             
             # Save model
-            model_path = await self._save_model(job_id, {
+            model_path = self._save_model(job_id, {
                 'model': model,
                 'scaler': scaler,
                 'feature_names': config.get('feature_names'),
@@ -122,7 +122,7 @@ class MLService:
             self.logger.error(f"Error training classification model: {e}")
             raise
     
-    async def train_regression_model(
+    def train_regression_model(
         self, 
         job_id: int,
         dataset_path: str,
@@ -141,7 +141,7 @@ class MLService:
         """
         try:
             # Load and prepare data
-            X, y = await self._load_and_prepare_data(
+            X, y = self._load_and_prepare_data(
                 dataset_path, 
                 config.get('target_column', 'target'),
                 config.get('feature_columns')
@@ -186,7 +186,7 @@ class MLService:
                 feature_importance = dict(zip(feature_names, model.feature_importances_))
             
             # Save model
-            model_path = await self._save_model(job_id, {
+            model_path = self._save_model(job_id, {
                 'model': model,
                 'scaler': scaler,
                 'feature_names': config.get('feature_names'),
@@ -206,7 +206,7 @@ class MLService:
             self.logger.error(f"Error training regression model: {e}")
             raise
     
-    async def predict_with_model(
+    def predict_with_model(
         self,
         model_id: int,
         input_data: List[Dict[str, Any]],
@@ -225,7 +225,7 @@ class MLService:
         """
         try:
             # Load model
-            model_info = await self._load_model(model_id)
+            model_info = self._load_model(model_id)
             
             if not model_info:
                 raise ValueError(f"Model {model_id} not found")
@@ -266,7 +266,7 @@ class MLService:
                 results['probabilities'] = probabilities.tolist()
             
             # Update model usage count
-            await self._update_model_usage(model_id)
+            self._update_model_usage(model_id)
             
             return results
             
@@ -274,7 +274,7 @@ class MLService:
             self.logger.error(f"Error making predictions with model {model_id}: {e}")
             raise
     
-    async def _load_and_prepare_data(
+    def _load_and_prepare_data(
         self,
         dataset_path: str,
         target_column: str,
@@ -388,7 +388,7 @@ class MLService:
             'mae': np.mean(np.abs(y_true - y_pred))
         }
     
-    async def _save_model(self, job_id: int, model_info: Dict[str, Any]) -> Path:
+    def _save_model(self, job_id: int, model_info: Dict[str, Any]) -> Path:
         """Save trained model to disk"""
         
         model_dir = self.model_storage_path / f"job_{job_id}"
@@ -402,7 +402,7 @@ class MLService:
         self.logger.info(f"Model saved to {model_path}")
         return model_path
     
-    async def _load_model(self, model_id: int) -> Optional[Dict[str, Any]]:
+    def _load_model(self, model_id: int) -> Optional[Dict[str, Any]]:
         """Load trained model from disk"""
         
         with get_db_context() as db:
@@ -418,7 +418,7 @@ class MLService:
                 self.logger.error(f"Error loading model {model_id}: {e}")
                 return None
     
-    async def _update_model_usage(self, model_id: int) -> None:
+    def _update_model_usage(self, model_id: int) -> None:
         """Update model usage statistics"""
         
         with get_db_context() as db:
@@ -427,3 +427,54 @@ class MLService:
             if model:
                 model.increment_prediction_count()
                 db.commit()
+
+    def evaluate_model(
+        self,
+        model_id: int,
+        test_dataset_path: str,
+        config: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """Evaluate a trained model on a test dataset and return metrics."""
+        try:
+            model_info = self._load_model(model_id)
+            if not model_info:
+                raise ValueError(f"Model {model_id} not found")
+
+            model = model_info['model']
+            scaler = model_info.get('scaler')
+            feature_names = model_info.get('feature_names')
+
+            target_column = config.get('target_column', 'target')
+            feature_columns = config.get('feature_columns') or feature_names
+
+            X, y = self._load_and_prepare_data(
+                test_dataset_path,
+                target_column,
+                feature_columns
+            )
+
+            if scaler:
+                X = scaler.transform(X)
+
+            y_pred = model.predict(X)
+            y_proba = model.predict_proba(X) if hasattr(model, 'predict_proba') else None
+
+            # Determine task type by y dtype or config
+            task_type = config.get('model_type')
+            if task_type is None:
+                # Heuristic: if y has few unique values -> classification
+                task_type = 'classification' if len(np.unique(y)) <= 20 else 'regression'
+
+            if task_type == 'classification':
+                metrics = self._calculate_classification_metrics(y, y_pred, y_proba)
+            else:
+                metrics = self._calculate_regression_metrics(y, y_pred)
+
+            return {
+                'model_id': model_id,
+                'metrics': metrics,
+                'samples': len(y),
+            }
+        except Exception as e:
+            logger.error(f"Error evaluating model {model_id}: {e}")
+            raise

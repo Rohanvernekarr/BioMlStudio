@@ -4,8 +4,13 @@ ML Model management endpoints for trained models and artifacts
 
 import logging
 from datetime import datetime
+from io import BytesIO
+import pickle
+from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+import aiofiles
+import joblib
 from fastapi import APIRouter, Depends, HTTPException, status, Response
 from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
@@ -20,7 +25,6 @@ from app.schemas.ml_model import (
     ModelPredictionRequest, ModelPredictionResponse
 )
 from app.services.model_service import ModelService
-from app.services.storage_service import StorageService
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
@@ -154,7 +158,7 @@ async def update_model(
 @router.get("/{model_id}/download")
 async def download_model(
     model_id: int,
-    format: str = "pickle",
+    format: str = "joblib",
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db)
 ) -> StreamingResponse:
@@ -187,24 +191,50 @@ async def download_model(
             detail="Model artifact not found"
         )
     
-    # Get model file from storage
-    storage_service = StorageService()
-    
+    # Stream from local filesystem; support joblib or pickle export
     try:
-        file_stream = await storage_service.get_model_file(
-            model.artifact_path, 
-            format=format
-        )
-        
+        artifact_path = Path(model.artifact_path)
+        if not artifact_path.exists():
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Model artifact file not found on disk"
+            )
+
         filename = f"{model.name}_{model.id}.{format}"
         media_type = "application/octet-stream"
-        
-        return StreamingResponse(
-            file_stream,
-            media_type=media_type,
-            headers={"Content-Disposition": f"attachment; filename={filename}"}
-        )
-        
+
+        if format not in {"joblib", "pickle"}:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Unsupported export format. Use 'joblib' or 'pickle'."
+            )
+
+        if format == "joblib":
+            async def file_generator():
+                async with aiofiles.open(artifact_path, 'rb') as f:
+                    while True:
+                        chunk = await f.read(8192)
+                        if not chunk:
+                            break
+                        yield chunk
+
+            return StreamingResponse(
+                file_generator(),
+                media_type=media_type,
+                headers={"Content-Disposition": f"attachment; filename={filename}"}
+            )
+        else:
+            # Convert to pickle in-memory
+            model_info = joblib.load(artifact_path)
+            data = pickle.dumps(model_info, protocol=pickle.HIGHEST_PROTOCOL)
+            return StreamingResponse(
+                BytesIO(data),
+                media_type=media_type,
+                headers={"Content-Disposition": f"attachment; filename={filename}"}
+            )
+
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"Error downloading model {model_id}: {e}")
         raise HTTPException(
@@ -389,10 +419,19 @@ async def delete_model(
             detail="Model not found"
         )
     
-    # Delete model files from storage
+    # Delete model artifact from local filesystem
     if model.artifact_path:
-        storage_service = StorageService()
-        await storage_service.delete_model_files(model.artifact_path)
+        try:
+            path = Path(model.artifact_path)
+            if path.exists():
+                # Remove file
+                path.unlink()
+                # Remove parent directory if empty
+                parent = path.parent
+                if parent.exists() and not any(parent.iterdir()):
+                    parent.rmdir()
+        except Exception as e:
+            logger.warning(f"Failed to remove model artifact for {model_id}: {e}")
     
     # Delete model record
     db.delete(model)

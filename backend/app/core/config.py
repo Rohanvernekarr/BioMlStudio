@@ -6,7 +6,8 @@ import secrets
 import os
 from typing import List, Optional, Union
 
-from pydantic import AnyHttpUrl, BaseSettings, EmailStr, validator
+from pydantic import AnyHttpUrl, EmailStr, validator
+from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
@@ -116,12 +117,18 @@ class Settings(BaseSettings):
     
     @validator("DATABASE_URL", pre=True)
     def validate_database_url(cls, v: str) -> str:
-        if v and not v.startswith((
+        if not v:
+            return v
+        # Normalize legacy 'postgres://' scheme to a valid SQLAlchemy URL
+        if v.startswith("postgres://"):
+            v = v.replace("postgres://", "postgresql+psycopg2://", 1)
+        allowed_prefixes = (
             "postgresql://",
             "postgresql+psycopg2://",
             "postgresql+psycopg://",
             "sqlite:///",
-        )):
+        )
+        if not v.startswith(allowed_prefixes):
             raise ValueError(
                 "Database URL must start with postgresql://, postgresql+psycopg2://, postgresql+psycopg:// or sqlite:///"
             )

@@ -291,34 +291,30 @@ def evaluate_model_task(
     logger.info(f"Starting model evaluation task {task_id} for model {model_id}")
     
     ml_service = MLService()
-    
+
     try:
         self.update_state(
             state='PROGRESS',
-            meta={'current': 0, 'total': 100, 'status': 'Loading model...'}
+            meta={'current': 0, 'total': 100, 'status': 'Evaluating model...'}
         )
-        
-        # Load model and perform evaluation
-        # This would be implemented in the ML service
-        evaluation_results = {
-            'model_id': model_id,
-            'test_accuracy': 0.95,
-            'test_precision': 0.94,
-            'test_recall': 0.96,
-            'test_f1': 0.95
-        }
-        
+
+        eval_out = ml_service.evaluate_model(
+            model_id=model_id,
+            test_dataset_path=test_dataset_path,
+            config=config,
+        )
+
         self.update_state(
             state='PROGRESS',
             meta={'current': 100, 'total': 100, 'status': 'Evaluation completed'}
         )
-        
+
         logger.info(f"Model evaluation completed for model {model_id}")
-        
+
         return {
             'status': 'completed',
             'model_id': model_id,
-            'results': evaluation_results,
+            'results': eval_out,
             'task_id': task_id
         }
         

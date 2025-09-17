@@ -2,10 +2,10 @@
 User model for authentication and user management
 """
 
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import TYPE_CHECKING
 
-from sqlalchemy import Boolean, Column, DateTime, String, Text
+from sqlalchemy import Boolean, Column, DateTime, String, Text, Integer
 from sqlalchemy.orm import relationship
 
 from .base import Base
