@@ -23,6 +23,7 @@ class JobService:
     
     async def create_job(
         self, 
+        db: Session,
         user_id: int,
         name: str,
         job_type: JobType,
@@ -35,6 +36,7 @@ class JobService:
         Create a new job.
         
         Args:
+            db: Database session
             user_id: User ID who owns the job
             name: Job name
             job_type: Type of job
@@ -46,25 +48,24 @@ class JobService:
         Returns:
             Job: Created job instance
         """
-        with get_db_context() as db:
-            job = Job(
-                user_id=user_id,
-                name=name,
-                description=description,
-                job_type=job_type,
-                config=config,
-                dataset_id=dataset_id,
-                priority=priority,
-                status=JobStatus.PENDING,
-                created_at=datetime.utcnow()
-            )
-            
-            db.add(job)
-            db.commit()
-            db.refresh(job)
-            
-            self.logger.info(f"Job created: {job.id} - {job.name}")
-            return job
+        job = Job(
+            user_id=user_id,
+            name=name,
+            description=description,
+            job_type=job_type,
+            config=config,
+            dataset_id=dataset_id,
+            priority=priority,
+            status=JobStatus.PENDING,
+            created_at=datetime.utcnow()
+        )
+        
+        db.add(job)
+        db.commit()
+        db.refresh(job)
+        
+        self.logger.info(f"Job created: {job.id} - {job.name}")
+        return job
     
     async def update_job_status(
         self, 

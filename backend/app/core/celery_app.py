@@ -3,6 +3,7 @@ Celery configuration for background task processing
 """
 
 import logging
+import ssl
 from celery import Celery
 from celery.signals import setup_logging
 
@@ -40,15 +41,6 @@ celery_app.conf.update(
     
     # Result backend settings
     result_expires=3600,  # 1 hour
-    result_backend_transport_options={
-        "master_name": "mymaster",
-        "socket_keepalive": True,
-        "socket_keepalive_options": {
-            "TCP_KEEPIDLE": 1,
-            "TCP_KEEPINTVL": 3,
-            "TCP_KEEPCNT": 5,
-        },
-    },
     
     # Task execution settings
     task_acks_late=True,
@@ -56,6 +48,7 @@ celery_app.conf.update(
     task_reject_on_worker_lost=True,
     task_soft_time_limit=settings.MAX_TRAINING_TIME_SECONDS,
     task_time_limit=settings.MAX_TRAINING_TIME_SECONDS + 60,
+    broker_connection_retry_on_startup=True,
     
     # Monitoring
     worker_send_task_events=True,
@@ -83,6 +76,23 @@ celery_app.conf.task_queues = {
         "exchange_type": "direct", 
         "routing_key": "training_queue",
     },
+}
+
+# Enable TLS/SSL for Redis (Upstash uses TLS). Accept cert without verification if needed.
+# If your environment has proper CA certificates installed, you can change CERT_NONE to CERT_REQUIRED.
+celery_app.conf.broker_use_ssl = {
+    "ssl_cert_reqs": ssl.CERT_NONE,
+}
+celery_app.conf.redis_backend_use_ssl = {
+    "ssl_cert_reqs": ssl.CERT_NONE,
+}
+
+# Transport options for SSL
+celery_app.conf.broker_transport_options = {
+    "ssl_cert_reqs": ssl.CERT_NONE,
+}
+celery_app.conf.result_backend_transport_options = {
+    "ssl_cert_reqs": ssl.CERT_NONE,
 }
 
 

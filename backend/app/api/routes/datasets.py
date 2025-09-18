@@ -65,15 +65,8 @@ async def upload_dataset(
     file_ext = file_info['extension'].lstrip('.') if file_info.get('extension') else ''
     await validate_file_upload(file.size, file_ext)
     
-    # Validate biological file format if needed
-    if dataset_type in ['dna', 'protein', 'rna']:
-        is_valid = await validate_biological_file(file, dataset_type)
-        if not is_valid:
-            raise BioMLException(
-                status_code=400,
-                detail=f"Invalid {dataset_type} file format",
-                error_code="INVALID_BIOLOGICAL_FORMAT"
-            )
+    # Note: Biological file validation will be performed after saving the file,
+    # so the validator can work with a filesystem path rather than an UploadFile
     
     try:
         # Generate unique filename
@@ -92,7 +85,19 @@ async def upload_dataset(
         async with aiofiles.open(file_path, 'wb') as f:
             content = await file.read()
             await f.write(content)
-        
+
+        # Validate biological file format if needed (after saving so we have a path)
+        if dataset_type in ['dna', 'protein', 'rna']:
+            validation = validate_biological_file(str(file_path), dataset_type)
+            if not validation.get('is_valid', False):
+                # Remove invalid file and raise an error
+                if file_path.exists():
+                    file_path.unlink()
+                raise BioMLException(
+                    message=f"Invalid {dataset_type} file format",
+                    status_code=400
+                )
+
         # Create dataset record
         dataset_service = DatasetService()
         
@@ -128,9 +133,8 @@ async def upload_dataset(
             file_path.unlink()
         
         raise BioMLException(
-            status_code=500,
-            detail="Failed to upload dataset",
-            error_code="DATASET_UPLOAD_FAILED"
+            message="Failed to upload dataset",
+            status_code=500
         )
 
 

@@ -6,7 +6,7 @@ from datetime import datetime
 from enum import Enum
 from typing import Any, Dict, List, Optional
 
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 
 
 class JobStatus(str, Enum):
@@ -73,8 +73,9 @@ class JobResponse(JobBase):
 
     class Config:
         from_attributes = True
+        protected_namespaces = ()
 
-    @validator('duration_seconds')
+    @field_validator('duration_seconds')
     def format_duration(cls, v):
         """Format duration for display"""
         if v is None:
@@ -105,6 +106,9 @@ class JobMetrics(BaseModel):
     feature_importance: Optional[Dict[str, float]] = None
     confusion_matrix: Optional[List[List[int]]] = None
     roc_curve: Optional[Dict[str, List[float]]] = None
+    
+    class Config:
+        protected_namespaces = ()
 
 
 class JobLog(BaseModel):

@@ -52,6 +52,9 @@ class UserProfile(UserResponse):
     model_count: int = 0
     job_count: int = 0
     api_key: Optional[str] = None
+    
+    class Config:
+        protected_namespaces = ()
 
 
 class UserListResponse(BaseModel):

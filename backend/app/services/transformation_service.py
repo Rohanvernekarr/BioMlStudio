@@ -337,5 +337,4 @@ class TransformationService:
                     
         return kmer_counts
 
-# Initialize a global instance for easy import
-transformation_service = TransformationService()
+

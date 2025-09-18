@@ -60,24 +60,16 @@ async def create_job(
         db.commit()
         db.refresh(db_job)
         
-        # Start background task based on job type
+        # Start Celery task based on job type (dispatch via Celery so task_id is set)
         if job_data.job_type == "training":
-            background_tasks.add_task(
-                start_training_task,
-                job_id=db_job.id,
-                config=job_data.config
-            )
+            # Dispatch to Celery worker
+            start_training_task.delay(job_id=db_job.id, config=job_data.config)
         elif job_data.job_type == "preprocessing":
-            background_tasks.add_task(
-                start_preprocessing_task,
-                job_id=db_job.id,
-                config=job_data.config
-            )
+            start_preprocessing_task.delay(job_id=db_job.id, config=job_data.config)
         else:
             raise BioMLException(
-                status_code=400,
-                detail=f"Unsupported job type: {job_data.job_type}",
-                error_code="INVALID_JOB_TYPE"
+                message=f"Unsupported job type: {job_data.job_type}",
+                status_code=400
             )
         
         # Update status to queued
@@ -93,9 +85,8 @@ async def create_job(
         logger.error(f"Error creating job: {e}")
         db.rollback()
         raise BioMLException(
-            status_code=500,
-            detail="Failed to create job",
-            error_code="JOB_CREATION_FAILED"
+            message="Failed to create job",
+            status_code=500
         )
 
 

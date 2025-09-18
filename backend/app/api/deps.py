@@ -1,6 +1,7 @@
 """
 Dependency injection for FastAPI routes
 """
+#Auth: JWT
 
 import logging
 from typing import Generator

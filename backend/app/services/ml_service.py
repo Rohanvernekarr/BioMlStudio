@@ -1,6 +1,7 @@
 """
 ML service for machine learning operations and model management
 """
+#Models: Train/evaluate/predict and download artifacts
 
 import joblib
 import logging

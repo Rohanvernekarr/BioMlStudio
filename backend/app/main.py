@@ -12,7 +12,7 @@ from fastapi.staticfiles import StaticFiles
 from sentry_sdk.integrations.fastapi import FastApiIntegration
 from sentry_sdk.integrations.sqlalchemy import SqlalchemyIntegration
 
-from app.api.routes import auth, datasets, health, jobs, models
+from app.api.routes import auth, datasets, health, jobs, models, dataset_preprocessing
 from app.core.config import settings
 from app.core.database import engine
 from app.core.exceptions import BioMLException
@@ -110,13 +110,12 @@ async def process_time_middleware(request: Request, call_next):
 # Exception handlers
 @app.exception_handler(BioMLException)
 async def bioml_exception_handler(request: Request, exc: BioMLException):
-    logger.error(f"BioML Exception: {exc.detail}")
+    logger.error(f"BioML Exception: {exc.message}")
     return JSONResponse(
         status_code=exc.status_code,
         content={
             "error": True,
-            "message": exc.detail,
-            "error_code": exc.error_code,
+            "message": exc.message,
             "timestamp": time.time(),
         },
     )
@@ -184,6 +183,13 @@ app.include_router(
     models.router,
     prefix=f"{api_prefix}/models",
     tags=["Models"],
+)
+
+
+app.include_router(
+    dataset_preprocessing.router,
+    prefix=f"{api_prefix}/datasets",
+    tags=["Dataset Preprocessing"],
 )
 
 

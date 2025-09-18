@@ -6,7 +6,7 @@ from datetime import datetime
 from enum import Enum
 from typing import Any, Dict, List, Optional
 
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field
 
 
 class ModelType(str, Enum):
@@ -38,6 +38,9 @@ class MLModelBase(BaseModel):
     framework: ModelFramework
     is_public: bool = False
     tags: Optional[List[str]] = None
+    
+    class Config:
+        protected_namespaces = ()
 
 
 class MLModelUpdate(BaseModel):
@@ -72,6 +75,7 @@ class MLModelResponse(MLModelBase):
 
     class Config:
         from_attributes = True
+        protected_namespaces = ()
 
 
 class MLModelListResponse(BaseModel):
@@ -97,6 +101,9 @@ class ModelPredictionResponse(BaseModel):
     feature_importance: Optional[Dict[str, float]] = None
     prediction_time_ms: Optional[float] = None
     timestamp: datetime
+    
+    class Config:
+        protected_namespaces = ()
 
 
 class ModelMetrics(BaseModel):
@@ -114,6 +121,9 @@ class ModelMetrics(BaseModel):
     confusion_matrix: Optional[List[List[int]]] = None
     classification_report: Optional[Dict[str, Any]] = None
     cross_validation_scores: Optional[List[float]] = None
+    
+    class Config:
+        protected_namespaces = ()
 
 
 class ModelDeployment(BaseModel):
@@ -124,3 +134,6 @@ class ModelDeployment(BaseModel):
     is_active: bool = True
     scaling_config: Optional[Dict[str, Any]] = None
     environment_config: Optional[Dict[str, Any]] = None
+    
+    class Config:
+        protected_namespaces = ()

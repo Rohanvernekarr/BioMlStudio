@@ -1,9 +1,11 @@
 """
 Machine learning background tasks
 """
+#Jobs: Background work via Celery
 
 import logging
 import traceback
+import asyncio
 from datetime import datetime
 from typing import Any, Dict
 
@@ -13,6 +15,7 @@ from sqlalchemy.orm import sessionmaker
 from app.core.celery_app import celery_app
 from app.core.database import engine
 from app.models.job import Job, JobStatus
+from app.models.dataset import Dataset
 from app.models.ml_model import MLModel, ModelType, ModelFramework
 from app.services.ml_service import MLService
 from app.services.job_service import JobService
@@ -45,9 +48,9 @@ def start_training_task(
     ml_service = MLService()
     
     try:
-        # Update job status to running
-        job_service.update_job_status(job_id, JobStatus.RUNNING)
-        job_service.add_job_log(job_id, f"Training task started: {task_id}")
+        # Update job status to running (wrap async calls)
+        asyncio.run(job_service.update_job_status(job_id, JobStatus.RUNNING))
+        asyncio.run(job_service.add_job_log(job_id, f"Training task started: {task_id}"))
         
         # Update progress
         self.update_state(
@@ -56,37 +59,44 @@ def start_training_task(
         )
         
         # Get training configuration
-        model_type = config.get('model_type', 'classification')
+        task_type = config.get('task_type', 'classification')
         dataset_path = config.get('dataset_path')
+        # Resolve dataset_path from dataset_id if needed
+        if not dataset_path and config.get('dataset_id'):
+            with SessionLocal() as db:
+                ds = db.query(Dataset).filter(Dataset.id == config['dataset_id']).first()
+                if not ds:
+                    raise ValueError(f"Dataset not found: {config['dataset_id']}")
+                dataset_path = ds.file_path
         
         if not dataset_path:
             raise ValueError("Dataset path is required")
         
         # Update progress
-        job_service.update_job_progress(job_id, 10.0, "Loading dataset")
+        asyncio.run(job_service.update_job_progress(job_id, 10.0, "Loading dataset"))
         self.update_state(
             state='PROGRESS', 
             meta={'current': 10, 'total': 100, 'status': 'Loading dataset...'}
         )
         
-        # Start training based on model type
-        if model_type == 'classification':
+        # Start training based on task type
+        if task_type == 'classification':
             result = ml_service.train_classification_model(
                 job_id=job_id,
                 dataset_path=dataset_path,
                 config=config
             )
-        elif model_type == 'regression':
+        elif task_type == 'regression':
             result = ml_service.train_regression_model(
                 job_id=job_id,
                 dataset_path=dataset_path,
                 config=config
             )
         else:
-            raise ValueError(f"Unsupported model type: {model_type}")
+            raise ValueError(f"Unsupported task type: {task_type}")
         
         # Update progress
-        job_service.update_job_progress(job_id, 80.0, "Saving model")
+        asyncio.run(job_service.update_job_progress(job_id, 80.0, "Saving model"))
         self.update_state(
             state='PROGRESS',
             meta={'current': 80, 'total': 100, 'status': 'Saving model...'}
@@ -121,13 +131,13 @@ def start_training_task(
             db.commit()
         
         # Complete job
-        job_service.update_job_status(
-            job_id, 
-            JobStatus.COMPLETED, 
+        asyncio.run(job_service.update_job_status(
+            job_id,
+            JobStatus.COMPLETED,
             metrics=result['metrics']
-        )
-        job_service.update_job_progress(job_id, 100.0, "Training completed")
-        job_service.add_job_log(job_id, "Training completed successfully")
+        ))
+        asyncio.run(job_service.update_job_progress(job_id, 100.0, "Training completed"))
+        asyncio.run(job_service.add_job_log(job_id, "Training completed successfully"))
         
         logger.info(f"Training task completed for job {job_id}")
         
@@ -147,12 +157,12 @@ def start_training_task(
         logger.error(f"Traceback: {error_trace}")
         
         # Update job status to failed
-        job_service.update_job_status(
-            job_id, 
-            JobStatus.FAILED, 
+        asyncio.run(job_service.update_job_status(
+            job_id,
+            JobStatus.FAILED,
             error_message=error_msg
-        )
-        job_service.add_job_log(job_id, f"Training failed: {error_msg}")
+        ))
+        asyncio.run(job_service.add_job_log(job_id, f"Training failed: {error_msg}"))
         
         # Update task state
         self.update_state(
@@ -189,9 +199,9 @@ def start_preprocessing_task(
     job_service = JobService()
     
     try:
-        # Update job status
-        job_service.update_job_status(job_id, JobStatus.RUNNING)
-        job_service.add_job_log(job_id, f"Preprocessing task started: {task_id}")
+        # Update job status (wrap async calls)
+        asyncio.run(job_service.update_job_status(job_id, JobStatus.RUNNING))
+        asyncio.run(job_service.add_job_log(job_id, f"Preprocessing task started: {task_id}"))
         
         # Preprocessing steps would go here
         # This is a simplified implementation
@@ -206,7 +216,7 @@ def start_preprocessing_task(
         
         for i, step in enumerate(steps):
             progress = ((i + 1) / len(steps)) * 100
-            job_service.update_job_progress(job_id, progress, step)
+            asyncio.run(job_service.update_job_progress(job_id, progress, step))
             
             self.update_state(
                 state='PROGRESS',
@@ -228,12 +238,12 @@ def start_preprocessing_task(
             'output_path': config.get('output_path')
         }
         
-        job_service.update_job_status(
+        asyncio.run(job_service.update_job_status(
             job_id,
             JobStatus.COMPLETED,
             metrics=result_metrics
-        )
-        job_service.add_job_log(job_id, "Preprocessing completed successfully")
+        ))
+        asyncio.run(job_service.add_job_log(job_id, "Preprocessing completed successfully"))
         
         logger.info(f"Preprocessing task completed for job {job_id}")
         
@@ -250,12 +260,12 @@ def start_preprocessing_task(
         
         logger.error(f"Preprocessing task failed for job {job_id}: {error_msg}")
         
-        job_service.update_job_status(
+        asyncio.run(job_service.update_job_status(
             job_id,
             JobStatus.FAILED,
             error_message=error_msg
-        )
-        job_service.add_job_log(job_id, f"Preprocessing failed: {error_msg}")
+        ))
+        asyncio.run(job_service.add_job_log(job_id, f"Preprocessing failed: {error_msg}"))
         
         self.update_state(
             state='FAILURE',
