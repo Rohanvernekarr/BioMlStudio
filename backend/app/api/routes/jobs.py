@@ -223,7 +223,11 @@ async def get_job_results(
         "job_name": job.name,
         "job_type": job.job_type,
         "status": job.status,
-        "results": job.results,
+        "results": {
+            "metrics": job.metrics or {},
+            "feature_importance": (job.artifacts or {}).get('feature_importance', {}),
+            "confusion_matrix": (job.artifacts or {}).get('confusion_matrix', [])
+        },
         "created_at": job.created_at,
         "completed_at": job.updated_at
     }

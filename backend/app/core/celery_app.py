@@ -4,12 +4,17 @@ Celery configuration for background task processing
 
 import logging
 import ssl
+import os
 from celery import Celery
 from celery.signals import setup_logging
 
 from .config import settings
 
 logger = logging.getLogger(__name__)
+
+# Create broker folder for filesystem transport
+os.makedirs("celery_broker/out", exist_ok=True)
+os.makedirs("celery_broker/processed", exist_ok=True)
 
 # Create Celery instance
 celery_app = Celery(
@@ -29,15 +34,13 @@ celery_app.conf.update(
     task_serializer="json",
     accept_content=["json"],
     result_serializer="json",
+    result_extended=True,
     timezone="UTC",
     enable_utc=True,
     
-    # Task routing
-    task_routes={
-        "app.tasks.ml_tasks.*": {"queue": "ml_queue"},
-        "app.tasks.data_processing.*": {"queue": "data_queue"},
-        "app.tasks.model_training.*": {"queue": "training_queue"},
-    },
+    # Disable task routing - use default queue
+    task_default_queue='celery',
+    task_create_missing_queues=True,
     
     # Result backend settings
     result_expires=3600,  # 1 hour
@@ -59,27 +62,7 @@ celery_app.conf.update(
     worker_log_color=False,
 )
 
-# Queue configuration
-celery_app.conf.task_queues = {
-    "ml_queue": {
-        "exchange": "ml_queue",
-        "exchange_type": "direct",
-        "routing_key": "ml_queue",
-    },
-    "data_queue": {
-        "exchange": "data_queue", 
-        "exchange_type": "direct",
-        "routing_key": "data_queue",
-    },
-    "training_queue": {
-        "exchange": "training_queue",
-        "exchange_type": "direct", 
-        "routing_key": "training_queue",
-    },
-}
-
-# Enable TLS/SSL for Redis (Upstash uses TLS). Accept cert without verification if needed.
-# If your environment has proper CA certificates installed, you can change CERT_NONE to CERT_REQUIRED.
+# Enable TLS/SSL for Redis (Upstash uses TLS)
 celery_app.conf.broker_use_ssl = {
     "ssl_cert_reqs": ssl.CERT_NONE,
 }
@@ -94,7 +77,6 @@ celery_app.conf.broker_transport_options = {
 celery_app.conf.result_backend_transport_options = {
     "ssl_cert_reqs": ssl.CERT_NONE,
 }
-
 
 @setup_logging.connect
 def config_loggers(*args, **kwargs):

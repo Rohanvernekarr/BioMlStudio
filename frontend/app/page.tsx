@@ -1,65 +1,153 @@
-import Image from "next/image";
+'use client';
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/Card';
+import { Header } from '@/components/Header';
+import { api } from '@/lib/api';
+import { useAuth } from '@/lib/useAuth';
 
 export default function Home() {
+  useAuth();
+  const router = useRouter();
+  const [file, setFile] = useState<File | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState('');
+  const [fileInfo, setFileInfo] = useState<{ rows: number; cols: number } | null>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile) {
+      if (!selectedFile.name.endsWith('.csv')) {
+        setError('Please upload a CSV file');
+        return;
+      }
+      setFile(selectedFile);
+      setError('');
+      setFileInfo(null);
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    const droppedFile = e.dataTransfer.files[0];
+    if (droppedFile && droppedFile.name.endsWith('.csv')) {
+      setFile(droppedFile);
+      setError('');
+      setFileInfo(null);
+    } else {
+      setError('Please upload a CSV file');
+    }
+  };
+
+  const handleUpload = async () => {
+    if (!file) return;
+
+    setUploading(true);
+    setError('');
+
+    try {
+      const dataset = await api.uploadDataset(file, file.name);
+      router.push(`/configure/${dataset.id}`);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Upload failed');
+      setUploading(false);
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      <Header />
+      <div className="min-h-screen bg-black flex items-center justify-center p-8">
+        <div className="max-w-2xl w-full">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold mb-4">BioMLStudio</h1>
+          <p className="text-xl text-zinc-400">
+            Upload your CSV and get a trained model and report, no coding.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        <Card>
+          <div
+            className={`border-2 border-dashed rounded-lg p-12 text-center transition-colors ${
+              file ? 'border-white bg-zinc-800' : 'border-zinc-700 hover:border-zinc-600'
+            }`}
+            onDrop={handleDrop}
+            onDragOver={(e) => e.preventDefault()}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+            {!file ? (
+              <>
+                <svg
+                  className="mx-auto h-12 w-12 text-zinc-400 mb-4"
+                  stroke="currentColor"
+                  fill="none"
+                  viewBox="0 0 48 48"
+                >
+                  <path
+                    d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <p className="text-lg mb-2">Drop your CSV file here</p>
+                <p className="text-sm text-zinc-400 mb-4">or</p>
+                <label className="cursor-pointer">
+                  <span className="px-4 py-2 bg-white text-black rounded-lg hover:bg-zinc-200 transition-colors inline-block">
+                    Browse File
+                  </span>
+                  <input
+                    type="file"
+                    accept=".csv"
+                    onChange={handleFileChange}
+                    className="hidden"
+                  />
+                </label>
+                <p className="text-sm text-zinc-500 mt-4">
+                  Accepts CSV with samples as rows, features as columns
+                </p>
+              </>
+            ) : (
+              <>
+                <div className="text-2xl mb-2">✓</div>
+                <p className="text-lg font-medium mb-1">{file.name}</p>
+                <p className="text-sm text-zinc-400">
+                  {(file.size / 1024 / 1024).toFixed(2)} MB
+                </p>
+                {fileInfo && (
+                  <p className="text-sm text-zinc-400 mt-2">
+                    {fileInfo.rows} rows, {fileInfo.cols} columns
+                  </p>
+                )}
+                <button
+                  onClick={() => setFile(null)}
+                  className="text-sm text-zinc-400 hover:text-white mt-4"
+                >
+                  Remove
+                </button>
+              </>
+            )}
+          </div>
+
+          {error && (
+            <div className="mt-4 p-3 bg-red-900/20 border border-red-800 rounded-lg text-red-400">
+              {error}
+            </div>
+          )}
+
+          <div className="mt-6 flex justify-end">
+            <Button
+              onClick={handleUpload}
+              disabled={!file || uploading}
+              size="lg"
+            >
+              {uploading ? 'Uploading...' : 'Next: Configure Analysis'}
+            </Button>
+          </div>
+        </Card>
+      </div>
     </div>
+    </>
   );
 }

@@ -61,6 +61,8 @@ async def auto_analyze_dataset(
     features = None
     if feature_columns:
         features = [col.strip() for col in feature_columns.split(",")]
+        # Ensure target column is not in features
+        features = [f for f in features if f != target_column]
     
     # Create simplified job configuration
     config = {
@@ -79,7 +81,7 @@ async def auto_analyze_dataset(
     
     # Create job using existing job creation logic
     job_data = JobCreate(
-        job_type="auto_analysis",
+        job_type="data_analysis",
         name=f"Auto Analysis: {dataset.name}",
         description=f"Automated {analysis_type} analysis on {target_column}",
         config=config
@@ -91,6 +93,7 @@ async def auto_analyze_dataset(
     
     db_job = Job(
         user_id=current_user.id,
+        dataset_id=dataset_id,
         job_type=job_data.job_type,
         name=job_data.name,
         description=job_data.description,
@@ -103,10 +106,134 @@ async def auto_analyze_dataset(
     db.commit()
     db.refresh(db_job)
     
-    # Start simplified analysis task
-    start_auto_analysis_task.delay(job_id=db_job.id, config=config)
+    # Run analysis directly (no Celery) for demo
+    import threading
     
-    # Update status
+    def run_analysis():
+        from app.core.database import SessionLocal
+        from app.services.ml_service import MLService
+        from app.services.job_service import JobService
+        
+        db_local = SessionLocal()
+        try:
+            job = db_local.query(Job).filter(Job.id == db_job.id).first()
+            job.status = JobStatus.RUNNING
+            db_local.commit()
+            
+            ml_service = MLService()
+            
+            # Load and prepare data
+            import pandas as pd
+            from sklearn.preprocessing import LabelEncoder
+            
+            df = pd.read_csv(config['dataset_path'])
+            
+            # Encode categorical columns
+            label_encoders = {}
+            for col in df.columns:
+                if df[col].dtype == 'object':
+                    le = LabelEncoder()
+                    df[col] = le.fit_transform(df[col].astype(str))
+                    label_encoders[col] = le
+            
+            # Auto-detect features if not provided
+            feature_cols = config['feature_columns']
+            if feature_cols is None:
+                # Use all columns except target
+                feature_cols = [col for col in df.columns if col != config['target_column']]
+            
+            # Separate features and target
+            X = df[feature_cols]
+            y = df[config['target_column']]
+            
+            # Train model
+            if config['analysis_type'] == 'classification':
+                from sklearn.ensemble import RandomForestClassifier
+                from sklearn.model_selection import train_test_split
+                from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
+                
+                X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+                
+                model = RandomForestClassifier(n_estimators=100, random_state=42)
+                model.fit(X_train, y_train)
+                
+                y_pred = model.predict(X_test)
+                
+                # Calculate metrics
+                metrics = {
+                    'accuracy': float(accuracy_score(y_test, y_pred)),
+                    'precision': float(precision_score(y_test, y_pred, average='weighted', zero_division=0)),
+                    'recall': float(recall_score(y_test, y_pred, average='weighted', zero_division=0)),
+                    'f1_score': float(f1_score(y_test, y_pred, average='weighted', zero_division=0))
+                }
+                
+                # Feature importance
+                feature_importance = {
+                    name: float(importance) 
+                    for name, importance in zip(feature_cols, model.feature_importances_)
+                }
+                
+                # Confusion matrix
+                cm = confusion_matrix(y_test, y_pred)
+                
+                result = {
+                    'metrics': metrics,
+                    'feature_importance': feature_importance,
+                    'confusion_matrix': cm.tolist()
+                }
+            else:
+                from sklearn.ensemble import RandomForestRegressor
+                from sklearn.model_selection import train_test_split
+                from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
+                
+                X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+                
+                model = RandomForestRegressor(n_estimators=100, random_state=42)
+                model.fit(X_train, y_train)
+                
+                y_pred = model.predict(X_test)
+                
+                metrics = {
+                    'r2_score': float(r2_score(y_test, y_pred)),
+                    'mse': float(mean_squared_error(y_test, y_pred)),
+                    'mae': float(mean_absolute_error(y_test, y_pred))
+                }
+                
+                feature_importance = {
+                    name: float(importance) 
+                    for name, importance in zip(feature_cols, model.feature_importances_)
+                }
+                
+                result = {
+                    'metrics': metrics,
+                    'feature_importance': feature_importance
+                }
+            
+            job.status = JobStatus.COMPLETED
+            job.metrics = result.get('metrics', {})
+            job.artifacts = {
+                'feature_importance': result.get('feature_importance', {}),
+                'confusion_matrix': result.get('confusion_matrix', [])
+            }
+            job.updated_at = datetime.utcnow()
+            db_local.commit()
+            
+        except Exception as e:
+            logger.error(f"Analysis failed: {str(e)}")
+            job = db_local.query(Job).filter(Job.id == db_job.id).first()
+            job.status = JobStatus.FAILED
+            job.error_message = str(e)
+            job.updated_at = datetime.utcnow()
+            db_local.commit()
+        finally:
+            db_local.close()
+    
+    # Run in background thread
+    thread = threading.Thread(target=run_analysis)
+    thread.daemon = True
+    thread.start()
+    
+    # Set to queued initially
     db_job.status = JobStatus.QUEUED
     db_job.updated_at = datetime.utcnow()
     db.commit()

@@ -27,8 +27,8 @@ class Settings(BaseSettings):
     
     # Redis & Celery
     REDIS_URL: str = "redis://localhost:6379/0"
-    CELERY_BROKER_URL: str = "redis://localhost:6379/0"
-    CELERY_RESULT_BACKEND: str = "redis://localhost:6379/0"
+    CELERY_BROKER_URL: str = "filesystem://"
+    CELERY_RESULT_BACKEND: str = "db+sqlite:///./celery_results.db"
     
     # Storage Configuration
     STORAGE_TYPE: str = "local"  # 'local' or 's3' or 'minio'
