@@ -405,3 +405,145 @@ def predict_batch_task(
         )
         
         raise
+
+
+@celery_app.task(bind=True, name='biomlstudio.ml_tasks.start_auto_analysis_task')
+def start_auto_analysis_task(
+    self, 
+    job_id: int, 
+    config: Dict[str, Any]
+) -> Dict[str, Any]:
+    """
+    Start automated analysis task (one-click ML pipeline).
+    
+    This implements the simplified workflow:
+    1. Load and clean data (remove NaNs, scale, balance classes)
+    2. Train multiple models (RF + LogisticRegression) 
+    3. Evaluate with standard metrics
+    4. Generate plots and feature importance
+    
+    Args:
+        job_id: Job ID
+        config: Analysis configuration
+        
+    Returns:
+        Dict: Analysis results
+    """
+    task_id = self.request.id
+    logger.info(f"Starting auto-analysis task {task_id} for job {job_id}")
+    
+    job_service = JobService()
+    ml_service = MLService()
+    
+    try:
+        # Update job status
+        job_service.update_job_status(job_id, JobStatus.RUNNING, task_id)
+        
+        self.update_state(
+            state='PROGRESS',
+            meta={'current': 10, 'total': 100, 'status': 'Loading dataset...'}
+        )
+        
+        # Load dataset
+        dataset_path = config['dataset_path']
+        target_column = config['target_column']
+        analysis_type = config['analysis_type']
+        
+        # Run analysis for each model
+        models_to_train = config.get('models', ['random_forest', 'logistic_regression'])
+        results = {'models': {}, 'best_model': None, 'comparison': {}}
+        
+        for i, algorithm in enumerate(models_to_train):
+            self.update_state(
+                state='PROGRESS',
+                meta={
+                    'current': 30 + (i * 40), 
+                    'total': 100, 
+                    'status': f'Training {algorithm}...'
+                }
+            )
+            
+            # Create model-specific config
+            model_config = {
+                'algorithm': algorithm,
+                'target_column': target_column,
+                'feature_columns': config.get('feature_columns'),
+                'test_size': config.get('test_size', 0.2),
+                'scale_features': config.get('scale_features', True),
+                'handle_imbalance': config.get('handle_imbalance', False),
+                'random_state': 42
+            }
+            
+            # Train model
+            if analysis_type == 'classification':
+                model_results = ml_service.train_classification_model(
+                    job_id, dataset_path, model_config
+                )
+            else:
+                model_results = ml_service.train_regression_model(
+                    job_id, dataset_path, model_config
+                )
+            
+            results['models'][algorithm] = model_results
+        
+        # Determine best model based on primary metric
+        if analysis_type == 'classification':
+            primary_metric = 'accuracy'
+        else:
+            primary_metric = 'r2'
+            
+        best_model_name = max(
+            results['models'].keys(),
+            key=lambda x: results['models'][x]['metrics'].get(primary_metric, 0)
+        )
+        results['best_model'] = best_model_name
+        
+        # Create comparison summary
+        results['comparison'] = {
+            'primary_metric': primary_metric,
+            'model_scores': {
+                model: results['models'][model]['metrics'].get(primary_metric, 0)
+                for model in results['models']
+            }
+        }
+        
+        # Generate model comparison plot
+        from app.services.visualization_service import visualization_service
+        comparison_plot = visualization_service.create_model_comparison_plot(
+            results['models'], primary_metric
+        )
+        if comparison_plot:
+            results['comparison']['plot'] = comparison_plot
+        
+        self.update_state(
+            state='PROGRESS',
+            meta={'current': 90, 'total': 100, 'status': 'Finalizing results...'}
+        )
+        
+        # Update job with results
+        job_service.update_job_results(job_id, results, JobStatus.COMPLETED)
+        
+        logger.info(f"Auto-analysis completed for job {job_id}")
+        
+        return {
+            'status': 'completed',
+            'job_id': job_id,
+            'results': results,
+            'task_id': task_id
+        }
+        
+    except Exception as e:
+        error_msg = str(e)
+        tb = traceback.format_exc()
+        logger.error(f"Auto-analysis failed for job {job_id}: {error_msg}")
+        logger.error(f"Traceback: {tb}")
+        
+        # Update job status
+        job_service.update_job_status(job_id, JobStatus.FAILED, task_id, error_msg)
+        
+        self.update_state(
+            state='FAILURE',
+            meta={'error': error_msg, 'job_id': job_id}
+        )
+        
+        raise

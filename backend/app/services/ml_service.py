@@ -20,11 +20,13 @@ from sklearn.metrics import (
 )
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.utils.class_weight import compute_class_weight
 
 from app.core.config import settings
 from app.core.database import get_db_context
 from app.models.ml_model import MLModel, ModelType, ModelFramework
 from app.models.job import Job
+from app.services.visualization_service import visualization_service
 
 logger = logging.getLogger(__name__)
 
@@ -76,9 +78,11 @@ class MLService:
                 X_train = scaler.fit_transform(X_train)
                 X_test = scaler.transform(X_test)
             
-            # Initialize model
+            # Initialize model with class imbalance handling
             algorithm = config.get('algorithm', 'random_forest')
-            model = self._get_classification_model(algorithm, config.get('hyperparameters', {}))
+            hyperparams = config.get('hyperparameters', {})
+            hyperparams['handle_imbalance'] = config.get('handle_imbalance', False)
+            model = self._get_classification_model(algorithm, hyperparams)
             
             # Train model
             model.fit(X_train, y_train)
@@ -101,6 +105,13 @@ class MLService:
                 feature_names = config.get('feature_names', [f'feature_{i}' for i in range(X.shape[1])])
                 feature_importance = dict(zip(feature_names, model.feature_importances_))
             
+            # Generate plots if requested
+            plots = {}
+            if config.get('generate_plots', False):
+                plots = visualization_service.generate_classification_plots(
+                    y_test, y_pred, y_proba, feature_importance
+                )
+            
             # Save model
             model_path = self._save_model(job_id, {
                 'model': model,
@@ -114,6 +125,7 @@ class MLService:
                 'model_path': str(model_path),
                 'metrics': metrics,
                 'feature_importance': feature_importance,
+                'plots': plots,
                 'training_samples': len(X_train),
                 'test_samples': len(X_test),
                 'algorithm': algorithm
@@ -141,11 +153,12 @@ class MLService:
             Dict: Training results and metrics
         """
         try:
-            # Load and prepare data
+            # Load and prepare data (with auto-cleaning)
             X, y = self._load_and_prepare_data(
                 dataset_path, 
                 config.get('target_column', 'target'),
-                config.get('feature_columns')
+                config.get('feature_columns'),
+                auto_clean=config.get('auto_preprocess', True)
             )
             
             # Split data
@@ -186,6 +199,13 @@ class MLService:
                 feature_names = config.get('feature_names', [f'feature_{i}' for i in range(X.shape[1])])
                 feature_importance = dict(zip(feature_names, model.feature_importances_))
             
+            # Generate plots if requested
+            plots = {}
+            if config.get('generate_plots', False):
+                plots = visualization_service.generate_regression_plots(
+                    y_test, y_pred, feature_importance
+                )
+            
             # Save model
             model_path = self._save_model(job_id, {
                 'model': model,
@@ -196,6 +216,7 @@ class MLService:
             
             return {
                 'model_path': str(model_path),
+                'plots': plots,
                 'metrics': metrics,
                 'feature_importance': feature_importance,
                 'training_samples': len(X_train),
@@ -279,9 +300,18 @@ class MLService:
         self,
         dataset_path: str,
         target_column: str,
-        feature_columns: Optional[List[str]] = None
+        feature_columns: Optional[List[str]] = None,
+        auto_clean: bool = True
     ) -> Tuple[np.ndarray, np.ndarray]:
-        """Load and prepare dataset for training"""
+        """
+        Load and prepare dataset for training with automatic data cleaning.
+        
+        This implements the data preparation steps from your specification:
+        - Load CSV data
+        - Remove NaNs 
+        - Handle categorical variables
+        - Basic data validation
+        """
         
         # Load dataset
         if dataset_path.endswith('.csv'):
@@ -291,25 +321,70 @@ class MLService:
         else:
             raise ValueError(f"Unsupported file format: {dataset_path}")
         
+        # Validate target column exists
+        if target_column not in df.columns:
+            raise ValueError(f"Target column '{target_column}' not found in dataset")
+        
+        # Automatic data cleaning if requested
+        if auto_clean:
+            # Remove rows with missing target values
+            df = df.dropna(subset=[target_column])
+            
+            # For features, either drop or fill missing values
+            if feature_columns:
+                feature_cols = feature_columns
+            else:
+                feature_cols = [col for col in df.columns if col != target_column]
+            
+            # Drop rows where too many features are missing (>50%)
+            df = df.dropna(subset=feature_cols, thresh=len(feature_cols) * 0.5)
+            
+            # Fill remaining missing values with median (numeric) or mode (categorical)
+            for col in feature_cols:
+                if df[col].dtype in ['object', 'category']:
+                    # Categorical: fill with mode
+                    mode_val = df[col].mode()
+                    if len(mode_val) > 0:
+                        df[col] = df[col].fillna(mode_val[0])
+                else:
+                    # Numeric: fill with median
+                    df[col] = df[col].fillna(df[col].median())
+        
         # Prepare features and target
         if feature_columns:
-            X = df[feature_columns].values
+            X = df[feature_columns]
         else:
             # Use all columns except target
             feature_cols = [col for col in df.columns if col != target_column]
-            X = df[feature_cols].values
+            X = df[feature_cols]
         
-        y = df[target_column].values
+        y = df[target_column]
+        
+        # Handle categorical features - simple label encoding for now
+        for col in X.select_dtypes(include=['object', 'category']).columns:
+            le = LabelEncoder()
+            X[col] = le.fit_transform(X[col].astype(str))
+        
+        # Convert to numpy arrays
+        X = X.values
+        y = y.values
         
         # Handle categorical target for classification
         if not np.issubdtype(y.dtype, np.number):
             le = LabelEncoder()
             y = le.fit_transform(y)
         
+        self.logger.info(f"Data prepared: {X.shape[0]} samples, {X.shape[1]} features")
+        
         return X, y
     
     def _get_classification_model(self, algorithm: str, hyperparameters: Dict[str, Any]):
-        """Get classification model instance"""
+        """Get classification model instance with class imbalance handling"""
+        
+        # Handle class imbalance by setting class weights
+        class_weight = None
+        if hyperparameters.get('handle_imbalance', False):
+            class_weight = 'balanced'
         
         if algorithm == 'random_forest':
             return RandomForestClassifier(
@@ -317,12 +392,14 @@ class MLService:
                 max_depth=hyperparameters.get('max_depth'),
                 min_samples_split=hyperparameters.get('min_samples_split', 2),
                 min_samples_leaf=hyperparameters.get('min_samples_leaf', 1),
+                class_weight=class_weight,
                 random_state=hyperparameters.get('random_state', 42)
             )
         elif algorithm == 'logistic_regression':
             return LogisticRegression(
                 C=hyperparameters.get('C', 1.0),
                 max_iter=hyperparameters.get('max_iter', 1000),
+                class_weight=class_weight,
                 random_state=hyperparameters.get('random_state', 42)
             )
         else:

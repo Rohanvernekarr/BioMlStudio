@@ -173,6 +173,62 @@ async def get_job(
     return JobResponse.from_orm(job)
 
 
+@router.get("/{job_id}/results")
+async def get_job_results(
+    job_id: int,
+    current_user: User = Depends(get_current_active_user),
+    db: Session = Depends(get_db)
+) -> Any:
+    """
+    Get detailed job results including metrics, plots, and model comparisons.
+    
+    This endpoint provides the comprehensive results that match your specification:
+    - Model metrics (accuracy, precision, recall, F1, AUC, etc.)
+    - Feature importance rankings
+    - Visualizations (confusion matrix, ROC curves, model comparison)
+    - Best model recommendation
+    
+    Args:
+        job_id: Job ID
+        current_user: Current authenticated user
+        db: Database session
+        
+    Returns:
+        Dict: Detailed job results with visualizations
+    """
+    job = db.query(Job).filter(
+        Job.id == job_id,
+        Job.user_id == current_user.id
+    ).first()
+    
+    if not job:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Job not found"
+        )
+    
+    if job.status != JobStatus.COMPLETED:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Job is not completed. Current status: {job.status}"
+        )
+    
+    # Return the job results which should contain:
+    # - metrics: accuracy, precision, recall, F1, AUC, etc.
+    # - plots: base64-encoded visualizations
+    # - feature_importance: ranked features
+    # - comparison: model comparison if multiple models trained
+    return {
+        "job_id": job.id,
+        "job_name": job.name,
+        "job_type": job.job_type,
+        "status": job.status,
+        "results": job.results,
+        "created_at": job.created_at,
+        "completed_at": job.updated_at
+    }
+
+
 @router.put("/{job_id}", response_model=JobResponse)
 async def update_job(
     job_id: int,
