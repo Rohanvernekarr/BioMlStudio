@@ -17,32 +17,38 @@ export default function SHAPVisualization({ shapData, className = '' }: SHAPVisu
   const { plots, summary, explainer_type } = shapData;
 
   return (
-    <div className={`space-y-6 ${className}`}>
+    <div className={`space-y-8 ${className}`}>
       {/* Header */}
-      <Card className="p-6">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-bold">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
-              SHAP Explanations
-            </span>
-          </h2>
+      <Card>
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
+          <div>
+            <h2 className="text-3xl font-bold mb-2">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+                SHAP Explanations
+              </span>
+            </h2>
+            <p className="text-base text-zinc-400 leading-relaxed">
+              SHapley Additive exPlanations (SHAP) provide insights into which features
+              contribute most to individual predictions and overall model behavior.
+            </p>
+          </div>
           {explainer_type && (
-            <span className="px-3 py-1 text-xs font-medium bg-blue-500/10 text-blue-400 rounded-full border border-blue-500/20">
-              {explainer_type}
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="px-4 py-2 text-sm font-semibold bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-blue-400 rounded-xl border border-blue-500/30 backdrop-blur-sm">
+                {explainer_type}
+              </span>
+            </div>
           )}
         </div>
-        <p className="text-sm text-zinc-400">
-          SHapley Additive exPlanations (SHAP) provide insights into which features
-          contribute most to individual predictions and overall model behavior.
-        </p>
       </Card>
 
       {/* Summary Statistics */}
       {summary && (
-        <Card className="p-6">
-          <h3 className="text-xl font-bold mb-4 text-zinc-200">Top Contributing Features</h3>
-          <div className="space-y-3">
+        <Card>
+          <h3 className="text-2xl font-bold mb-6 text-white flex items-center gap-2">
+            📊 Top Contributing Features
+          </h3>
+          <div className="space-y-4">
             {summary.top_features.slice(0, 10).map((feature, idx) => (
               <div key={idx} className="space-y-2">
                 <div className="flex justify-between items-center text-sm">

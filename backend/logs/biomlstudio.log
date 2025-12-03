@@ -17587,3 +17587,14 @@ asyncio.exceptions.CancelledError
 {"timestamp": "2025-12-03 23:58:15", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/workflow/54/download/report"}
 {"timestamp": "2025-12-03 23:58:19", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/workflow/54/download/report - 200 - 4.7702s"}
 {"timestamp": "2025-12-03 23:58:19", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:57246 - "GET /api/v1/workflow/54/download/report?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwiZXhwIjoxNzY0Nzg3MjY1LCJpYXQiOjE3NjQ3ODU0NjUsImlzcyI6IkJpb01MU3R1ZGlvIiwidHlwZSI6ImFjY2VzcyJ9.HNxrhyx5ZmdVpy0V8vctlec_CXZtIVm6_HKWaKT0R1Y HTTP/1.1" 200"}
+{"timestamp": "2025-12-04 00:06:40", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-12-04 00:06:40", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application shutdown."}
+{"timestamp": "2025-12-04 00:06:40", "name": "app.main", "level": "INFO", "message": "🛑 Shutting down BioMLStudio API..."}
+{"timestamp": "2025-12-04 00:06:40", "name": "uvicorn.error", "level": "INFO", "message": "Application shutdown complete."}
+{"timestamp": "2025-12-04 00:06:40", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [18884]"}
+{"timestamp": "2025-12-04 00:06:47", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [34144]"}
+{"timestamp": "2025-12-04 00:06:47", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-04 00:06:47", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-04 00:06:49", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-04 00:06:49", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-04 00:06:49", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}

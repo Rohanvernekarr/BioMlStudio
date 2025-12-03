@@ -42,8 +42,11 @@ export default function ResultsPage() {
     return (
       <>
         <Header />
-        <div className="min-h-screen bg-black flex items-center justify-center">
-          <div className="text-zinc-300 text-sm">Loading results...</div>
+        <div className="min-h-[calc(100vh-64px)] bg-gradient-to-b from-black via-zinc-950/90 to-black flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-2 border-white/20 border-t-white mx-auto mb-4"></div>
+            <div className="text-zinc-300 text-lg font-medium">Loading results...</div>
+          </div>
         </div>
       </>
     );
@@ -83,47 +86,49 @@ export default function ResultsPage() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-gradient-to-b from-black via-zinc-950 to-black py-10 sm:py-12 lg:py-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-          {/* Top section */}
-          <div className="flex flex-col sm:flex-row justify-between items-start gap-6">
-            <div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">
-                Training results
-              </h1>
-              <p className="mt-3 text-sm sm:text-base text-zinc-400">
-                {job?.name && (
-                  <span className="text-zinc-500">
-                    {job.name}
-                    <span className="mx-1">•</span>
-                  </span>
-                )}
-                Best model:{' '}
-                <span className="text-zinc-100 font-medium">
-                  {results.best_model || 'RandomForest'}
-                </span>
-              </p>
+      <div className="min-h-[calc(100vh-64px)] bg-gradient-to-b from-black via-zinc-950/90 to-black">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+          <div className="space-y-8 lg:space-y-12">
+            {/* Page Header */}
+            <div className="flex flex-col lg:flex-row justify-between items-start gap-6 lg:gap-8">
+              <div className="flex-1">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent mb-4">
+                  Training Results
+                </h1>
+                <div className="space-y-2">
+                  {job?.name && (
+                    <p className="text-lg text-zinc-400">
+                      <span className="text-zinc-300 font-medium">{job.name}</span>
+                    </p>
+                  )}
+                  <p className="text-base text-zinc-400">
+                    Best performing model:{' '}
+                    <span className="font-semibold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                      {results.best_model || 'RandomForest'}
+                    </span>
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3 lg:gap-4">
+                <Button
+                  variant="secondary"
+                  onClick={() => window.open(api.getWorkflowModelDownloadUrl(jobId))}
+                  size="md"
+                  className="min-w-[160px]"
+                >
+                  📦 Download Model
+                </Button>
+                <Button
+                  onClick={() =>
+                    window.open(api.getWorkflowReportDownloadUrl(jobId), '_blank')
+                  }
+                  size="md"
+                  className="min-w-[160px]"
+                >
+                  📋 Download Report
+                </Button>
+              </div>
             </div>
-            <div className="flex flex-wrap gap-3">
-              <Button
-                variant="secondary"
-                onClick={() => window.open(api.getWorkflowModelDownloadUrl(jobId))}
-                size="sm"
-                className="px-4 py-2 text-sm"
-              >
-                Download model
-              </Button>
-              <Button
-                onClick={() =>
-                  window.open(api.getWorkflowReportDownloadUrl(jobId), '_blank')
-                }
-                size="sm"
-                className="px-4 py-2 text-sm"
-              >
-                Download report
-              </Button>
-            </div>
-          </div>
 
           {/* Sequence stats */}
           {sequenceStats && (
@@ -508,11 +513,17 @@ export default function ResultsPage() {
             <SHAPVisualization shapData={results.shap_explanations} />
           )}
 
-          {/* Footer actions */}
-          <div className="flex flex-wrap gap-3 pt-2">
-            <Button onClick={() => router.push('/')} size="sm" className="px-4 py-2 text-sm">
-              Run new analysis
-            </Button>
+            {/* Footer Actions */}
+            <div className="flex justify-center pt-8 border-t border-zinc-800/50">
+              <Button 
+                onClick={() => router.push('/')} 
+                variant="outline" 
+                size="lg"
+                className="min-w-[200px]"
+              >
+                🆕 Run New Analysis
+              </Button>
+            </div>
           </div>
         </div>
       </div>

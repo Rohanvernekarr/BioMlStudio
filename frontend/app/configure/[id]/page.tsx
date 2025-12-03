@@ -88,8 +88,11 @@ export default function ConfigurePage() {
     return (
       <>
         <Header />
-        <div className="min-h-screen bg-black flex items-center justify-center">
-          <div className="text-white">Loading dataset...</div>
+        <div className="min-h-[calc(100vh-64px)] bg-gradient-to-b from-black via-zinc-950/90 to-black flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-2 border-white/20 border-t-white mx-auto mb-4"></div>
+            <div className="text-zinc-300 text-lg font-medium">Loading dataset...</div>
+          </div>
         </div>
       </>
     );
@@ -99,8 +102,15 @@ export default function ConfigurePage() {
     return (
       <>
         <Header />
-        <div className="min-h-screen bg-black flex items-center justify-center">
-          <div className="text-red-400">{error || 'Dataset not found'}</div>
+        <div className="min-h-[calc(100vh-64px)] bg-gradient-to-b from-black via-zinc-950/90 to-black flex items-center justify-center px-4">
+          <Card className="max-w-lg text-center">
+            <div className="text-red-400 text-5xl mb-4">❌</div>
+            <h2 className="text-xl font-bold text-white mb-2">Dataset Not Found</h2>
+            <p className="text-red-400 mb-6">{error || 'The requested dataset could not be loaded.'}</p>
+            <Button onClick={() => router.push('/')} variant="outline">
+              Return Home
+            </Button>
+          </Card>
         </div>
       </>
     );
@@ -109,17 +119,18 @@ export default function ConfigurePage() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-gradient-to-b from-black via-zinc-950 to-black py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-16">
-            <h1 className="text-5xl sm:text-6xl font-bold mb-6 tracking-tight bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">Configure Training</h1>
-            <p className="text-zinc-400 text-lg">Set up your machine learning pipeline</p>
+      <div className="min-h-[calc(100vh-64px)] bg-gradient-to-b from-black via-zinc-950/90 to-black">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+          <div className="mb-12 lg:mb-16 text-center">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 lg:mb-6 tracking-tight bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">Configure Training</h1>
+            <p className="text-zinc-400 text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed">Set up your machine learning pipeline with custom parameters and optimization settings</p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div>
-            <Card>
-              <h2 className="text-2xl font-bold mb-6">Dataset Overview</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+            {/* Dataset Overview */}
+            <div>
+              <Card>
+                <h2 className="text-2xl font-bold mb-6 text-white">Dataset Overview</h2>
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between items-center py-2 border-b border-zinc-800">
                   <span className="text-zinc-400">Dataset Name</span>
