@@ -4,9 +4,9 @@ Dependency injection for FastAPI routes
 #Auth: JWT
 
 import logging
-from typing import Generator
+from typing import Generator, Optional
 
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, status, Query
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from jose import JWTError, jwt
 from sqlalchemy.orm import Session
@@ -115,6 +115,61 @@ async def get_current_active_user(
             detail="Inactive user"
         )
     return current_user
+
+
+async def get_user_from_token_query(
+    token: Optional[str] = Query(None),
+    db: Session = Depends(get_db)
+) -> User:
+    """
+    Get current user from JWT token in query parameter (for file downloads).
+    
+    Args:
+        token: JWT token from query parameter
+        db: Database session
+        
+    Returns:
+        User: Authenticated user object
+        
+    Raises:
+        HTTPException: If token is invalid or user not found
+    """
+    if not token:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Authentication token required",
+        )
+    
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+    )
+    
+    try:
+        payload = jwt.decode(
+            token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
+        )
+        
+        user_id: int = payload.get("sub")
+        if user_id is None:
+            raise credentials_exception
+            
+    except JWTError as e:
+        logger.warning(f"JWT decode error from query token: {e}")
+        raise credentials_exception
+    
+    # Get user from database
+    user = db.query(User).filter(User.id == user_id).first()
+    if user is None:
+        raise credentials_exception
+    
+    if not user.is_active:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Inactive user"
+        )
+    
+    return user
 
 
 def require_admin(

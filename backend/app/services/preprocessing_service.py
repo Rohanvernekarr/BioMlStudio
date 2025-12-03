@@ -140,6 +140,8 @@ class PreprocessingService:
             if dataset_type in ['dna', 'rna', 'protein']:
                 # Load biological sequences
                 if file_path.suffix.lower() in ['.fasta', '.fa', '.fas']:
+                    from app.utils.bioinformatics import extract_label_from_header
+                    
                     sequences_data = []
                     with open(file_path, 'r') as handle:
                         for record in SeqIO.parse(handle, "fasta"):
@@ -153,15 +155,25 @@ class PreprocessingService:
                                 seq_str = ''.join(c for c in seq_str if c in 'ACDEFGHIKLMNPQRSTVWY')
                             
                             if len(seq_str) > 0:
+                                # Extract label from FASTA header
+                                label = extract_label_from_header(record.description)
+                                
                                 sequences_data.append({
                                     'id': record.id,
                                     'sequence': seq_str,
-                                    'length': len(seq_str)
+                                    'length': len(seq_str),
+                                    'label': label
                                 })
                     
                     df = pd.DataFrame(sequences_data)
                     step_info['actions'].append(f"Loaded {len(df)} sequences from FASTA")
                     step_info['actions'].append("Removed invalid characters")
+                    step_info['actions'].append(f"Extracted labels from headers")
+                    
+                    # Log label distribution
+                    if 'label' in df.columns:
+                        label_counts = df['label'].value_counts()
+                        step_info['actions'].append(f"Label distribution: {label_counts.to_dict()}")
                     
                 elif file_path.suffix.lower() in ['.csv', '.tsv']:
                     delimiter = '\t' if file_path.suffix == '.tsv' else ','
@@ -521,7 +533,8 @@ class PreprocessingService:
         step_info = {
             'step': 'Data Splitting',
             'actions': [],
-            'stats': {}
+            'stats': {},
+            'warnings': []
         }
         
         # Separate features and target
@@ -543,19 +556,53 @@ class PreprocessingService:
             self.label_encoders[target_column] = le
             step_info['actions'].append(f"Encoded target variable ({len(le.classes_)} classes)")
         
+        # Check class distribution
+        unique_classes, class_counts = np.unique(y, return_counts=True)
+        min_class_count = np.min(class_counts)
+        
+        # Validate minimum samples per class for stratified split
+        min_samples_needed = 2  # Minimum for stratified split
+        if min_class_count < min_samples_needed:
+            step_info['warnings'].append(
+                f"Class with only {min_class_count} sample(s) detected. "
+                f"Need at least {min_samples_needed} samples per class for stratified split. "
+                f"Using simple random split instead."
+            )
+            stratify = False
+        
+        # Adjust split sizes for very small datasets
+        total_samples = len(y)
+        if total_samples < 20:
+            step_info['warnings'].append(
+                f"Very small dataset ({total_samples} samples). "
+                f"Results may not be reliable. Recommend at least 50 samples."
+            )
+            # Use larger train set for tiny datasets
+            test_size = min(0.2, max(0.1, 2 / total_samples))
+            val_size = min(0.1, max(0.05, 1 / total_samples))
+        
         # First split: train+val vs test
-        stratify_param = y if stratify and len(np.unique(y)) > 1 else None
+        stratify_param = y if stratify and len(unique_classes) > 1 and min_class_count >= 2 else None
         
         X_temp, X_test, y_temp, y_test = train_test_split(
             X, y, test_size=test_size, random_state=42, stratify=stratify_param
         )
         
         # Second split: train vs val
+        # Check if we can still stratify after first split
+        if stratify_param is not None:
+            unique_temp, counts_temp = np.unique(y_temp, return_counts=True)
+            if np.min(counts_temp) < 2:
+                stratify_param = None
+                step_info['warnings'].append(
+                    "Insufficient samples for stratified validation split. Using random split."
+                )
+        
         val_ratio = val_size / (1 - test_size)
-        stratify_param = y_temp if stratify and len(np.unique(y_temp)) > 1 else None
+        stratify_param_val = y_temp if stratify_param is not None else None
         
         X_train, X_val, y_train, y_val = train_test_split(
-            X_temp, y_temp, test_size=val_ratio, random_state=42, stratify=stratify_param
+            X_temp, y_temp, test_size=val_ratio, random_state=42, stratify=stratify_param_val
         )
         
         splits = {

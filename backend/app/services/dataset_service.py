@@ -114,6 +114,7 @@ class DatasetService:
                 "format": "fasta",
                 "sequence_count": len(sequences),
                 "total_sequences": len(sequences),
+                "total_rows": len(sequences),  # For UI consistency
                 "min_sequence_length": min(sequence_lengths),
                 "max_sequence_length": max(sequence_lengths),
                 "avg_sequence_length": sum(sequence_lengths) / len(sequence_lengths),
@@ -144,6 +145,91 @@ class DatasetService:
             
         except Exception as e:
             self.logger.error(f"Error analyzing FASTA file: {e}")
+            raise
+    
+    async def _analyze_fastq_file(
+        self, 
+        file_path: Path, 
+        dataset_type: str
+    ) -> Dict[str, Any]:
+        """Analyze FASTQ format file"""
+        sequences = []
+        sequence_lengths = []
+        quality_scores = []
+        
+        try:
+            with open(file_path, 'r') as handle:
+                for record in SeqIO.parse(handle, "fastq"):
+                    sequences.append(str(record.seq))
+                    sequence_lengths.append(len(record.seq))
+                    if hasattr(record, 'letter_annotations') and 'phred_quality' in record.letter_annotations:
+                        quality_scores.append(sum(record.letter_annotations['phred_quality']) / len(record.seq))
+            
+            if not sequences:
+                raise ValueError("No valid sequences found in FASTQ file")
+            
+            stats = {
+                "format": "fastq",
+                "sequence_count": len(sequences),
+                "total_sequences": len(sequences),
+                "total_rows": len(sequences),  # For UI consistency
+                "min_sequence_length": min(sequence_lengths),
+                "max_sequence_length": max(sequence_lengths),
+                "avg_sequence_length": sum(sequence_lengths) / len(sequence_lengths),
+                "total_bases": sum(sequence_lengths)
+            }
+            
+            if quality_scores:
+                stats.update({
+                    "avg_quality_score": sum(quality_scores) / len(quality_scores),
+                    "min_quality_score": min(quality_scores),
+                    "max_quality_score": max(quality_scores)
+                })
+            
+            return stats
+            
+        except Exception as e:
+            self.logger.error(f"Error analyzing FASTQ file: {e}")
+            raise
+    
+    async def _analyze_sequence_csv(
+        self, 
+        file_path: Path, 
+        dataset_type: str
+    ) -> Dict[str, Any]:
+        """Analyze CSV file containing biological sequences"""
+        try:
+            # Detect delimiter
+            with open(file_path, 'r') as f:
+                first_line = f.readline()
+                delimiter = '\t' if '\t' in first_line else ','
+            
+            df = pd.read_csv(file_path, delimiter=delimiter)
+            
+            stats = {
+                "format": "csv" if delimiter == ',' else "tsv",
+                "total_rows": len(df),
+                "total_columns": len(df.columns),
+                "columns": list(df.columns),
+                "sequence_count": len(df),
+                "total_sequences": len(df)
+            }
+            
+            # Check if there's a sequence column
+            sequence_cols = [col for col in df.columns if 'seq' in col.lower()]
+            if sequence_cols:
+                sequences = df[sequence_cols[0]].astype(str)
+                sequence_lengths = sequences.str.len()
+                stats.update({
+                    "min_sequence_length": int(sequence_lengths.min()),
+                    "max_sequence_length": int(sequence_lengths.max()),
+                    "avg_sequence_length": float(sequence_lengths.mean())
+                })
+            
+            return stats
+            
+        except Exception as e:
+            self.logger.error(f"Error analyzing sequence CSV: {e}")
             raise
     
     async def _analyze_general_dataset(self, file_path: Path) -> Dict[str, Any]:

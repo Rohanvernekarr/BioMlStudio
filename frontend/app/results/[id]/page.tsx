@@ -74,11 +74,11 @@ export default function ResultsPage() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-black py-12 px-6 sm:px-8 lg:px-12">
+      <div className="min-h-screen bg-black py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-12 flex flex-col sm:flex-row justify-between items-start gap-6">
+          <div className="mb-16 flex flex-col sm:flex-row justify-between items-start gap-6">
             <div>
-              <h1 className="text-4xl font-bold mb-3 tracking-tight">Training Results</h1>
+              <h1 className="text-4xl sm:text-5xl font-bold mb-4 tracking-tight">Training Results</h1>
               <p className="text-zinc-400 text-lg">
                 {job?.name && <span className="text-zinc-500">{job.name} • </span>}
                 Best model: <span className="text-white font-medium">{results.best_model || 'RandomForest'}</span>
@@ -87,7 +87,7 @@ export default function ResultsPage() {
             <div className="flex flex-wrap gap-3">
               <Button
                 variant="secondary"
-                onClick={() => window.open(api.getWorkflowModelDownloadUrl(jobId), '_blank')}
+                onClick={() => window.open(api.getWorkflowModelDownloadUrl(jobId))}
                 size="lg"
               >
                 📦 Download Model
@@ -116,6 +116,95 @@ export default function ResultsPage() {
               <div className="p-4 rounded-lg bg-zinc-950/50 border border-zinc-800/50">
                 <p className="text-sm text-zinc-400 mb-2">Sequence Type</p>
                 <p className="text-3xl font-bold capitalize">{sequenceStats.sequence_type}</p>
+              </div>
+            </div>
+          </Card>
+        )}
+
+        {results.models_trained && results.models_trained.length > 0 && (
+          <Card className="mb-8">
+            <h2 className="text-2xl font-bold mb-4">Model Comparison</h2>
+            <p className="text-sm text-zinc-400 mb-6">
+              Performance comparison of all trained models • Total training time: {results.training_time?.toFixed(2) || 0}s
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-zinc-800">
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-zinc-400">Model</th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-zinc-400">Type</th>
+                    <th className="text-right py-3 px-4 text-sm font-semibold text-zinc-400">Train Score</th>
+                    <th className="text-right py-3 px-4 text-sm font-semibold text-zinc-400">Val Score</th>
+                    <th className="text-right py-3 px-4 text-sm font-semibold text-zinc-400">Training Time</th>
+                    <th className="text-center py-3 px-4 text-sm font-semibold text-zinc-400">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {results.models_trained
+                    .sort((a, b) => (b.metrics?.primary_score || 0) - (a.metrics?.primary_score || 0))
+                    .map((model, idx) => (
+                    <tr 
+                      key={idx} 
+                      className={`border-b border-zinc-800/50 transition-colors ${
+                        model.is_best ? 'bg-white/5' : 'hover:bg-zinc-900/50'
+                      }`}
+                    >
+                      <td className="py-4 px-4">
+                        <div className="flex items-center gap-2">
+                          <span className="font-medium">{model.model_name}</span>
+                          {model.is_best && (
+                            <span className="px-2 py-1 text-xs font-semibold bg-green-500/20 text-green-400 rounded-full">
+                              BEST
+                            </span>
+                          )}
+                        </div>
+                      </td>
+                      <td className="py-4 px-4 text-zinc-400 text-sm">{model.model_type}</td>
+                      <td className="py-4 px-4 text-right font-mono">
+                        {model.metrics?.train_score?.toFixed(4) || 'N/A'}
+                      </td>
+                      <td className="py-4 px-4 text-right font-mono">
+                        <span className={model.metrics?.val_score && model.metrics.val_score > 0.85 ? 'text-green-400' : ''}>
+                          {model.metrics?.val_score?.toFixed(4) || 'N/A'}
+                        </span>
+                      </td>
+                      <td className="py-4 px-4 text-right text-zinc-400 font-mono text-sm">
+                        {model.training_time?.toFixed(2) || 0}s
+                      </td>
+                      <td className="py-4 px-4 text-center">
+                        {idx === 0 ? (
+                          <span className="text-yellow-400">🥇</span>
+                        ) : idx === 1 ? (
+                          <span className="text-zinc-400">🥈</span>
+                        ) : idx === 2 ? (
+                          <span className="text-orange-400">🥉</span>
+                        ) : (
+                          <span className="text-zinc-600">—</span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="mt-6 p-4 rounded-lg bg-zinc-900/50 border border-zinc-800">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+                <div>
+                  <p className="text-zinc-500 mb-1">Best Model</p>
+                  <p className="font-semibold text-white">{results.best_model}</p>
+                </div>
+                <div>
+                  <p className="text-zinc-500 mb-1">Models Trained</p>
+                  <p className="font-semibold text-white">{results.models_trained.length}</p>
+                </div>
+                <div>
+                  <p className="text-zinc-500 mb-1">Fastest Model</p>
+                  <p className="font-semibold text-white">
+                    {results.models_trained.reduce((fastest, model) => 
+                      (model.training_time < fastest.training_time) ? model : fastest
+                    ).model_name}
+                  </p>
+                </div>
               </div>
             </div>
           </Card>

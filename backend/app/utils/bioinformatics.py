@@ -17,6 +17,71 @@ from Bio.SeqUtils.ProtParam import ProteinAnalysis
 logger = logging.getLogger(__name__)
 
 
+def extract_label_from_header(header: str) -> str:
+    """
+    Extract label from FASTA header description.
+    
+    Supports multiple naming conventions:
+    - Space-separated: '>seq1 Cancer_sample'
+    - Pipe-separated: '>seq1|cancer'
+    - Underscore: '>seq1_cancer'
+    
+    Auto-detects disease/normal keywords and maps them to standard labels.
+    
+    Args:
+        header: FASTA header/description string
+        
+    Returns:
+        str: Extracted label (e.g., 'affected', 'normal', or custom label)
+    """
+    # Common disease/normal keywords
+    disease_keywords = ['cancer', 'tumor', 'disease', 'affected', 'diseased', 
+                       'mutant', 'mutation', 'pathogenic', 'malignant', 'positive']
+    normal_keywords = ['normal', 'healthy', 'control', 'wildtype', 'wild-type',
+                      'benign', 'negative', 'unaffected']
+    
+    label = None
+    
+    # Try space-separated format (most common)
+    parts = header.split()
+    if len(parts) > 1:
+        last_word = parts[-1].lower()
+        
+        if any(keyword in last_word for keyword in disease_keywords):
+            label = 'affected'
+        elif any(keyword in last_word for keyword in normal_keywords):
+            label = 'normal'
+        else:
+            # Use last word as-is (custom label)
+            label = parts[-1]
+    
+    # Try pipe-separated format: >seq1|cancer
+    if not label and '|' in header:
+        parts = header.split('|')
+        if len(parts) > 1:
+            potential_label = parts[-1].strip().lower()
+            if any(keyword in potential_label for keyword in disease_keywords):
+                label = 'affected'
+            elif any(keyword in potential_label for keyword in normal_keywords):
+                label = 'normal'
+            else:
+                label = parts[-1].strip()
+    
+    # Try underscore format: >seq1_cancer
+    if not label and '_' in header:
+        parts = header.split('_')
+        potential_label = parts[-1].lower()
+        if any(keyword in potential_label for keyword in disease_keywords):
+            label = 'affected'
+        elif any(keyword in potential_label for keyword in normal_keywords):
+            label = 'normal'
+        else:
+            label = parts[-1]
+    
+    # Return label or 'unknown' if nothing found
+    return label if label else 'unknown'
+
+
 def detect_sequence_type(sequence: str) -> str:
     """
     Detect the type of biological sequence.
@@ -289,10 +354,9 @@ def convert_fasta_to_csv(
                     'length': len(record.seq)
                 }
                 
-                # Extract label from description if present
-                description_parts = record.description.split()
-                if len(description_parts) > 1:
-                    seq_data['label'] = description_parts[-1]
+                # Extract label from description using dedicated function
+                label = extract_label_from_header(record.description)
+                seq_data['label'] = label
                 
                 # Add sequence type detection
                 seq_type = detect_sequence_type(str(record.seq))

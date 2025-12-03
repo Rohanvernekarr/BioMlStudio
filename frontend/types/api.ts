@@ -37,6 +37,9 @@ export interface JobResults {
     mse?: number;
     rmse?: number;
     r2?: number;
+    train_score?: number;
+    val_score?: number;
+    primary_score?: number;
   };
   feature_importance?: Array<{ feature: string; importance: number }>;
   confusion_matrix?: number[][];
@@ -51,4 +54,16 @@ export interface JobResults {
     roc_curve?: string;
   };
   best_model?: string;
+  models_trained?: Array<{
+    model_name: string;
+    model_type: string;
+    training_time: number;
+    metrics: {
+      train_score: number;
+      val_score: number;
+      primary_score: number;
+    };
+    is_best: boolean;
+  }>;
+  training_time?: number;
 }

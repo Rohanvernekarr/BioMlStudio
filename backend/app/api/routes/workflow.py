@@ -9,7 +9,7 @@ from typing import Any, Dict
 from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks, status
 from sqlalchemy.orm import Session
 
-from app.api.deps import get_current_active_user, get_db
+from app.api.deps import get_current_active_user, get_db, get_user_from_token_query
 from app.models.user import User
 from app.models.dataset import Dataset
 from app.models.job import Job, JobStatus, JobType
@@ -248,12 +248,31 @@ async def execute_ml_workflow(
             # Update job with results
             job.status = JobStatus.COMPLETED
             job.progress = 100
+            
+            # Flatten metrics for frontend (use validation metrics, fallback to training)
+            evaluation_metrics = training_results.get('metrics', {})
+            flattened_metrics = evaluation_metrics.get('validation', evaluation_metrics.get('training', {}))
+            
+            # Prepare models_trained data for frontend (exclude model objects)
+            models_comparison = []
+            for model_result in training_results.get('models_trained', []):
+                models_comparison.append({
+                    'model_name': model_result['model_name'],
+                    'model_type': model_result['model_type'],
+                    'training_time': model_result['training_time'],
+                    'metrics': model_result['metrics'],
+                    'is_best': model_result['model_name'] == training_results['best_model']['model_name']
+                })
+            
             job.result = {
                 'success': True,
                 'best_model': training_results['best_model']['model_name'],
-                'metrics': training_results['metrics'],
+                'metrics': flattened_metrics,
+                'full_metrics': training_results['metrics'],  # Keep nested structure for advanced use
+                'models_trained': models_comparison,  # All trained models comparison
                 'artifacts': artifacts,
-                'training_time': training_results['training_time']
+                'training_time': training_results['training_time'],
+                'visualizations': training_results.get('visualizations', {})
             }
             db.commit()
             
@@ -330,7 +349,7 @@ async def get_workflow_results(
 @router.get("/{job_id}/download/model")
 async def download_model(
     job_id: int,
-    current_user: User = Depends(get_current_active_user),
+    current_user: User = Depends(get_user_from_token_query),
     db: Session = Depends(get_db)
 ):
     """Download trained model file"""
@@ -364,7 +383,7 @@ async def download_model(
 @router.get("/{job_id}/download/report")
 async def download_report(
     job_id: int,
-    current_user: User = Depends(get_current_active_user),
+    current_user: User = Depends(get_user_from_token_query),
     db: Session = Depends(get_db)
 ):
     """Download PDF report"""

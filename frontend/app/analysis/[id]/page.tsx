@@ -354,9 +354,9 @@ export default function AnalysisPage() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-black p-8">
+      <div className="min-h-screen bg-black py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-8">
+          <div className="mb-12">
             <Button
               variant="ghost"
               onClick={() => router.back()}
@@ -364,7 +364,7 @@ export default function AnalysisPage() {
             >
               ← Back
             </Button>
-            <h1 className="text-3xl font-bold mb-2">Dataset Analysis</h1>
+            <h1 className="text-4xl sm:text-5xl font-bold mb-4">Dataset Analysis</h1>
             {dataset && (
               <div className="flex items-center gap-4 text-zinc-400">
                 <span>{dataset.name}</span>

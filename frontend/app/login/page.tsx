@@ -37,7 +37,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center px-6 py-12">
+    <div className="min-h-screen bg-black flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16">
       <div className="max-w-md w-full">
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-3 mb-6">
@@ -45,7 +45,7 @@ export default function LoginPage() {
               <span className="text-black font-bold text-lg">BM</span>
             </div>
           </div>
-          <h1 className="text-4xl font-bold mb-3 tracking-tight">BioMLStudio</h1>
+          <h1 className="text-4xl sm:text-5xl font-bold mb-4 tracking-tight">BioMLStudio</h1>
           <p className="text-zinc-400 text-lg">
             {isLogin ? 'Welcome back' : 'Get started today'}
           </p>

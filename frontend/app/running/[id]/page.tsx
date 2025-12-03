@@ -64,13 +64,13 @@ export default function RunningPage() {
 
   if (job?.status === 'failed') {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center px-6 py-12">
+      <div className="min-h-screen bg-black flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16">
         <Card className="max-w-2xl w-full">
           <div className="text-center">
             <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-red-950/30 border-2 border-red-800/50 flex items-center justify-center">
               <span className="text-4xl">✗</span>
             </div>
-            <h1 className="text-3xl font-bold mb-4">Analysis Failed</h1>
+            <h1 className="text-3xl sm:text-4xl font-bold mb-4">Analysis Failed</h1>
             <p className="text-zinc-400 mb-8 leading-relaxed">
               {job.error_message || 'An error occurred during analysis'}
             </p>
@@ -88,13 +88,13 @@ export default function RunningPage() {
 
   if (pollCount > 60) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center px-6 py-12">
+      <div className="min-h-screen bg-black flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16">
         <Card className="max-w-2xl w-full">
           <div className="text-center">
             <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-zinc-900 border-2 border-zinc-800 flex items-center justify-center">
               <span className="text-4xl">⏱️</span>
             </div>
-            <h1 className="text-3xl font-bold mb-4">Taking Longer Than Expected</h1>
+            <h1 className="text-3xl sm:text-4xl font-bold mb-4">Taking Longer Than Expected</h1>
             <p className="text-zinc-400 mb-3 leading-relaxed">
               The analysis is still processing. Current status: <strong className="text-white">{job?.status || 'unknown'}</strong>
             </p>
@@ -123,14 +123,14 @@ export default function RunningPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center px-6 py-12">
+    <div className="min-h-screen bg-black flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16">
       <div className="max-w-2xl w-full">
         <Card>
           <div className="text-center mb-10">
             <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-zinc-900 border-2 border-zinc-800 flex items-center justify-center animate-pulse">
               <span className="text-4xl">🔬</span>
             </div>
-            <h1 className="text-4xl font-bold mb-4 tracking-tight">Running Analysis</h1>
+            <h1 className="text-4xl sm:text-5xl font-bold mb-4 tracking-tight">Running Analysis</h1>
             <p className="text-zinc-400 mb-2 text-lg">
               Status: <span className="text-white capitalize font-medium">{job?.status || 'loading'}</span>
             </p>
