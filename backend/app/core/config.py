@@ -77,6 +77,7 @@ class Settings(BaseSettings):
     
     # ML Settings
     MODEL_STORAGE_PATH: str = "models"
+    MODELS_DIR: str = "models"
     MAX_TRAINING_TIME_SECONDS: int = 7200  # 2 hours
     DEFAULT_TEST_SIZE: float = 0.2
     MAX_FEATURES: int = 10000

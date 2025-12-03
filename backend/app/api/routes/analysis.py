@@ -5,9 +5,12 @@ Simplified analysis endpoints for one-click ML pipeline
 import logging
 from typing import Any, Dict, Optional
 from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
+from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
+from pathlib import Path
 
 from app.api.deps import get_current_active_user, get_db
+from app.core.config import settings
 from app.models.user import User
 from app.models.dataset import Dataset
 from app.schemas.job import JobCreate, JobResponse
@@ -125,8 +128,47 @@ async def auto_analyze_dataset(
             # Load and prepare data
             import pandas as pd
             from sklearn.preprocessing import LabelEncoder
+            from pathlib import Path
             
-            df = pd.read_csv(config['dataset_path'])
+            file_path = Path(config['dataset_path'])
+            
+            # Check if FASTA file and convert to CSV with k-mer features
+            if file_path.suffix.lower() in ['.fasta', '.fa', '.fas']:
+                from app.utils.bioinformatics import convert_fasta_to_csv
+                import tempfile
+                
+                temp_csv = tempfile.NamedTemporaryFile(delete=False, suffix='.csv', mode='w')
+                temp_csv.close()
+                
+                conversion_config = {
+                    'add_composition': True,
+                    'add_kmers': True,
+                    'kmer_size': 3,
+                    'max_sequences': 10000
+                }
+                
+                result = convert_fasta_to_csv(str(file_path), temp_csv.name, conversion_config)
+                
+                if not result['success']:
+                    raise Exception(f"Failed to convert FASTA: {result.get('error')}")
+                
+                df = pd.read_csv(temp_csv.name)
+                
+                sequence_metadata = ['sequence_id', 'sequence', 'sequence_type']
+                
+                job.artifacts = job.artifacts or {}
+                job.artifacts['sequence_stats'] = {
+                    'total_sequences': len(df),
+                    'avg_length': float(df['length'].mean()) if 'length' in df.columns else 0,
+                    'sequence_type': df['sequence_type'].iloc[0] if 'sequence_type' in df.columns else 'unknown'
+                }
+                db_local.commit()
+                
+                # Drop metadata columns that shouldn't be used for training
+                df = df.drop(columns=[col for col in sequence_metadata if col in df.columns], errors='ignore')
+                
+            else:
+                df = pd.read_csv(config['dataset_path'])
             
             # Encode categorical columns
             label_encoders = {}
@@ -176,10 +218,19 @@ async def auto_analyze_dataset(
                 # Confusion matrix
                 cm = confusion_matrix(y_test, y_pred)
                 
+                # Save model
+                import joblib
+                from pathlib import Path
+                model_dir = Path(settings.MODELS_DIR) / str(job.user_id)
+                model_dir.mkdir(parents=True, exist_ok=True)
+                model_path = model_dir / f"model_{job.id}.joblib"
+                joblib.dump(model, str(model_path))
+                
                 result = {
                     'metrics': metrics,
                     'feature_importance': feature_importance,
-                    'confusion_matrix': cm.tolist()
+                    'confusion_matrix': cm.tolist(),
+                    'model_path': str(model_path)
                 }
             else:
                 from sklearn.ensemble import RandomForestRegressor
@@ -204,16 +255,26 @@ async def auto_analyze_dataset(
                     for name, importance in zip(feature_cols, model.feature_importances_)
                 }
                 
+                # Save model
+                import joblib
+                from pathlib import Path
+                model_dir = Path(settings.MODELS_DIR) / str(job.user_id)
+                model_dir.mkdir(parents=True, exist_ok=True)
+                model_path = model_dir / f"model_{job.id}.joblib"
+                joblib.dump(model, str(model_path))
+                
                 result = {
                     'metrics': metrics,
-                    'feature_importance': feature_importance
+                    'feature_importance': feature_importance,
+                    'model_path': str(model_path)
                 }
             
             job.status = JobStatus.COMPLETED
             job.metrics = result.get('metrics', {})
             job.artifacts = {
                 'feature_importance': result.get('feature_importance', {}),
-                'confusion_matrix': result.get('confusion_matrix', [])
+                'confusion_matrix': result.get('confusion_matrix', []),
+                'model_path': result.get('model_path', '')
             }
             job.updated_at = datetime.utcnow()
             db_local.commit()
@@ -241,3 +302,34 @@ async def auto_analyze_dataset(
     logger.info(f"Auto analysis job created: {db_job.id} for dataset {dataset_id}")
     
     return JobResponse.from_orm(db_job)
+
+
+@router.get("/download-model/{job_id}")
+async def download_model(
+    job_id: int,
+    current_user: User = Depends(get_current_active_user),
+    db: Session = Depends(get_db)
+):
+    from app.models.job import Job
+    
+    job = db.query(Job).filter(
+        Job.id == job_id,
+        Job.user_id == current_user.id
+    ).first()
+    
+    if not job:
+        raise HTTPException(status_code=404, detail="Job not found")
+    
+    model_path = (job.artifacts or {}).get('model_path')
+    if not model_path:
+        raise HTTPException(status_code=404, detail="Model not found")
+    
+    model_file = Path(model_path)
+    if not model_file.exists():
+        raise HTTPException(status_code=404, detail="Model file not found")
+    
+    return FileResponse(
+        path=str(model_file),
+        filename=f"model_{job_id}.joblib",
+        media_type="application/octet-stream"
+    )

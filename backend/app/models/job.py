@@ -98,12 +98,6 @@ class Job(Base):
     
     # Parent-child job relationships for pipelines
     parent_job_id = Column(Integer, ForeignKey("jobs.id"), index=True)
-    parent_job = relationship(
-        "Job", 
-        remote_side="Job.id",  # This is the fix - specify the remote side column
-        backref="child_jobs",
-        foreign_keys=[parent_job_id]
-    )
     
     def __repr__(self) -> str:
         return f"<Job(id={self.id}, name='{self.name}', status='{self.status}')>"
@@ -198,3 +192,12 @@ class Job(Base):
             summary["error"] = self.error_message
         
         return summary
+
+
+# Define the self-referential relationship after the class is defined
+Job.parent_job = relationship(
+    "Job",
+    remote_side=[Job.id],
+    backref="child_jobs",
+    foreign_keys=[Job.parent_job_id]
+)

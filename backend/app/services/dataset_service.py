@@ -195,6 +195,8 @@ class DatasetService:
         """
         file_path = Path(file_path)
         
+        self.logger.info(f"Preview called: file={file_path.name}, dataset_type={dataset_type}, suffix={file_path.suffix}")
+        
         try:
             if dataset_type in ['dna', 'rna', 'protein']:
                 return await self._preview_biological_dataset(file_path, rows)
@@ -213,18 +215,51 @@ class DatasetService:
         """Preview biological sequence dataset"""
         preview_data = []
         
+        self.logger.info(f"Biological preview: file={file_path.name}, suffix={file_path.suffix}")
+        
         if file_path.suffix.lower() in ['.fasta', '.fa', '.fas']:
-            with open(file_path, 'r') as handle:
-                for i, record in enumerate(SeqIO.parse(handle, "fasta")):
-                    if i >= rows:
-                        break
+            # Convert FASTA to CSV for preview
+            from app.utils.bioinformatics import convert_fasta_to_csv
+            import tempfile
+            import pandas as pd
+            import os
+            
+            temp_csv = tempfile.NamedTemporaryFile(delete=False, suffix='.csv', mode='w')
+            temp_csv_path = temp_csv.name
+            temp_csv.close()
+            
+            try:
+                conversion_config = {
+                    'add_composition': True,
+                    'add_kmers': True,
+                    'kmer_size': 3,
+                    'max_sequences': 100
+                }
+                
+                self.logger.info(f"Converting FASTA to CSV: {file_path} -> {temp_csv_path}")
+                result = convert_fasta_to_csv(str(file_path), temp_csv_path, conversion_config)
+                
+                if result['success']:
+                    self.logger.info(f"Conversion successful: {result['sequences_converted']} sequences, columns: {result.get('columns', [])}")
+                    df = pd.read_csv(temp_csv_path)
+                    self.logger.info(f"DataFrame loaded: shape={df.shape}, columns={list(df.columns)}")
                     
-                    preview_data.append({
-                        "id": record.id,
-                        "description": record.description,
-                        "sequence": str(record.seq)[:100] + "..." if len(record.seq) > 100 else str(record.seq),
-                        "length": len(record.seq)
-                    })
+                    # Drop metadata columns for preview
+                    df = df.drop(columns=['sequence_id', 'sequence', 'sequence_type'], errors='ignore')
+                    self.logger.info(f"After dropping metadata: columns={list(df.columns)}")
+                    
+                    preview_data = df.head(rows).to_dict('records')
+                    self.logger.info(f"Preview data created: {len(preview_data)} rows")
+                else:
+                    self.logger.error(f"FASTA conversion failed: {result.get('error')}")
+                    preview_data = []
+            except Exception as e:
+                self.logger.error(f"Error converting FASTA for preview: {e}", exc_info=True)
+                preview_data = []
+            finally:
+                # Clean up temp file
+                if os.path.exists(temp_csv_path):
+                    os.unlink(temp_csv_path)
         
         return preview_data
     

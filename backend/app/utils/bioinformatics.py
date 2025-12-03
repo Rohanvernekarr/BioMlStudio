@@ -285,10 +285,14 @@ def convert_fasta_to_csv(
             for i, record in enumerate(SeqIO.parse(handle, "fasta")):
                 seq_data = {
                     'sequence_id': record.id,
-                    'description': record.description,
                     'sequence': str(record.seq),
                     'length': len(record.seq)
                 }
+                
+                # Extract label from description if present
+                description_parts = record.description.split()
+                if len(description_parts) > 1:
+                    seq_data['label'] = description_parts[-1]
                 
                 # Add sequence type detection
                 seq_type = detect_sequence_type(str(record.seq))
@@ -325,6 +329,12 @@ def convert_fasta_to_csv(
         
         # Create DataFrame and save
         df = pd.DataFrame(sequences_data)
+        
+        # Reorder columns: label first, then numeric features, drop metadata
+        if 'label' in df.columns:
+            other_cols = [col for col in df.columns if col not in ['sequence_id', 'sequence', 'sequence_type', 'label']]
+            df = df[['label'] + other_cols]
+        
         df.to_csv(csv_path, index=False)
         
         return {

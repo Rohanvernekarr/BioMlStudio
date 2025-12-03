@@ -40,6 +40,11 @@ export interface JobResults {
   };
   feature_importance?: Array<{ feature: string; importance: number }>;
   confusion_matrix?: number[][];
+  sequence_stats?: {
+    total_sequences: number;
+    avg_length: number;
+    sequence_type: string;
+  };
   plots?: {
     confusion_matrix?: string;
     feature_importance?: string;

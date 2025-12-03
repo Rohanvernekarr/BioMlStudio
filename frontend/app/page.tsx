@@ -19,8 +19,9 @@ export default function Home() {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
-      if (!selectedFile.name.endsWith('.csv')) {
-        setError('Please upload a CSV file');
+      const fileName = selectedFile.name.toLowerCase();
+      if (!fileName.endsWith('.csv') && !fileName.endsWith('.fasta') && !fileName.endsWith('.fa')) {
+        setError('Please upload a CSV or FASTA file');
         return;
       }
       setFile(selectedFile);
@@ -32,12 +33,15 @@ export default function Home() {
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     const droppedFile = e.dataTransfer.files[0];
-    if (droppedFile && droppedFile.name.endsWith('.csv')) {
-      setFile(droppedFile);
-      setError('');
-      setFileInfo(null);
-    } else {
-      setError('Please upload a CSV file');
+    if (droppedFile) {
+      const fileName = droppedFile.name.toLowerCase();
+      if (fileName.endsWith('.csv') || fileName.endsWith('.fasta') || fileName.endsWith('.fa')) {
+        setFile(droppedFile);
+        setError('');
+        setFileInfo(null);
+      } else {
+        setError('Please upload a CSV or FASTA file');
+      }
     }
   };
 
@@ -48,7 +52,12 @@ export default function Home() {
     setError('');
 
     try {
-      const dataset = await api.uploadDataset(file, file.name);
+      // Auto-detect FASTA files and set dataset_type
+      const fileName = file.name.toLowerCase();
+      const isFasta = fileName.endsWith('.fasta') || fileName.endsWith('.fa');
+      const datasetType = isFasta ? 'dna' : 'general';
+      
+      const dataset = await api.uploadDataset(file, file.name, datasetType);
       router.push(`/configure/${dataset.id}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Upload failed');
@@ -91,7 +100,7 @@ export default function Home() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <p className="text-lg mb-2">Drop your CSV file here</p>
+                <p className="text-lg mb-2">Drop your CSV or FASTA file here</p>
                 <p className="text-sm text-zinc-400 mb-4">or</p>
                 <label className="cursor-pointer">
                   <span className="px-4 py-2 bg-white text-black rounded-lg hover:bg-zinc-200 transition-colors inline-block">
@@ -99,13 +108,13 @@ export default function Home() {
                   </span>
                   <input
                     type="file"
-                    accept=".csv"
+                    accept=".csv,.fasta,.fa"
                     onChange={handleFileChange}
                     className="hidden"
                   />
                 </label>
                 <p className="text-sm text-zinc-500 mt-4">
-                  Accepts CSV with samples as rows, features as columns
+                  CSV for tabular data • FASTA for DNA/protein sequences
                 </p>
               </>
             ) : (

@@ -257,10 +257,16 @@ async def preview_dataset(
         rows=rows
     )
     
+    # Extract columns from preview data
+    columns = list(preview_data[0].keys()) if preview_data else []
+    
+    logger.info(f"Preview for dataset {dataset_id}: {len(preview_data)} rows, columns: {columns}")
+    
     return DatasetPreview(
         dataset_id=dataset_id,
         preview_data=preview_data,
-        total_rows=dataset.stats.get('total_rows', 0) if dataset.stats else 0
+        total_rows=dataset.stats.get('total_rows', 0) if dataset.stats else 0,
+        columns=columns
     )
 
 
