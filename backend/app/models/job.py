@@ -32,11 +32,12 @@ class JobStatus(str, Enum):
 
 class JobType(str, Enum):
     """Job type enumeration"""
-    TRAINING = "training"
-    PREPROCESSING = "preprocessing"
-    EVALUATION = "evaluation"
-    PREDICTION = "prediction"
-    DATA_ANALYSIS = "data_analysis"
+    TRAINING = "TRAINING"
+    PREPROCESSING = "PREPROCESSING"
+    EVALUATION = "EVALUATION"
+    PREDICTION = "PREDICTION"
+    DATA_ANALYSIS = "DATA_ANALYSIS"
+    ML_WORKFLOW = "ML_WORKFLOW"
 
 
 class Job(Base):
@@ -45,7 +46,7 @@ class Job(Base):
     __tablename__ = "jobs"
     
     # Basic job information
-    name = Column(String(255), nullable=False)
+    name = Column(String(255), nullable=True)
     description = Column(Text)
     job_type = Column(SQLEnum(JobType), nullable=False, index=True)
     status = Column(SQLEnum(JobStatus), default=JobStatus.PENDING, nullable=False, index=True)
@@ -61,10 +62,12 @@ class Job(Base):
     
     # Progress tracking
     progress_percent = Column(Float, default=0.0)
+    progress = Column(Float, default=0.0)  # Simplified progress for workflow
     current_step = Column(String(100))
     total_steps = Column(Integer)
     
     # Results and metrics
+    result = Column(JSON)  # Workflow results including artifacts, metrics, etc.
     metrics = Column(JSON)  # Training metrics, evaluation results, etc.
     artifacts = Column(JSON)  # Paths to generated files, models, etc.
     logs = Column(Text)  # Execution logs

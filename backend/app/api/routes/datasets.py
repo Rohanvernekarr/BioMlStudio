@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 import aiofiles
+import numpy as np
 from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File, Form
 from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
@@ -23,11 +24,16 @@ from app.models.dataset import Dataset
 from app.models.user import User
 from app.schemas.dataset import (
     DatasetResponse, DatasetUpdate, DatasetListResponse,
-    DatasetPreview, DatasetStats
+    DatasetPreview, DatasetStats, DatasetAnalysisResponse,
+    DatasetVisualizationResponse
 )
 from app.services.dataset_service import DatasetService
 from app.services.storage_service import StorageService
-from app.utils.bioinformatics import validate_biological_file, convert_fasta_to_csv
+from app.services.visualization_service import VisualizationService
+from app.utils.bioinformatics import (
+    validate_biological_file, convert_fasta_to_csv, 
+    generate_sequence_report
+)
 from app.utils.file_handlers import get_file_info, generate_unique_filename
 
 logger = logging.getLogger(__name__)
@@ -528,3 +534,215 @@ async def validate_dataset(
         "validation_results": validation_results,
         "timestamp": datetime.utcnow()
     }
+
+
+@router.get("/{dataset_id}/analyze", response_model=DatasetAnalysisResponse)
+async def analyze_dataset(
+    dataset_id: int,
+    current_user: User = Depends(get_current_active_user),
+    db: Session = Depends(get_db)
+) -> Any:
+    """
+    Perform comprehensive analysis on a dataset.
+    
+    Provides detailed insights including:
+    - Missing data detection
+    - DNA/RNA sequence quality metrics
+    - Data completeness analysis
+    - Statistical summaries
+    - Recommendations for data cleaning
+    
+    Args:
+        dataset_id: Dataset ID
+        current_user: Current authenticated user
+        db: Database session
+        
+    Returns:
+        DatasetAnalysisResponse: Comprehensive analysis results
+    """
+    dataset = db.query(Dataset).filter(
+        Dataset.id == dataset_id,
+        (Dataset.user_id == current_user.id) | (Dataset.is_public == True)
+    ).first()
+    
+    if not dataset:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Dataset not found"
+        )
+    
+    try:
+        file_path = Path(dataset.file_path)
+        
+        # Perform comprehensive analysis based on dataset type
+        if dataset.dataset_type in ['dna', 'rna', 'protein']:
+            # Biological sequence analysis
+            report = generate_sequence_report(str(file_path), dataset.dataset_type)
+            
+            return DatasetAnalysisResponse(
+                dataset_id=dataset_id,
+                dataset_type=dataset.dataset_type,
+                basic_stats=report.get('basic_stats', {}),
+                quality_analysis=report.get('quality_analysis'),
+                missing_data=report.get('missing_data'),
+                recommendations=report.get('recommendations', [])
+            )
+        else:
+            # General dataset analysis
+            import pandas as pd
+            
+            # Detect delimiter
+            with open(file_path, 'r') as f:
+                first_line = f.readline()
+                delimiter = '\t' if '\t' in first_line else ','
+            
+            df = pd.read_csv(file_path, delimiter=delimiter, nrows=10000)
+            
+            # Calculate statistics
+            basic_stats = {
+                'total_rows': len(df),
+                'total_columns': len(df.columns),
+                'columns': list(df.columns),
+                'column_types': df.dtypes.astype(str).to_dict(),
+                'numeric_columns': df.select_dtypes(include=[np.number]).columns.tolist(),
+                'categorical_columns': df.select_dtypes(include=['object']).columns.tolist()
+            }
+            
+            # Missing data analysis
+            missing_info = {}
+            for col in df.columns:
+                null_count = df[col].isnull().sum()
+                if null_count > 0:
+                    missing_info[col] = {
+                        'count': int(null_count),
+                        'percentage': float((null_count / len(df)) * 100)
+                    }
+            
+            # Recommendations
+            recommendations = []
+            if missing_info:
+                recommendations.append(f"Dataset has missing values in {len(missing_info)} columns")
+            if len(df.columns) > 100:
+                recommendations.append("High dimensionality detected - consider feature selection")
+            
+            # Statistical summary for numeric columns
+            numeric_cols = df.select_dtypes(include=[np.number]).columns
+            if len(numeric_cols) > 0:
+                basic_stats['numeric_summary'] = df[numeric_cols].describe().to_dict()
+            
+            return DatasetAnalysisResponse(
+                dataset_id=dataset_id,
+                dataset_type=dataset.dataset_type,
+                basic_stats=basic_stats,
+                column_info={'missing_values': missing_info},
+                recommendations=recommendations
+            )
+            
+    except Exception as e:
+        logger.error(f"Error analyzing dataset {dataset_id}: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to analyze dataset: {str(e)}"
+        )
+
+
+@router.get("/{dataset_id}/visualize", response_model=DatasetVisualizationResponse)
+async def visualize_dataset(
+    dataset_id: int,
+    current_user: User = Depends(get_current_active_user),
+    db: Session = Depends(get_db)
+) -> Any:
+    """
+    Generate visualizations for dataset analysis.
+    
+    Creates various plots including:
+    - Distribution charts
+    - Missing data heatmaps
+    - Correlation matrices
+    - GC content distribution (for DNA/RNA)
+    - Sequence quality plots
+    
+    Args:
+        dataset_id: Dataset ID
+        current_user: Current authenticated user
+        db: Database session
+        
+    Returns:
+        DatasetVisualizationResponse: Visualization plots as base64 images
+    """
+    dataset = db.query(Dataset).filter(
+        Dataset.id == dataset_id,
+        (Dataset.user_id == current_user.id) | (Dataset.is_public == True)
+    ).first()
+    
+    if not dataset:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Dataset not found"
+        )
+    
+    try:
+        file_path = Path(dataset.file_path)
+        viz_service = VisualizationService()
+        
+        # Load data as DataFrame for visualization
+        if dataset.dataset_type in ['dna', 'rna', 'protein']:
+            # For biological data, create a DataFrame from sequences
+            from Bio import SeqIO
+            import pandas as pd
+            
+            sequences_data = []
+            with open(file_path, 'r') as handle:
+                for record in SeqIO.parse(handle, "fasta"):
+                    sequences_data.append({
+                        'id': record.id,
+                        'length': len(record.seq),
+                        'sequence': str(record.seq)[:100]  # Truncate for display
+                    })
+            
+            df = pd.DataFrame(sequences_data)
+            
+            # Generate visualizations with sequence stats
+            plots = viz_service.generate_dataset_visualizations(
+                df=df,
+                dataset_type=dataset.dataset_type,
+                sequence_stats=dataset.stats
+            )
+        else:
+            # General dataset
+            import pandas as pd
+            
+            with open(file_path, 'r') as f:
+                first_line = f.readline()
+                delimiter = '\t' if '\t' in first_line else ','
+            
+            df = pd.read_csv(file_path, delimiter=delimiter, nrows=5000)
+            
+            plots = viz_service.generate_dataset_visualizations(
+                df=df,
+                dataset_type=dataset.dataset_type
+            )
+        
+        # Add plot descriptions
+        plot_descriptions = {
+            'missing_data_heatmap': 'Heatmap showing missing data patterns across features',
+            'distribution_plots': 'Distribution of numeric features',
+            'correlation_heatmap': 'Correlation matrix between numeric features',
+            'gc_content_distribution': 'GC content distribution across sequences',
+            'nucleotide_composition': 'Nucleotide composition analysis',
+            'length_distribution': 'Sequence length distribution'
+        }
+        
+        return DatasetVisualizationResponse(
+            dataset_id=dataset_id,
+            plots=plots,
+            plot_descriptions={k: v for k, v in plot_descriptions.items() if k in plots}
+        )
+        
+    except Exception as e:
+        logger.error(f"Error generating visualizations for dataset {dataset_id}: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to generate visualizations: {str(e)}"
+        )
+

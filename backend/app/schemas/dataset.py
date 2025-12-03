@@ -92,3 +92,54 @@ class DatasetValidation(BaseModel):
     format_detected: Optional[str] = None
     sequence_type: Optional[str] = None
     encoding: Optional[str] = None
+
+
+class QualityIssue(BaseModel):
+    """Schema for sequence quality issue"""
+    sequence_index: int
+    problems: List[str]
+
+
+class AmbiguousBasesInfo(BaseModel):
+    """Schema for ambiguous bases information"""
+    total_count: int
+    sequences_affected: int
+    percentage: float
+
+
+class DatasetQualityAnalysis(BaseModel):
+    """Schema for dataset quality analysis results"""
+    total_sequences: int
+    sequences_with_issues: int
+    issues: List[QualityIssue] = []
+    ambiguous_bases: Optional[AmbiguousBasesInfo] = None
+    gaps: Optional[Dict[str, Any]] = None
+    invalid_characters: Optional[Dict[str, int]] = None
+    length_issues: Optional[Dict[str, int]] = None
+
+
+class MissingDataAnalysis(BaseModel):
+    """Schema for missing data analysis"""
+    empty_sequences: int = 0
+    sequences_with_all_N: int = 0
+    sequences_mostly_gaps: int = 0
+    missing_metadata_fields: Dict[str, Dict[str, Any]] = {}
+
+
+class DatasetAnalysisResponse(BaseModel):
+    """Schema for comprehensive dataset analysis response"""
+    dataset_id: int
+    dataset_type: str
+    basic_stats: Dict[str, Any]
+    quality_analysis: Optional[DatasetQualityAnalysis] = None
+    missing_data: Optional[MissingDataAnalysis] = None
+    recommendations: List[str] = []
+    column_info: Optional[Dict[str, Any]] = None
+
+
+class DatasetVisualizationResponse(BaseModel):
+    """Schema for dataset visualization response"""
+    dataset_id: int
+    plots: Dict[str, str]  # Plot name -> base64 encoded image
+    plot_descriptions: Optional[Dict[str, str]] = None
+

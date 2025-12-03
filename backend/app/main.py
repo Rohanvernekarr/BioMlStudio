@@ -12,7 +12,7 @@ from fastapi.staticfiles import StaticFiles
 from sentry_sdk.integrations.fastapi import FastApiIntegration
 from sentry_sdk.integrations.sqlalchemy import SqlalchemyIntegration
 
-from app.api.routes import auth, datasets, health, jobs, models, dataset_preprocessing, analysis
+from app.api.routes import auth, datasets, health, jobs, models, dataset_preprocessing, analysis, workflow
 from app.core.config import settings
 from app.core.database import engine
 from app.core.exceptions import BioMLException
@@ -196,6 +196,12 @@ app.include_router(
     analysis.router,
     prefix=f"{api_prefix}/analysis",
     tags=["Auto Analysis"],
+)
+
+app.include_router(
+    workflow.router,
+    prefix=f"{api_prefix}/workflow",
+    tags=["ML Workflow"],
 )
 
 

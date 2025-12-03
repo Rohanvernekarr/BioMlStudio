@@ -248,6 +248,8 @@ class DatasetService:
                     df = df.drop(columns=['sequence_id', 'sequence', 'sequence_type'], errors='ignore')
                     self.logger.info(f"After dropping metadata: columns={list(df.columns)}")
                     
+                    # Replace NaN with None for JSON serialization
+                    df = df.fillna(0)  # Fill NaN with 0 for numeric k-mer counts
                     preview_data = df.head(rows).to_dict('records')
                     self.logger.info(f"Preview data created: {len(preview_data)} rows")
                 else:
@@ -276,6 +278,8 @@ class DatasetService:
                 delimiter = '\t' if '\t' in first_line else ','
             
             df = pd.read_csv(file_path, delimiter=delimiter, nrows=rows)
+            # Replace NaN with None for JSON serialization
+            df = df.fillna(0)  # or use None: df.where(pd.notnull(df), None)
             return df.to_dict('records')
             
         except Exception as e:

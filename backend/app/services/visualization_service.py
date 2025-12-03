@@ -300,6 +300,221 @@ class VisualizationService:
         buffer.close()
         
         return image_base64
+    
+    def generate_dataset_visualizations(
+        self,
+        df: pd.DataFrame,
+        dataset_type: str = 'general',
+        sequence_stats: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, str]:
+        """
+        Generate visualizations for dataset analysis.
+        
+        Args:
+            df: Dataset as DataFrame
+            dataset_type: Type of dataset ('dna', 'rna', 'protein', 'general')
+            sequence_stats: Optional sequence-specific statistics
+            
+        Returns:
+            Dict: Base64-encoded plot images
+        """
+        plots = {}
+        
+        try:
+            # 1. Missing data heatmap
+            if df.isnull().sum().sum() > 0:
+                plots['missing_data_heatmap'] = self._create_missing_data_heatmap(df)
+            
+            # 2. Data distribution plots for numeric columns
+            numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
+            if numeric_cols:
+                plots['distribution_plots'] = self._create_distribution_plots(df, numeric_cols[:6])
+            
+            # 3. Correlation heatmap for numeric data
+            if len(numeric_cols) > 1:
+                plots['correlation_heatmap'] = self._create_correlation_heatmap(df[numeric_cols])
+            
+            # 4. Sequence-specific visualizations
+            if dataset_type in ['dna', 'rna'] and sequence_stats:
+                if 'gc_content' in sequence_stats:
+                    plots['gc_content_distribution'] = self._create_gc_distribution(sequence_stats)
+                
+                if 'nucleotide_composition' in sequence_stats or 'composition' in sequence_stats:
+                    plots['nucleotide_composition'] = self._create_composition_plot(
+                        sequence_stats.get('nucleotide_composition') or sequence_stats.get('composition')
+                    )
+            
+            # 5. Sequence length distribution
+            if 'length' in df.columns:
+                plots['length_distribution'] = self._create_length_distribution(df['length'])
+            
+            return plots
+            
+        except Exception as e:
+            self.logger.error(f"Error generating dataset visualizations: {e}")
+            return {}
+    
+    def _create_missing_data_heatmap(self, df: pd.DataFrame) -> str:
+        """Create heatmap showing missing data patterns"""
+        
+        fig, ax = plt.subplots(figsize=(12, 8))
+        
+        # Calculate missing data percentage for each column
+        missing_data = df.isnull()
+        
+        # Only show columns with missing data
+        cols_with_missing = [col for col in df.columns if missing_data[col].sum() > 0]
+        
+        if not cols_with_missing:
+            return ""
+        
+        # Sample rows if too many
+        sample_size = min(100, len(df))
+        if len(df) > sample_size:
+            missing_sample = missing_data[cols_with_missing].sample(sample_size)
+        else:
+            missing_sample = missing_data[cols_with_missing]
+        
+        sns.heatmap(missing_sample.T, cmap='RdYlGn_r', cbar=True, 
+                    yticklabels=cols_with_missing, ax=ax)
+        ax.set_title('Missing Data Pattern', fontsize=14, fontweight='bold')
+        ax.set_xlabel('Sample Index', fontsize=12)
+        ax.set_ylabel('Features', fontsize=12)
+        
+        plt.tight_layout()
+        return self._plot_to_base64(fig)
+    
+    def _create_distribution_plots(self, df: pd.DataFrame, columns: List[str]) -> str:
+        """Create distribution plots for numeric columns"""
+        
+        n_cols = min(3, len(columns))
+        n_rows = (len(columns) + n_cols - 1) // n_cols
+        
+        fig, axes = plt.subplots(n_rows, n_cols, figsize=(15, 5 * n_rows))
+        
+        if n_rows == 1 and n_cols == 1:
+            axes = np.array([axes])
+        axes = axes.flatten() if n_rows > 1 or n_cols > 1 else axes
+        
+        for idx, col in enumerate(columns):
+            ax = axes[idx] if len(columns) > 1 else axes[0]
+            
+            # Remove NaN values
+            data = df[col].dropna()
+            
+            if len(data) > 0:
+                ax.hist(data, bins=30, color='#3498db', alpha=0.7, edgecolor='black')
+                ax.set_title(f'Distribution of {col}', fontsize=11, fontweight='bold')
+                ax.set_xlabel(col, fontsize=10)
+                ax.set_ylabel('Frequency', fontsize=10)
+                ax.grid(axis='y', alpha=0.3)
+        
+        # Hide empty subplots
+        for idx in range(len(columns), len(axes)):
+            axes[idx].set_visible(False)
+        
+        plt.tight_layout()
+        return self._plot_to_base64(fig)
+    
+    def _create_correlation_heatmap(self, df: pd.DataFrame) -> str:
+        """Create correlation heatmap for numeric features"""
+        
+        # Calculate correlation matrix
+        corr = df.corr()
+        
+        fig, ax = plt.subplots(figsize=(12, 10))
+        
+        sns.heatmap(corr, annot=True, fmt='.2f', cmap='coolwarm', 
+                    center=0, square=True, linewidths=1, ax=ax,
+                    cbar_kws={"shrink": 0.8})
+        
+        ax.set_title('Feature Correlation Matrix', fontsize=14, fontweight='bold')
+        
+        plt.tight_layout()
+        return self._plot_to_base64(fig)
+    
+    def _create_gc_distribution(self, stats: Dict[str, Any]) -> str:
+        """Create GC content distribution plot"""
+        
+        fig, ax = plt.subplots(figsize=(10, 6))
+        
+        if isinstance(stats.get('gc_content'), dict):
+            gc_data = stats['gc_content']
+            mean_gc = gc_data.get('mean', 0)
+            std_gc = gc_data.get('std', 0)
+            
+            # Create a simulated distribution for visualization
+            x = np.linspace(0, 100, 100)
+            y = np.exp(-0.5 * ((x - mean_gc) / std_gc) ** 2) if std_gc > 0 else np.zeros_like(x)
+            
+            ax.plot(x, y, linewidth=2, color='#2ecc71')
+            ax.fill_between(x, y, alpha=0.3, color='#2ecc71')
+            ax.axvline(mean_gc, color='red', linestyle='--', linewidth=2, 
+                      label=f'Mean: {mean_gc:.2f}%')
+            
+        else:
+            # Single value
+            gc_val = stats.get('avg_gc_content', 0) * 100
+            ax.axvline(gc_val, color='#2ecc71', linewidth=3, 
+                      label=f'GC Content: {gc_val:.2f}%')
+        
+        ax.set_xlabel('GC Content (%)', fontsize=12)
+        ax.set_ylabel('Density', fontsize=12)
+        ax.set_title('GC Content Distribution', fontsize=14, fontweight='bold')
+        ax.legend()
+        ax.grid(axis='y', alpha=0.3)
+        
+        plt.tight_layout()
+        return self._plot_to_base64(fig)
+    
+    def _create_composition_plot(self, composition: Dict[str, float]) -> str:
+        """Create nucleotide/amino acid composition plot"""
+        
+        fig, ax = plt.subplots(figsize=(10, 6))
+        
+        # Sort by frequency
+        sorted_comp = sorted(composition.items(), key=lambda x: x[1], reverse=True)
+        bases, counts = zip(*sorted_comp) if sorted_comp else ([], [])
+        
+        colors = plt.cm.Set3(np.linspace(0, 1, len(bases)))
+        bars = ax.bar(bases, counts, color=colors, edgecolor='black', linewidth=1.5)
+        
+        ax.set_xlabel('Base/Amino Acid', fontsize=12)
+        ax.set_ylabel('Count / Percentage', fontsize=12)
+        ax.set_title('Sequence Composition', fontsize=14, fontweight='bold')
+        ax.grid(axis='y', alpha=0.3)
+        
+        # Add value labels on bars
+        for bar in bars:
+            height = bar.get_height()
+            ax.text(bar.get_x() + bar.get_width()/2., height,
+                   f'{height:.1f}',
+                   ha='center', va='bottom', fontsize=9)
+        
+        plt.tight_layout()
+        return self._plot_to_base64(fig)
+    
+    def _create_length_distribution(self, lengths: pd.Series) -> str:
+        """Create sequence length distribution plot"""
+        
+        fig, ax = plt.subplots(figsize=(10, 6))
+        
+        lengths_clean = lengths.dropna()
+        
+        ax.hist(lengths_clean, bins=30, color='#9b59b6', alpha=0.7, edgecolor='black')
+        ax.axvline(lengths_clean.mean(), color='red', linestyle='--', linewidth=2,
+                  label=f'Mean: {lengths_clean.mean():.0f}')
+        ax.axvline(lengths_clean.median(), color='orange', linestyle='--', linewidth=2,
+                  label=f'Median: {lengths_clean.median():.0f}')
+        
+        ax.set_xlabel('Sequence Length (bp/aa)', fontsize=12)
+        ax.set_ylabel('Frequency', fontsize=12)
+        ax.set_title('Sequence Length Distribution', fontsize=14, fontweight='bold')
+        ax.legend()
+        ax.grid(axis='y', alpha=0.3)
+        
+        plt.tight_layout()
+        return self._plot_to_base64(fig)
 
 
 # Global instance

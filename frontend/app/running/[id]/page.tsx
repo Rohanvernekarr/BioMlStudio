@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
+import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { ProgressBar } from '@/components/ui/ProgressBar';
 import { api } from '@/lib/api';
@@ -27,8 +28,8 @@ export default function RunningPage() {
   useEffect(() => {
     const interval = setInterval(async () => {
       try {
-        const jobData = await api.getJobStatus(jobId);
-        setJob(jobData);
+        const jobData = await api.getWorkflowStatus(jobId);
+        setJob(jobData as any);
         setPollCount((prev) => prev + 1);
 
         if (jobData.status === 'completed') {
@@ -63,20 +64,22 @@ export default function RunningPage() {
 
   if (job?.status === 'failed') {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center p-8">
+      <div className="min-h-screen bg-black flex items-center justify-center px-6 py-12">
         <Card className="max-w-2xl w-full">
           <div className="text-center">
-            <div className="text-4xl mb-4">✗</div>
-            <h1 className="text-2xl font-bold mb-4">Analysis Failed</h1>
-            <p className="text-zinc-400 mb-6">
+            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-red-950/30 border-2 border-red-800/50 flex items-center justify-center">
+              <span className="text-4xl">✗</span>
+            </div>
+            <h1 className="text-3xl font-bold mb-4">Analysis Failed</h1>
+            <p className="text-zinc-400 mb-8 leading-relaxed">
               {job.error_message || 'An error occurred during analysis'}
             </p>
-            <button
+            <Button
               onClick={() => router.push('/')}
-              className="px-6 py-2 bg-white text-black rounded-lg hover:bg-zinc-200"
+              size="lg"
             >
               Start New Analysis
-            </button>
+            </Button>
           </div>
         </Card>
       </div>
@@ -85,30 +88,33 @@ export default function RunningPage() {
 
   if (pollCount > 60) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center p-8">
+      <div className="min-h-screen bg-black flex items-center justify-center px-6 py-12">
         <Card className="max-w-2xl w-full">
           <div className="text-center">
-            <div className="text-4xl mb-4">⏱️</div>
-            <h1 className="text-2xl font-bold mb-4">Taking Longer Than Expected</h1>
-            <p className="text-zinc-400 mb-4">
-              The analysis is still processing. Current status: <strong>{job?.status || 'unknown'}</strong>
+            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-zinc-900 border-2 border-zinc-800 flex items-center justify-center">
+              <span className="text-4xl">⏱️</span>
+            </div>
+            <h1 className="text-3xl font-bold mb-4">Taking Longer Than Expected</h1>
+            <p className="text-zinc-400 mb-3 leading-relaxed">
+              The analysis is still processing. Current status: <strong className="text-white">{job?.status || 'unknown'}</strong>
             </p>
-            <p className="text-sm text-zinc-500 mb-6">
+            <p className="text-sm text-zinc-500 mb-8">
               Note: Celery workers might not be running. Check backend logs.
             </p>
             <div className="flex gap-4 justify-center">
-              <button
+              <Button
+                variant="secondary"
                 onClick={() => router.push('/')}
-                className="px-6 py-2 bg-zinc-800 text-white rounded-lg hover:bg-zinc-700 border border-zinc-700"
+                size="lg"
               >
                 Start New Analysis
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={() => window.location.reload()}
-                className="px-6 py-2 bg-white text-black rounded-lg hover:bg-zinc-200"
+                size="lg"
               >
                 Refresh
-              </button>
+              </Button>
             </div>
           </div>
         </Card>
@@ -117,14 +123,16 @@ export default function RunningPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center p-8">
+    <div className="min-h-screen bg-black flex items-center justify-center px-6 py-12">
       <div className="max-w-2xl w-full">
         <Card>
-          <div className="text-center mb-8">
-            <div className="text-4xl mb-6">🔬</div>
-            <h1 className="text-3xl font-bold mb-2">Running Analysis</h1>
-            <p className="text-zinc-400 mb-2">
-              Status: <span className="text-white capitalize">{job?.status || 'loading'}</span>
+          <div className="text-center mb-10">
+            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-zinc-900 border-2 border-zinc-800 flex items-center justify-center animate-pulse">
+              <span className="text-4xl">🔬</span>
+            </div>
+            <h1 className="text-4xl font-bold mb-4 tracking-tight">Running Analysis</h1>
+            <p className="text-zinc-400 mb-2 text-lg">
+              Status: <span className="text-white capitalize font-medium">{job?.status || 'loading'}</span>
             </p>
             <p className="text-sm text-zinc-500">
               {job?.status === 'queued' && 'Waiting in queue...'}
@@ -133,13 +141,12 @@ export default function RunningPage() {
             </p>
           </div>
 
-          <ProgressBar value={progress} className="mb-8" />
+          <ProgressBar value={progress} className="mb-10" />
 
-          <div className="space-y-4">
-            {steps.map((step, i) => (
-              <div key={i} className="flex items-center gap-3">
+          <div className="space-y-3">{steps.map((step, i) => (
+              <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-zinc-950/50 border border-zinc-800/50">
                 <div
-                  className={`w-6 h-6 rounded-full flex items-center justify-center ${
+                  className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all ${
                     step.completed
                       ? 'bg-white text-black'
                       : 'bg-zinc-800 text-zinc-400'
@@ -147,7 +154,7 @@ export default function RunningPage() {
                 >
                   {step.completed ? '✓' : i === steps.findIndex((s) => !s.completed) ? '⏳' : '○'}
                 </div>
-                <span className={step.completed ? 'text-white' : 'text-zinc-400'}>
+                <span className={`${step.completed ? 'text-white font-medium' : 'text-zinc-400'}`}>
                   {step.label}
                 </span>
               </div>

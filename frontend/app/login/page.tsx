@@ -37,17 +37,22 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center p-8">
+    <div className="min-h-screen bg-black flex items-center justify-center px-6 py-12">
       <div className="max-w-md w-full">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-2">BioMLStudio</h1>
-          <p className="text-zinc-400">
-            {isLogin ? 'Sign in to continue' : 'Create your account'}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-3 mb-6">
+            <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center">
+              <span className="text-black font-bold text-lg">BM</span>
+            </div>
+          </div>
+          <h1 className="text-4xl font-bold mb-3 tracking-tight">BioMLStudio</h1>
+          <p className="text-zinc-400 text-lg">
+            {isLogin ? 'Welcome back' : 'Get started today'}
           </p>
         </div>
 
         <Card>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-5">
             {!isLogin && (
               <Input
                 label="Full Name"
@@ -78,24 +83,24 @@ export default function LoginPage() {
             />
 
             {error && (
-              <div className="p-3 bg-red-900/20 border border-red-800 rounded-lg text-red-400 text-sm">
+              <div className="p-4 bg-red-950/30 border border-red-800/50 rounded-xl text-red-400 text-sm">
                 {error}
               </div>
             )}
 
             <Button type="submit" disabled={loading} className="w-full" size="lg">
-              {loading ? 'Please wait...' : isLogin ? 'Sign In' : 'Sign Up'}
+              {loading ? 'Please wait...' : isLogin ? 'Sign In' : 'Create Account'}
             </Button>
           </form>
 
-          <div className="mt-6 text-center">
+          <div className="mt-8 text-center">
             <button
               type="button"
               onClick={() => {
                 setIsLogin(!isLogin);
                 setError('');
               }}
-              className="text-sm text-zinc-400 hover:text-white"
+              className="text-sm text-zinc-400 hover:text-white transition-colors"
             >
               {isLogin ? "Don't have an account? Sign up" : 'Already have an account? Sign in'}
             </button>

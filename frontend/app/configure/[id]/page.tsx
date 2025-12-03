@@ -21,12 +21,15 @@ export default function ConfigurePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const [analysisType, setAnalysisType] = useState('classification');
-  const [targetColumn, setTargetColumn] = useState('');
-  const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
-  const [autoPreprocess, setAutoPreprocess] = useState(true);
-  const [handleImbalance, setHandleImbalance] = useState(true);
-  const [normalizeFeatures, setNormalizeFeatures] = useState(true);
+  const [taskType, setTaskType] = useState('general_classification');
+  const [targetColumn, setTargetColumn] = useState('label');
+  const [encodingMethod, setEncodingMethod] = useState('kmer');
+  const [kmerSize, setKmerSize] = useState(3);
+  const [testSize, setTestSize] = useState(0.2);
+  const [valSize, setValSize] = useState(0.1);
+  const [optimizeHyperparams, setOptimizeHyperparams] = useState(false);
+  const [nModels, setNModels] = useState(3);
+  const [generateReport, setGenerateReport] = useState(true);
 
   const [submitting, setSubmitting] = useState(false);
 
@@ -44,11 +47,6 @@ export default function ConfigurePage() {
       setDataset(datasetData);
       setPreview(previewData);
 
-      const columns = previewData.columns || (previewData.preview_data.length > 0 ? Object.keys(previewData.preview_data[0]) : []);
-      if (columns.length > 0) {
-        setSelectedFeatures(columns);
-      }
-
       setLoading(false);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load dataset');
@@ -56,23 +54,9 @@ export default function ConfigurePage() {
     }
   };
 
-  const handleTargetChange = (column: string) => {
-    setTargetColumn(column);
-    const columns = preview?.columns || (preview?.preview_data.length ? Object.keys(preview.preview_data[0]) : []);
-    setSelectedFeatures(columns.filter((col) => col !== column));
-  };
-
-  const toggleFeature = (feature: string) => {
-    setSelectedFeatures((prev) =>
-      prev.includes(feature)
-        ? prev.filter((f) => f !== feature)
-        : [...prev, feature]
-    );
-  };
-
-  const handleRunAnalysis = async () => {
+  const handleStartWorkflow = async () => {
     if (!targetColumn) {
-      setError('Please select a target column');
+      setError('Please enter a target column');
       return;
     }
 
@@ -80,15 +64,22 @@ export default function ConfigurePage() {
     setError('');
 
     try {
-      const job = await api.startAnalysis(datasetId, {
+      const result = await api.startWorkflow({
+        dataset_id: datasetId,
+        task_type: taskType,
         target_column: targetColumn,
-        analysis_type: analysisType,
-        feature_columns: selectedFeatures.join(','),
+        encoding_method: encodingMethod,
+        kmer_size: kmerSize,
+        test_size: testSize,
+        val_size: valSize,
+        optimize_hyperparams: optimizeHyperparams,
+        n_models: nModels,
+        generate_report: generateReport,
       });
 
-      router.push(`/running/${job.id}`);
+      router.push(`/running/${result.job_id}`);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to start analysis');
+      setError(err instanceof Error ? err.message : 'Failed to start training');
       setSubmitting(false);
     }
   };
@@ -118,36 +109,39 @@ export default function ConfigurePage() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-black p-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">Configure Analysis</h1>
-            <p className="text-zinc-400">Define your ML problem</p>
+      <div className="min-h-screen bg-black py-12 px-6 sm:px-8 lg:px-12">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-12">
+            <h1 className="text-4xl font-bold mb-3 tracking-tight">Configure Training</h1>
+            <p className="text-zinc-400 text-lg">Set up your machine learning pipeline</p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">"
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div>
             <Card>
-              <h2 className="text-xl font-bold mb-4">Dataset Summary</h2>
-              <div className="space-y-2 text-sm mb-4">
-                <p>
-                  <span className="text-zinc-400">Name:</span> {dataset.name}
-                </p>
-                <p>
-                  <span className="text-zinc-400">Samples:</span> {preview.total_rows}
-                </p>
-                <p>
-                  <span className="text-zinc-400">Features:</span> {preview.columns?.length || (preview.preview_data.length > 0 ? Object.keys(preview.preview_data[0]).length : 0)}
-                </p>
+              <h2 className="text-2xl font-bold mb-6">Dataset Overview</h2>
+              <div className="space-y-3 mb-6">
+                <div className="flex justify-between items-center py-2 border-b border-zinc-800">
+                  <span className="text-zinc-400">Dataset Name</span>
+                  <span className="font-medium">{dataset.name}</span>
+                </div>
+                <div className="flex justify-between items-center py-2 border-b border-zinc-800">
+                  <span className="text-zinc-400">Total Samples</span>
+                  <span className="font-medium">{preview.total_rows}</span>
+                </div>
+                <div className="flex justify-between items-center py-2">
+                  <span className="text-zinc-400">Features</span>
+                  <span className="font-medium">{preview.columns?.length || (preview.preview_data.length > 0 ? Object.keys(preview.preview_data[0]).length : 0)}</span>
+                </div>
               </div>
 
-              <h3 className="text-sm font-medium text-zinc-400 mb-2">Preview (first 5 rows)</h3>
-              <div className="overflow-x-auto">
-                <table className="w-full text-xs">
+              <h3 className="text-sm font-semibold text-zinc-400 mb-4 uppercase tracking-wide">Data Preview</h3>
+              <div className="overflow-x-auto -mx-8 px-8">
+                <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-zinc-800">
                       {(preview.columns || (preview.preview_data.length > 0 ? Object.keys(preview.preview_data[0]) : [])).map((col) => (
-                        <th key={col} className="text-left p-2 text-zinc-400">
+                        <th key={col} className="text-left px-3 py-3 text-zinc-400 font-medium">
                           {col}
                         </th>
                       ))}
@@ -157,9 +151,9 @@ export default function ConfigurePage() {
                     {preview.preview_data.map((row, i) => {
                       const columns = preview.columns || Object.keys(row);
                       return (
-                        <tr key={i} className="border-b border-zinc-800">
+                        <tr key={i} className="border-b border-zinc-800/50">
                           {columns.map((col) => (
-                            <td key={col} className="p-2">
+                            <td key={col} className="px-3 py-3 text-zinc-300">
                               {String(row[col] ?? '')}
                             </td>
                           ))}
@@ -174,96 +168,162 @@ export default function ConfigurePage() {
 
           <div>
             <Card>
-              <h2 className="text-xl font-bold mb-4">Configuration</h2>
+              <h2 className="text-2xl font-bold mb-6">Training Configuration</h2>
 
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <Select
-                  label="Analysis Type"
-                  value={analysisType}
-                  onChange={(e) => setAnalysisType(e.target.value)}
+                  label="Task Type"
+                  value={taskType}
+                  onChange={(e) => setTaskType(e.target.value)}
                 >
-                  <option value="classification">Classification (predict category)</option>
-                  <option value="regression">Regression (predict number)</option>
-                </Select>
-
-                <Select
-                  label="Target Column"
-                  value={targetColumn}
-                  onChange={(e) => handleTargetChange(e.target.value)}
-                >
-                  <option value="">Select target column</option>
-                  {(preview.columns || (preview.preview_data.length > 0 ? Object.keys(preview.preview_data[0]) : [])).map((col) => (
-                    <option key={col} value={col}>
-                      {col}
-                    </option>
-                  ))}
+                  <option value="general_classification">General Classification</option>
+                  <option value="protein_classification">Protein Classification</option>
+                  <option value="dna_classification">DNA Classification</option>
+                  <option value="rna_classification">RNA Classification</option>
+                  <option value="gene_expression">Gene Expression Analysis</option>
+                  <option value="regression">Regression</option>
                 </Select>
 
                 <div>
-                  <label className="text-sm text-zinc-400 mb-2 block">
-                    Input Features ({selectedFeatures.length} selected)
+                  <label className="text-sm font-medium text-zinc-300 mb-2 block">
+                    Target Column Name
                   </label>
-                  <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-3 max-h-48 overflow-y-auto">
-                    {(preview.columns || (preview.preview_data.length > 0 ? Object.keys(preview.preview_data[0]) : []))
-                      .filter((col) => col !== targetColumn)
-                      .map((col) => (
-                        <label key={col} className="flex items-center gap-2 py-1 cursor-pointer">
-                          <input
-                            type="checkbox"
-                            checked={selectedFeatures.includes(col)}
-                            onChange={() => toggleFeature(col)}
-                            className="w-4 h-4"
-                          />
-                          <span className="text-sm">{col}</span>
-                        </label>
-                      ))}
-                  </div>
+                  <input
+                    type="text"
+                    value={targetColumn}
+                    onChange={(e) => setTargetColumn(e.target.value)}
+                    className="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
+                    placeholder="label"
+                  />
                 </div>
 
-                <details className="border border-zinc-800 rounded-lg">
-                  <summary className="cursor-pointer p-3 text-sm font-medium">
+                <Select
+                  label="Encoding Method"
+                  value={encodingMethod}
+                  onChange={(e) => setEncodingMethod(e.target.value)}
+                >
+                  <option value="kmer">K-mer Encoding</option>
+                  <option value="onehot">One-Hot Encoding</option>
+                  <option value="integer">Integer Encoding</option>
+                </Select>
+
+                {encodingMethod === 'kmer' && (
+                  <div>
+                    <label className="text-sm font-medium text-zinc-300 mb-3 block">
+                      K-mer Size: <span className="text-white font-bold">{kmerSize}</span>
+                    </label>
+                    <input
+                      type="range"
+                      min="2"
+                      max="6"
+                      value={kmerSize}
+                      onChange={(e) => setKmerSize(parseInt(e.target.value))}
+                      className="w-full"
+                      aria-label="K-mer size slider"
+                    />
+                    <div className="flex justify-between text-xs text-zinc-500 mt-1">
+                      <span>2</span>
+                      <span>6</span>
+                    </div>
+                  </div>
+                )}
+
+                <div>
+                  <label className="text-sm font-medium text-zinc-300 mb-3 block">
+                    Number of Models: <span className="text-white font-bold">{nModels}</span>
+                  </label>
+                  <input
+                    type="range"
+                    min="1"
+                    max="9"
+                    value={nModels}
+                    onChange={(e) => setNModels(parseInt(e.target.value))}
+                    className="w-full"
+                    aria-label="Number of models slider"
+                  />
+                  <div className="flex justify-between text-xs text-zinc-500 mt-1">
+                    <span>1</span>
+                    <span>9</span>
+                  </div>
+                  <p className="text-xs text-zinc-500 mt-2">
+                    AutoML will evaluate and train the top {nModels} models
+                  </p>
+                </div>
+
+                <details className="border border-zinc-800 rounded-xl overflow-hidden">
+                  <summary className="cursor-pointer p-4 text-sm font-semibold hover:bg-zinc-900/50 transition-colors">
                     Advanced Options
                   </summary>
-                  <div className="p-3 pt-0 space-y-3">
-                    <label className="flex items-center gap-2 cursor-pointer">
+                  <div className="p-4 pt-2 space-y-4 bg-zinc-950/30">
+                    <div>
+                      <label className="text-sm font-medium text-zinc-300 mb-3 block">
+                        Test Split: <span className="text-white font-bold">{(testSize * 100).toFixed(0)}%</span>
+                      </label>
+                      <input
+                        type="range"
+                        min="0.1"
+                        max="0.3"
+                        step="0.05"
+                        value={testSize}
+                        onChange={(e) => setTestSize(parseFloat(e.target.value))}
+                        className="w-full"
+                        aria-label="Test split slider"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-zinc-300 mb-3 block">
+                        Validation Split: <span className="text-white font-bold">{(valSize * 100).toFixed(0)}%</span>
+                      </label>
+                      <input
+                        type="range"
+                        min="0.05"
+                        max="0.2"
+                        step="0.05"
+                        value={valSize}
+                        onChange={(e) => setValSize(parseFloat(e.target.value))}
+                        className="w-full"
+                        aria-label="Validation split slider"
+                      />
+                    </div>
+                    <label className="flex items-center gap-3 cursor-pointer p-3 rounded-lg hover:bg-zinc-900/50 transition-colors">
                       <input
                         type="checkbox"
-                        checked={handleImbalance}
-                        onChange={(e) => setHandleImbalance(e.target.checked)}
+                        checked={optimizeHyperparams}
+                        onChange={(e) => setOptimizeHyperparams(e.target.checked)}
                         className="w-4 h-4"
                       />
-                      <span className="text-sm">Handle class imbalance automatically</span>
+                      <span className="text-sm">Optimize Hyperparameters (takes longer, better results)</span>
                     </label>
-                    <label className="flex items-center gap-2 cursor-pointer">
+                    <label className="flex items-center gap-3 cursor-pointer p-3 rounded-lg hover:bg-zinc-900/50 transition-colors">
                       <input
                         type="checkbox"
-                        checked={normalizeFeatures}
-                        onChange={(e) => setNormalizeFeatures(e.target.checked)}
+                        checked={generateReport}
+                        onChange={(e) => setGenerateReport(e.target.checked)}
                         className="w-4 h-4"
                       />
-                      <span className="text-sm">Normalize features</span>
+                      <span className="text-sm">Generate PDF Report</span>
                     </label>
                   </div>
                 </details>
               </div>
 
               {error && (
-                <div className="mt-4 p-3 bg-red-900/20 border border-red-800 rounded-lg text-red-400 text-sm">
+                <div className="mt-6 p-4 bg-red-950/30 border border-red-800/50 rounded-xl text-red-400 text-sm">
                   {error}
                 </div>
               )}
 
-              <div className="mt-6 flex gap-3">
-                <Button variant="secondary" onClick={() => router.push('/')}>
-                  Back to Upload
+              <div className="mt-8 flex gap-4">
+                <Button variant="secondary" onClick={() => router.push('/')} size="lg">
+                  Back
                 </Button>
                 <Button
-                  onClick={handleRunAnalysis}
+                  onClick={handleStartWorkflow}
                   disabled={!targetColumn || submitting}
                   className="flex-1"
                   size="lg"
                 >
-                  {submitting ? 'Starting...' : 'Run Analysis'}
+                  {submitting ? 'Starting Training...' : 'Run Analysis'}
                 </Button>
               </div>
             </Card>

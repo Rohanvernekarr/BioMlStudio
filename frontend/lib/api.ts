@@ -119,6 +119,55 @@ class ApiClient {
       body: JSON.stringify({ email, password, full_name: fullName }),
     });
   }
+
+  async analyzeDataset(id: number) {
+    return this.request<any>(`/datasets/${id}/analyze`);
+  }
+
+  async visualizeDataset(id: number) {
+    return this.request<any>(`/datasets/${id}/visualize`);
+  }
+
+  async getDatasetStats(id: number) {
+    return this.request<any>(`/datasets/${id}/stats`);
+  }
+
+  // Workflow endpoints
+  async startWorkflow(config: {
+    dataset_id: number;
+    task_type: string;
+    target_column: string;
+    encoding_method: string;
+    kmer_size: number;
+    test_size: number;
+    val_size: number;
+    optimize_hyperparams: boolean;
+    n_models: number;
+    generate_report: boolean;
+  }) {
+    return this.request<any>('/workflow/start', {
+      method: 'POST',
+      body: JSON.stringify(config),
+    });
+  }
+
+  async getWorkflowStatus(jobId: number) {
+    return this.request<any>(`/workflow/${jobId}/status`);
+  }
+
+  async getWorkflowResults(jobId: number) {
+    return this.request<any>(`/workflow/${jobId}/results`);
+  }
+
+  getWorkflowModelDownloadUrl(jobId: number) {
+    const token = this.getToken();
+    return `${API_BASE}${API_PREFIX}/workflow/${jobId}/download/model?token=${token}`;
+  }
+
+  getWorkflowReportDownloadUrl(jobId: number) {
+    const token = this.getToken();
+    return `${API_BASE}${API_PREFIX}/workflow/${jobId}/download/report?token=${token}`;
+  }
 }
 
 export const api = new ApiClient();

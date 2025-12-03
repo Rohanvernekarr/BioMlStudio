@@ -27,13 +27,9 @@ export default function ResultsPage() {
 
   const loadResults = async () => {
     try {
-      const [jobData, resultsData] = await Promise.all([
-        api.getJobStatus(jobId),
-        api.getJobResults(jobId),
-      ]);
-
-      setJob(jobData);
-      setResults(resultsData.results);
+      const resultsData = await api.getWorkflowResults(jobId);
+      setJob(resultsData as any);
+      setResults(resultsData.results as any);
       setLoading(false);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load results');
@@ -78,37 +74,54 @@ export default function ResultsPage() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-black p-8">
+      <div className="min-h-screen bg-black py-12 px-6 sm:px-8 lg:px-12">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">Results</h1>
-            <p className="text-zinc-400">
-            {job?.name} • Best model: {results.best_model || 'RandomForest'}
-          </p>
-        </div>
+          <div className="mb-12 flex flex-col sm:flex-row justify-between items-start gap-6">
+            <div>
+              <h1 className="text-4xl font-bold mb-3 tracking-tight">Training Results</h1>
+              <p className="text-zinc-400 text-lg">
+                {job?.name && <span className="text-zinc-500">{job.name} • </span>}
+                Best model: <span className="text-white font-medium">{results.best_model || 'RandomForest'}</span>
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Button
+                variant="secondary"
+                onClick={() => window.open(api.getWorkflowModelDownloadUrl(jobId), '_blank')}
+                size="lg"
+              >
+                📦 Download Model
+              </Button>
+              <Button
+                onClick={() => window.open(api.getWorkflowReportDownloadUrl(jobId), '_blank')}
+                size="lg"
+              >
+                📄 Download Report
+              </Button>
+            </div>
+          </div>
 
         {sequenceStats && (
           <Card className="mb-8">
-            <h2 className="text-xl font-bold mb-4">Sequence Data Summary</h2>
-            <div className="grid grid-cols-3 gap-6">
-              <div>
-                <p className="text-sm text-zinc-400 mb-1">Total Sequences</p>
-                <p className="text-2xl font-bold">{sequenceStats.total_sequences}</p>
+            <h2 className="text-2xl font-bold mb-6">Sequence Data Summary</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              <div className="p-4 rounded-lg bg-zinc-950/50 border border-zinc-800/50">
+                <p className="text-sm text-zinc-400 mb-2">Total Sequences</p>
+                <p className="text-3xl font-bold">{sequenceStats.total_sequences}</p>
               </div>
-              <div>
-                <p className="text-sm text-zinc-400 mb-1">Average Length</p>
-                <p className="text-2xl font-bold">{sequenceStats.avg_length?.toFixed(0) || 0} bp</p>
+              <div className="p-4 rounded-lg bg-zinc-950/50 border border-zinc-800/50">
+                <p className="text-sm text-zinc-400 mb-2">Average Length</p>
+                <p className="text-3xl font-bold">{sequenceStats.avg_length?.toFixed(0) || 0} <span className="text-lg text-zinc-500">bp</span></p>
               </div>
-              <div>
-                <p className="text-sm text-zinc-400 mb-1">Sequence Type</p>
-                <p className="text-2xl font-bold capitalize">{sequenceStats.sequence_type}</p>
+              <div className="p-4 rounded-lg bg-zinc-950/50 border border-zinc-800/50">
+                <p className="text-sm text-zinc-400 mb-2">Sequence Type</p>
+                <p className="text-3xl font-bold capitalize">{sequenceStats.sequence_type}</p>
               </div>
             </div>
           </Card>
         )}
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          {isClassification ? (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">{isClassification ? (
             <>
               <MetricCard
                 label="Accuracy"
@@ -140,22 +153,22 @@ export default function ResultsPage() {
           )}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           <Card>
-            <h2 className="text-xl font-bold mb-4">Top Features</h2>
-            <p className="text-sm text-zinc-400 mb-4">
-              Features influencing prediction the most
+            <h2 className="text-2xl font-bold mb-2">Top Features</h2>
+            <p className="text-sm text-zinc-400 mb-6">
+              Features that most influence the model's predictions
             </p>
-            <div className="space-y-3">
+            <div className="space-y-4">
               {featureImportance.slice(0, 10).map((item, i) => (
                 <div key={i}>
-                  <div className="flex justify-between text-sm mb-1">
-                    <span>{item.feature}</span>
-                    <span className="text-zinc-400">{item.importance.toFixed(3)}</span>
+                  <div className="flex justify-between text-sm mb-2">
+                    <span className="font-medium">{item.feature}</span>
+                    <span className="text-zinc-400 font-mono">{item.importance.toFixed(3)}</span>
                   </div>
-                  <div className="w-full bg-zinc-800 rounded-full h-2">
+                  <div className="w-full bg-zinc-800 rounded-full h-2.5">
                     <div
-                      className="bg-white h-2 rounded-full"
+                      className="bg-white h-2.5 rounded-full transition-all"
                       style={{ width: `${(item.importance / maxImportance) * 100}%` }}
                     />
                   </div>
@@ -166,12 +179,12 @@ export default function ResultsPage() {
 
           {isClassification && confusionMatrix.length > 0 && (
             <Card>
-              <h2 className="text-xl font-bold mb-4">Confusion Matrix</h2>
-              <p className="text-sm text-zinc-400 mb-4">
+              <h2 className="text-2xl font-bold mb-2">Confusion Matrix</h2>
+              <p className="text-sm text-zinc-400 mb-6">
                 Actual vs predicted classifications
               </p>
               <div className="overflow-x-auto">
-                <table className="w-full">
+                <table className="w-full border-collapse">
                   <tbody>
                     {confusionMatrix.map((row, i) => (
                       <tr key={i}>
@@ -181,7 +194,7 @@ export default function ResultsPage() {
                           return (
                             <td
                               key={j}
-                              className="p-4 text-center border border-zinc-800"
+                              className="p-6 text-center border border-zinc-800 font-medium transition-all hover:scale-105"
                               style={{
                                 backgroundColor: `rgba(255, 255, 255, ${intensity * 0.3})`,
                               }}

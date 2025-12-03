@@ -15,6 +15,7 @@ export default function Home() {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
   const [fileInfo, setFileInfo] = useState<{ rows: number; cols: number } | null>(null);
+  const [uploadedDatasetId, setUploadedDatasetId] = useState<number | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -58,7 +59,8 @@ export default function Home() {
       const datasetType = isFasta ? 'dna' : 'general';
       
       const dataset = await api.uploadDataset(file, file.name, datasetType);
-      router.push(`/configure/${dataset.id}`);
+      setUploadedDatasetId(dataset.id);
+      setUploading(false);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Upload failed');
       setUploading(false);
@@ -68,19 +70,21 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-black flex items-center justify-center p-8">
-        <div className="max-w-2xl w-full">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">BioMLStudio</h1>
-          <p className="text-xl text-zinc-400">
-            Upload your CSV and get a trained model and report, no coding.
+      <div className="min-h-screen bg-black flex items-center justify-center px-6 py-12 sm:px-8">
+        <div className="max-w-3xl w-full">
+        <div className="text-center mb-16">
+          <h1 className="text-5xl sm:text-6xl font-bold mb-6 tracking-tight bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-transparent">
+            BioMLStudio
+          </h1>
+          <p className="text-xl sm:text-2xl text-zinc-400 leading-relaxed max-w-2xl mx-auto">
+            Upload your dataset and get a trained ML model with comprehensive reports—no coding required.
           </p>
         </div>
 
         <Card>
           <div
-            className={`border-2 border-dashed rounded-lg p-12 text-center transition-colors ${
-              file ? 'border-white bg-zinc-800' : 'border-zinc-700 hover:border-zinc-600'
+            className={`border-2 border-dashed rounded-xl p-16 text-center transition-all duration-300 ${
+              file ? 'border-white bg-zinc-800/50' : 'border-zinc-700 hover:border-zinc-500 hover:bg-zinc-900/30'
             }`}
             onDrop={handleDrop}
             onDragOver={(e) => e.preventDefault()}
@@ -100,11 +104,11 @@ export default function Home() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <p className="text-lg mb-2">Drop your CSV or FASTA file here</p>
-                <p className="text-sm text-zinc-400 mb-4">or</p>
+                <p className="text-xl mb-3 font-medium">Drop your file here</p>
+                <p className="text-sm text-zinc-500 mb-6">or</p>
                 <label className="cursor-pointer">
-                  <span className="px-4 py-2 bg-white text-black rounded-lg hover:bg-zinc-200 transition-colors inline-block">
-                    Browse File
+                  <span className="px-6 py-3 bg-white text-black font-medium rounded-lg hover:bg-zinc-100 active:scale-95 transition-all duration-200 inline-block shadow-lg">
+                    Browse Files
                   </span>
                   <input
                     type="file"
@@ -113,7 +117,7 @@ export default function Home() {
                     className="hidden"
                   />
                 </label>
-                <p className="text-sm text-zinc-500 mt-4">
+                <p className="text-sm text-zinc-500 mt-6">
                   CSV for tabular data • FASTA for DNA/protein sequences
                 </p>
               </>
@@ -140,20 +144,49 @@ export default function Home() {
           </div>
 
           {error && (
-            <div className="mt-4 p-3 bg-red-900/20 border border-red-800 rounded-lg text-red-400">
+            <div className="mt-6 p-4 bg-red-950/30 border border-red-800/50 rounded-xl text-red-400 text-sm">
               {error}
             </div>
           )}
 
-          <div className="mt-6 flex justify-end">
-            <Button
-              onClick={handleUpload}
-              disabled={!file || uploading}
-              size="lg"
-            >
-              {uploading ? 'Uploading...' : 'Next: Configure Analysis'}
-            </Button>
-          </div>
+          {uploadedDatasetId && (
+            <div className="mt-6 p-6 bg-green-950/30 border border-green-800/50 rounded-xl">
+              <p className="text-green-400 font-semibold mb-3 text-lg">✓ Upload successful!</p>
+              <p className="text-sm text-zinc-400 mb-5">
+                Would you like to analyze your dataset first or skip directly to model training?
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Button
+                  onClick={() => router.push(`/analysis/${uploadedDatasetId}`)}
+                  variant="outline"
+                  size="lg"
+                  className="flex-1"
+                >
+                  Analyze Dataset
+                </Button>
+                <Button
+                  onClick={() => router.push(`/configure/${uploadedDatasetId}`)}
+                  size="lg"
+                  className="flex-1"
+                >
+                  Start Training
+                </Button>
+              </div>
+            </div>
+          )}
+
+          {!uploadedDatasetId && (
+            <div className="mt-8 flex justify-end">
+              <Button
+                onClick={handleUpload}
+                disabled={!file || uploading}
+                size="lg"
+                className="min-w-[200px]"
+              >
+                {uploading ? 'Uploading...' : 'Upload Dataset'}
+              </Button>
+            </div>
+          )}
         </Card>
       </div>
     </div>

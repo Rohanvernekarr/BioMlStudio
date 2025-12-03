@@ -414,3 +414,244 @@ def validate_biological_file(file_path: str, expected_type: str) -> Dict[str, An
         validation['errors'].append(f"Error validating file: {str(e)}")
     
     return validation
+
+
+def analyze_sequence_quality(sequences: List[str], seq_type: str = 'dna') -> Dict[str, Any]:
+    """
+    Analyze sequence quality metrics including ambiguous bases, gaps, and anomalies.
+    
+    Args:
+        sequences: List of sequence strings
+        seq_type: Sequence type ('dna', 'rna', 'protein')
+        
+    Returns:
+        Dict: Quality analysis results
+    """
+    if not sequences:
+        return {'error': 'No sequences provided'}
+    
+    quality_metrics = {
+        'total_sequences': len(sequences),
+        'sequences_with_issues': 0,
+        'issues': []
+    }
+    
+    if seq_type in ['dna', 'rna']:
+        # DNA/RNA specific quality checks
+        ambiguous_bases = set('NRYSWKMBDHV')
+        valid_bases = set('ATCG' if seq_type == 'dna' else 'AUCG')
+        
+        total_ambiguous = 0
+        total_gaps = 0
+        total_invalid = 0
+        sequences_with_ambiguous = 0
+        sequences_with_gaps = 0
+        sequences_too_short = 0
+        
+        for i, seq in enumerate(sequences):
+            seq_upper = seq.upper()
+            seq_issues = []
+            
+            # Count ambiguous bases
+            ambiguous_count = sum(1 for base in seq_upper if base in ambiguous_bases)
+            if ambiguous_count > 0:
+                total_ambiguous += ambiguous_count
+                sequences_with_ambiguous += 1
+                seq_issues.append(f"Contains {ambiguous_count} ambiguous bases")
+            
+            # Count gaps
+            gap_count = seq_upper.count('-')
+            if gap_count > 0:
+                total_gaps += gap_count
+                sequences_with_gaps += 1
+                seq_issues.append(f"Contains {gap_count} gaps")
+            
+            # Check for invalid characters
+            invalid_chars = set(seq_upper) - valid_bases - ambiguous_bases - {'-'}
+            if invalid_chars:
+                total_invalid += len([c for c in seq_upper if c in invalid_chars])
+                seq_issues.append(f"Contains invalid characters: {invalid_chars}")
+            
+            # Check sequence length
+            if len(seq) < 50:
+                sequences_too_short += 1
+                seq_issues.append(f"Very short sequence ({len(seq)} bp)")
+            
+            if seq_issues:
+                quality_metrics['sequences_with_issues'] += 1
+                if i < 10:  # Report first 10 problematic sequences
+                    quality_metrics['issues'].append({
+                        'sequence_index': i,
+                        'problems': seq_issues
+                    })
+        
+        quality_metrics.update({
+            'ambiguous_bases': {
+                'total_count': total_ambiguous,
+                'sequences_affected': sequences_with_ambiguous,
+                'percentage': (sequences_with_ambiguous / len(sequences)) * 100
+            },
+            'gaps': {
+                'total_count': total_gaps,
+                'sequences_affected': sequences_with_gaps,
+                'percentage': (sequences_with_gaps / len(sequences)) * 100
+            },
+            'invalid_characters': {
+                'total_count': total_invalid
+            },
+            'length_issues': {
+                'too_short': sequences_too_short
+            }
+        })
+    
+    elif seq_type == 'protein':
+        # Protein specific quality checks
+        valid_aa = set('ACDEFGHIKLMNPQRSTVWY')
+        ambiguous_aa = set('XBZJ')
+        
+        sequences_with_unusual = 0
+        total_unusual = 0
+        
+        for i, seq in enumerate(sequences):
+            seq_upper = seq.upper()
+            seq_issues = []
+            
+            # Check for unusual amino acids
+            unusual_count = sum(1 for aa in seq_upper if aa in ambiguous_aa)
+            if unusual_count > 0:
+                total_unusual += unusual_count
+                sequences_with_unusual += 1
+                seq_issues.append(f"Contains {unusual_count} ambiguous amino acids")
+            
+            # Check for gaps
+            if '-' in seq_upper:
+                seq_issues.append("Contains gaps")
+            
+            if seq_issues and i < 10:
+                quality_metrics['issues'].append({
+                    'sequence_index': i,
+                    'problems': seq_issues
+                })
+        
+        quality_metrics.update({
+            'unusual_amino_acids': {
+                'total_count': total_unusual,
+                'sequences_affected': sequences_with_unusual
+            }
+        })
+    
+    return quality_metrics
+
+
+def detect_missing_data(sequences: List[str], metadata: Optional[List[Dict]] = None) -> Dict[str, Any]:
+    """
+    Detect missing or incomplete data in sequence dataset.
+    
+    Args:
+        sequences: List of sequence strings
+        metadata: Optional metadata associated with sequences
+        
+    Returns:
+        Dict: Missing data analysis
+    """
+    missing_data = {
+        'empty_sequences': 0,
+        'sequences_with_all_N': 0,
+        'sequences_mostly_gaps': 0,
+        'missing_metadata_fields': {}
+    }
+    
+    for i, seq in enumerate(sequences):
+        # Check for empty sequences
+        if not seq or len(seq) == 0:
+            missing_data['empty_sequences'] += 1
+            continue
+        
+        seq_upper = seq.upper()
+        
+        # Check for sequences that are all N (unknown bases)
+        if seq_upper.replace('N', '').replace('-', '') == '':
+            missing_data['sequences_with_all_N'] += 1
+        
+        # Check for sequences mostly composed of gaps
+        if seq_upper.count('-') / len(seq_upper) > 0.5:
+            missing_data['sequences_mostly_gaps'] += 1
+    
+    # Check metadata completeness if provided
+    if metadata:
+        # Identify all possible fields
+        all_fields = set()
+        for record in metadata:
+            all_fields.update(record.keys())
+        
+        # Count missing values per field
+        for field in all_fields:
+            missing_count = sum(1 for record in metadata if field not in record or not record[field])
+            if missing_count > 0:
+                missing_data['missing_metadata_fields'][field] = {
+                    'count': missing_count,
+                    'percentage': (missing_count / len(metadata)) * 100
+                }
+    
+    return missing_data
+
+
+def generate_sequence_report(file_path: str, dataset_type: str) -> Dict[str, Any]:
+    """
+    Generate comprehensive sequence analysis report.
+    
+    Args:
+        file_path: Path to sequence file
+        dataset_type: Type of dataset ('dna', 'rna', 'protein')
+        
+    Returns:
+        Dict: Comprehensive analysis report
+    """
+    report = {
+        'file_info': {
+            'path': file_path,
+            'type': dataset_type
+        }
+    }
+    
+    try:
+        file_path = Path(file_path)
+        
+        # Load sequences based on file type
+        sequences = []
+        if file_path.suffix.lower() in ['.fasta', '.fa', '.fas']:
+            with open(file_path, 'r') as handle:
+                for record in SeqIO.parse(handle, "fasta"):
+                    sequences.append(str(record.seq))
+        
+        if not sequences:
+            return {'error': 'No sequences found in file'}
+        
+        # Basic statistics
+        report['basic_stats'] = calculate_sequence_composition(sequences, dataset_type)
+        
+        # Quality analysis
+        report['quality_analysis'] = analyze_sequence_quality(sequences, dataset_type)
+        
+        # Missing data detection
+        report['missing_data'] = detect_missing_data(sequences)
+        
+        # Summary recommendations
+        recommendations = []
+        
+        if report['missing_data']['empty_sequences'] > 0:
+            recommendations.append(f"Remove {report['missing_data']['empty_sequences']} empty sequences")
+        
+        if report['missing_data']['sequences_with_all_N'] > 0:
+            recommendations.append(f"Review {report['missing_data']['sequences_with_all_N']} sequences with all N bases")
+        
+        if report['quality_analysis']['sequences_with_issues'] > len(sequences) * 0.1:
+            recommendations.append("More than 10% of sequences have quality issues - consider data cleaning")
+        
+        report['recommendations'] = recommendations
+        
+        return report
+        
+    except Exception as e:
+        logger.error(f"Error generating sequence report: {e}")
+        return {'error': str(e)}
