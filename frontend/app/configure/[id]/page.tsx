@@ -109,10 +109,10 @@ export default function ConfigurePage() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-black py-12 px-6 sm:px-8 lg:px-12">
+      <div className="min-h-screen bg-gradient-to-b from-black via-zinc-950 to-black py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-12">
-            <h1 className="text-4xl font-bold mb-3 tracking-tight">Configure Training</h1>
+          <div className="mb-16">
+            <h1 className="text-5xl sm:text-6xl font-bold mb-6 tracking-tight bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">Configure Training</h1>
             <p className="text-zinc-400 text-lg">Set up your machine learning pipeline</p>
           </div>
 
@@ -167,8 +167,8 @@ export default function ConfigurePage() {
           </div>
 
           <div>
-            <Card>
-              <h2 className="text-2xl font-bold mb-6">Training Configuration</h2>
+            <Card className="!p-10">
+              <h2 className="text-3xl font-bold mb-8">Training Configuration</h2>
 
               <div className="space-y-6">
                 <Select

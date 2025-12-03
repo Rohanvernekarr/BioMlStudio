@@ -66,4 +66,50 @@ export interface JobResults {
     is_best: boolean;
   }>;
   training_time?: number;
+  shap_explanations?: SHAPExplanation;
+}
+
+export interface FeatureContribution {
+  feature: string;
+  value: number;
+  shap_value: number;
+  contribution: 'positive' | 'negative';
+}
+
+export interface TopFeature {
+  feature: string;
+  importance: number;
+  mean_shap: number;
+  std_shap: number;
+}
+
+export interface SHAPSummary {
+  feature_importance: Record<string, number>;
+  top_features: TopFeature[];
+  total_features: number;
+}
+
+export interface SHAPPlots {
+  summary_plot?: string;
+  bar_plot?: string;
+  waterfall_plot?: string;
+  force_plot?: string;
+}
+
+export interface SHAPExplanation {
+  success: boolean;
+  shap_values?: number[][];
+  feature_names?: string[];
+  plots?: SHAPPlots;
+  summary?: SHAPSummary;
+  explainer_type?: string;
+  error?: string;
+  timestamp?: string;
+}
+
+export interface PredictionExplanation {
+  prediction: number;
+  probability?: number[];
+  contributions: FeatureContribution[];
+  base_value?: number;
 }

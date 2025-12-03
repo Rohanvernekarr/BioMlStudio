@@ -18,6 +18,7 @@ from sklearn.preprocessing import LabelEncoder
 
 from app.services.ml_service import MLService
 from app.services.model_builder_service import model_builder_service
+from app.services.shap_service import shap_service
 from app.core.database import get_db_context
 from app.models.ml_model import MLModel, ModelType, ModelFramework
 from app.models.job import Job, JobStatus
@@ -144,6 +145,21 @@ class EnhancedMLService(MLService):
             
             model_path = self._save_enhanced_model(job_id, model_artifacts)
             
+            # Generate SHAP explanations if requested
+            shap_results = None
+            if training_params.get('generate_shap', True):
+                try:
+                    logger.info("Generating SHAP explanations...")
+                    shap_results = shap_service.generate_shap_explanations(
+                        model_path=str(model_path),
+                        X_data=X_test,
+                        feature_names=feature_names,
+                        max_display=15,
+                        sample_size=min(100, len(X_test))
+                    )
+                except Exception as e:
+                    logger.warning(f"Could not generate SHAP explanations: {e}")
+            
             # Create model record in database
             model_record = await self._create_model_record(
                 job_id=job_id,
@@ -162,7 +178,8 @@ class EnhancedMLService(MLService):
                 'training_samples': len(X_train),
                 'test_samples': len(X_test),
                 'algorithm': model_config['algorithm'],
-                'optimization_results': optimization_results
+                'optimization_results': optimization_results,
+                'shap_explanations': shap_results
             }
             
         except Exception as e:

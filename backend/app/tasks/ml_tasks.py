@@ -19,6 +19,7 @@ from app.models.dataset import Dataset
 from app.models.ml_model import MLModel, ModelType, ModelFramework
 from app.services.ml_service import MLService
 from app.services.job_service import JobService
+from app.services.shap_service import shap_service
 from app.utils.logger import get_task_logger
 
 logger = get_task_logger(__name__)
@@ -517,8 +518,49 @@ def start_auto_analysis_task(
         
         self.update_state(
             state='PROGRESS',
-            meta={'current': 90, 'total': 100, 'status': 'Finalizing results...'}
+            meta={'current': 90, 'total': 100, 'status': 'Generating SHAP explanations...'}
         )
+        
+        # Generate SHAP explanations for the best model
+        shap_results = None
+        try:
+            best_model_results = results['models'][best_model_name]
+            model_path = best_model_results.get('model_path')
+            
+            if model_path:
+                # Load dataset to get test data
+                import pandas as pd
+                import numpy as np
+                df = pd.read_csv(dataset_path)
+                
+                # Get feature columns (all except target)
+                feature_cols = [col for col in df.columns if col != target_column]
+                X_data = df[feature_cols].values
+                
+                # Limit samples for performance
+                sample_size = min(100, len(X_data))
+                X_sample = X_data[:sample_size] if len(X_data) > sample_size else X_data
+                
+                shap_results = shap_service.generate_shap_explanations(
+                    model_path=model_path,
+                    X_data=X_sample,
+                    feature_names=feature_cols,
+                    max_display=15,
+                    sample_size=sample_size
+                )
+                
+                logger.info(f"SHAP explanations generated for job {job_id}")
+        except Exception as e:
+            logger.warning(f"Could not generate SHAP explanations for job {job_id}: {e}")
+        
+        self.update_state(
+            state='PROGRESS',
+            meta={'current': 95, 'total': 100, 'status': 'Finalizing results...'}
+        )
+        
+        # Add SHAP results if available
+        if shap_results and shap_results.get('success'):
+            results['shap_explanations'] = shap_results
         
         # Update job with results
         job_service.update_job_results(job_id, results, JobStatus.COMPLETED)

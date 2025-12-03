@@ -17,8 +17,10 @@ from app.services.preprocessing_service import preprocessing_service
 from app.services.automl_service import automl_service
 from app.services.training_service import training_service
 from app.services.export_service import export_service
+from app.services.shap_service import shap_service
 from app.core.config import settings
 from pydantic import BaseModel
+import numpy as np
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
@@ -198,11 +200,52 @@ async def execute_ml_workflow(
                 raise Exception("Training failed")
             
             logger.info("Training completed successfully")
+            job.progress = 70
+            db.commit()
+            
+            # Create output directory
+            output_dir = Path(settings.MODELS_DIR) / f"job_{job_id}"
+            output_dir.mkdir(parents=True, exist_ok=True)
+            
+            # Step 3: Generate SHAP explanations
+            logger.info("Step 3: Generating SHAP explanations...")
+            shap_results = None
+            try:
+                # Get the best model path
+                best_model = training_results['best_model']['model']
+                
+                # Save model temporarily for SHAP analysis
+                import joblib
+                temp_model_path = output_dir / "temp_model.joblib"
+                
+                # Get feature names from preprocessing results
+                feature_names = preprocessing_results.get('feature_names', 
+                                [f'feature_{i}' for i in range(preprocessing_results['final_shape'][1])])
+                
+                joblib.dump({
+                    'model': best_model,
+                    'feature_names': feature_names
+                }, temp_model_path)
+                
+                # Generate SHAP explanations on test data
+                X_test = preprocessing_results['test_data']['X']
+                shap_results = shap_service.generate_shap_explanations(
+                    model_path=str(temp_model_path),
+                    X_data=X_test[:100] if len(X_test) > 100 else X_test,  # Limit samples for performance
+                    feature_names=feature_names,
+                    max_display=15,
+                    sample_size=min(100, len(X_test))
+                )
+                
+                logger.info("SHAP explanations generated successfully")
+            except Exception as e:
+                logger.warning(f"Could not generate SHAP explanations: {e}")
+            
             job.progress = 80
             db.commit()
             
-            # Step 3: Save model and generate reports
-            logger.info("Step 3: Saving model and generating reports...")
+            # Step 4: Save model and generate reports
+            logger.info("Step 4: Saving model and generating reports...")
             
             # Create output directory
             output_dir = Path(settings.MODELS_DIR) / f"job_{job_id}"
@@ -272,7 +315,8 @@ async def execute_ml_workflow(
                 'models_trained': models_comparison,  # All trained models comparison
                 'artifacts': artifacts,
                 'training_time': training_results['training_time'],
-                'visualizations': training_results.get('visualizations', {})
+                'visualizations': training_results.get('visualizations', {}),
+                'shap_explanations': shap_results if shap_results and shap_results.get('success') else None
             }
             db.commit()
             

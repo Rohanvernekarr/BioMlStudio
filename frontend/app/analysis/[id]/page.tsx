@@ -354,17 +354,17 @@ export default function AnalysisPage() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-black py-16 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-gradient-to-b from-black via-zinc-950 to-black py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-12">
+          <div className="mb-16">
             <Button
               variant="ghost"
               onClick={() => router.back()}
-              className="mb-4"
+              className="mb-6"
             >
               ← Back
             </Button>
-            <h1 className="text-4xl sm:text-5xl font-bold mb-4">Dataset Analysis</h1>
+            <h1 className="text-5xl sm:text-6xl font-bold mb-6 bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">Dataset Analysis</h1>
             {dataset && (
               <div className="flex items-center gap-4 text-zinc-400">
                 <span>{dataset.name}</span>

@@ -64,13 +64,13 @@ export default function RunningPage() {
 
   if (job?.status === 'failed') {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16">
-        <Card className="max-w-2xl w-full">
+      <div className="min-h-screen bg-gradient-to-br from-black via-zinc-950 to-black flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
+        <Card className="max-w-3xl w-full !p-12">
           <div className="text-center">
-            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-red-950/30 border-2 border-red-800/50 flex items-center justify-center">
-              <span className="text-4xl">✗</span>
+            <div className="w-24 h-24 mx-auto mb-8 rounded-full bg-red-950/40 border-2 border-red-800/60 flex items-center justify-center shadow-2xl">
+              <span className="text-5xl">✗</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-bold mb-4">Analysis Failed</h1>
+            <h1 className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">Analysis Failed</h1>
             <p className="text-zinc-400 mb-8 leading-relaxed">
               {job.error_message || 'An error occurred during analysis'}
             </p>
@@ -88,13 +88,13 @@ export default function RunningPage() {
 
   if (pollCount > 60) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16">
-        <Card className="max-w-2xl w-full">
+      <div className="min-h-screen bg-gradient-to-br from-black via-zinc-950 to-black flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
+        <Card className="max-w-3xl w-full !p-12">
           <div className="text-center">
-            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-zinc-900 border-2 border-zinc-800 flex items-center justify-center">
-              <span className="text-4xl">⏱️</span>
+            <div className="w-24 h-24 mx-auto mb-8 rounded-full bg-zinc-900 border-2 border-zinc-700 flex items-center justify-center shadow-2xl">
+              <span className="text-5xl">⏱️</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-bold mb-4">Taking Longer Than Expected</h1>
+            <h1 className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">Taking Longer Than Expected</h1>
             <p className="text-zinc-400 mb-3 leading-relaxed">
               The analysis is still processing. Current status: <strong className="text-white">{job?.status || 'unknown'}</strong>
             </p>
@@ -123,14 +123,14 @@ export default function RunningPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16">
-      <div className="max-w-2xl w-full">
-        <Card>
-          <div className="text-center mb-10">
-            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-zinc-900 border-2 border-zinc-800 flex items-center justify-center animate-pulse">
-              <span className="text-4xl">🔬</span>
+    <div className="min-h-screen bg-gradient-to-br from-black via-zinc-950 to-black flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
+      <div className="max-w-3xl w-full">
+        <Card className="!p-12">
+          <div className="text-center mb-12">
+            <div className="w-24 h-24 mx-auto mb-8 rounded-full bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-zinc-700 flex items-center justify-center animate-pulse shadow-2xl">
+              <span className="text-5xl">🔬</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl font-bold mb-4 tracking-tight">Running Analysis</h1>
+            <h1 className="text-5xl sm:text-6xl font-bold mb-6 tracking-tight bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">Running Analysis</h1>
             <p className="text-zinc-400 mb-2 text-lg">
               Status: <span className="text-white capitalize font-medium">{job?.status || 'loading'}</span>
             </p>
