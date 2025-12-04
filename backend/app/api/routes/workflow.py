@@ -185,7 +185,8 @@ async def execute_ml_workflow(
             task_config = {
                 'task_type': config.get('task_type', 'general_classification'),
                 'optimize_hyperparams': config.get('optimize_hyperparams', False),
-                'n_models': config.get('n_models', 3)
+                'n_models': config.get('n_models', 3),
+                'feature_names': preprocessing_results.get('feature_names', [])
             }
             
             training_results = await training_service.train_with_monitoring(
@@ -307,6 +308,24 @@ async def execute_ml_workflow(
                     'is_best': model_result['model_name'] == training_results['best_model']['model_name']
                 })
             
+            # Extract feature importance from training results
+            feature_importance = {}
+            evaluation_data = training_results.get('evaluation', {})
+            visualizations = evaluation_data.get('visualizations', {})
+            
+            # Try to get feature importance from different sources
+            if 'feature_importance' in training_results:
+                feature_importance = training_results['feature_importance']
+            elif 'best_model' in training_results and hasattr(training_results['best_model'].get('model'), 'feature_importances_'):
+                # Extract from best model if available
+                model = training_results['best_model']['model']
+                feature_names = preprocessing_results.get('feature_names', 
+                                [f'feature_{i}' for i in range(len(model.feature_importances_))])
+                feature_importance = {
+                    feature_names[i]: imp 
+                    for i, imp in enumerate(model.feature_importances_)
+                }
+            
             job.result = {
                 'success': True,
                 'best_model': training_results['best_model']['model_name'],
@@ -316,6 +335,7 @@ async def execute_ml_workflow(
                 'artifacts': artifacts,
                 'training_time': training_results['training_time'],
                 'visualizations': training_results.get('visualizations', {}),
+                'feature_importance': feature_importance,  # Add feature importance here
                 'shap_explanations': shap_results if shap_results and shap_results.get('success') else None
             }
             db.commit()

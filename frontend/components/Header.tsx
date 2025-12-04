@@ -29,7 +29,7 @@ export function Header() {
                 onClick={() => router.push('/')}
                 className="px-4 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-900/50 rounded-lg transition-all duration-200"
               >
-                🏠 Home
+                 Home
               </button>
             </nav>
           </div>

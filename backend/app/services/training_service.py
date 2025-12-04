@@ -156,7 +156,8 @@ class TrainingService:
                     X_val=X_val,
                     y_val=y_val,
                     is_regression=is_regression,
-                    optimize_hyperparams=task_config.get('optimize_hyperparams', False)
+                    optimize_hyperparams=task_config.get('optimize_hyperparams', False),
+                    feature_names=task_config.get('feature_names', [])
                 )
                 
                 if model_results['success']:
@@ -186,7 +187,8 @@ class TrainingService:
                     y_train=y_train,
                     X_val=X_val,
                     y_val=y_val,
-                    is_regression=is_regression
+                    is_regression=is_regression,
+                    feature_names=task_config.get('feature_names', [])
                 )
                 
                 results.update({
@@ -196,6 +198,7 @@ class TrainingService:
                     'evaluation': evaluation,
                     'metrics': evaluation['metrics'],
                     'visualizations': evaluation['visualizations'],
+                    'feature_importance': evaluation.get('feature_importance', {}),
                     'training_time': time.time() - self.monitor.start_time
                 })
             else:
@@ -219,7 +222,8 @@ class TrainingService:
         X_val: Optional[np.ndarray],
         y_val: Optional[np.ndarray],
         is_regression: bool,
-        optimize_hyperparams: bool = False
+        optimize_hyperparams: bool = False,
+        feature_names: Optional[List[str]] = None
     ) -> Dict[str, Any]:
         """Train a single model"""
         result = {
@@ -333,7 +337,8 @@ class TrainingService:
         y_train: np.ndarray,
         X_val: Optional[np.ndarray],
         y_val: Optional[np.ndarray],
-        is_regression: bool
+        is_regression: bool,
+        feature_names: Optional[List[str]] = None
     ) -> Dict[str, Any]:
         """Generate comprehensive model evaluation"""
         self.monitor.log("Generating comprehensive evaluation...")
@@ -413,10 +418,34 @@ class TrainingService:
                 if y_val is not None:
                     # Get feature importance if available
                     feature_importance = None
+                    
+                    # Handle different types of models
                     if hasattr(model, 'feature_importances_'):
+                        # Tree-based models (Random Forest, XGBoost, etc.)
+                        importances = model.feature_importances_
+                    elif hasattr(model, 'coef_'):
+                        # Linear models (Logistic Regression, SVM, etc.)
+                        if len(model.coef_.shape) > 1 and model.coef_.shape[0] > 1:
+                            # Multi-class: use mean of absolute coefficients
+                            importances = np.mean(np.abs(model.coef_), axis=0)
+                        else:
+                            # Binary classification: use absolute coefficients
+                            importances = np.abs(model.coef_[0])
+                    else:
+                        importances = None
+                    
+                    if importances is not None:
+                        # Use provided feature names or generate generic ones
+                        if feature_names and len(feature_names) == len(importances):
+                            feature_name_list = feature_names
+                        elif hasattr(X_train, 'columns'):
+                            feature_name_list = list(X_train.columns)
+                        else:
+                            feature_name_list = [f'feature_{i}' for i in range(len(importances))]
+                        
                         feature_importance = {
-                            f'feature_{i}': imp
-                            for i, imp in enumerate(model.feature_importances_)
+                            feature_name_list[i]: float(imp)
+                            for i, imp in enumerate(importances)
                         }
                     
                     viz_plots = self.viz_service.generate_classification_plots(
@@ -426,6 +455,9 @@ class TrainingService:
                         feature_importance=feature_importance
                     )
                     evaluation['visualizations'] = viz_plots
+                    
+                    # Add feature importance to evaluation results
+                    evaluation['feature_importance'] = feature_importance
             
             # Store predictions for analysis
             evaluation['predictions'] = {
