@@ -37,15 +37,15 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-zinc-950 to-black flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16">
-      <div className="max-w-lg w-full">
-        <div className="text-center mb-12">
+    <div className="min-h-screen bg-gradient-to-br from-black via-zinc-950 to-black flex-center-col px-4 sm:px-6 lg:px-8 padding-section">
+      <div className="centered-card">
+        <div className="text-center-wrapper section-spacing">
           <div className="inline-flex items-center gap-3 mb-8">
             <div className="w-16 h-16 bg-gradient-to-br from-white to-zinc-300 rounded-2xl flex items-center justify-center shadow-2xl">
               <span className="text-black font-bold text-2xl">BM</span>
             </div>
           </div>
-          <h1 className="text-5xl sm:text-6xl font-bold mb-5 tracking-tight bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">
+          <h1 className="text-5xl sm:text-6xl font-bold mb-6 tracking-tight bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">
             BioMLStudio
           </h1>
           <p className="text-zinc-400 text-xl font-light">
@@ -53,7 +53,7 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <Card className="!p-10">
+        <Card className="!p-10 lg:!p-12">
           <form onSubmit={handleSubmit} className="space-y-6">
             {!isLogin && (
               <Input
@@ -85,18 +85,18 @@ export default function LoginPage() {
             />
 
             {error && (
-              <div className="p-5 bg-red-950/40 border border-red-800/60 rounded-xl text-red-300 text-sm font-medium">
+              <div className="p-6 bg-red-950/40 border border-red-800/60 rounded-xl text-red-300 text-sm font-medium">
                 <span className="inline-block mr-2">⚠️</span>
                 {error}
               </div>
             )}
 
-            <Button type="submit" disabled={loading} className="w-full !py-4 !text-lg font-semibold" size="lg">
+            <Button type="submit" disabled={loading} className="w-full !py-4 !text-lg font-semibold mt-2" size="lg">
               {loading ? '⏳ Please wait...' : isLogin ? '🔓 Sign In' : '✨ Create Account'}
             </Button>
           </form>
 
-          <div className="mt-10 pt-8 border-t border-zinc-800 text-center">
+          <div className="mt-8 pt-8 border-t border-zinc-800 text-center">
             <button
               type="button"
               onClick={() => {

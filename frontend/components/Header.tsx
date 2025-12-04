@@ -11,7 +11,7 @@ export function Header() {
 
   return (
     <header className="border-b border-zinc-800/40 bg-black/95 backdrop-blur-md sticky top-0 z-50 shadow-xl">
-      <div className=" mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="page-container">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center gap-8">
             <button 
@@ -27,7 +27,7 @@ export function Header() {
             <nav className="hidden md:flex items-center gap-1">
               <button
                 onClick={() => router.push('/')}
-                className="px-4 py-2 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-900/50 rounded-lg transition-all duration-200"
+                className="px-5 py-2.5 text-sm font-medium text-zinc-400 hover:text-white hover:bg-zinc-900/50 rounded-lg transition-all duration-200"
               >
                  Home
               </button>
@@ -36,7 +36,7 @@ export function Header() {
           
           <button
             onClick={handleLogout}
-            className="px-4 py-2 text-sm font-medium text-zinc-300 hover:text-white hover:bg-zinc-900/80 rounded-lg transition-all duration-200 border border-zinc-800/60 hover:border-zinc-700/60"
+            className="px-5 py-2.5 text-sm font-medium text-zinc-300 hover:text-white hover:bg-zinc-900/80 rounded-lg transition-all duration-200 border border-zinc-800/60 hover:border-zinc-700/60"
           >
             🚪 Logout
           </button>

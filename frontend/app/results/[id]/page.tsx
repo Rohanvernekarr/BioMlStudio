@@ -42,8 +42,8 @@ export default function ResultsPage() {
     return (
       <>
         <Header />
-        <div className="min-h-[calc(100vh-64px)] bg-gradient-to-b from-black via-zinc-950/90 to-black flex items-center justify-center">
-          <div className="text-center">
+        <div className="min-h-[calc(100vh-64px)] bg-gradient-to-b from-black via-zinc-950/90 to-black flex-center-col">
+          <div className="text-center-wrapper">
             <div className="animate-spin rounded-full h-12 w-12 border-2 border-white/20 border-t-white mx-auto mb-4"></div>
             <div className="text-zinc-300 text-lg font-medium">Loading results...</div>
           </div>
@@ -56,8 +56,8 @@ export default function ResultsPage() {
     return (
       <>
         <Header />
-        <div className="min-h-screen bg-black flex items-center justify-center px-4">
-          <div className="max-w-md w-full rounded-lg border border-red-900/60 bg-red-950/40 px-4 py-3 text-sm text-red-200">
+        <div className="min-h-screen bg-black flex-center-col px-4">
+          <div className="centered-card rounded-lg border border-red-900/60 bg-red-950/40 px-4 py-3 text-sm text-red-200">
             {error || 'Results not found'}
           </div>
         </div>
@@ -87,12 +87,12 @@ export default function ResultsPage() {
     <>
       <Header />
       <div className="min-h-[calc(100vh-64px)] bg-gradient-to-b from-black via-zinc-950/90 to-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
-          <div className="space-y-8 lg:space-y-12">
+        <div className="page-container page-section">
+          <div className="gap-section flex flex-col">
             {/* Page Header */}
-            <div className="flex flex-col lg:flex-row justify-between items-start gap-6 lg:gap-8">
+            <div className="flex flex-col lg:flex-row justify-between items-start gap-6 lg:gap-8 section-spacing">
               <div className="flex-1">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent mb-4">
+                <h1 className="text-4xl sm:text-5xl lg:text-5xl font-bold bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent mb-4">
                   Training Results
                 </h1>
                 <div className="space-y-2">
@@ -116,7 +116,7 @@ export default function ResultsPage() {
                   size="md"
                   className="min-w-[160px]"
                 >
-                  📦 Download Model
+                  Download Model
                 </Button>
                 <Button
                   onClick={() =>
@@ -125,15 +125,15 @@ export default function ResultsPage() {
                   size="md"
                   className="min-w-[160px]"
                 >
-                  📋 Download Report
+                  Download Report
                 </Button>
               </div>
             </div>
 
           {/* Sequence stats */}
           {sequenceStats && (
-            <Card className="p-5 sm:p-6 border-zinc-800/70 bg-zinc-950/70">
-              <h2 className="text-lg sm:text-xl font-semibold text-zinc-50 mb-4">
+            <Card className="p-7 sm:p-8 lg:p-9 border-zinc-800/70 bg-zinc-950/70 card-spacing">
+              <h2 className="text-lg sm:text-xl font-semibold text-zinc-50 mb-6">
                 Sequence data summary
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -162,8 +162,9 @@ export default function ResultsPage() {
 
           {/* Model comparison */}
           {results.models_trained && results.models_trained.length > 0 && (
-            <Card className="p-5 sm:p-6 border-zinc-800/70 bg-zinc-950/70 space-y-5">
-              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <Card className="p-7 sm:p-8 lg:p-9 border-zinc-800/70 bg-zinc-950/70 card-spacing">
+              <div className="space-y-6">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between ">
                 <div>
                   <h2 className="text-lg sm:text-xl font-semibold text-zinc-50">
                     Model comparison
@@ -288,11 +289,12 @@ export default function ResultsPage() {
                   </p>
                 </div>
               </div>
+              </div>
             </Card>
           )}
 
           {/* Metrics cards */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 card-spacing">
             {isClassification ? (
               <>
                 <MetricCard
@@ -330,9 +332,9 @@ export default function ResultsPage() {
           </div>
 
           {/* Feature importance + confusion matrix */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="p-5 sm:p-6 border-zinc-800/70 bg-zinc-950/70">
-              <h2 className="text-lg sm:text-xl font-semibold text-zinc-50 mb-3">
+          {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-section card-spacing">
+            <Card className="p-7 sm:p-8 lg:p-9 border-zinc-800/70 bg-zinc-950/70">
+              <h2 className="text-lg sm:text-xl font-semibold text-zinc-50 mb-6">
                 Top features
               </h2>
               <p className="text-xs sm:text-sm text-zinc-500 mb-5">
@@ -363,8 +365,8 @@ export default function ResultsPage() {
             </Card>
 
             {isClassification && confusionMatrix.length > 0 && (
-              <Card className="p-5 sm:p-6 border-zinc-800/70 bg-zinc-950/70">
-                <h2 className="text-lg sm:text-xl font-semibold text-zinc-50 mb-3">
+              <Card className="p-7 sm:p-8 lg:p-9 border-zinc-800/70 bg-zinc-950/70">
+                <h2 className="text-lg sm:text-xl font-semibold text-zinc-50 mb-6">
                   Confusion matrix
                 </h2>
                 <p className="text-xs sm:text-sm text-zinc-500 mb-5">
@@ -399,11 +401,11 @@ export default function ResultsPage() {
                 </div>
               </Card>
             )}
-          </div>
+          </div> */}
 
           {/* Summary */}
-          <Card className="p-5 sm:p-6 border-zinc-800/70 bg-zinc-950/70">
-            <h2 className="text-lg sm:text-xl font-semibold text-zinc-50 mb-3">
+          <Card className="p-7 sm:p-8 lg:p-9 border-zinc-800/70 bg-zinc-950/70 card-spacing">
+            <h2 className="text-lg sm:text-xl font-semibold text-zinc-50 mb-6">
               Summary
             </h2>
             <ul className="space-y-2.5 text-xs sm:text-sm text-zinc-300 list-disc list-inside">
@@ -457,8 +459,8 @@ export default function ResultsPage() {
           {/* Biological insights */}
           {sequenceStats &&
             featureImportance.some((f) => f.feature.startsWith('kmer_')) && (
-              <Card className="p-5 sm:p-6 border-zinc-800/70 bg-zinc-950/70">
-                <h2 className="text-lg sm:text-xl font-semibold text-zinc-50 mb-3">
+              <Card className="p-7 sm:p-8 lg:p-9 border-zinc-800/70 bg-zinc-950/70 card-spacing">
+                <h2 className="text-lg sm:text-xl font-semibold text-zinc-50 mb-6">
                   Biological insights
                 </h2>
                 <div className="space-y-5">
@@ -514,7 +516,7 @@ export default function ResultsPage() {
           )}
 
             {/* Footer Actions */}
-            <div className="flex justify-center pt-8 border-t border-zinc-800/50">
+            <div className="flex justify-center pt-8 mt-8 border-t border-zinc-800/50">
               <Button 
                 onClick={() => router.push('/')} 
                 variant="outline" 

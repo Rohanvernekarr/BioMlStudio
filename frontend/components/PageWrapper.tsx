@@ -27,7 +27,7 @@ export function PageWrapper({
     <>
       <Header />
       <div className="min-h-[calc(100vh-64px)] bg-gradient-to-b from-black via-zinc-950/90 to-black">
-        <div className={`${maxWidthClasses[maxWidth]} mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16 ${className}`}>
+        <div className={`page-container ${maxWidthClasses[maxWidth]} mx-auto page-section ${className}`}>
           {children}
         </div>
       </div>

@@ -88,8 +88,8 @@ export default function ConfigurePage() {
     return (
       <>
         <Header />
-        <div className="min-h-[calc(100vh-64px)] bg-gradient-to-b from-black via-zinc-950/90 to-black flex items-center justify-center">
-          <div className="text-center">
+        <div className="min-h-[calc(100vh-64px)] bg-gradient-to-b from-black via-zinc-950/90 to-black flex-center-col">
+          <div className="text-center-wrapper">
             <div className="animate-spin rounded-full h-12 w-12 border-2 border-white/20 border-t-white mx-auto mb-4"></div>
             <div className="text-zinc-300 text-lg font-medium">Loading dataset...</div>
           </div>
@@ -102,8 +102,8 @@ export default function ConfigurePage() {
     return (
       <>
         <Header />
-        <div className="min-h-[calc(100vh-64px)] bg-gradient-to-b from-black via-zinc-950/90 to-black flex items-center justify-center px-4">
-          <Card className="max-w-lg text-center">
+        <div className="min-h-[calc(100vh-64px)] bg-gradient-to-b from-black via-zinc-950/90 to-black flex-center-col px-4">
+          <Card className="centered-card text-center">
             <div className="text-red-400 text-5xl mb-4">❌</div>
             <h2 className="text-xl font-bold text-white mb-2">Dataset Not Found</h2>
             <p className="text-red-400 mb-6">{error || 'The requested dataset could not be loaded.'}</p>
@@ -120,18 +120,18 @@ export default function ConfigurePage() {
     <>
       <Header />
       <div className="min-h-[calc(100vh-64px)] bg-gradient-to-b from-black via-zinc-950/90 to-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
-          <div className="mb-12 lg:mb-16 text-center">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 lg:mb-6 tracking-tight bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">Configure Training</h1>
-            <p className="text-zinc-400 text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed">Set up your machine learning pipeline with custom parameters and optimization settings</p>
+        <div className="page-container page-section">
+          <div className="section-spacing text-center-wrapper">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 tracking-tight bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">Configure Training</h1>
+            <p className="text-zinc-400 text-lg lg:text-xl max-w-3xl leading-relaxed">Set up your machine learning pipeline with custom parameters and optimization settings</p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-section">
             {/* Dataset Overview */}
             <div>
               <Card>
-                <h2 className="text-2xl font-bold mb-6 text-white">Dataset Overview</h2>
-              <div className="space-y-3 mb-6">
+                <h2 className="text-2xl font-bold mb-7 text-white">Dataset Overview</h2>
+              <div className="space-y-4 mb-8">
                 <div className="flex justify-between items-center py-2 border-b border-zinc-800">
                   <span className="text-zinc-400">Dataset Name</span>
                   <span className="font-medium">{dataset.name}</span>
@@ -178,10 +178,10 @@ export default function ConfigurePage() {
           </div>
 
           <div>
-            <Card className="!p-10">
+            <Card className="!p-10 lg:!p-12">
               <h2 className="text-3xl font-bold mb-8">Training Configuration</h2>
 
-              <div className="space-y-6">
+              <div className="gap-component flex flex-col">
                 <Select
                   label="Task Type"
                   value={taskType}
@@ -196,14 +196,14 @@ export default function ConfigurePage() {
                 </Select>
 
                 <div>
-                  <label className="text-sm font-medium text-zinc-300 mb-2 block">
+                  <label className="text-sm font-medium text-zinc-300 mb-3 block">
                     Target Column Name
                   </label>
                   <input
                     type="text"
                     value={targetColumn}
                     onChange={(e) => setTargetColumn(e.target.value)}
-                    className="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
+                    className="w-full px-5 py-4 bg-zinc-900 border border-zinc-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/20 transition-all min-h-[52px]"
                     placeholder="label"
                   />
                 </div>
@@ -296,21 +296,21 @@ export default function ConfigurePage() {
                         aria-label="Validation split slider"
                       />
                     </div>
-                    <label className="flex items-center gap-3 cursor-pointer p-3 rounded-lg hover:bg-zinc-900/50 transition-colors">
+                    <label className="flex items-center gap-3 cursor-pointer p-4 rounded-lg hover:bg-zinc-900/50 transition-colors">
                       <input
                         type="checkbox"
                         checked={optimizeHyperparams}
                         onChange={(e) => setOptimizeHyperparams(e.target.checked)}
-                        className="w-4 h-4"
+                        className="w-5 h-5"
                       />
                       <span className="text-sm">Optimize Hyperparameters (takes longer, better results)</span>
                     </label>
-                    <label className="flex items-center gap-3 cursor-pointer p-3 rounded-lg hover:bg-zinc-900/50 transition-colors">
+                    <label className="flex items-center gap-3 cursor-pointer p-4 rounded-lg hover:bg-zinc-900/50 transition-colors">
                       <input
                         type="checkbox"
                         checked={generateReport}
                         onChange={(e) => setGenerateReport(e.target.checked)}
-                        className="w-4 h-4"
+                        className="w-5 h-5"
                       />
                       <span className="text-sm">Generate PDF Report</span>
                     </label>
@@ -319,12 +319,12 @@ export default function ConfigurePage() {
               </div>
 
               {error && (
-                <div className="mt-6 p-4 bg-red-950/30 border border-red-800/50 rounded-xl text-red-400 text-sm">
+                <div className="mt-6 mb-4 p-5 bg-red-950/30 border border-red-800/50 rounded-xl text-red-400 text-sm">
                   {error}
                 </div>
               )}
 
-              <div className="mt-8 flex gap-4">
+              <div className="mt-8 flex gap-4 pt-6">
                 <Button variant="secondary" onClick={() => router.push('/')} size="lg">
                   Back
                 </Button>
@@ -339,9 +339,9 @@ export default function ConfigurePage() {
               </div>
             </Card>
           </div>
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 }

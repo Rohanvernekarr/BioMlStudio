@@ -64,9 +64,9 @@ export default function RunningPage() {
 
   if (job?.status === 'failed') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-black via-zinc-950 to-black flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
-        <Card className="max-w-3xl w-full !p-12">
-          <div className="text-center">
+      <div className="min-h-screen bg-gradient-to-br from-black via-zinc-950 to-black flex-center-col px-4 sm:px-6 lg:px-8 padding-section">
+        <Card className="centered-card-lg !p-12 lg:!p-14">
+          <div className="text-center-wrapper">
             <div className="w-24 h-24 mx-auto mb-8 rounded-full bg-red-950/40 border-2 border-red-800/60 flex items-center justify-center shadow-2xl">
               <span className="text-5xl">✗</span>
             </div>
@@ -88,14 +88,14 @@ export default function RunningPage() {
 
   if (pollCount > 60) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-black via-zinc-950 to-black flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
-        <Card className="max-w-3xl w-full !p-12">
-          <div className="text-center">
+      <div className="min-h-screen bg-gradient-to-br from-black via-zinc-950 to-black flex-center-col px-4 sm:px-6 lg:px-8 padding-section">
+        <Card className="centered-card-lg !p-12 lg:!p-14">
+          <div className="text-center-wrapper">
             <div className="w-24 h-24 mx-auto mb-8 rounded-full bg-zinc-900 border-2 border-zinc-700 flex items-center justify-center shadow-2xl">
               <span className="text-5xl">⏱️</span>
             </div>
             <h1 className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">Taking Longer Than Expected</h1>
-            <p className="text-zinc-400 mb-3 leading-relaxed">
+            <p className="text-zinc-400 mb-4 leading-relaxed">
               The analysis is still processing. Current status: <strong className="text-white">{job?.status || 'unknown'}</strong>
             </p>
             <p className="text-sm text-zinc-500 mb-8">
@@ -123,15 +123,15 @@ export default function RunningPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-zinc-950 to-black flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
-      <div className="max-w-3xl w-full">
-        <Card className="!p-12">
-          <div className="text-center mb-12">
+    <div className="min-h-screen bg-gradient-to-br from-black via-zinc-950 to-black flex-center-col px-4 sm:px-6 lg:px-8 padding-section">
+      <div className="centered-card-lg">
+        <Card className="!p-12 lg:!p-14">
+          <div className="text-center-wrapper section-spacing">
             <div className="w-24 h-24 mx-auto mb-8 rounded-full bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-zinc-700 flex items-center justify-center animate-pulse shadow-2xl">
               <span className="text-5xl">🔬</span>
             </div>
             <h1 className="text-5xl sm:text-6xl font-bold mb-6 tracking-tight bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">Running Analysis</h1>
-            <p className="text-zinc-400 mb-2 text-lg">
+            <p className="text-zinc-400 mb-3 text-lg">
               Status: <span className="text-white capitalize font-medium">{job?.status || 'loading'}</span>
             </p>
             <p className="text-sm text-zinc-500">
@@ -143,8 +143,8 @@ export default function RunningPage() {
 
           <ProgressBar value={progress} className="mb-10" />
 
-          <div className="space-y-3">{steps.map((step, i) => (
-              <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-zinc-950/50 border border-zinc-800/50">
+          <div className="gap-component flex flex-col">{steps.map((step, i) => (
+              <div key={i} className="flex items-center gap-4 p-5 rounded-xl bg-zinc-950/50 border border-zinc-800/50">
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all ${
                     step.completed
@@ -161,7 +161,7 @@ export default function RunningPage() {
             ))}
           </div>
 
-          <div className="mt-8 text-center text-sm text-zinc-500">
+          <div className="mt-8 pt-6 text-center text-sm text-zinc-500 border-t border-zinc-800/50">
             Job ID: {jobId}
           </div>
         </Card>

@@ -135,6 +135,10 @@ class DatasetAnalysisResponse(BaseModel):
     missing_data: Optional[MissingDataAnalysis] = None
     recommendations: List[str] = []
     column_info: Optional[Dict[str, Any]] = None
+    detailed_stats: Optional[Dict[str, Any]] = None
+    correlation_analysis: Optional[Dict[str, Any]] = None
+    distribution_analysis: Optional[Dict[str, Any]] = None
+    outlier_analysis: Optional[Dict[str, Any]] = None
 
 
 class DatasetVisualizationResponse(BaseModel):

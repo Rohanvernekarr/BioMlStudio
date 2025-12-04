@@ -9,6 +9,7 @@ from typing import Any, Dict, List, Optional
 
 import aiofiles
 import numpy as np
+import pandas as pd
 from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File, Form
 from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
@@ -579,17 +580,202 @@ async def analyze_dataset(
             # Biological sequence analysis
             report = generate_sequence_report(str(file_path), dataset.dataset_type)
             
+            # Convert FASTA to CSV for additional analysis
+            import tempfile
+            from app.utils.bioinformatics import convert_fasta_to_csv
+            
+            # Create temporary CSV for enhanced analysis
+            temp_csv = tempfile.NamedTemporaryFile(delete=False, suffix='.csv', mode='w')
+            temp_csv.close()
+            
+            try:
+                conversion_config = {
+                    'add_composition': True,
+                    'add_kmers': True,
+                    'kmer_size': 3,
+                    'max_sequences': 10000
+                }
+                
+                conversion_result = convert_fasta_to_csv(str(file_path), temp_csv.name, conversion_config)
+                
+                if conversion_result.get('success'):
+                    # Load converted CSV for enhanced analysis
+                    df = pd.read_csv(temp_csv.name)
+                    
+                    # Remove sequence metadata columns for numerical analysis
+                    metadata_cols = ['sequence_id', 'sequence', 'sequence_type']
+                    numeric_df = df.drop(columns=[col for col in metadata_cols if col in df.columns], errors='ignore')
+                    
+                    # Enhanced analysis on numeric features
+                    detailed_stats = {}
+                    correlation_analysis = {}
+                    distribution_analysis = {}
+                    outlier_analysis = {}
+                    
+                    numeric_cols = numeric_df.select_dtypes(include=[np.number]).columns
+                    if len(numeric_cols) > 0:
+                        try:
+                            from scipy import stats
+                            has_scipy = True
+                        except ImportError:
+                            has_scipy = False
+                            logger.warning("scipy not available, skipping advanced distribution analysis")
+                        
+                        # Helper function to handle NaN values
+                        def safe_float(value):
+                            if pd.isna(value) or np.isinf(value):
+                                return None
+                            return float(value)
+                        
+                        # Detailed statistics
+                        for col in numeric_cols:
+                            col_data = numeric_df[col].dropna()
+                            if len(col_data) > 0:
+                                detailed_stats[col] = {
+                                    'mean': safe_float(col_data.mean()),
+                                    'std': safe_float(col_data.std()),
+                                    'min': safe_float(col_data.min()),
+                                    'max': safe_float(col_data.max()),
+                                    '25%': safe_float(col_data.quantile(0.25)),
+                                    '50%': safe_float(col_data.quantile(0.5)),
+                                    '75%': safe_float(col_data.quantile(0.75))
+                                }
+                                
+                                # Distribution analysis
+                                if len(col_data) > 10 and has_scipy:
+                                    try:
+                                        skewness = safe_float(stats.skew(col_data))
+                                        kurtosis_val = safe_float(stats.kurtosis(col_data))
+                                        
+                                        if skewness is not None and kurtosis_val is not None:
+                                            dist_type = "Normal"
+                                            if abs(skewness) > 1:
+                                                dist_type = "Right-skewed" if skewness > 0 else "Left-skewed"
+                                            elif abs(kurtosis_val) > 3:
+                                                dist_type = "Heavy-tailed" if kurtosis_val > 0 else "Light-tailed"
+                                            
+                                            distribution_analysis[col] = {
+                                                'skewness': skewness,
+                                                'kurtosis': kurtosis_val,
+                                                'distribution_type': dist_type
+                                            }
+                                    except:
+                                        pass
+                                
+                                # Outlier analysis
+                                if len(col_data) > 10:
+                                    Q1 = col_data.quantile(0.25)
+                                    Q3 = col_data.quantile(0.75)
+                                    IQR = Q3 - Q1
+                                    lower_bound = Q1 - 1.5 * IQR
+                                    upper_bound = Q3 + 1.5 * IQR
+                                    
+                                    outliers = col_data[(col_data < lower_bound) | (col_data > upper_bound)]
+                                    outlier_analysis[col] = {
+                                        'count': len(outliers),
+                                        'percentage': safe_float((len(outliers) / len(col_data)) * 100),
+                                        'method': 'IQR',
+                                        'values': [safe_float(x) for x in outliers.tolist()[:10] if safe_float(x) is not None]
+                                    }
+                        
+                        # Correlation analysis for sequence features
+                        if len(numeric_cols) > 1:
+                            try:
+                                corr_matrix = numeric_df[numeric_cols].corr()
+                                
+                                # Find high correlations
+                                high_correlations = []
+                                feature_relationships = {}
+                                
+                                for i, col1 in enumerate(numeric_cols):
+                                    relationships = {
+                                        'strongest_positive': None,
+                                        'strongest_negative': None,
+                                        'average_correlation': 0
+                                    }
+                                    
+                                    correlations = []
+                                    for j, col2 in enumerate(numeric_cols):
+                                        if i != j:
+                                            corr_val = corr_matrix.loc[col1, col2]
+                                            if not pd.isna(corr_val):
+                                                correlations.append(abs(corr_val))
+                                                
+                                                if abs(corr_val) > 0.7:
+                                                    high_correlations.append({
+                                                        'feature1': col1,
+                                                        'feature2': col2,
+                                                        'correlation': safe_float(corr_val)
+                                                    })
+                                                
+                                                if corr_val > 0 and (relationships['strongest_positive'] is None or 
+                                                                   corr_val > relationships['strongest_positive']['correlation']):
+                                                    relationships['strongest_positive'] = {
+                                                        'feature': col2,
+                                                        'correlation': safe_float(corr_val)
+                                                    }
+                                                elif corr_val < 0 and (relationships['strongest_negative'] is None or 
+                                                                     corr_val < relationships['strongest_negative']['correlation']):
+                                                    relationships['strongest_negative'] = {
+                                                        'feature': col2,
+                                                        'correlation': safe_float(corr_val)
+                                                    }
+                                    
+                                    if correlations:
+                                        avg_corr = safe_float(np.mean(correlations))
+                                        if avg_corr is not None:
+                                            relationships['average_correlation'] = avg_corr
+                                    feature_relationships[col1] = relationships
+                                
+                                # Remove duplicate high correlations
+                                seen_pairs = set()
+                                unique_high_correlations = []
+                                for item in high_correlations:
+                                    pair = tuple(sorted([item['feature1'], item['feature2']]))
+                                    if pair not in seen_pairs:
+                                        seen_pairs.add(pair)
+                                        unique_high_correlations.append(item)
+                                
+                                correlation_analysis = {
+                                    'high_correlations': unique_high_correlations,
+                                    'matrix_summary': {
+                                        'high_correlations': len(unique_high_correlations),
+                                        'moderate_correlations': len([c for c in high_correlations if 0.3 < abs(c['correlation']) < 0.7]),
+                                        'low_correlations': len([c for c in high_correlations if abs(c['correlation']) < 0.3])
+                                    },
+                                    'feature_relationships': feature_relationships
+                                }
+                            except Exception as e:
+                                logger.warning(f"Correlation analysis failed for biological data: {e}")
+                
+                # Clean up temp file
+                Path(temp_csv.name).unlink(missing_ok=True)
+                
+            except Exception as e:
+                logger.warning(f"Enhanced analysis failed for biological data: {e}")
+                # Clean up temp file
+                Path(temp_csv.name).unlink(missing_ok=True)
+            
             return DatasetAnalysisResponse(
                 dataset_id=dataset_id,
                 dataset_type=dataset.dataset_type,
                 basic_stats=report.get('basic_stats', {}),
                 quality_analysis=report.get('quality_analysis'),
                 missing_data=report.get('missing_data'),
-                recommendations=report.get('recommendations', [])
+                recommendations=report.get('recommendations', []),
+                detailed_stats=detailed_stats if 'detailed_stats' in locals() else None,
+                correlation_analysis=correlation_analysis if 'correlation_analysis' in locals() else None,
+                distribution_analysis=distribution_analysis if 'distribution_analysis' in locals() else None,
+                outlier_analysis=outlier_analysis if 'outlier_analysis' in locals() else None
             )
         else:
             # General dataset analysis
-            import pandas as pd
+            try:
+                from scipy import stats
+                has_scipy = True
+            except ImportError:
+                has_scipy = False
+                logger.warning("scipy not available, skipping advanced distribution analysis")
             
             # Detect delimiter
             with open(file_path, 'r') as f:
@@ -598,7 +784,7 @@ async def analyze_dataset(
             
             df = pd.read_csv(file_path, delimiter=delimiter, nrows=10000)
             
-            # Calculate statistics
+            # Calculate basic statistics
             basic_stats = {
                 'total_rows': len(df),
                 'total_columns': len(df.columns),
@@ -610,31 +796,212 @@ async def analyze_dataset(
             
             # Missing data analysis
             missing_info = {}
+            non_null_counts = {}
+            unique_counts = {}
+            data_types = {}
+            
             for col in df.columns:
                 null_count = df[col].isnull().sum()
+                non_null_counts[col] = int(len(df) - null_count)
+                unique_counts[col] = int(df[col].nunique())
+                data_types[col] = str(df[col].dtype)
+                
                 if null_count > 0:
                     missing_info[col] = {
                         'count': int(null_count),
                         'percentage': float((null_count / len(df)) * 100)
                     }
             
-            # Recommendations
+            # Column information
+            column_info = {
+                'missing_values': missing_info,
+                'non_null_counts': non_null_counts,
+                'unique_counts': unique_counts,
+                'data_types': data_types
+            }
+            
+            # Detailed statistical analysis
+            numeric_cols = df.select_dtypes(include=[np.number]).columns
+            detailed_stats = {}
+            distribution_analysis = {}
+            
+            if len(numeric_cols) > 0:
+                # Helper function to handle NaN values
+                def safe_float(value):
+                    if pd.isna(value) or np.isinf(value):
+                        return None
+                    return float(value)
+                
+                desc_stats = df[numeric_cols].describe()
+                for col in numeric_cols:
+                    col_data = df[col].dropna()
+                    if len(col_data) > 0:
+                        detailed_stats[col] = {
+                            'mean': safe_float(col_data.mean()),
+                            'std': safe_float(col_data.std()),
+                            'min': safe_float(col_data.min()),
+                            'max': safe_float(col_data.max()),
+                            '25%': safe_float(col_data.quantile(0.25)),
+                            '50%': safe_float(col_data.quantile(0.5)),
+                            '75%': safe_float(col_data.quantile(0.75))
+                        }
+                        
+                        # Distribution analysis
+                        if len(col_data) > 10 and has_scipy:
+                            try:
+                                skewness = safe_float(stats.skew(col_data))
+                                kurtosis_val = safe_float(stats.kurtosis(col_data))
+                                
+                                if skewness is not None and kurtosis_val is not None:
+                                    # Simple distribution type detection
+                                    dist_type = "Normal"
+                                    if abs(skewness) > 1:
+                                        dist_type = "Right-skewed" if skewness > 0 else "Left-skewed"
+                                    elif abs(kurtosis_val) > 3:
+                                        dist_type = "Heavy-tailed" if kurtosis_val > 0 else "Light-tailed"
+                                    
+                                    distribution_analysis[col] = {
+                                        'skewness': skewness,
+                                        'kurtosis': kurtosis_val,
+                                        'distribution_type': dist_type
+                                    }
+                            except:
+                                pass
+            
+            # Outlier analysis using IQR method
+            outlier_analysis = {}
+            for col in numeric_cols:
+                col_data = df[col].dropna()
+                if len(col_data) > 10:
+                    Q1 = col_data.quantile(0.25)
+                    Q3 = col_data.quantile(0.75)
+                    IQR = Q3 - Q1
+                    lower_bound = Q1 - 1.5 * IQR
+                    upper_bound = Q3 + 1.5 * IQR
+                    
+                    outliers = col_data[(col_data < lower_bound) | (col_data > upper_bound)]
+                    outlier_analysis[col] = {
+                        'count': len(outliers),
+                        'percentage': safe_float((len(outliers) / len(col_data)) * 100),
+                        'method': 'IQR',
+                        'values': [safe_float(x) for x in outliers.tolist()[:10] if safe_float(x) is not None]
+                    }
+            
+            # Correlation analysis
+            correlation_analysis = {}
+            if len(numeric_cols) > 1:
+                try:
+                    corr_matrix = df[numeric_cols].corr()
+                    
+                    # Find high correlations
+                    high_correlations = []
+                    feature_relationships = {}
+                    
+                    for i, col1 in enumerate(numeric_cols):
+                        relationships = {
+                            'strongest_positive': None,
+                            'strongest_negative': None,
+                            'average_correlation': 0
+                        }
+                        
+                        correlations = []
+                        for j, col2 in enumerate(numeric_cols):
+                            if i != j:
+                                corr_val = corr_matrix.loc[col1, col2]
+                                if not pd.isna(corr_val):
+                                    correlations.append(abs(corr_val))
+                                    
+                                    # Check for high correlation
+                                    if abs(corr_val) > 0.7:
+                                        high_correlations.append({
+                                            'feature1': col1,
+                                            'feature2': col2,
+                                            'correlation': safe_float(corr_val)
+                                        })
+                                    
+                                    # Track strongest relationships
+                                    if corr_val > 0 and (relationships['strongest_positive'] is None or 
+                                                       corr_val > relationships['strongest_positive']['correlation']):
+                                        relationships['strongest_positive'] = {
+                                            'feature': col2,
+                                            'correlation': safe_float(corr_val)
+                                        }
+                                    elif corr_val < 0 and (relationships['strongest_negative'] is None or 
+                                                         corr_val < relationships['strongest_negative']['correlation']):
+                                        relationships['strongest_negative'] = {
+                                            'feature': col2,
+                                            'correlation': safe_float(corr_val)
+                                        }
+                        
+                        if correlations:
+                            avg_corr = safe_float(np.mean(correlations))
+                            if avg_corr is not None:
+                                relationships['average_correlation'] = avg_corr
+                        feature_relationships[col1] = relationships
+                    
+                    # Remove duplicate high correlations
+                    seen_pairs = set()
+                    unique_high_correlations = []
+                    for item in high_correlations:
+                        pair = tuple(sorted([item['feature1'], item['feature2']]))
+                        if pair not in seen_pairs:
+                            seen_pairs.add(pair)
+                            unique_high_correlations.append(item)
+                    
+                    # Matrix summary
+                    matrix_summary = {
+                        'high_correlations': len(unique_high_correlations),
+                        'moderate_correlations': len([c for c in high_correlations if 0.3 < abs(c['correlation']) < 0.7]),
+                        'low_correlations': len([c for c in high_correlations if abs(c['correlation']) < 0.3])
+                    }
+                    
+                    correlation_analysis = {
+                        'high_correlations': unique_high_correlations,
+                        'matrix_summary': matrix_summary,
+                        'feature_relationships': feature_relationships
+                    }
+                except Exception as e:
+                    logger.warning(f"Correlation analysis failed: {e}")
+            
+            # Enhanced recommendations
             recommendations = []
             if missing_info:
-                recommendations.append(f"Dataset has missing values in {len(missing_info)} columns")
-            if len(df.columns) > 100:
-                recommendations.append("High dimensionality detected - consider feature selection")
+                total_missing_pct = sum(info['percentage'] for info in missing_info.values()) / len(missing_info)
+                if total_missing_pct > 20:
+                    recommendations.append("High percentage of missing data detected - consider imputation or removal")
+                elif total_missing_pct > 5:
+                    recommendations.append("Some missing data present - review data collection process")
+                else:
+                    recommendations.append("Missing data is minimal and manageable")
             
-            # Statistical summary for numeric columns
-            numeric_cols = df.select_dtypes(include=[np.number]).columns
-            if len(numeric_cols) > 0:
-                basic_stats['numeric_summary'] = df[numeric_cols].describe().to_dict()
+            if len(df.columns) > 100:
+                recommendations.append("High dimensionality detected - consider feature selection or dimensionality reduction")
+            elif len(df.columns) > 50:
+                recommendations.append("Moderate number of features - feature selection may improve model performance")
+            
+            if len(numeric_cols) == 0:
+                recommendations.append("No numeric columns detected - consider feature encoding for categorical variables")
+            
+            # Check for outliers
+            outlier_cols = [col for col, analysis in outlier_analysis.items() if analysis.get('percentage') and analysis['percentage'] > 5]
+            if outlier_cols:
+                recommendations.append(f"Significant outliers detected in {len(outlier_cols)} columns - consider outlier treatment")
+            
+            # Dataset size recommendations
+            if len(df) < 1000:
+                recommendations.append("Small dataset size - consider data augmentation or collecting more samples")
+            elif len(df) > 100000:
+                recommendations.append("Large dataset - consider sampling for faster prototyping")
             
             return DatasetAnalysisResponse(
                 dataset_id=dataset_id,
                 dataset_type=dataset.dataset_type,
                 basic_stats=basic_stats,
-                column_info={'missing_values': missing_info},
+                column_info=column_info,
+                detailed_stats=detailed_stats,
+                correlation_analysis=correlation_analysis,
+                distribution_analysis=distribution_analysis,
+                outlier_analysis=outlier_analysis,
                 recommendations=recommendations
             )
             

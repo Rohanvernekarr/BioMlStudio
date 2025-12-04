@@ -28,9 +28,11 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  height: 100%;
 }
 
 body {
+  min-height: 100vh;
   background: linear-gradient(180deg, #000000 0%, #0a0a0a 50%, #000000 100%);
   color: hsl(var(--foreground));
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -39,6 +41,8 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Smooth scrolling */
@@ -62,4 +66,206 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--muted));
+}
+
+/* Centered layout utilities */
+.page-container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .page-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Centered content wrapper */
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 64px);
+  width: 100%;
+}
+
+/* Centered card container */
+.centered-card {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.centered-card-lg {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.centered-card-xl {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Page section spacing */
+.page-section {
+  width: 100%;
+  padding: 2rem 0;
+}
+
+@media (min-width: 640px) {
+  .page-section {
+    padding: 3rem 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-section {
+    padding: 4rem 0;
+  }
+}
+
+/* Text centering utilities */
+.text-center-wrapper {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Flex centering utilities */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-center-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Spacing utilities for consistent component spacing */
+.component-spacing {
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 640px) {
+  .component-spacing {
+    margin-bottom: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .component-spacing {
+    margin-bottom: 3rem;
+  }
+}
+
+.section-spacing {
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 640px) {
+  .section-spacing {
+    margin-bottom: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-spacing {
+    margin-bottom: 5rem;
+  }
+}
+
+.card-spacing {
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .card-spacing {
+    margin-bottom: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .card-spacing {
+    margin-bottom: 2.5rem;
+  }
+}
+
+/* Improved gap utilities */
+.gap-section {
+  gap: 2rem;
+}
+
+@media (min-width: 640px) {
+  .gap-section {
+    gap: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .gap-section {
+    gap: 3rem;
+  }
+}
+
+.gap-component {
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .gap-component {
+    gap: 2rem;
+  }
+}
+
+/* Padding utilities */
+.padding-section {
+  padding: 2rem 0;
+}
+
+@media (min-width: 640px) {
+  .padding-section {
+    padding: 3rem 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .padding-section {
+    padding: 4rem 0;
+  }
+}
+
+.padding-component {
+  padding: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .padding-component {
+    padding: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .padding-component {
+    padding: 2.5rem;
+  }
 }

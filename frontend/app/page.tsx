@@ -70,24 +70,23 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="min-h-[calc(100vh-64px)] bg-gradient-to-b from-black via-zinc-950/80 to-black flex items-center justify-center">
-        <div className="w-full max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center mb-12">
+      <div className="min-h-[calc(100vh-64px)] bg-gradient-to-b from-black via-zinc-950/80 to-black flex-center-col">
+        <div className="page-container w-full padding-section">
+          <div className="text-center-wrapper section-spacing">
             <div className="mb-8">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 tracking-tight bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 tracking-tight bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">
                 BioMLStudio
               </h1>
-
             </div>
-            <p className="text-lg sm:text-xl text-zinc-300 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl text-zinc-300 leading-relaxed max-w-3xl">
               Upload your dataset and get a trained ML model with comprehensive reports -
               <span className="text-white font-medium"> no coding required</span>.
             </p>
           </div>
 
-          <Card className="max-w-3xl  mx-auto overflow-hidden">
+          <Card className="centered-card-xl overflow-hidden">
             <div
-              className={`relative border-2 border-dashed rounded-2xl p-8 sm:p-12 lg:p-16 text-center transition-all duration-300 group ${
+              className={`relative border-2 border-dashed rounded-2xl p-10 sm:p-14 lg:p-20 text-center transition-all duration-300 group ${
                 file 
                   ? 'border-emerald-400/60 bg-emerald-500/5 shadow-2xl' 
                   : 'border-zinc-600/40 hover:border-zinc-400/60 hover:bg-zinc-800/20 hover:shadow-xl cursor-pointer'
@@ -118,10 +117,8 @@ export default function Home() {
                   
                   <div className="mb-8">
                     <label className="cursor-pointer inline-block group/btn">
-                      <span className="inline-flex items-center gap-3  px-8 py-4 bg-gradient-to-r from-white to-zinc-100 text-black font-bold rounded-xl hover:from-zinc-50 hover:to-white active:scale-[0.98] transition-all duration-200 shadow-2xl hover:shadow-3xl text-base group-hover/btn:shadow-white/10">
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <span className="inline-flex items-center gap-3 px-10 py-4.5 bg-gradient-to-r from-white to-zinc-100 text-black font-bold rounded-xl hover:from-zinc-50 hover:to-white active:scale-[0.98] transition-all duration-200 shadow-2xl hover:shadow-3xl text-base group-hover/btn:shadow-white/10">
                           <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
-                        </svg>
                         Browse Files
                       </span>
                       <input
@@ -133,8 +130,7 @@ export default function Home() {
                     </label>
                   </div>
                   
-                  {/* File Types */}
-                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm">
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm ">
                     <div className="flex items-center gap-2 px-4 py-2 text-blue-300 rounded-lg border border-blue-500/20">
                       <span className="font-medium">CSV Files</span>
                     </div>
@@ -145,14 +141,10 @@ export default function Home() {
                 </div>
               ) : (
                 <div className="relative z-10">
-                  {/* Success Icon */}
-                  <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-emerald-500/20 to-emerald-600/20 rounded-2xl flex items-center justify-center border border-emerald-500/30">
-                    <svg className="w-10 h-10 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-20 h-20 mx-auto mb-6 rounded-2xl flex items-center justify-center ">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                    </svg>
                   </div>
                   
-                  {/* File Details */}
                   <div className="mb-6">
                     <h3 className="text-2xl font-bold text-white mb-2">File Ready</h3>
                     <p className="text-xl text-emerald-300 font-semibold mb-3">{file.name}</p>
@@ -173,11 +165,9 @@ export default function Home() {
                   {/* Remove Button */}
                   <button
                     onClick={() => setFile(null)}
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-red-500/10 hover:bg-red-500/20 text-red-400 hover:text-red-300 rounded-lg border border-red-500/30 hover:border-red-500/50 transition-all duration-200 font-medium"
+                    className="inline-flex items-center gap-2 px-7 py-3.5 bg-red-500/10 hover:bg-red-500/20 text-red-400 hover:text-red-300 rounded-lg border border-red-500/30 hover:border-red-500/50 transition-all duration-200 font-medium"
                   >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1-1H8a1 1 0 00-1 1v3M4 7h16" />
-                    </svg>
                     Remove File
                   </button>
                 </div>
@@ -185,7 +175,7 @@ export default function Home() {
             </div>
 
             {error && (
-              <div className="mt-8 p-6 bg-gradient-to-r from-red-950/50 to-red-900/50 border border-red-500/30 rounded-xl">
+              <div className="component-spacing p-7 sm:p-8 bg-gradient-to-r from-red-950/50 to-red-900/50 border border-red-500/30 rounded-xl">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0">
                     <svg className="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -198,8 +188,8 @@ export default function Home() {
             )}
 
             {uploadedDatasetId && (
-              <div className="mt-8 p-6 sm:p-8 bg-gradient-to-r from-green-950/40 to-emerald-950/40 border border-green-800/60 rounded-2xl shadow-xl">
-                <p className="text-green-300 font-bold mb-4 text-xl flex items-center gap-2">
+              <div className="component-spacing p-7 sm:p-9 lg:p-10 bg-gradient-to-r from-green-950/40 to-emerald-950/40 border border-green-800/60 rounded-2xl shadow-xl">
+                <p className="text-green-300 font-bold mb-5 text-xl flex items-center gap-2">
                   ✓ Upload successful!
                 </p>
                 <p className="text-base text-zinc-300 mb-6 leading-relaxed">
@@ -212,21 +202,21 @@ export default function Home() {
                     size="lg"
                     className="flex-1"
                   >
-                    📊 Analyze Dataset
+                    Analyze Dataset
                   </Button>
                   <Button
                     onClick={() => router.push(`/configure/${uploadedDatasetId}`)}
                     size="lg"
                     className="flex-1"
                   >
-                    🚀 Start Training
+                    Start Training
                   </Button>
                 </div>
               </div>
             )}
             
             {!uploadedDatasetId && (
-              <div className="mt-8 flex justify-center">
+              <div className="component-spacing flex justify-center">
                 <Button
                   onClick={handleUpload}
                   disabled={!file || uploading}
@@ -235,17 +225,14 @@ export default function Home() {
                 >
                   {uploading ? (
                     <>
-                      <svg className="w-5 h-5 mr-2 animate-spin" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
+                      
                       Uploading...
                     </>
                   ) : (
                     <>
-                      <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 12l2 2 4-4" />
-                      </svg>
                       Upload Dataset
                     </>
                   )}
