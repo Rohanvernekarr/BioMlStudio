@@ -205,6 +205,7 @@ export default function AutoML() {
                         <div className="text-zinc-400">Loading columns...</div>
                       ) : (
                         <select
+                          title='DS'
                           value={config.target_column}
                           onChange={(e) => setConfig({...config, target_column: e.target.value})}
                           className="w-full p-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white"
@@ -220,6 +221,7 @@ export default function AutoML() {
                     <div>
                       <label className="block text-white font-medium mb-2">Task Type</label>
                       <select
+                      title='DS'
                         value={config.task_type}
                         onChange={(e) => setConfig({...config, task_type: e.target.value})}
                         className="w-full p-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white"
@@ -233,6 +235,7 @@ export default function AutoML() {
                       <div>
                         <label className="block text-white font-medium mb-2">Test Size</label>
                         <input
+                        title='DS'
                           type="range"
                           min="0.1"
                           max="0.4"
@@ -249,6 +252,7 @@ export default function AutoML() {
                       <div>
                         <label className="block text-white font-medium mb-2">Validation Size</label>
                         <input
+                        title='DS'
                           type="range"
                           min="0.05"
                           max="0.2"

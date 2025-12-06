@@ -163,7 +163,7 @@ export default function ResultsPage() {
 
           {/* Model comparison */}
           {results.models_trained && results.models_trained.length > 0 && (
-            <Card className="p-7 sm:p-8 lg:p-9 border-zinc-800/70 bg-zinc-950/70 card-spacing">
+            <Card className="p-7 sm:p-8 lg:p-9 border-zinc-800/70  card-spacing">
               <div className="space-y-6">
               <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between ">
                 <div>

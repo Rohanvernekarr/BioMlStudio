@@ -167,6 +167,7 @@ export default function Upload() {
                         Supports CSV, FASTA, Excel, and Image files (Max 100MB)
                       </p>
                       <input
+                      title='DS'
                         ref={fileInputRef}
                         type="file"
                         onChange={handleFileChange}

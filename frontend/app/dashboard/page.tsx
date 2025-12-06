@@ -213,16 +213,17 @@ export default function Dashboard() {
                 </Card>
 
                 {/* Module 7: Dataset Analysis Module */}
-                <Card className="p-6 hover:bg-zinc-800/40 transition-all cursor-pointer group border-zinc-700/50 hover:border-zinc-600/70"
-                      onClick={() => router.push('/datasets')}>
-                  <div className="mb-4 group-hover:scale-110 transition-transform">
-                    <BarChart3 className="w-10 h-10 text-cyan-400" />
-                  </div>
-                  <h3 className="text-white text-lg font-bold mb-3">Dataset Analysis</h3>
-                  <p className="text-zinc-400 text-sm leading-relaxed">
-                    Quality metrics, sequence statistics, and comprehensive data visualizations
-                  </p>
-                </Card>
+                <div onClick={() => router.push('/datasets')} className="cursor-pointer">
+                  <Card className="p-6 hover:bg-zinc-800/40 transition-all group border-zinc-700/50 hover:border-zinc-600/70">
+                    <div className="mb-4 group-hover:scale-110 transition-transform">
+                      <BarChart3 className="w-10 h-10 text-cyan-400" />
+                    </div>
+                    <h3 className="text-white text-lg font-bold mb-3">Dataset Analysis</h3>
+                    <p className="text-zinc-400 text-sm leading-relaxed">
+                      Quality metrics, sequence statistics, and comprehensive data visualizations
+                    </p>
+                  </Card>
+                </div>
 
                 {/* Module 8: Test Cases & Reports */}
                 <Card className="p-6 hover:bg-zinc-800/40 transition-all cursor-pointer group border-zinc-700/50 hover:border-zinc-600/70"

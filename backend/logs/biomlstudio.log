@@ -2803,3 +2803,15 @@ job_type
 {"timestamp": "2025-12-07 02:50:59", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/workflow/77/results"}
 {"timestamp": "2025-12-07 02:51:00", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/workflow/77/results - 200 - 0.9957s"}
 {"timestamp": "2025-12-07 02:51:00", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:49720 - "GET /api/v1/workflow/77/results HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 02:54:27", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/api/v1/datasets/"}
+{"timestamp": "2025-12-07 02:54:27", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/api/v1/datasets/"}
+{"timestamp": "2025-12-07 02:54:27", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/api/v1/datasets/ - 200 - 0.0021s"}
+{"timestamp": "2025-12-07 02:54:27", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:55477 - "OPTIONS /api/v1/api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 02:54:27", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/api/v1/datasets/ - 200 - 0.0025s"}
+{"timestamp": "2025-12-07 02:54:27", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:57297 - "OPTIONS /api/v1/api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 02:54:27", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/api/v1/datasets/"}
+{"timestamp": "2025-12-07 02:54:27", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/api/v1/datasets/ - 404 - 0.0010s"}
+{"timestamp": "2025-12-07 02:54:27", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:55477 - "GET /api/v1/api/v1/datasets/ HTTP/1.1" 404"}
+{"timestamp": "2025-12-07 02:54:27", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/api/v1/datasets/"}
+{"timestamp": "2025-12-07 02:54:27", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/api/v1/datasets/ - 404 - 0.0025s"}
+{"timestamp": "2025-12-07 02:54:27", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:57297 - "GET /api/v1/api/v1/datasets/ HTTP/1.1" 404"}
