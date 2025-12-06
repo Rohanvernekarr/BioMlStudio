@@ -9,6 +9,7 @@ import { Header } from '@/components/Header';
 import { api } from '@/lib/api';
 import { useAuth } from '@/lib/useAuth';
 import { Dataset, DatasetPreview } from '@/types/api';
+import { X } from 'lucide-react';
 
 export default function ConfigurePage() {
   useAuth();
@@ -104,7 +105,7 @@ export default function ConfigurePage() {
         <Header />
         <div className="min-h-[calc(100vh-64px)] bg-gradient-to-b from-black via-zinc-950/90 to-black flex-center-col px-4">
           <Card className="centered-card text-center">
-            <div className="text-red-400 text-5xl mb-4">❌</div>
+            <X className="w-16 h-16 text-red-400 mx-auto mb-4" />
             <h2 className="text-xl font-bold text-white mb-2">Dataset Not Found</h2>
             <p className="text-red-400 mb-6">{error || 'The requested dataset could not be loaded.'}</p>
             <Button onClick={() => router.push('/')} variant="outline">
@@ -126,12 +127,12 @@ export default function ConfigurePage() {
             <p className="text-zinc-400 text-lg lg:text-xl max-w-3xl leading-relaxed">Set up your machine learning pipeline with custom parameters and optimization settings</p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-section">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-section section-spacing">
             {/* Dataset Overview */}
             <div>
               <Card>
                 <h2 className="text-2xl font-bold mb-7 text-white">Dataset Overview</h2>
-              <div className="space-y-4 mb-8">
+              <div className="space-y-4 mb-8 mt-4">
                 <div className="flex justify-between items-center py-2 border-b border-zinc-800">
                   <span className="text-zinc-400">Dataset Name</span>
                   <span className="font-medium">{dataset.name}</span>

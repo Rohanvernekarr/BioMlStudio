@@ -7,6 +7,7 @@ import { Card } from '@/components/ui/Card';
 import { Header } from '@/components/Header';
 import { api } from '@/lib/api';
 import { useAuth } from '@/lib/useAuth';
+import { Lightbulb, Search, Dna, Microscope, FlaskConical, Rocket, RotateCcw, Folder, CheckCircle2, AlertTriangle, X, Circle } from 'lucide-react';
 
 interface AnalysisData {
   dataset_id: number;
@@ -746,7 +747,7 @@ export default function AnalysisPage() {
           </div>
 
           {/* Tabs */}
-          <div className="flex gap-2 mb-8 border-b border-zinc-800 overflow-x-auto">
+          <div className="flex gap-2 card-spacing border-b border-zinc-800 overflow-x-auto">
             <button
               className={`pb-3 px-4 font-medium transition-colors whitespace-nowrap ${
                 activeTab === 'overview'
@@ -803,7 +804,7 @@ export default function AnalysisPage() {
           {activeTab === 'overview' && (
             <div className="gap-section flex flex-col">
               {/* Dataset Health Dashboard */}
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 card-spacing">
                 {/* Health Score */}
                 <Card className="p-6 bg-gradient-to-br from-blue-900/20 to-blue-800/20 border-blue-800/30">
                   <div className="flex items-center justify-between">
@@ -893,9 +894,9 @@ export default function AnalysisPage() {
               {renderBasicStats()}
 
               {/* Quick Insights */}
-              <Card className="p-6 bg-zinc-900/50 border-zinc-700">
+              <Card className="p-6 bg-zinc-900/50 border-zinc-700 card-spacing">
                 <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                  <span className="text-blue-400">💡</span>
+                  <Lightbulb className="w-5 h-5 text-blue-400" />
                   Quick Insights
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -925,8 +926,8 @@ export default function AnalysisPage() {
                         {(() => {
                           const totalMissing = Object.values(analysis.column_info.missing_values).reduce((sum: number, info: any) => sum + info.count, 0);
                           if (totalMissing === 0) return '✅ No missing values detected';
-                          if (totalMissing < 50) return '⚠️ Minor missing values - Easy to handle';
-                          return '❌ Significant missing values - Requires preprocessing';
+                          if (totalMissing < 50) return 'Minor missing values - Easy to handle';
+                          return 'Significant missing values - Requires preprocessing';
                         })()}
                       </div>
                     </div>
@@ -935,9 +936,9 @@ export default function AnalysisPage() {
                     <div className="p-3 bg-zinc-800 rounded-lg">
                       <div className="text-sm text-zinc-400 mb-1">Sequence Complexity</div>
                       <div className="font-medium">
-                        {analysis.basic_stats.avg_sequence_length < 100 ? '🧬 Short sequences - Good for pattern analysis' :
-                         analysis.basic_stats.avg_sequence_length < 1000 ? '🔬 Medium sequences - Balanced complexity' :
-                         '🧪 Long sequences - High complexity analysis'}
+                        {analysis.basic_stats.avg_sequence_length < 100 ? 'Short sequences - Good for pattern analysis' :
+                         analysis.basic_stats.avg_sequence_length < 1000 ? 'Medium sequences - Balanced complexity' :
+                         'Long sequences - High complexity analysis'}
                       </div>
                     </div>
                   )}
@@ -984,7 +985,10 @@ export default function AnalysisPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
               {/* Key Findings */}
               <div>
-                <h4 className="text-lg font-semibold mb-4 text-blue-400">🔍 Key Findings</h4>
+                <h4 className="text-lg font-semibold mb-4 text-blue-400 flex items-center gap-2">
+                  <Search className="w-5 h-5" />
+                  Key Findings
+                </h4>
                 <div className="space-y-3">
                   <div className="flex items-start gap-3">
                     <span className="text-green-400 mt-1">✓</span>
@@ -1032,7 +1036,10 @@ export default function AnalysisPage() {
 
               {/* Recommendations */}
               <div>
-                <h4 className="text-lg font-semibold mb-4 text-green-400">💡 Recommendations</h4>
+                <h4 className="text-lg font-semibold mb-4 text-green-400 flex items-center gap-2">
+                  <Lightbulb className="w-5 h-5" />
+                  Recommendations
+                </h4>
                 <div className="space-y-3">
                   {analysis?.recommendations?.slice(0, 3).map((rec, idx) => (
                     <div key={idx} className="flex items-start gap-3">
@@ -1049,7 +1056,7 @@ export default function AnalysisPage() {
             </div>
 
             {/* Readiness Assessment */}
-            <div className="text-center p-6 bg-zinc-800 rounded-lg mb-6">
+            <div className="text-center p-6 bg-zinc-800 rounded-lg mb-6 mt-6">
               <h4 className="text-lg font-semibold mb-3">ML Readiness Assessment</h4>
               <div className="text-3xl font-bold mb-2">
                 {(() => {
@@ -1067,11 +1074,11 @@ export default function AnalysisPage() {
                   }
 
                   if (issues.length === 0) {
-                    return <span className="text-green-400">🟢 Ready</span>;
+                    return <span className="text-green-400 flex items-center gap-2"><CheckCircle2 className="w-5 h-5" /> Ready</span>;
                   } else if (issues.length <= 1) {
-                    return <span className="text-yellow-400">🟡 Minor Issues</span>;
+                    return <span className="text-yellow-400 flex items-center gap-2"><AlertTriangle className="w-5 h-5" /> Minor Issues</span>;
                   } else {
-                    return <span className="text-red-400">🔴 Needs Work</span>;
+                    return <span className="text-red-400 flex items-center gap-2"><X className="w-5 h-5" /> Needs Work</span>;
                   }
                 })()}
               </div>
@@ -1088,14 +1095,17 @@ export default function AnalysisPage() {
 
           {/* Action Buttons */}
           <div className="component-spacing flex flex-col sm:flex-row gap-4 justify-center pt-6">
-            <Button onClick={() => router.push(`/configure/${datasetId}`)} size="lg" className="px-8">
-              🚀 Continue to Model Configuration
+            <Button onClick={() => router.push(`/configure/${datasetId}`)} size="lg" className="px-8 flex items-center gap-2">
+              <Rocket className="w-4 h-4" />
+              Continue to Model Configuration
             </Button>
-            <Button variant="outline" onClick={loadAnalysisData} size="lg" className="px-8">
-              🔄 Refresh Analysis
+            <Button variant="outline" onClick={loadAnalysisData} size="lg" className="px-8 flex items-center gap-2">
+              <RotateCcw className="w-4 h-4" />
+              Refresh Analysis
             </Button>
-            <Button variant="ghost" onClick={() => router.push('/')} size="lg" className="px-8">
-              📁 Back to Datasets
+            <Button variant="ghost" onClick={() => router.push('/')} size="lg" className="px-8 flex items-center gap-2">
+              <Folder className="w-4 h-4" />
+              Back to Datasets
             </Button>
           </div>
         </div>

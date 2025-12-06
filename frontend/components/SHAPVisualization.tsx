@@ -3,6 +3,7 @@
 import React from 'react';
 import { Card } from '@/components/ui/Card';
 import { SHAPExplanation } from '@/types/api';
+import { BarChart3 } from 'lucide-react';
 
 interface SHAPVisualizationProps {
   shapData: SHAPExplanation;
@@ -17,9 +18,9 @@ export default function SHAPVisualization({ shapData, className = '' }: SHAPVisu
   const { plots, summary, explainer_type } = shapData;
 
   return (
-    <div className={`space-y-8 ${className}`}>
+    <div className={`gap-section flex flex-col ${className}`}>
       {/* Header */}
-      <Card>
+      <Card className="card-spacing">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
           <div>
             <h2 className="text-3xl font-bold mb-2">
@@ -44,9 +45,10 @@ export default function SHAPVisualization({ shapData, className = '' }: SHAPVisu
 
       {/* Summary Statistics */}
       {summary && (
-        <Card>
+        <Card className="card-spacing">
           <h3 className="text-2xl font-bold mb-6 text-white flex items-center gap-2">
-            📊 Top Contributing Features
+            <BarChart3 className="w-6 h-6" />
+            Top Contributing Features
           </h3>
           <div className="space-y-4">
             {summary.top_features.slice(0, 10).map((feature, idx) => (
@@ -81,7 +83,7 @@ export default function SHAPVisualization({ shapData, className = '' }: SHAPVisu
 
       {/* SHAP Summary Plot */}
       {plots.summary_plot && (
-        <Card className="p-6">
+        <Card className="p-6 card-spacing">
           <h3 className="text-xl font-bold mb-4 text-zinc-200">Feature Impact Distribution</h3>
           <p className="text-sm text-zinc-400 mb-4">
             Each dot represents a sample. Red indicates high feature values, blue indicates low.
@@ -99,7 +101,7 @@ export default function SHAPVisualization({ shapData, className = '' }: SHAPVisu
 
       {/* SHAP Bar Plot */}
       {plots.bar_plot && (
-        <Card className="p-6">
+        <Card className="p-6 card-spacing">
           <h3 className="text-xl font-bold mb-4 text-zinc-200">Mean Feature Importance</h3>
           <p className="text-sm text-zinc-400 mb-4">
             Average magnitude of SHAP values across all predictions. Higher values indicate
@@ -117,7 +119,7 @@ export default function SHAPVisualization({ shapData, className = '' }: SHAPVisu
 
       {/* Waterfall Plot */}
       {plots.waterfall_plot && (
-        <Card className="p-6">
+        <Card className="p-6 card-spacing">
           <h3 className="text-xl font-bold mb-4 text-zinc-200">Individual Prediction Breakdown</h3>
           <p className="text-sm text-zinc-400 mb-4">
             Shows how each feature pushes the prediction from the base value (expected model output)
@@ -135,7 +137,7 @@ export default function SHAPVisualization({ shapData, className = '' }: SHAPVisu
 
       {/* Force Plot */}
       {plots.force_plot && (
-        <Card className="p-6">
+        <Card className="p-6 card-spacing">
           <h3 className="text-xl font-bold mb-4 text-zinc-200">Force Plot</h3>
           <p className="text-sm text-zinc-400 mb-4">
             Visualizes feature contributions pushing the prediction higher (red) or lower (blue)
@@ -152,7 +154,7 @@ export default function SHAPVisualization({ shapData, className = '' }: SHAPVisu
       )}
 
       {/* Interpretation Guide */}
-      <Card className="p-6 bg-gradient-to-br from-blue-500/5 to-purple-500/5 border-blue-500/20">
+      <Card className="p-6 bg-gradient-to-br from-blue-500/5 to-purple-500/5 border-blue-500/20 card-spacing">
         <h3 className="text-lg font-bold mb-3 text-zinc-200">How to Interpret SHAP Values</h3>
         <ul className="space-y-2 text-sm text-zinc-300">
           <li className="flex gap-2">

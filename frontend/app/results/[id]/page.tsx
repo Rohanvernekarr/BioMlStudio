@@ -10,6 +10,7 @@ import SHAPVisualization from '@/components/SHAPVisualization';
 import { api } from '@/lib/api';
 import { useAuth } from '@/lib/useAuth';
 import { Job, JobResults } from '@/types/api';
+import { Sparkles } from 'lucide-react';
 
 export default function ResultsPage() {
   useAuth();
@@ -87,7 +88,7 @@ export default function ResultsPage() {
     <>
       <Header />
       <div className="min-h-[calc(100vh-64px)] bg-gradient-to-b from-black via-zinc-950/90 to-black">
-        <div className="page-container page-section">
+        <div className="page-container page-section padding-section">
           <div className="gap-section flex flex-col">
             {/* Page Header */}
             <div className="flex flex-col lg:flex-row justify-between items-start gap-6 lg:gap-8 section-spacing">
@@ -294,7 +295,7 @@ export default function ResultsPage() {
           )}
 
           {/* Metrics cards */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 card-spacing">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 card-spacing mt-6">
             {isClassification ? (
               <>
                 <MetricCard
@@ -521,9 +522,10 @@ export default function ResultsPage() {
                 onClick={() => router.push('/')} 
                 variant="outline" 
                 size="lg"
-                className="min-w-[200px]"
+                className="min-w-[200px] flex items-center gap-2"
               >
-                🆕 Run New Analysis
+                <Sparkles className="w-4 h-4" />
+                Run New Analysis
               </Button>
             </div>
           </div>

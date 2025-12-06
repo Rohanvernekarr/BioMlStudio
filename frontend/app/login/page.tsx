@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
 import { api } from '@/lib/api';
+import { AlertTriangle, Loader2, LogIn, Sparkles } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -53,8 +54,8 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <Card className="!p-10 lg:!p-12">
-          <form onSubmit={handleSubmit} className="space-y-6">
+        <Card className="!p-10 lg:!p-12 card-spacing">
+          <form onSubmit={handleSubmit} className="gap-component flex flex-col">
             {!isLogin && (
               <Input
                 label="Full Name"
@@ -85,18 +86,33 @@ export default function LoginPage() {
             />
 
             {error && (
-              <div className="p-6 bg-red-950/40 border border-red-800/60 rounded-xl text-red-300 text-sm font-medium">
-                <span className="inline-block mr-2">⚠️</span>
+              <div className="p-6 bg-red-950/40 border border-red-800/60 rounded-xl text-red-300 text-sm font-medium flex items-center gap-2">
+                <AlertTriangle className="w-5 h-5" />
                 {error}
               </div>
             )}
 
-            <Button type="submit" disabled={loading} className="w-full !py-4 !text-lg font-semibold mt-2" size="lg">
-              {loading ? '⏳ Please wait...' : isLogin ? '🔓 Sign In' : '✨ Create Account'}
+            <Button type="submit" disabled={loading} className="w-full !py-4 !text-lg font-semibold mt-2 flex items-center justify-center gap-2" size="lg">
+              {loading ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Please wait...
+                </>
+              ) : isLogin ? (
+                <>
+                  <LogIn className="w-5 h-5" />
+                  Sign In
+                </>
+              ) : (
+                <>
+                  <Sparkles className="w-5 h-5" />
+                  Create Account
+                </>
+              )}
             </Button>
           </form>
 
-          <div className="mt-8 pt-8 border-t border-zinc-800 text-center">
+          <div className="mt-8 pt-8 border-t border-zinc-800 text-center element-spacing">
             <button
               type="button"
               onClick={() => {

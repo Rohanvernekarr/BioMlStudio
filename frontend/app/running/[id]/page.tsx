@@ -8,6 +8,7 @@ import { ProgressBar } from '@/components/ui/ProgressBar';
 import { api } from '@/lib/api';
 import { useAuth } from '@/lib/useAuth';
 import { Job } from '@/types/api';
+import { X, Clock, Microscope, CheckCircle2, Loader2, Circle } from 'lucide-react';
 
 export default function RunningPage() {
   useAuth();
@@ -68,7 +69,7 @@ export default function RunningPage() {
         <Card className="centered-card-lg !p-12 lg:!p-14">
           <div className="text-center-wrapper">
             <div className="w-24 h-24 mx-auto mb-8 rounded-full bg-red-950/40 border-2 border-red-800/60 flex items-center justify-center shadow-2xl">
-              <span className="text-5xl">✗</span>
+              <X className="w-12 h-12 text-red-400" />
             </div>
             <h1 className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">Analysis Failed</h1>
             <p className="text-zinc-400 mb-8 leading-relaxed">
@@ -92,7 +93,7 @@ export default function RunningPage() {
         <Card className="centered-card-lg !p-12 lg:!p-14">
           <div className="text-center-wrapper">
             <div className="w-24 h-24 mx-auto mb-8 rounded-full bg-zinc-900 border-2 border-zinc-700 flex items-center justify-center shadow-2xl">
-              <span className="text-5xl">⏱️</span>
+              <Clock className="w-12 h-12 text-zinc-400" />
             </div>
             <h1 className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">Taking Longer Than Expected</h1>
             <p className="text-zinc-400 mb-4 leading-relaxed">
@@ -128,7 +129,7 @@ export default function RunningPage() {
         <Card className="!p-12 lg:!p-14">
           <div className="text-center-wrapper section-spacing">
             <div className="w-24 h-24 mx-auto mb-8 rounded-full bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-zinc-700 flex items-center justify-center animate-pulse shadow-2xl">
-              <span className="text-5xl">🔬</span>
+              <Microscope className="w-12 h-12 text-blue-400" />
             </div>
             <h1 className="text-5xl sm:text-6xl font-bold mb-6 tracking-tight bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">Running Analysis</h1>
             <p className="text-zinc-400 mb-3 text-lg">
@@ -143,7 +144,7 @@ export default function RunningPage() {
 
           <ProgressBar value={progress} className="mb-10" />
 
-          <div className="gap-component flex flex-col">{steps.map((step, i) => (
+          <div className="gap-component flex flex-col mt-6">{steps.map((step, i) => (
               <div key={i} className="flex items-center gap-4 p-5 rounded-xl bg-zinc-950/50 border border-zinc-800/50">
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all ${
@@ -152,7 +153,13 @@ export default function RunningPage() {
                       : 'bg-zinc-800 text-zinc-400'
                   }`}
                 >
-                  {step.completed ? '✓' : i === steps.findIndex((s) => !s.completed) ? '⏳' : '○'}
+                  {step.completed ? (
+                    <CheckCircle2 className="w-5 h-5" />
+                  ) : i === steps.findIndex((s) => !s.completed) ? (
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                  ) : (
+                    <Circle className="w-5 h-5" />
+                  )}
                 </div>
                 <span className={`${step.completed ? 'text-white font-medium' : 'text-zinc-400'}`}>
                   {step.label}
