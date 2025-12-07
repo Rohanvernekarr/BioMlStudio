@@ -20,7 +20,8 @@ import {
   ArrowRight,
   FileSpreadsheet,
   Dna,
-  BarChart3
+  BarChart3,
+  Brain
 } from 'lucide-react';
 
 export default function Upload() {
@@ -105,13 +106,46 @@ export default function Upload() {
       
       if (response.id) {
         setUploadedDatasetId(response.id);
-        // Save to localStorage for persistence
-        localStorage.setItem('lastUploadedDataset', JSON.stringify({
+        
+        // Create dataset object for localStorage
+        const datasetInfo = {
           id: response.id,
-          name: file.name,
-          fileType: fileInfo.type,
+          name: response.name || file.name,
+          type: response.dataset_type || datasetType,
           size: file.size,
-          uploadedAt: new Date().toISOString()
+          uploadedAt: new Date().toISOString(),
+          filename: file.name,
+          file_path: response.file_path
+        };
+        
+        // Save to localStorage for persistence
+        localStorage.setItem('lastUploadedDataset', JSON.stringify(datasetInfo));
+        
+        // Update available datasets list in localStorage
+        const savedDatasets = localStorage.getItem('availableDatasets');
+        let datasets = [];
+        if (savedDatasets) {
+          try {
+            datasets = JSON.parse(savedDatasets);
+          } catch (error) {
+            console.error('Error parsing saved datasets:', error);
+          }
+        }
+        
+        // Add new dataset to the list (avoid duplicates)
+        const existingIndex = datasets.findIndex((d: any) => d.id === response.id);
+        if (existingIndex >= 0) {
+          datasets[existingIndex] = datasetInfo;
+        } else {
+          datasets.unshift(datasetInfo); // Add to beginning of list
+        }
+        
+        localStorage.setItem('availableDatasets', JSON.stringify(datasets));
+        
+        // Trigger a storage event to notify other tabs/pages
+        window.dispatchEvent(new StorageEvent('storage', {
+          key: 'availableDatasets',
+          newValue: JSON.stringify(datasets)
         }));
       }
     } catch (err) {
@@ -264,24 +298,37 @@ export default function Upload() {
                   {uploadedDatasetId && (
                     <>
                       <Separator />
-                      <Button 
-                        onClick={startPreprocessing} 
-                        disabled={preprocessing}
-                        className="w-full"
-                      >
-                        {preprocessing ? (
-                          <>
-                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                            Processing...
-                          </>
-                        ) : (
-                          <>
-                            <BarChart3 className="mr-2 h-4 w-4" />
-                            Start Analysis
-                            <ArrowRight className="ml-2 h-4 w-4" />
-                          </>
-                        )}
-                      </Button>
+                      <div className="space-y-2">
+                        <Button 
+                          onClick={() => router.push(`/automl?datasetId=${uploadedDatasetId}`)}
+                          className="w-full"
+                          variant="default"
+                        >
+                          <Brain className="mr-2 h-4 w-4" />
+                          Start AutoML Training
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                        
+                        <Button 
+                          onClick={startPreprocessing} 
+                          disabled={preprocessing}
+                          className="w-full"
+                          variant="outline"
+                        >
+                          {preprocessing ? (
+                            <>
+                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                              Processing...
+                            </>
+                          ) : (
+                            <>
+                              <BarChart3 className="mr-2 h-4 w-4" />
+                              Start Analysis
+                              <ArrowRight className="ml-2 h-4 w-4" />
+                            </>
+                          )}
+                        </Button>
+                      </div>
                     </>
                   )}
                 </div>

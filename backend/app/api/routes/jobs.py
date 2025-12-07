@@ -125,11 +125,11 @@ async def list_jobs(
     else:
         query = query.order_by(desc(getattr(Job, commons.sort_by, Job.created_at)))
     
-    # Get total count
-    total = query.count()
-    
-    # Apply pagination
+    # Apply pagination first for better performance
     jobs = query.offset(commons.skip).limit(commons.limit).all()
+    
+    # Get total count (this is expensive, so we do it after pagination)
+    total = query.count()
     
     return JobListResponse(
         jobs=[JobResponse.from_orm(job) for job in jobs],

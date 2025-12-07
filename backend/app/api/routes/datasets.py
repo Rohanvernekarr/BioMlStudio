@@ -182,11 +182,11 @@ async def list_datasets(
     else:
         query = query.order_by(desc(getattr(Dataset, commons.sort_by, Dataset.created_at)))
     
-    # Get total count
-    total = query.count()
-    
-    # Apply pagination
+    # Apply pagination first for better performance
     datasets = query.offset(commons.skip).limit(commons.limit).all()
+    
+    # Get total count (this is expensive, so we do it after pagination)
+    total = query.count()
     
     return DatasetListResponse(
         datasets=[DatasetResponse.from_orm(dataset) for dataset in datasets],

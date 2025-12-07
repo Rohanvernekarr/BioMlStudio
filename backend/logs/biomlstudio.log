@@ -39081,3 +39081,815 @@ sqlalchemy.exc.PendingRollbackError: This Session's transaction has been rolled 
 {"timestamp": "2025-12-07 21:46:34", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [33980]"}
 {"timestamp": "2025-12-07 21:46:34", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
 {"timestamp": "2025-12-07 21:46:34", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-07 21:46:36", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-07 21:46:36", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-07 21:46:36", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-12-07 21:46:43", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-12-07 21:46:43", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application shutdown."}
+{"timestamp": "2025-12-07 21:46:43", "name": "app.main", "level": "INFO", "message": "🛑 Shutting down BioMLStudio API..."}
+{"timestamp": "2025-12-07 21:46:43", "name": "uvicorn.error", "level": "INFO", "message": "Application shutdown complete."}
+{"timestamp": "2025-12-07 21:46:43", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [33980]"}
+{"timestamp": "2025-12-07 21:46:53", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [34880]"}
+{"timestamp": "2025-12-07 21:46:53", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-07 21:46:53", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-07 21:46:55", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-07 21:46:55", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-07 21:46:55", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-12-07 21:48:20", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [21968]"}
+{"timestamp": "2025-12-07 21:48:20", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-07 21:48:20", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-07 21:48:22", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-07 21:48:22", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-07 21:48:22", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-12-07 21:49:43", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/139"}
+{"timestamp": "2025-12-07 21:49:43", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/139 - 200 - 0.7179s"}
+{"timestamp": "2025-12-07 21:49:43", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:60028 - "GET /api/v1/datasets/139 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:49:43", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/139"}
+{"timestamp": "2025-12-07 21:49:44", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/139 - 200 - 0.6536s"}
+{"timestamp": "2025-12-07 21:49:44", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64468 - "GET /api/v1/datasets/139 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:49:44", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/139/analyze"}
+{"timestamp": "2025-12-07 21:49:45", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/139/analyze - 200 - 0.7982s"}
+{"timestamp": "2025-12-07 21:49:45", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:60028 - "GET /api/v1/datasets/139/analyze HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:49:45", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/139/analyze"}
+{"timestamp": "2025-12-07 21:49:46", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/139/analyze - 200 - 0.8779s"}
+{"timestamp": "2025-12-07 21:49:46", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64468 - "GET /api/v1/datasets/139/analyze HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:49:46", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/139/visualize"}
+{"timestamp": "2025-12-07 21:49:48", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/139/visualize - 200 - 2.0368s"}
+{"timestamp": "2025-12-07 21:49:48", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:60028 - "GET /api/v1/datasets/139/visualize HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:49:48", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/139/visualize"}
+{"timestamp": "2025-12-07 21:49:50", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/139/visualize - 200 - 1.9456s"}
+{"timestamp": "2025-12-07 21:49:50", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64468 - "GET /api/v1/datasets/139/visualize HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:49:52", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/"}
+{"timestamp": "2025-12-07 21:49:52", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/"}
+{"timestamp": "2025-12-07 21:49:52", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/ - 200 - 0.0045s"}
+{"timestamp": "2025-12-07 21:49:52", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64468 - "OPTIONS /api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:49:52", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/ - 200 - 0.0052s"}
+{"timestamp": "2025-12-07 21:49:52", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:60028 - "OPTIONS /api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:49:52", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 21:49:52", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.4536s"}
+{"timestamp": "2025-12-07 21:49:52", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64468 - "GET /api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:49:52", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 21:49:53", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.8044s"}
+{"timestamp": "2025-12-07 21:49:53", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:60028 - "GET /api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:49:56", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/123/preview"}
+{"timestamp": "2025-12-07 21:49:56", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/123/preview - 200 - 0.0025s"}
+{"timestamp": "2025-12-07 21:49:56", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:60028 - "OPTIONS /api/v1/datasets/123/preview?rows=5 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:49:56", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/123/preview"}
+{"timestamp": "2025-12-07 21:49:56", "name": "app.services.dataset_service", "level": "INFO", "message": "Preview called: file=2_0cad4a6b_seq_001_affected.fasta, dataset_type=dna, suffix=.fasta, absolute_path=D:\Pablo\fullstac\Final project\BioMlStudio\backend\uploads\2\2_0cad4a6b_seq_001_affected.fasta"}
+{"timestamp": "2025-12-07 21:49:56", "name": "app.services.dataset_service", "level": "INFO", "message": "Biological preview: file=2_0cad4a6b_seq_001_affected.fasta, suffix=.fasta"}
+{"timestamp": "2025-12-07 21:49:56", "name": "app.services.dataset_service", "level": "INFO", "message": "Converting FASTA to CSV: D:\Pablo\fullstac\Final project\BioMlStudio\backend\uploads\2\2_0cad4a6b_seq_001_affected.fasta -> C:\Users\rohan\AppData\Local\Temp\tmp2zmrex8c.csv"}
+{"timestamp": "2025-12-07 21:49:56", "name": "app.utils.bioinformatics", "level": "ERROR", "message": "Error converting FASTA to CSV: [Errno 2] No such file or directory: 'D:\\Pablo\\fullstac\\Final project\\BioMlStudio\\backend\\uploads\\2\\2_0cad4a6b_seq_001_affected.fasta'"}
+{"timestamp": "2025-12-07 21:49:56", "name": "app.services.dataset_service", "level": "ERROR", "message": "FASTA conversion failed: [Errno 2] No such file or directory: 'D:\\Pablo\\fullstac\\Final project\\BioMlStudio\\backend\\uploads\\2\\2_0cad4a6b_seq_001_affected.fasta'"}
+{"timestamp": "2025-12-07 21:49:56", "name": "app.api.routes.datasets", "level": "INFO", "message": "Preview for dataset 123: 0 rows, columns: []"}
+{"timestamp": "2025-12-07 21:49:56", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/123/preview - 200 - 0.2548s"}
+{"timestamp": "2025-12-07 21:49:56", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:60028 - "GET /api/v1/datasets/123/preview?rows=5 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:53:31", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 21:53:31", "name": "app.api.deps", "level": "WARNING", "message": "JWT decode error: Signature has expired."}
+{"timestamp": "2025-12-07 21:53:31", "name": "app.api.deps", "level": "ERROR", "message": "Database session error: "}
+{"timestamp": "2025-12-07 21:53:31", "name": "app.main", "level": "WARNING", "message": "HTTP Exception: Could not validate credentials"}
+{"timestamp": "2025-12-07 21:53:31", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 401 - 0.0109s"}
+{"timestamp": "2025-12-07 21:53:31", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:61474 - "GET /api/v1/datasets/ HTTP/1.1" 401"}
+{"timestamp": "2025-12-07 21:53:31", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 21:53:31", "name": "app.api.deps", "level": "WARNING", "message": "JWT decode error: Signature has expired."}
+{"timestamp": "2025-12-07 21:53:31", "name": "app.api.deps", "level": "ERROR", "message": "Database session error: "}
+{"timestamp": "2025-12-07 21:53:31", "name": "app.main", "level": "WARNING", "message": "HTTP Exception: Could not validate credentials"}
+{"timestamp": "2025-12-07 21:53:31", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 401 - 0.0105s"}
+{"timestamp": "2025-12-07 21:53:31", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:61474 - "GET /api/v1/datasets/ HTTP/1.1" 401"}
+{"timestamp": "2025-12-07 21:53:31", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-12-07 21:53:31", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application shutdown."}
+{"timestamp": "2025-12-07 21:53:31", "name": "app.main", "level": "INFO", "message": "🛑 Shutting down BioMLStudio API..."}
+{"timestamp": "2025-12-07 21:53:31", "name": "uvicorn.error", "level": "INFO", "message": "Application shutdown complete."}
+{"timestamp": "2025-12-07 21:53:31", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [21968]"}
+{"timestamp": "2025-12-07 21:53:44", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [30868]"}
+{"timestamp": "2025-12-07 21:53:44", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-07 21:53:44", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-07 21:53:45", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-07 21:53:45", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-07 21:53:45", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-12-07 21:53:49", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/upload"}
+{"timestamp": "2025-12-07 21:53:49", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/upload - 200 - 0.0020s"}
+{"timestamp": "2025-12-07 21:53:49", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64090 - "OPTIONS /api/v1/datasets/upload HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:53:49", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/datasets/upload"}
+{"timestamp": "2025-12-07 21:53:49", "name": "app.api.deps", "level": "WARNING", "message": "JWT decode error: Signature has expired."}
+{"timestamp": "2025-12-07 21:53:49", "name": "app.api.deps", "level": "ERROR", "message": "Database session error: "}
+{"timestamp": "2025-12-07 21:53:49", "name": "app.main", "level": "WARNING", "message": "HTTP Exception: Could not validate credentials"}
+{"timestamp": "2025-12-07 21:53:49", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/datasets/upload - 401 - 0.0834s"}
+{"timestamp": "2025-12-07 21:53:49", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64090 - "POST /api/v1/datasets/upload HTTP/1.1" 401"}
+{"timestamp": "2025-12-07 21:53:58", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/auth/login"}
+{"timestamp": "2025-12-07 21:53:58", "name": "passlib.handlers.bcrypt", "level": "WARNING", "message": "(trapped) error reading bcrypt version"}
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+{"timestamp": "2025-12-07 21:53:59", "name": "app.api.routes.auth", "level": "INFO", "message": "User logged in: rohanrv2004@gmail.com"}
+{"timestamp": "2025-12-07 21:53:59", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/auth/login - 200 - 1.3140s"}
+{"timestamp": "2025-12-07 21:53:59", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59338 - "POST /api/v1/auth/login HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:54:03", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 21:54:03", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.4656s"}
+{"timestamp": "2025-12-07 21:54:03", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59338 - "GET /api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:54:03", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 21:54:04", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.7886s"}
+{"timestamp": "2025-12-07 21:54:04", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59636 - "GET /api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:54:04", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/jobs/"}
+{"timestamp": "2025-12-07 21:54:04", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/jobs/ - 200 - 0.0016s"}
+{"timestamp": "2025-12-07 21:54:04", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59338 - "OPTIONS /api/v1/jobs/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:54:04", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-07 21:54:20", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 15.6079s"}
+{"timestamp": "2025-12-07 21:54:20", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59338 - "GET /api/v1/jobs/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:54:20", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/jobs/"}
+{"timestamp": "2025-12-07 21:54:20", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/datasets/upload"}
+{"timestamp": "2025-12-07 21:54:20", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/jobs/ - 200 - 0.0048s"}
+{"timestamp": "2025-12-07 21:54:20", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59636 - "OPTIONS /api/v1/jobs/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:54:20", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-07 21:54:44", "name": "app.api.routes.datasets", "level": "INFO", "message": "Dataset uploaded: 141 by user 2"}
+{"timestamp": "2025-12-07 21:54:44", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 24.0358s"}
+{"timestamp": "2025-12-07 21:54:44", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/datasets/upload - 200 - 24.3974s"}
+{"timestamp": "2025-12-07 21:54:44", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:54992 - "POST /api/v1/datasets/upload HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:54:44", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-07 21:55:07", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-12-07 21:55:07", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 23.0606s"}
+{"timestamp": "2025-12-07 21:55:07", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-07 21:55:18", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for background tasks to complete. (CTRL+C to force quit)"}
+{"timestamp": "2025-12-07 21:55:18", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 10.2742s"}
+{"timestamp": "2025-12-07 21:55:18", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application shutdown."}
+{"timestamp": "2025-12-07 21:55:18", "name": "app.main", "level": "INFO", "message": "🛑 Shutting down BioMLStudio API..."}
+{"timestamp": "2025-12-07 21:55:18", "name": "uvicorn.error", "level": "INFO", "message": "Application shutdown complete."}
+{"timestamp": "2025-12-07 21:55:18", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [30868]"}
+{"timestamp": "2025-12-07 21:55:33", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [30240]"}
+{"timestamp": "2025-12-07 21:55:33", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-07 21:55:33", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-07 21:55:36", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-07 21:55:36", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-07 21:55:36", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-12-07 21:55:42", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/datasets/upload"}
+{"timestamp": "2025-12-07 21:55:44", "name": "app.api.routes.datasets", "level": "INFO", "message": "Dataset uploaded: 142 by user 2"}
+{"timestamp": "2025-12-07 21:55:44", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/datasets/upload - 200 - 1.7494s"}
+{"timestamp": "2025-12-07 21:55:44", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:51841 - "POST /api/v1/datasets/upload HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:56:36", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/datasets/upload"}
+{"timestamp": "2025-12-07 21:56:37", "name": "app.api.routes.datasets", "level": "INFO", "message": "Dataset uploaded: 143 by user 2"}
+{"timestamp": "2025-12-07 21:56:37", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/datasets/upload - 200 - 1.1990s"}
+{"timestamp": "2025-12-07 21:56:37", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:54206 - "POST /api/v1/datasets/upload HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:56:44", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 21:56:45", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 1.4534s"}
+{"timestamp": "2025-12-07 21:56:45", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:55652 - "GET /api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:56:45", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 21:56:46", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.6074s"}
+{"timestamp": "2025-12-07 21:56:46", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:55652 - "GET /api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:56:46", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/143/preview"}
+{"timestamp": "2025-12-07 21:56:46", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/143/preview - 200 - 0.0030s"}
+{"timestamp": "2025-12-07 21:56:46", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:61029 - "OPTIONS /api/v1/datasets/143/preview?rows=5 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:56:46", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/143/preview"}
+{"timestamp": "2025-12-07 21:56:47", "name": "app.services.dataset_service", "level": "INFO", "message": "Preview called: file=2_5902796c_seq_001_affected.fasta, dataset_type=dna, suffix=.fasta, absolute_path=D:\Pablo\fullstac\Final project\BioMlStudio\backend\uploads\2\2_5902796c_seq_001_affected.fasta"}
+{"timestamp": "2025-12-07 21:56:47", "name": "app.services.dataset_service", "level": "INFO", "message": "Biological preview: file=2_5902796c_seq_001_affected.fasta, suffix=.fasta"}
+{"timestamp": "2025-12-07 21:56:47", "name": "app.services.dataset_service", "level": "INFO", "message": "Converting FASTA to CSV: D:\Pablo\fullstac\Final project\BioMlStudio\backend\uploads\2\2_5902796c_seq_001_affected.fasta -> C:\Users\rohan\AppData\Local\Temp\tmpg4r7_y79.csv"}
+{"timestamp": "2025-12-07 21:56:47", "name": "app.services.dataset_service", "level": "INFO", "message": "Conversion successful: 40 sequences, columns: ['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:56:47", "name": "app.services.dataset_service", "level": "INFO", "message": "DataFrame loaded: shape=(40, 61), columns=['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:56:47", "name": "app.services.dataset_service", "level": "INFO", "message": "After dropping sequence: columns=['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:56:47", "name": "app.services.dataset_service", "level": "INFO", "message": "Preview data created: 5 rows"}
+{"timestamp": "2025-12-07 21:56:47", "name": "app.api.routes.datasets", "level": "INFO", "message": "Preview for dataset 143: 5 rows, columns: ['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:56:47", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/143/preview - 200 - 1.1313s"}
+{"timestamp": "2025-12-07 21:56:47", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:61029 - "GET /api/v1/datasets/143/preview?rows=5 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:56:50", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/142/preview"}
+{"timestamp": "2025-12-07 21:56:50", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/142/preview - 200 - 0.0020s"}
+{"timestamp": "2025-12-07 21:56:50", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:61029 - "OPTIONS /api/v1/datasets/142/preview?rows=5 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:56:50", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/142/preview"}
+{"timestamp": "2025-12-07 21:56:50", "name": "app.services.dataset_service", "level": "INFO", "message": "Preview called: file=2_3c65d20f_seq_001_affected.fasta, dataset_type=dna, suffix=.fasta, absolute_path=D:\Pablo\fullstac\Final project\BioMlStudio\backend\uploads\2\2_3c65d20f_seq_001_affected.fasta"}
+{"timestamp": "2025-12-07 21:56:50", "name": "app.services.dataset_service", "level": "INFO", "message": "Biological preview: file=2_3c65d20f_seq_001_affected.fasta, suffix=.fasta"}
+{"timestamp": "2025-12-07 21:56:50", "name": "app.services.dataset_service", "level": "INFO", "message": "Converting FASTA to CSV: D:\Pablo\fullstac\Final project\BioMlStudio\backend\uploads\2\2_3c65d20f_seq_001_affected.fasta -> C:\Users\rohan\AppData\Local\Temp\tmp6z615zb2.csv"}
+{"timestamp": "2025-12-07 21:56:50", "name": "app.services.dataset_service", "level": "INFO", "message": "Conversion successful: 40 sequences, columns: ['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:56:50", "name": "app.services.dataset_service", "level": "INFO", "message": "DataFrame loaded: shape=(40, 61), columns=['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:56:50", "name": "app.services.dataset_service", "level": "INFO", "message": "After dropping sequence: columns=['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:56:50", "name": "app.services.dataset_service", "level": "INFO", "message": "Preview data created: 5 rows"}
+{"timestamp": "2025-12-07 21:56:50", "name": "app.api.routes.datasets", "level": "INFO", "message": "Preview for dataset 142: 5 rows, columns: ['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:56:50", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/142/preview - 200 - 0.3184s"}
+{"timestamp": "2025-12-07 21:56:50", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:61029 - "GET /api/v1/datasets/142/preview?rows=5 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:56:51", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/143/preview"}
+{"timestamp": "2025-12-07 21:56:51", "name": "app.services.dataset_service", "level": "INFO", "message": "Preview called: file=2_5902796c_seq_001_affected.fasta, dataset_type=dna, suffix=.fasta, absolute_path=D:\Pablo\fullstac\Final project\BioMlStudio\backend\uploads\2\2_5902796c_seq_001_affected.fasta"}
+{"timestamp": "2025-12-07 21:56:51", "name": "app.services.dataset_service", "level": "INFO", "message": "Biological preview: file=2_5902796c_seq_001_affected.fasta, suffix=.fasta"}
+{"timestamp": "2025-12-07 21:56:51", "name": "app.services.dataset_service", "level": "INFO", "message": "Converting FASTA to CSV: D:\Pablo\fullstac\Final project\BioMlStudio\backend\uploads\2\2_5902796c_seq_001_affected.fasta -> C:\Users\rohan\AppData\Local\Temp\tmpt93ifpn9.csv"}
+{"timestamp": "2025-12-07 21:56:51", "name": "app.services.dataset_service", "level": "INFO", "message": "Conversion successful: 40 sequences, columns: ['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:56:51", "name": "app.services.dataset_service", "level": "INFO", "message": "DataFrame loaded: shape=(40, 61), columns=['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:56:51", "name": "app.services.dataset_service", "level": "INFO", "message": "After dropping sequence: columns=['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:56:51", "name": "app.services.dataset_service", "level": "INFO", "message": "Preview data created: 5 rows"}
+{"timestamp": "2025-12-07 21:56:51", "name": "app.api.routes.datasets", "level": "INFO", "message": "Preview for dataset 143: 5 rows, columns: ['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:56:51", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/143/preview - 200 - 0.4314s"}
+{"timestamp": "2025-12-07 21:56:51", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:61029 - "GET /api/v1/datasets/143/preview?rows=5 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:56:54", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/142/preview"}
+{"timestamp": "2025-12-07 21:56:54", "name": "app.services.dataset_service", "level": "INFO", "message": "Preview called: file=2_3c65d20f_seq_001_affected.fasta, dataset_type=dna, suffix=.fasta, absolute_path=D:\Pablo\fullstac\Final project\BioMlStudio\backend\uploads\2\2_3c65d20f_seq_001_affected.fasta"}
+{"timestamp": "2025-12-07 21:56:54", "name": "app.services.dataset_service", "level": "INFO", "message": "Biological preview: file=2_3c65d20f_seq_001_affected.fasta, suffix=.fasta"}
+{"timestamp": "2025-12-07 21:56:54", "name": "app.services.dataset_service", "level": "INFO", "message": "Converting FASTA to CSV: D:\Pablo\fullstac\Final project\BioMlStudio\backend\uploads\2\2_3c65d20f_seq_001_affected.fasta -> C:\Users\rohan\AppData\Local\Temp\tmp4cexpo7p.csv"}
+{"timestamp": "2025-12-07 21:56:54", "name": "app.services.dataset_service", "level": "INFO", "message": "Conversion successful: 40 sequences, columns: ['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:56:54", "name": "app.services.dataset_service", "level": "INFO", "message": "DataFrame loaded: shape=(40, 61), columns=['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:56:54", "name": "app.services.dataset_service", "level": "INFO", "message": "After dropping sequence: columns=['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:56:54", "name": "app.services.dataset_service", "level": "INFO", "message": "Preview data created: 5 rows"}
+{"timestamp": "2025-12-07 21:56:54", "name": "app.api.routes.datasets", "level": "INFO", "message": "Preview for dataset 142: 5 rows, columns: ['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:56:54", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/142/preview - 200 - 0.3513s"}
+{"timestamp": "2025-12-07 21:56:54", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:61029 - "GET /api/v1/datasets/142/preview?rows=5 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:56:56", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/143/preview"}
+{"timestamp": "2025-12-07 21:56:57", "name": "app.services.dataset_service", "level": "INFO", "message": "Preview called: file=2_5902796c_seq_001_affected.fasta, dataset_type=dna, suffix=.fasta, absolute_path=D:\Pablo\fullstac\Final project\BioMlStudio\backend\uploads\2\2_5902796c_seq_001_affected.fasta"}
+{"timestamp": "2025-12-07 21:56:57", "name": "app.services.dataset_service", "level": "INFO", "message": "Biological preview: file=2_5902796c_seq_001_affected.fasta, suffix=.fasta"}
+{"timestamp": "2025-12-07 21:56:57", "name": "app.services.dataset_service", "level": "INFO", "message": "Converting FASTA to CSV: D:\Pablo\fullstac\Final project\BioMlStudio\backend\uploads\2\2_5902796c_seq_001_affected.fasta -> C:\Users\rohan\AppData\Local\Temp\tmpsbsdimto.csv"}
+{"timestamp": "2025-12-07 21:56:57", "name": "app.services.dataset_service", "level": "INFO", "message": "Conversion successful: 40 sequences, columns: ['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:56:57", "name": "app.services.dataset_service", "level": "INFO", "message": "DataFrame loaded: shape=(40, 61), columns=['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:56:57", "name": "app.services.dataset_service", "level": "INFO", "message": "After dropping sequence: columns=['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:56:57", "name": "app.services.dataset_service", "level": "INFO", "message": "Preview data created: 5 rows"}
+{"timestamp": "2025-12-07 21:56:57", "name": "app.api.routes.datasets", "level": "INFO", "message": "Preview for dataset 143: 5 rows, columns: ['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:56:57", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/143/preview - 200 - 0.2912s"}
+{"timestamp": "2025-12-07 21:56:57", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:61029 - "GET /api/v1/datasets/143/preview?rows=5 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:09", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/workflow/start"}
+{"timestamp": "2025-12-07 21:57:09", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/workflow/start - 200 - 0.0030s"}
+{"timestamp": "2025-12-07 21:57:09", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:60346 - "OPTIONS /api/v1/workflow/start HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:09", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/workflow/start"}
+{"timestamp": "2025-12-07 21:57:10", "name": "app.api.routes.workflow", "level": "INFO", "message": "ML workflow started: Job 106 for user 2"}
+{"timestamp": "2025-12-07 21:57:10", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/workflow/start - 200 - 0.7548s"}
+{"timestamp": "2025-12-07 21:57:10", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:60346 - "POST /api/v1/workflow/start HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:10", "name": "app.api.routes.workflow", "level": "INFO", "message": "Starting ML workflow for job 106"}
+{"timestamp": "2025-12-07 21:57:10", "name": "app.api.routes.workflow", "level": "INFO", "message": "Step 1: Preprocessing data..."}
+{"timestamp": "2025-12-07 21:57:11", "name": "app.services.preprocessing_service", "level": "INFO", "message": "Starting preprocessing for dna dataset"}
+{"timestamp": "2025-12-07 21:57:11", "name": "app.api.routes.workflow", "level": "INFO", "message": "Preprocessing completed successfully"}
+{"timestamp": "2025-12-07 21:57:11", "name": "app.api.routes.workflow", "level": "INFO", "message": "Step 2: Training models..."}
+{"timestamp": "2025-12-07 21:57:11", "name": "app.services.training_service", "level": "INFO", "message": "[INFO] Training started"}
+{"timestamp": "2025-12-07 21:57:11", "name": "app.services.training_service", "level": "INFO", "message": "[INFO] Task type: classification"}
+{"timestamp": "2025-12-07 21:57:11", "name": "app.services.training_service", "level": "INFO", "message": "[INFO] Training samples: 34, Features: 7"}
+{"timestamp": "2025-12-07 21:57:11", "name": "app.services.training_service", "level": "INFO", "message": "[INFO] Selecting optimal models..."}
+{"timestamp": "2025-12-07 21:57:11", "name": "app.services.automl_service", "level": "INFO", "message": "Selecting models for task: classification"}
+{"timestamp": "2025-12-07 21:57:11", "name": "app.services.training_service", "level": "INFO", "message": "[INFO] Selected 4 models: ['Logistic Regression', 'Random Forest', 'Gradient Boosting', 'Support Vector Machine']"}
+{"timestamp": "2025-12-07 21:57:11", "name": "app.services.training_service", "level": "INFO", "message": "[INFO] Training model 1/4: Logistic Regression"}
+{"timestamp": "2025-12-07 21:57:11", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Optimizing hyperparameters..."}
+{"timestamp": "2025-12-07 21:57:16", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Best params: {'solver': 'lbfgs', 'penalty': 'l2', 'C': 10}"}
+{"timestamp": "2025-12-07 21:57:16", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Fitting Logistic Regression..."}
+{"timestamp": "2025-12-07 21:57:16", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Training completed in 4.91s"}
+{"timestamp": "2025-12-07 21:57:16", "name": "app.services.training_service", "level": "INFO", "message": "[SUCCESS] Logistic Regression - Score: 1.0000"}
+{"timestamp": "2025-12-07 21:57:16", "name": "app.services.training_service", "level": "INFO", "message": "[INFO] Training model 2/4: Random Forest"}
+{"timestamp": "2025-12-07 21:57:16", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Optimizing hyperparameters..."}
+{"timestamp": "2025-12-07 21:57:19", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Best params: {'n_estimators': 100, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_depth': None}"}
+{"timestamp": "2025-12-07 21:57:19", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Fitting Random Forest..."}
+{"timestamp": "2025-12-07 21:57:19", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Training completed in 3.24s"}
+{"timestamp": "2025-12-07 21:57:20", "name": "app.services.training_service", "level": "INFO", "message": "[SUCCESS] Random Forest - Score: 1.0000"}
+{"timestamp": "2025-12-07 21:57:20", "name": "app.services.training_service", "level": "INFO", "message": "[INFO] Training model 3/4: Gradient Boosting"}
+{"timestamp": "2025-12-07 21:57:20", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Optimizing hyperparameters..."}
+{"timestamp": "2025-12-07 21:57:20", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Fitting Gradient Boosting..."}
+{"timestamp": "2025-12-07 21:57:20", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Training completed in 0.15s"}
+{"timestamp": "2025-12-07 21:57:20", "name": "app.services.training_service", "level": "INFO", "message": "[SUCCESS] Gradient Boosting - Score: 1.0000"}
+{"timestamp": "2025-12-07 21:57:20", "name": "app.services.training_service", "level": "INFO", "message": "[INFO] Training model 4/4: Support Vector Machine"}
+{"timestamp": "2025-12-07 21:57:20", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Optimizing hyperparameters..."}
+{"timestamp": "2025-12-07 21:57:20", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Best params: {'kernel': 'rbf', 'gamma': 0.01, 'C': 100}"}
+{"timestamp": "2025-12-07 21:57:20", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Fitting Support Vector Machine..."}
+{"timestamp": "2025-12-07 21:57:20", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Training completed in 0.15s"}
+{"timestamp": "2025-12-07 21:57:20", "name": "app.services.training_service", "level": "INFO", "message": "[SUCCESS] Support Vector Machine - Score: 1.0000"}
+{"timestamp": "2025-12-07 21:57:20", "name": "app.services.training_service", "level": "INFO", "message": "[SUCCESS] Best model: Logistic Regression (Score: 1.0000)"}
+{"timestamp": "2025-12-07 21:57:20", "name": "app.services.training_service", "level": "INFO", "message": "[INFO] Generating comprehensive evaluation..."}
+{"timestamp": "2025-12-07 21:57:21", "name": "app.services.training_service", "level": "INFO", "message": "[INFO] Evaluation completed successfully"}
+{"timestamp": "2025-12-07 21:57:21", "name": "app.api.routes.workflow", "level": "INFO", "message": "Training completed successfully"}
+{"timestamp": "2025-12-07 21:57:22", "name": "app.api.routes.workflow", "level": "INFO", "message": "Step 3: Generating SHAP explanations..."}
+{"timestamp": "2025-12-07 21:57:22", "name": "app.services.shap_service", "level": "INFO", "message": "Using LinearExplainer for linear model"}
+{"timestamp": "2025-12-07 21:57:25", "name": "app.api.routes.workflow", "level": "INFO", "message": "SHAP explanations generated successfully"}
+{"timestamp": "2025-12-07 21:57:26", "name": "app.api.routes.workflow", "level": "INFO", "message": "Step 4: Saving model and generating reports..."}
+{"timestamp": "2025-12-07 21:57:26", "name": "app.services.training_service", "level": "INFO", "message": "[INFO] Model saved to models\job_106\model_job_106.joblib"}
+{"timestamp": "2025-12-07 21:57:26", "name": "app.services.training_service", "level": "INFO", "message": "[INFO] All artifacts saved to models\job_106"}
+{"timestamp": "2025-12-07 21:57:27", "name": "app.services.export_service", "level": "INFO", "message": "Generating PDF report: models\job_106\report_job_106.pdf"}
+{"timestamp": "2025-12-07 21:57:28", "name": "app.services.export_service", "level": "INFO", "message": "PDF report generated successfully: models\job_106\report_job_106.pdf"}
+{"timestamp": "2025-12-07 21:57:28", "name": "app.api.routes.workflow", "level": "INFO", "message": "PDF report generated: models\job_106\report_job_106.pdf"}
+{"timestamp": "2025-12-07 21:57:28", "name": "app.api.routes.workflow", "level": "INFO", "message": "ML workflow completed successfully for job 106"}
+{"timestamp": "2025-12-07 21:57:28", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/workflow/106/status"}
+{"timestamp": "2025-12-07 21:57:28", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/workflow/106/status"}
+{"timestamp": "2025-12-07 21:57:28", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/workflow/106/status"}
+{"timestamp": "2025-12-07 21:57:28", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/workflow/106/status"}
+{"timestamp": "2025-12-07 21:57:28", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/workflow/106/status"}
+{"timestamp": "2025-12-07 21:57:28", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/workflow/106/status - 200 - 0.0110s"}
+{"timestamp": "2025-12-07 21:57:28", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/workflow/106/status - 200 - 0.0113s"}
+{"timestamp": "2025-12-07 21:57:28", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/workflow/106/status - 200 - 0.0102s"}
+{"timestamp": "2025-12-07 21:57:28", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/workflow/106/status - 200 - 0.0106s"}
+{"timestamp": "2025-12-07 21:57:28", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/workflow/106/status - 200 - 0.0098s"}
+{"timestamp": "2025-12-07 21:57:28", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:56575 - "OPTIONS /api/v1/workflow/106/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:28", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:56044 - "OPTIONS /api/v1/workflow/106/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:28", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:57402 - "OPTIONS /api/v1/workflow/106/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:28", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:49806 - "OPTIONS /api/v1/workflow/106/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:28", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:50882 - "OPTIONS /api/v1/workflow/106/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:28", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/workflow/106/status"}
+{"timestamp": "2025-12-07 21:57:28", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/workflow/106/status"}
+{"timestamp": "2025-12-07 21:57:28", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/workflow/106/status"}
+{"timestamp": "2025-12-07 21:57:28", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/workflow/106/status - 200 - 0.0061s"}
+{"timestamp": "2025-12-07 21:57:28", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/workflow/106/status - 200 - 0.0063s"}
+{"timestamp": "2025-12-07 21:57:28", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/workflow/106/status - 200 - 0.0069s"}
+{"timestamp": "2025-12-07 21:57:28", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:49806 - "OPTIONS /api/v1/workflow/106/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:28", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:50882 - "OPTIONS /api/v1/workflow/106/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:28", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:60346 - "OPTIONS /api/v1/workflow/106/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:28", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/workflow/106/status"}
+{"timestamp": "2025-12-07 21:57:31", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/workflow/106/status - 200 - 2.7226s"}
+{"timestamp": "2025-12-07 21:57:31", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:60346 - "GET /api/v1/workflow/106/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:31", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/workflow/106/status"}
+{"timestamp": "2025-12-07 21:57:35", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/workflow/106/results"}
+{"timestamp": "2025-12-07 21:57:35", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/workflow/106/status - 200 - 4.0133s"}
+{"timestamp": "2025-12-07 21:57:35", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:58427 - "GET /api/v1/workflow/106/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:35", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/workflow/106/results"}
+{"timestamp": "2025-12-07 21:57:35", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/workflow/106/results - 200 - 0.0080s"}
+{"timestamp": "2025-12-07 21:57:35", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:62473 - "OPTIONS /api/v1/workflow/106/results HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:35", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/workflow/106/results - 200 - 0.0081s"}
+{"timestamp": "2025-12-07 21:57:35", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:60346 - "OPTIONS /api/v1/workflow/106/results HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:35", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/workflow/106/results"}
+{"timestamp": "2025-12-07 21:57:38", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/workflow/106/results - 200 - 2.5731s"}
+{"timestamp": "2025-12-07 21:57:38", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:62473 - "GET /api/v1/workflow/106/results HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:38", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/workflow/106/status"}
+{"timestamp": "2025-12-07 21:57:38", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/workflow/106/results"}
+{"timestamp": "2025-12-07 21:57:42", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/workflow/106/status - 200 - 4.4150s"}
+{"timestamp": "2025-12-07 21:57:42", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:58427 - "GET /api/v1/workflow/106/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:42", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/workflow/106/results - 200 - 4.4162s"}
+{"timestamp": "2025-12-07 21:57:42", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:60346 - "GET /api/v1/workflow/106/results HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:42", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/workflow/106/status"}
+{"timestamp": "2025-12-07 21:57:44", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/workflow/106/status - 200 - 1.3115s"}
+{"timestamp": "2025-12-07 21:57:44", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:50072 - "GET /api/v1/workflow/106/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:44", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/workflow/106/status"}
+{"timestamp": "2025-12-07 21:57:45", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/workflow/106/status - 200 - 1.0158s"}
+{"timestamp": "2025-12-07 21:57:45", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:60346 - "GET /api/v1/workflow/106/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:45", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/workflow/106/status"}
+{"timestamp": "2025-12-07 21:57:46", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/workflow/106/status - 200 - 1.5374s"}
+{"timestamp": "2025-12-07 21:57:46", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:50072 - "GET /api/v1/workflow/106/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:46", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/workflow/106/status"}
+{"timestamp": "2025-12-07 21:57:47", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/workflow/106/status - 200 - 1.0557s"}
+{"timestamp": "2025-12-07 21:57:47", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:60346 - "GET /api/v1/workflow/106/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:47", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/workflow/106/status"}
+{"timestamp": "2025-12-07 21:57:48", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/workflow/106/status - 200 - 0.7952s"}
+{"timestamp": "2025-12-07 21:57:48", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:50072 - "GET /api/v1/workflow/106/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:48", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/workflow/106/status"}
+{"timestamp": "2025-12-07 21:57:49", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/workflow/106/status - 200 - 0.8720s"}
+{"timestamp": "2025-12-07 21:57:49", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:60346 - "GET /api/v1/workflow/106/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:49", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/workflow/106/status"}
+{"timestamp": "2025-12-07 21:57:49", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/workflow/106/status - 200 - 0.5852s"}
+{"timestamp": "2025-12-07 21:57:49", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:50072 - "GET /api/v1/workflow/106/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:56", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 21:57:57", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.4077s"}
+{"timestamp": "2025-12-07 21:57:57", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:54581 - "GET /api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:57", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 21:57:58", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.7575s"}
+{"timestamp": "2025-12-07 21:57:58", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:50705 - "GET /api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:57:58", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/143/preview"}
+{"timestamp": "2025-12-07 21:57:58", "name": "app.services.dataset_service", "level": "INFO", "message": "Preview called: file=2_5902796c_seq_001_affected.fasta, dataset_type=dna, suffix=.fasta, absolute_path=D:\Pablo\fullstac\Final project\BioMlStudio\backend\uploads\2\2_5902796c_seq_001_affected.fasta"}
+{"timestamp": "2025-12-07 21:57:58", "name": "app.services.dataset_service", "level": "INFO", "message": "Biological preview: file=2_5902796c_seq_001_affected.fasta, suffix=.fasta"}
+{"timestamp": "2025-12-07 21:57:58", "name": "app.services.dataset_service", "level": "INFO", "message": "Converting FASTA to CSV: D:\Pablo\fullstac\Final project\BioMlStudio\backend\uploads\2\2_5902796c_seq_001_affected.fasta -> C:\Users\rohan\AppData\Local\Temp\tmp_7o227n6.csv"}
+{"timestamp": "2025-12-07 21:57:58", "name": "app.services.dataset_service", "level": "INFO", "message": "Conversion successful: 40 sequences, columns: ['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:57:58", "name": "app.services.dataset_service", "level": "INFO", "message": "DataFrame loaded: shape=(40, 61), columns=['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:57:58", "name": "app.services.dataset_service", "level": "INFO", "message": "After dropping sequence: columns=['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:57:58", "name": "app.services.dataset_service", "level": "INFO", "message": "Preview data created: 5 rows"}
+{"timestamp": "2025-12-07 21:57:58", "name": "app.api.routes.datasets", "level": "INFO", "message": "Preview for dataset 143: 5 rows, columns: ['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:57:58", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/143/preview - 200 - 0.6230s"}
+{"timestamp": "2025-12-07 21:57:58", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:54581 - "GET /api/v1/datasets/143/preview?rows=5 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:58:03", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/workflow/start"}
+{"timestamp": "2025-12-07 21:58:03", "name": "app.api.routes.workflow", "level": "INFO", "message": "ML workflow started: Job 107 for user 2"}
+{"timestamp": "2025-12-07 21:58:03", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/workflow/start - 200 - 0.6656s"}
+{"timestamp": "2025-12-07 21:58:03", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:54581 - "POST /api/v1/workflow/start HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:58:04", "name": "app.api.routes.workflow", "level": "INFO", "message": "Starting ML workflow for job 107"}
+{"timestamp": "2025-12-07 21:58:04", "name": "app.api.routes.workflow", "level": "INFO", "message": "Step 1: Preprocessing data..."}
+{"timestamp": "2025-12-07 21:58:04", "name": "app.services.preprocessing_service", "level": "INFO", "message": "Starting preprocessing for dna dataset"}
+{"timestamp": "2025-12-07 21:58:04", "name": "app.api.routes.workflow", "level": "INFO", "message": "Preprocessing completed successfully"}
+{"timestamp": "2025-12-07 21:58:04", "name": "app.api.routes.workflow", "level": "INFO", "message": "Step 2: Training models..."}
+{"timestamp": "2025-12-07 21:58:04", "name": "app.services.training_service", "level": "INFO", "message": "[INFO] Training started"}
+{"timestamp": "2025-12-07 21:58:04", "name": "app.services.training_service", "level": "INFO", "message": "[INFO] Task type: classification"}
+{"timestamp": "2025-12-07 21:58:04", "name": "app.services.training_service", "level": "INFO", "message": "[INFO] Training samples: 28, Features: 7"}
+{"timestamp": "2025-12-07 21:58:04", "name": "app.services.training_service", "level": "INFO", "message": "[INFO] Selecting optimal models..."}
+{"timestamp": "2025-12-07 21:58:04", "name": "app.services.automl_service", "level": "INFO", "message": "Selecting models for task: classification"}
+{"timestamp": "2025-12-07 21:58:04", "name": "app.services.training_service", "level": "INFO", "message": "[INFO] Selected 3 models: ['Logistic Regression', 'Random Forest', 'Gradient Boosting']"}
+{"timestamp": "2025-12-07 21:58:04", "name": "app.services.training_service", "level": "INFO", "message": "[INFO] Training model 1/3: Logistic Regression"}
+{"timestamp": "2025-12-07 21:58:04", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Optimizing hyperparameters..."}
+{"timestamp": "2025-12-07 21:58:05", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Best params: {'solver': 'liblinear', 'penalty': 'l2', 'C': 0.01}"}
+{"timestamp": "2025-12-07 21:58:05", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Fitting Logistic Regression..."}
+{"timestamp": "2025-12-07 21:58:05", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Training completed in 0.26s"}
+{"timestamp": "2025-12-07 21:58:05", "name": "app.services.training_service", "level": "INFO", "message": "[SUCCESS] Logistic Regression - Score: 0.7500"}
+{"timestamp": "2025-12-07 21:58:05", "name": "app.services.training_service", "level": "INFO", "message": "[INFO] Training model 2/3: Random Forest"}
+{"timestamp": "2025-12-07 21:58:05", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Optimizing hyperparameters..."}
+{"timestamp": "2025-12-07 21:58:08", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Best params: {'n_estimators': 200, 'min_samples_split': 5, 'min_samples_leaf': 4, 'max_depth': 20}"}
+{"timestamp": "2025-12-07 21:58:08", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Fitting Random Forest..."}
+{"timestamp": "2025-12-07 21:58:09", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Training completed in 4.23s"}
+{"timestamp": "2025-12-07 21:58:09", "name": "app.services.training_service", "level": "INFO", "message": "[SUCCESS] Random Forest - Score: 0.7500"}
+{"timestamp": "2025-12-07 21:58:09", "name": "app.services.training_service", "level": "INFO", "message": "[INFO] Training model 3/3: Gradient Boosting"}
+{"timestamp": "2025-12-07 21:58:09", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Optimizing hyperparameters..."}
+{"timestamp": "2025-12-07 21:58:09", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Fitting Gradient Boosting..."}
+{"timestamp": "2025-12-07 21:58:09", "name": "app.services.training_service", "level": "INFO", "message": "[INFO]   Training completed in 0.17s"}
+{"timestamp": "2025-12-07 21:58:09", "name": "app.services.training_service", "level": "INFO", "message": "[SUCCESS] Gradient Boosting - Score: 0.7500"}
+{"timestamp": "2025-12-07 21:58:09", "name": "app.services.training_service", "level": "INFO", "message": "[SUCCESS] Best model: Logistic Regression (Score: 0.7500)"}
+{"timestamp": "2025-12-07 21:58:09", "name": "app.services.training_service", "level": "INFO", "message": "[INFO] Generating comprehensive evaluation..."}
+{"timestamp": "2025-12-07 21:58:10", "name": "app.services.training_service", "level": "INFO", "message": "[INFO] Evaluation completed successfully"}
+{"timestamp": "2025-12-07 21:58:10", "name": "app.api.routes.workflow", "level": "INFO", "message": "Training completed successfully"}
+{"timestamp": "2025-12-07 21:58:11", "name": "app.api.routes.workflow", "level": "INFO", "message": "Step 3: Generating SHAP explanations..."}
+{"timestamp": "2025-12-07 21:58:11", "name": "app.services.shap_service", "level": "INFO", "message": "Using LinearExplainer for linear model"}
+{"timestamp": "2025-12-07 21:58:14", "name": "app.api.routes.workflow", "level": "INFO", "message": "SHAP explanations generated successfully"}
+{"timestamp": "2025-12-07 21:58:15", "name": "app.api.routes.workflow", "level": "INFO", "message": "Step 4: Saving model and generating reports..."}
+{"timestamp": "2025-12-07 21:58:15", "name": "app.services.training_service", "level": "INFO", "message": "[INFO] Model saved to models\job_107\model_job_107.joblib"}
+{"timestamp": "2025-12-07 21:58:15", "name": "app.services.training_service", "level": "INFO", "message": "[INFO] All artifacts saved to models\job_107"}
+{"timestamp": "2025-12-07 21:58:15", "name": "app.services.export_service", "level": "INFO", "message": "Generating PDF report: models\job_107\report_job_107.pdf"}
+{"timestamp": "2025-12-07 21:58:16", "name": "app.services.export_service", "level": "INFO", "message": "PDF report generated successfully: models\job_107\report_job_107.pdf"}
+{"timestamp": "2025-12-07 21:58:16", "name": "app.api.routes.workflow", "level": "INFO", "message": "PDF report generated: models\job_107\report_job_107.pdf"}
+{"timestamp": "2025-12-07 21:58:17", "name": "app.api.routes.workflow", "level": "INFO", "message": "ML workflow completed successfully for job 107"}
+{"timestamp": "2025-12-07 21:58:17", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/workflow/107/status"}
+{"timestamp": "2025-12-07 21:58:17", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/workflow/107/status"}
+{"timestamp": "2025-12-07 21:58:17", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/workflow/107/status"}
+{"timestamp": "2025-12-07 21:58:17", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/workflow/107/status"}
+{"timestamp": "2025-12-07 21:58:17", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/workflow/107/status"}
+{"timestamp": "2025-12-07 21:58:17", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/workflow/107/status - 200 - 0.0074s"}
+{"timestamp": "2025-12-07 21:58:17", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:50705 - "OPTIONS /api/v1/workflow/107/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:58:17", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/workflow/107/status - 200 - 0.0082s"}
+{"timestamp": "2025-12-07 21:58:17", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/workflow/107/status - 200 - 0.0082s"}
+{"timestamp": "2025-12-07 21:58:17", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/workflow/107/status - 200 - 0.0095s"}
+{"timestamp": "2025-12-07 21:58:17", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/workflow/107/status - 200 - 0.0100s"}
+{"timestamp": "2025-12-07 21:58:17", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:54155 - "OPTIONS /api/v1/workflow/107/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:58:17", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:55412 - "OPTIONS /api/v1/workflow/107/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:58:17", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:62364 - "OPTIONS /api/v1/workflow/107/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:58:17", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64515 - "OPTIONS /api/v1/workflow/107/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:58:17", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/workflow/107/status"}
+{"timestamp": "2025-12-07 21:58:18", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/workflow/107/status - 200 - 0.9100s"}
+{"timestamp": "2025-12-07 21:58:18", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:50705 - "GET /api/v1/workflow/107/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:58:18", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/workflow/107/status"}
+{"timestamp": "2025-12-07 21:58:18", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/workflow/107/status"}
+{"timestamp": "2025-12-07 21:58:18", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/workflow/107/status - 200 - 0.0052s"}
+{"timestamp": "2025-12-07 21:58:18", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:54581 - "OPTIONS /api/v1/workflow/107/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:58:19", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/workflow/107/status - 200 - 0.8247s"}
+{"timestamp": "2025-12-07 21:58:19", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64515 - "GET /api/v1/workflow/107/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:58:19", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/workflow/107/status"}
+{"timestamp": "2025-12-07 21:58:20", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/workflow/107/results"}
+{"timestamp": "2025-12-07 21:58:20", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/workflow/107/status - 200 - 1.1847s"}
+{"timestamp": "2025-12-07 21:58:20", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:54581 - "GET /api/v1/workflow/107/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:58:20", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/workflow/107/results"}
+{"timestamp": "2025-12-07 21:58:20", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/workflow/107/results - 200 - 0.0063s"}
+{"timestamp": "2025-12-07 21:58:20", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:50705 - "OPTIONS /api/v1/workflow/107/results HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:58:20", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/workflow/107/results - 200 - 0.0069s"}
+{"timestamp": "2025-12-07 21:58:20", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64515 - "OPTIONS /api/v1/workflow/107/results HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:58:20", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/workflow/107/results"}
+{"timestamp": "2025-12-07 21:58:21", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/workflow/107/results - 200 - 0.9525s"}
+{"timestamp": "2025-12-07 21:58:21", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:50705 - "GET /api/v1/workflow/107/results HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:58:21", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/workflow/107/status"}
+{"timestamp": "2025-12-07 21:58:21", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/workflow/107/results"}
+{"timestamp": "2025-12-07 21:58:25", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/workflow/107/status - 200 - 3.7060s"}
+{"timestamp": "2025-12-07 21:58:25", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/workflow/107/results - 200 - 3.7017s"}
+{"timestamp": "2025-12-07 21:58:25", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:54581 - "GET /api/v1/workflow/107/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:58:25", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64515 - "GET /api/v1/workflow/107/results HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:58:25", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/workflow/107/status"}
+{"timestamp": "2025-12-07 21:58:25", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/workflow/107/status - 200 - 0.7345s"}
+{"timestamp": "2025-12-07 21:58:25", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:50705 - "GET /api/v1/workflow/107/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:58:25", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/workflow/107/status"}
+{"timestamp": "2025-12-07 21:58:27", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/workflow/107/status - 200 - 1.5035s"}
+{"timestamp": "2025-12-07 21:58:27", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64515 - "GET /api/v1/workflow/107/status HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:58:44", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 21:58:44", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.6360s"}
+{"timestamp": "2025-12-07 21:58:44", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:53177 - "GET /api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:58:44", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 21:58:45", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.3805s"}
+{"timestamp": "2025-12-07 21:58:45", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:51050 - "GET /api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 21:58:45", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/143/preview"}
+{"timestamp": "2025-12-07 21:58:45", "name": "app.services.dataset_service", "level": "INFO", "message": "Preview called: file=2_5902796c_seq_001_affected.fasta, dataset_type=dna, suffix=.fasta, absolute_path=D:\Pablo\fullstac\Final project\BioMlStudio\backend\uploads\2\2_5902796c_seq_001_affected.fasta"}
+{"timestamp": "2025-12-07 21:58:45", "name": "app.services.dataset_service", "level": "INFO", "message": "Biological preview: file=2_5902796c_seq_001_affected.fasta, suffix=.fasta"}
+{"timestamp": "2025-12-07 21:58:45", "name": "app.services.dataset_service", "level": "INFO", "message": "Converting FASTA to CSV: D:\Pablo\fullstac\Final project\BioMlStudio\backend\uploads\2\2_5902796c_seq_001_affected.fasta -> C:\Users\rohan\AppData\Local\Temp\tmpoygmghh3.csv"}
+{"timestamp": "2025-12-07 21:58:45", "name": "app.services.dataset_service", "level": "INFO", "message": "Conversion successful: 40 sequences, columns: ['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:58:45", "name": "app.services.dataset_service", "level": "INFO", "message": "DataFrame loaded: shape=(40, 61), columns=['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:58:45", "name": "app.services.dataset_service", "level": "INFO", "message": "After dropping sequence: columns=['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:58:45", "name": "app.services.dataset_service", "level": "INFO", "message": "Preview data created: 5 rows"}
+{"timestamp": "2025-12-07 21:58:45", "name": "app.api.routes.datasets", "level": "INFO", "message": "Preview for dataset 143: 5 rows, columns: ['label', 'length', 'gc_content', 'a_content', 't_content', 'c_content', 'g_content', 'n_content', 'kmer_AGC', 'kmer_ATC', 'kmer_ATG', 'kmer_CGA', 'kmer_CGC', 'kmer_CGT', 'kmer_CTA', 'kmer_GAT', 'kmer_GCG', 'kmer_GCT', 'kmer_GTA', 'kmer_TAG', 'kmer_TCG', 'kmer_TGC', 'kmer_GGC', 'kmer_GTG', 'kmer_TGG', 'kmer_AAC', 'kmer_ACT', 'kmer_TAA', 'kmer_CCT', 'kmer_GCC', 'kmer_AGG', 'kmer_GAC', 'kmer_GGA', 'kmer_ACG', 'kmer_AAA', 'kmer_GGG', 'kmer_ATA', 'kmer_TAC', 'kmer_TAT', 'kmer_GAA', 'kmer_TGA', 'kmer_AGA', 'kmer_TGT', 'kmer_ACA', 'kmer_CAC', 'kmer_GCA', 'kmer_AAG', 'kmer_GAG', 'kmer_TCC', 'kmer_CCC', 'kmer_AAT', 'kmer_TCT', 'kmer_ATT', 'kmer_TTC', 'kmer_TTT', 'kmer_GTT', 'kmer_CAT', 'kmer_GGT', 'kmer_GTC', 'kmer_ACC', 'kmer_CTC']"}
+{"timestamp": "2025-12-07 21:58:45", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/143/preview - 200 - 0.2937s"}
+{"timestamp": "2025-12-07 21:58:45", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:53177 - "GET /api/v1/datasets/143/preview?rows=5 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:00:28", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/workflow/107/results"}
+{"timestamp": "2025-12-07 22:00:32", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/workflow/107/results - 200 - 4.0535s"}
+{"timestamp": "2025-12-07 22:00:32", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:53608 - "GET /api/v1/workflow/107/results HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:00:32", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/workflow/107/results"}
+{"timestamp": "2025-12-07 22:00:32", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/workflow/107/results - 200 - 0.7914s"}
+{"timestamp": "2025-12-07 22:00:32", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:49949 - "GET /api/v1/workflow/107/results HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:02:11", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:02:11", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:02:11", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/ - 200 - 0.0040s"}
+{"timestamp": "2025-12-07 22:02:11", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64512 - "OPTIONS /api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:02:11", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/ - 200 - 0.0050s"}
+{"timestamp": "2025-12-07 22:02:11", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:53109 - "OPTIONS /api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:02:11", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:02:12", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.7634s"}
+{"timestamp": "2025-12-07 22:02:12", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:53109 - "GET /api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:02:12", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:02:12", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.5113s"}
+{"timestamp": "2025-12-07 22:02:12", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:63731 - "GET /api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:02:14", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:02:15", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.9919s"}
+{"timestamp": "2025-12-07 22:02:15", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:63731 - "GET /api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:02:15", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:02:15", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.4436s"}
+{"timestamp": "2025-12-07 22:02:15", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:53109 - "GET /api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:02:15", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:02:49", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:02:49", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 34.0862s"}
+{"timestamp": "2025-12-07 22:02:49", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:03:15", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 26.2909s"}
+{"timestamp": "2025-12-07 22:03:15", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:54389 - "GET /api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:03:15", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 26.2900s"}
+{"timestamp": "2025-12-07 22:03:15", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:03:16", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.5115s"}
+{"timestamp": "2025-12-07 22:03:16", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:60186 - "GET /api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:03:16", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:03:17", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.9865s"}
+{"timestamp": "2025-12-07 22:03:17", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:58232 - "GET /api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:03:17", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:03:41", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 23.8156s"}
+{"timestamp": "2025-12-07 22:03:41", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:04:08", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 27.0279s"}
+{"timestamp": "2025-12-07 22:04:08", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:04:08", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/auth/login"}
+{"timestamp": "2025-12-07 22:04:36", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-12-07 22:04:36", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 27.9205s"}
+{"timestamp": "2025-12-07 22:04:36", "name": "passlib.handlers.bcrypt", "level": "WARNING", "message": "(trapped) error reading bcrypt version"}
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+{"timestamp": "2025-12-07 22:04:37", "name": "app.api.routes.auth", "level": "INFO", "message": "User logged in: rohanrv2004@gmail.com"}
+{"timestamp": "2025-12-07 22:04:37", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:04:37", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [30240]"}
+{"timestamp": "2025-12-07 22:04:37", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/auth/login - 200 - 29.3292s"}
+{"timestamp": "2025-12-07 22:04:37", "name": "uvicorn.error", "level": "ERROR", "message": "Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\routing.py", line 686, in lifespan
+    await receive()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError
+"}
+{"timestamp": "2025-12-07 22:04:37", "name": "uvicorn.error", "level": "ERROR", "message": "Exception in ASGI application
+"}
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py", line 426, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 84, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\applications.py", line 1106, in __call__
+    await super().__call__(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\applications.py", line 122, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 109, in __call__
+    await response(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\responses.py", line 270, in __call__
+    async with anyio.create_task_group() as task_group:
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 597, in __aexit__
+    raise exceptions[0]
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 668, in task_done
+    exc = _task.exception()
+          ^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\responses.py", line 272, in wrap
+    async def wrap(func: "typing.Callable[[], typing.Awaitable[None]]") -> None:
+asyncio.exceptions.CancelledError
+{"timestamp": "2025-12-07 22:04:37", "name": "uvicorn.error", "level": "ERROR", "message": "Exception in ASGI application
+"}
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\anyio\streams\memory.py", line 98, in receive
+    return self.receive_nowait()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\anyio\streams\memory.py", line 93, in receive_nowait
+    raise WouldBlock
+anyio.WouldBlock
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py", line 426, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 84, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\applications.py", line 1106, in __call__
+    await super().__call__(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\applications.py", line 122, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 108, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\app\main.py", line 99, in process_time_middleware
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 78, in call_next
+    message = await recv_stream.receive()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\anyio\streams\memory.py", line 106, in receive
+    await receive_event.wait()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1778, in wait
+    if await self._event.wait():
+       ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\locks.py", line 212, in wait
+    await fut
+asyncio.exceptions.CancelledError
+{"timestamp": "2025-12-07 22:04:55", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [13080]"}
+{"timestamp": "2025-12-07 22:04:55", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-07 22:04:55", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:04:57", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-07 22:04:57", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-07 22:04:57", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-12-07 22:05:31", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:05:31", "name": "app.main", "level": "WARNING", "message": "HTTP Exception: Not authenticated"}
+{"timestamp": "2025-12-07 22:05:31", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 403 - 0.0060s"}
+{"timestamp": "2025-12-07 22:05:31", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:53272 - "GET /api/v1/datasets/ HTTP/1.1" 403"}
+{"timestamp": "2025-12-07 22:05:31", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:05:31", "name": "app.main", "level": "WARNING", "message": "HTTP Exception: Not authenticated"}
+{"timestamp": "2025-12-07 22:05:31", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 403 - 0.0066s"}
+{"timestamp": "2025-12-07 22:05:31", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:53272 - "GET /api/v1/datasets/ HTTP/1.1" 403"}
+{"timestamp": "2025-12-07 22:05:37", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/auth/login"}
+{"timestamp": "2025-12-07 22:05:37", "name": "passlib.handlers.bcrypt", "level": "WARNING", "message": "(trapped) error reading bcrypt version"}
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+{"timestamp": "2025-12-07 22:05:38", "name": "app.api.routes.auth", "level": "INFO", "message": "User logged in: rohanrv2004@gmail.com"}
+{"timestamp": "2025-12-07 22:05:38", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/auth/login - 200 - 1.5636s"}
+{"timestamp": "2025-12-07 22:05:38", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:56627 - "POST /api/v1/auth/login HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:05:39", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:05:40", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.9052s"}
+{"timestamp": "2025-12-07 22:05:40", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:56627 - "GET /api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:05:40", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:05:41", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 1.2842s"}
+{"timestamp": "2025-12-07 22:05:41", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59723 - "GET /api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:05:41", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:05:41", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/jobs/ - 200 - 0.0050s"}
+{"timestamp": "2025-12-07 22:05:41", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:56627 - "OPTIONS /api/v1/jobs/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:05:41", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:05:41", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:05:41", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/jobs/ - 200 - 0.0390s"}
+{"timestamp": "2025-12-07 22:05:41", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59723 - "OPTIONS /api/v1/jobs/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:06:44", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 62.3897s"}
+{"timestamp": "2025-12-07 22:06:44", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:07:54", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 70.4577s"}
+{"timestamp": "2025-12-07 22:07:54", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:07:54", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:07:54", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:08:08", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 14.2872s"}
+{"timestamp": "2025-12-07 22:08:08", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 14.2882s"}
+{"timestamp": "2025-12-07 22:08:08", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64403 - "GET /api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:08:08", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 14.2899s"}
+{"timestamp": "2025-12-07 22:08:09", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:08:31", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 22.5821s"}
+{"timestamp": "2025-12-07 22:08:31", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64403 - "GET /api/v1/jobs/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:08:59", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:09:00", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.3852s"}
+{"timestamp": "2025-12-07 22:09:00", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59100 - "GET /api/v1/datasets/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:09:00", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:09:23", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 22.6578s"}
+{"timestamp": "2025-12-07 22:09:23", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59100 - "GET /api/v1/jobs/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:09:42", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-12-07 22:09:42", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application shutdown."}
+{"timestamp": "2025-12-07 22:09:42", "name": "app.main", "level": "INFO", "message": "🛑 Shutting down BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:09:42", "name": "uvicorn.error", "level": "INFO", "message": "Application shutdown complete."}
+{"timestamp": "2025-12-07 22:09:42", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [13080]"}
+{"timestamp": "2025-12-07 22:09:58", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [24740]"}
+{"timestamp": "2025-12-07 22:09:58", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-07 22:09:58", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:10:00", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-07 22:10:00", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-07 22:10:00", "name": "uvicorn.error", "level": "ERROR", "message": "Traceback (most recent call last):
+  File "C:\Python312\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    await self.startup(sockets=sockets)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\server.py", line 89, in startup
+    await self.lifespan.startup()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
+    await self.startup_event.wait()
+  File "C:\Python312\Lib\asyncio\locks.py", line 212, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python312\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\routing.py", line 686, in lifespan
+    await receive()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError
+"}
+{"timestamp": "2025-12-07 22:10:11", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [13596]"}
+{"timestamp": "2025-12-07 22:10:11", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-07 22:10:11", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:10:13", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-07 22:10:13", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-07 22:10:13", "name": "uvicorn.error", "level": "ERROR", "message": "Traceback (most recent call last):
+  File "C:\Python312\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    await self.startup(sockets=sockets)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\server.py", line 89, in startup
+    await self.lifespan.startup()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
+    await self.startup_event.wait()
+  File "C:\Python312\Lib\asyncio\locks.py", line 212, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python312\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\routing.py", line 686, in lifespan
+    await receive()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError
+"}
+{"timestamp": "2025-12-07 22:10:28", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [36008]"}
+{"timestamp": "2025-12-07 22:10:28", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-07 22:10:28", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:10:30", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-07 22:10:30", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-07 22:10:30", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-12-07 22:10:43", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/auth/login"}
+{"timestamp": "2025-12-07 22:10:43", "name": "passlib.handlers.bcrypt", "level": "WARNING", "message": "(trapped) error reading bcrypt version"}
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+{"timestamp": "2025-12-07 22:10:44", "name": "app.api.routes.auth", "level": "INFO", "message": "User logged in: rohanrv2004@gmail.com"}
+{"timestamp": "2025-12-07 22:10:44", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/auth/login - 200 - 1.3048s"}
+{"timestamp": "2025-12-07 22:10:44", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:61269 - "POST /api/v1/auth/login HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:10:46", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:10:46", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:10:46", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/ - 200 - 0.0070s"}
+{"timestamp": "2025-12-07 22:10:46", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:61269 - "OPTIONS /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:10:46", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/ - 200 - 0.0108s"}
+{"timestamp": "2025-12-07 22:10:46", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:56295 - "OPTIONS /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:10:46", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:10:46", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.2859s"}
+{"timestamp": "2025-12-07 22:10:46", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:61269 - "GET /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:10:46", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:10:47", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.7506s"}
+{"timestamp": "2025-12-07 22:10:47", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:56295 - "GET /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:10:47", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:10:47", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/jobs/ - 200 - 0.0033s"}
+{"timestamp": "2025-12-07 22:10:47", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:61269 - "OPTIONS /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:10:47", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:10:48", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 1.6748s"}
+{"timestamp": "2025-12-07 22:10:48", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:61269 - "GET /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:10:48", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:10:48", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/jobs/ - 200 - 0.0023s"}
+{"timestamp": "2025-12-07 22:10:48", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:56295 - "OPTIONS /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:10:48", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:10:49", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 1.1022s"}
+{"timestamp": "2025-12-07 22:10:49", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:56295 - "GET /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:11:35", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:11:35", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:11:35", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/api/v1/jobs/ - 200 - 0.0035s"}
+{"timestamp": "2025-12-07 22:11:35", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:53786 - "OPTIONS /api/v1/api/v1/jobs/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:11:35", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/api/v1/jobs/ - 200 - 0.0055s"}
+{"timestamp": "2025-12-07 22:11:35", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:56546 - "OPTIONS /api/v1/api/v1/jobs/ HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:11:35", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:11:35", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/api/v1/jobs/ - 404 - 0.0031s"}
+{"timestamp": "2025-12-07 22:11:35", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:56546 - "GET /api/v1/api/v1/jobs/ HTTP/1.1" 404"}
+{"timestamp": "2025-12-07 22:11:35", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:11:35", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/api/v1/jobs/ - 404 - 0.0025s"}
+{"timestamp": "2025-12-07 22:11:35", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:53786 - "GET /api/v1/api/v1/jobs/ HTTP/1.1" 404"}
+{"timestamp": "2025-12-07 22:11:42", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:11:43", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 1.1308s"}
+{"timestamp": "2025-12-07 22:11:43", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:49690 - "GET /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:11:43", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:11:43", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.2445s"}
+{"timestamp": "2025-12-07 22:11:43", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:49690 - "GET /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:11:43", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:11:50", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 6.2735s"}
+{"timestamp": "2025-12-07 22:11:50", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:51715 - "GET /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:11:50", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:11:51", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 1.1451s"}
+{"timestamp": "2025-12-07 22:11:51", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:50930 - "GET /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}

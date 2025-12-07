@@ -34,7 +34,7 @@ interface DashboardStats {
 }
 
 export default function Dashboard() {
-  useAuth();
+  const authResult = useAuth();
   const router = useRouter();
   
   const [stats, setStats] = useState<DashboardStats>({
@@ -46,30 +46,49 @@ export default function Dashboard() {
     recentJobs: []
   });
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  console.log('Dashboard component rendering, auth:', authResult);
 
   useEffect(() => {
     loadDashboardData();
   }, []);
 
   const loadDashboardData = async () => {
+    console.log('Loading dashboard data...');
     try {
-      // Load datasets
-      const datasets = await api.get<any>('/datasets/');
+      // Load datasets with limit for faster loading
+      console.log('Loading datasets...');
+      const datasets = await api.get<any>('/datasets/?limit=10');
+      console.log('Datasets loaded:', datasets);
       
-      // Load jobs
-      const jobs = await api.get<any>('/jobs/');
+      // Load jobs with limit for faster loading
+      console.log('Loading jobs...');
+      const jobs = await api.get<any>('/jobs/?limit=10&sort_by=created_at&sort_order=desc');
+      console.log('Jobs loaded:', jobs);
 
-      setStats({
-        totalProjects: jobs.items?.length || 0,
-        activeTraining: jobs.items?.filter((j: any) => j.status === 'running' || j.status === 'queued').length || 0,
-        completedModels: jobs.items?.filter((j: any) => j.status === 'completed').length || 0,
-        totalDatasets: datasets.items?.length || 0,
-        recentDatasets: datasets.items?.slice(0, 5) || [],
-        recentJobs: jobs.items?.slice(0, 5) || []
-      });
+      // Handle both .items and .datasets/.jobs response formats
+      const datasetItems = datasets.datasets || datasets.items || [];
+      const jobItems = jobs.jobs || jobs.items || [];
+
+      const newStats = {
+        totalProjects: jobs.total || jobItems.length || 0,
+        activeTraining: jobItems.filter((j: any) => j.status === 'running' || j.status === 'queued').length || 0,
+        completedModels: jobItems.filter((j: any) => j.status === 'completed').length || 0,
+        totalDatasets: datasets.total || datasetItems.length || 0,
+        recentDatasets: datasetItems.slice(0, 5) || [],
+        recentJobs: jobItems.slice(0, 5) || []
+      };
+      
+      console.log('Setting stats:', newStats);
+      setStats(newStats);
+      setError(null);
     } catch (error) {
       console.error('Failed to load dashboard data:', error);
+      console.error('Error details:', error);
+      setError(error instanceof Error ? error.message : 'Failed to load dashboard data');
     } finally {
+      console.log('Dashboard loading complete');
       setLoading(false);
     }
   };
@@ -82,6 +101,33 @@ export default function Dashboard() {
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
           </div>
+        </div>
+      </>
+    );
+  }
+
+  if (error) {
+    return (
+      <>
+        <Header />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-1 space-y-4 p-8 pt-6">
+          <div className="flex items-center justify-between space-y-2">
+            <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+          </div>
+          <Card>
+            <CardContent className="p-6">
+              <div className="text-center">
+                <div className="text-red-500 mb-4">
+                  <Activity className="h-12 w-12 mx-auto mb-2" />
+                  <p className="text-lg font-semibold">Failed to load dashboard</p>
+                </div>
+                <p className="text-muted-foreground mb-4">{error}</p>
+                <Button onClick={() => { setError(null); setLoading(true); loadDashboardData(); }}>
+                  Try Again
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </>
     );

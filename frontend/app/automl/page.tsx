@@ -57,6 +57,20 @@ export default function AutoML() {
 
   useEffect(() => {
     loadDatasets();
+    
+    // Listen for storage events (when datasets are updated from other pages)
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'availableDatasets') {
+        console.log('Datasets updated from another page, reloading...');
+        loadDatasets();
+      }
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, []);
 
   useEffect(() => {
@@ -164,13 +178,26 @@ export default function AutoML() {
     if (!selectedDataset) return;
     
     setLoading(true);
+    console.log('Loading columns for dataset ID:', selectedDataset);
     try {
       const preview = await api.previewDataset(selectedDataset, 5);
-      console.log('Preview response:', preview);
+      console.log('Full preview response:', preview);
+      console.log('Preview data:', preview.data);
       console.log('Available columns:', preview.columns);
-      setDatasetColumns(preview.columns || []);
+      console.log('Data length:', preview.data?.length);
+      
+      // If preview.columns is empty but data exists, extract columns from first row
+      let columns = preview.columns || [];
+      if ((!columns || columns.length === 0) && preview.data && preview.data.length > 0) {
+        columns = Object.keys(preview.data[0]);
+        console.log('Extracted columns from data:', columns);
+      }
+      
+      setDatasetColumns(columns);
+      console.log('Final columns set:', columns);
     } catch (error) {
       console.error('Failed to load dataset columns:', error);
+      console.error('Error details:', error);
     } finally {
       setLoading(false);
     }

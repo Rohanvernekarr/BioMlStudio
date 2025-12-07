@@ -39,17 +39,32 @@ class ApiClient {
       headers['Content-Type'] = 'application/json';
     }
 
-    const response = await fetch(`${API_BASE}${API_PREFIX}${endpoint}`, {
-      ...options,
-      headers,
-    });
+    // Add timeout for dashboard requests to prevent hanging
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
 
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({ detail: 'Request failed' }));
-      throw new Error(error.detail || `HTTP ${response.status}`);
+    try {
+      const response = await fetch(`${API_BASE}${API_PREFIX}${endpoint}`, {
+        ...options,
+        headers,
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        const error = await response.json().catch(() => ({ detail: 'Request failed' }));
+        throw new Error(error.detail || `HTTP ${response.status}`);
+      }
+
+      return response.json();
+    } catch (error) {
+      clearTimeout(timeoutId);
+      if (error instanceof Error && error.name === 'AbortError') {
+        throw new Error('Request timeout - server is taking too long to respond');
+      }
+      throw error;
     }
-
-    return response.json();
   }
 
   async uploadDataset(file: File, name: string, datasetType: string = 'general') {

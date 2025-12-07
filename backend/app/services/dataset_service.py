@@ -291,6 +291,27 @@ class DatasetService:
         
         self.logger.info(f"Preview called: file={file_path.name}, dataset_type={dataset_type}, suffix={file_path.suffix}, absolute_path={file_path}")
         
+        # Check if file exists, if not try to find it in uploads directory
+        if not file_path.exists():
+            self.logger.warning(f"File not found at {file_path}, searching in uploads directory...")
+            backend_dir = Path(__file__).parent.parent.parent
+            
+            # Try to find the file by name in uploads directory
+            uploads_dir = backend_dir / "uploads"
+            if uploads_dir.exists():
+                for user_dir in uploads_dir.iterdir():
+                    if user_dir.is_dir():
+                        potential_file = user_dir / file_path.name
+                        if potential_file.exists():
+                            file_path = potential_file
+                            self.logger.info(f"Found file at alternative location: {file_path}")
+                            break
+            
+            # If still not found, return empty result
+            if not file_path.exists():
+                self.logger.error(f"File not found: {file_path}")
+                return []
+        
         try:
             if dataset_type in ['dna', 'rna', 'protein']:
                 return await self._preview_biological_dataset(file_path, rows)

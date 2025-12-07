@@ -20,6 +20,20 @@ export default function Datasets() {
 
   useEffect(() => {
     loadDatasets();
+    
+    // Listen for storage events (when datasets are updated from other pages)
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'availableDatasets') {
+        console.log('Datasets updated from another page, reloading...');
+        loadDatasets();
+      }
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, []);
 
   useEffect(() => {
