@@ -39,14 +39,10 @@ export default function Dashboard() {
   const loadDashboardData = async () => {
     try {
       // Load datasets
-      const datasets = await api.request<any>('/api/v1/datasets/', {
-        method: 'GET'
-      });
+      const datasets = await api.get<any>('/datasets/');
       
       // Load jobs
-      const jobs = await api.request<any>('/api/v1/jobs/', {
-        method: 'GET'
-      });
+      const jobs = await api.get<any>('/jobs/');
 
       setStats({
         totalProjects: jobs.items?.length || 0,

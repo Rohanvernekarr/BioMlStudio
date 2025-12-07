@@ -68,6 +68,14 @@ class ApiClient {
     return this.request<any>(`/datasets/${id}`);
   }
 
+  async analyzeDataset(id: number) {
+    return this.request<any>(`/datasets/${id}/analyze`);
+  }
+
+  async visualizeDataset(id: number) {
+    return this.request<any>(`/datasets/${id}/visualizations`);
+  }
+
   async previewDataset(id: number, rows: number = 5) {
     return this.request<any>(`/datasets/${id}/preview?rows=${rows}`);
   }
@@ -151,6 +159,13 @@ class ApiClient {
     });
   }
 
+  async startWorkflow(config: any) {
+    return this.request<any>('/workflow/start', {
+      method: 'POST',
+      body: JSON.stringify(config),
+    });
+  }
+
   async getWorkflowStatus(jobId: number) {
     return this.request<any>(`/workflow/${jobId}/status`);
   }
@@ -194,3 +209,7 @@ class ApiClient {
 }
 
 export const api = new ApiClient();
+
+// Export individual methods for convenience
+export const analyzeDataset = (id: number) => api.analyzeDataset(id);
+export const visualizeDataset = (id: number) => api.visualizeDataset(id);

@@ -66,10 +66,82 @@ export default function AutoML() {
 
   const loadDatasets = async () => {
     try {
-      const response = await api.request<any>('/api/v1/datasets/', { method: 'GET' });
-      setDatasets(response.items || []);
+      // First load from API
+      const response = await api.get<any>('/datasets/');
+      let apiDatasets = response.items || [];
+      
+      // Check localStorage for recent uploads
+      const savedDatasets = localStorage.getItem('availableDatasets');
+      if (savedDatasets) {
+        try {
+          const localDatasets = JSON.parse(savedDatasets);
+          // Merge with API datasets, avoiding duplicates
+          localDatasets.forEach((local: any) => {
+            if (!apiDatasets.find((api: any) => api.id === local.id)) {
+              apiDatasets.push({
+                id: local.id,
+                name: local.name,
+                dataset_type: local.type,
+                size: local.size,
+                created_at: local.uploadedAt
+              });
+            }
+          });
+        } catch (error) {
+          console.error('Error parsing saved datasets:', error);
+        }
+      }
+      
+      setDatasets(apiDatasets);
+      
+      // Check for dataset parameter in URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const datasetParam = urlParams.get('dataset');
+      if (datasetParam) {
+        const datasetId = parseInt(datasetParam);
+        const foundDataset = apiDatasets.find((d: any) => d.id === datasetId);
+        if (foundDataset) {
+          setSelectedDataset(datasetId);
+        }
+      } else {
+        // Auto-select most recent dataset if available
+        const lastDataset = localStorage.getItem('lastUploadedDataset');
+        if (lastDataset && apiDatasets.length > 0) {
+          try {
+            const datasetInfo = JSON.parse(lastDataset);
+            const foundDataset = apiDatasets.find((d: any) => d.id === datasetInfo.id);
+            if (foundDataset) {
+              setSelectedDataset(datasetInfo.id);
+            }
+          } catch (error) {
+            console.error('Error parsing last dataset:', error);
+          }
+        }
+      }
     } catch (error) {
       console.error('Failed to load datasets:', error);
+      // If API fails, try to load from localStorage only
+      const savedDatasets = localStorage.getItem('availableDatasets');
+      if (savedDatasets) {
+        try {
+          const localDatasets = JSON.parse(savedDatasets);
+          const formattedDatasets = localDatasets.map((local: any) => ({
+            id: local.id,
+            name: local.name,
+            dataset_type: local.type,
+            size: local.size,
+            created_at: local.uploadedAt
+          }));
+          setDatasets(formattedDatasets);
+          
+          // Auto-select the most recent one
+          if (formattedDatasets.length > 0) {
+            setSelectedDataset(formattedDatasets[0].id);
+          }
+        } catch (error) {
+          console.error('Error parsing saved datasets:', error);
+        }
+      }
     }
   };
 
@@ -115,7 +187,13 @@ export default function AutoML() {
       };
 
       const job = await api.startWorkflow(jobConfig);
-      router.push(`/running/${job.id}`);
+      
+      if (job && job.job_id) {
+        router.push(`/running/${job.job_id}`);
+      } else {
+        console.error('Failed to start AutoML: Invalid job response', job);
+        alert('Failed to start training. Please try again.');
+      }
     } catch (error) {
       console.error('Failed to start AutoML:', error);
     } finally {

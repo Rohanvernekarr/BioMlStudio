@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
@@ -20,6 +20,34 @@ export default function Upload() {
   const [fileInfo, setFileInfo] = useState<any>(null);
   const [uploadedDatasetId, setUploadedDatasetId] = useState<number | null>(null);
   const [preprocessing, setPreprocessing] = useState(false);
+
+  // Check for existing uploaded dataset on page load
+  useEffect(() => {
+    const lastDataset = localStorage.getItem('lastUploadedDataset');
+    if (lastDataset) {
+      try {
+        const datasetInfo = JSON.parse(lastDataset);
+        // Check if uploaded within last 24 hours
+        const uploadTime = new Date(datasetInfo.uploadedAt);
+        const now = new Date();
+        const hoursDiff = (now.getTime() - uploadTime.getTime()) / (1000 * 60 * 60);
+        
+        if (hoursDiff < 24) {
+          setUploadedDatasetId(datasetInfo.id);
+          setFileInfo({
+            name: datasetInfo.name,
+            type: datasetInfo.fileType,
+            sizeFormatted: formatFileSize(datasetInfo.size)
+          });
+        } else {
+          // Clear old dataset info
+          localStorage.removeItem('lastUploadedDataset');
+        }
+      } catch (error) {
+        console.error('Error loading saved dataset:', error);
+      }
+    }
+  }, []);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -94,6 +122,18 @@ export default function Upload() {
       
       setPreprocessing(true);
       const dataset = await api.uploadDataset(file, file.name, datasetType);
+      
+      // Store dataset info in localStorage for cross-page availability
+      const datasetInfo = {
+        id: dataset.id,
+        name: dataset.name || file.name,
+        type: datasetType,
+        uploadedAt: new Date().toISOString(),
+        size: file.size,
+        fileType: fileInfo?.type || detectFileType(file.name)
+      };
+      localStorage.setItem('lastUploadedDataset', JSON.stringify(datasetInfo));
+      localStorage.setItem('availableDatasets', JSON.stringify([datasetInfo]));
       
       setUploadedDatasetId(dataset.id);
       setUploading(false);
@@ -316,38 +356,90 @@ export default function Upload() {
             <Card className="centered-card-xl">
               <div className="p-12 text-center">
                 <CheckCircle2 className="w-16 h-16 text-emerald-400 mx-auto mb-6" />
-                <h2 className="text-3xl font-bold text-white mb-4">Dataset Uploaded Successfully!</h2>
-                <p className="text-xl text-zinc-300 mb-8 max-w-2xl mx-auto leading-relaxed">
-                  Your dataset has been uploaded and preprocessed. Quality analysis and feature extraction completed.
+                <h2 className="text-3xl font-bold text-white mb-4">Dataset Ready Across All Modules!</h2>
+                <p className="text-xl text-zinc-300 mb-4 max-w-2xl mx-auto leading-relaxed">
+                  Your dataset has been uploaded and is now available in Pipelines, AutoML, and all analysis modules.
                 </p>
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-900/50 border border-green-500/30 rounded-full mb-6">
+                  <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                  <span className="text-green-300 font-medium text-sm">Dataset synchronized across platform</span>
+                </div>
                 
-                <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-                  <Button
-                    onClick={() => router.push(`/analysis/${uploadedDatasetId}`)}
-                    variant="outline"
-                    size="lg"
-                    className="flex items-center gap-2"
-                  >
-                    <BarChart3 className="w-4 h-4" />
-                    View Analysis Report
-                  </Button>
-                  <Button
-                    onClick={() => router.push(`/configure/${uploadedDatasetId}`)}
-                    size="lg"
-                    className="flex items-center gap-2"
-                  >
-                    <Rocket className="w-4 h-4" />
-                    Start Training Model
-                  </Button>
-                  <Button
-                    onClick={() => router.push('/automl')}
-                    variant="outline"
-                    size="lg"
-                    className="flex items-center gap-2"
-                  >
-                    <Bot className="w-4 h-4" />
-                    Use AutoML Pipeline
-                  </Button>
+                {/* Next Steps - Biology-First Approach */}
+                <div className="mb-8">
+                  <h3 className="text-xl font-bold text-white mb-4 text-center">
+                    🧬 Choose Your Analysis Path
+                    {fileInfo?.type === 'FASTA Sequence' && 
+                      <span className="block text-sm text-green-400 font-normal mt-1">
+                        ⭐ Recommended for sequence data
+                      </span>
+                    }
+                  </h3>
+                  
+                  {/* Biology-Specific Pipelines (Primary Options) */}
+                  <div className="grid md:grid-cols-2 gap-4 mb-6">
+                    <Card className="p-6 border-blue-500/30 bg-blue-900/10 hover:bg-blue-900/20 transition-all cursor-pointer group">
+                      <div className="text-center w-full h-full" onClick={() => router.push('/pipelines')}>
+                        <Dna className="w-12 h-12 text-blue-400 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+                        <h4 className="text-lg font-bold text-white mb-2">Domain-Specific Pipelines</h4>
+                        <p className="text-blue-200 text-sm mb-4">
+                          {fileInfo?.type === 'FASTA Sequence' 
+                            ? 'Perfect for your sequence data! Start with protein or DNA analysis.'
+                            : 'Biology-focused AI workflows for specialized analysis.'}
+                        </p>
+                        <Button size="sm" className="w-full">
+                          Choose Pipeline →
+                        </Button>
+                      </div>
+                    </Card>
+
+                    <Card className="p-6 border-purple-500/30 bg-purple-900/10 hover:bg-purple-900/20 transition-all cursor-pointer group">
+                      <div className="text-center w-full h-full" onClick={() => router.push('/automl')}>
+                        <Bot className="w-12 h-12 text-purple-400 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+                        <h4 className="text-lg font-bold text-white mb-2">AutoML Builder</h4>
+                        <p className="text-purple-200 text-sm mb-4">
+                          Build custom AI models with automated optimization and training.
+                        </p>
+                        <Button variant="outline" size="sm" className="w-full">
+                          Build Custom Model
+                        </Button>
+                      </div>
+                    </Card>
+                  </div>
+
+                  {/* Direct Action Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center mb-4">
+                    <Button
+                      onClick={() => router.push(`/datasets/${uploadedDatasetId}`)}
+                      variant="outline"
+                      size="lg"
+                      className="flex items-center gap-2"
+                    >
+                      <BarChart3 className="w-4 h-4" />
+                      View Analysis Report
+                    </Button>
+                    <Button
+                      onClick={() => router.push(`/automl?dataset=${uploadedDatasetId}`)}
+                      size="lg"
+                      className="flex items-center gap-2"
+                    >
+                      <Rocket className="w-4 h-4" />
+                      Start Training Model
+                    </Button>
+                  </div>
+                  
+                  {/* Secondary Navigation */}
+                  <div className="flex flex-col sm:flex-row gap-2 justify-center">
+                    <Button
+                      onClick={() => router.push('/dashboard')}
+                      variant="ghost"
+                      size="sm"
+                      className="flex items-center gap-2 text-zinc-400"
+                    >
+                      <FileText className="w-4 h-4" />
+                      Back to Dashboard
+                    </Button>
+                  </div>
                 </div>
 
                 <Button

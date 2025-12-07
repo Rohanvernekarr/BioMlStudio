@@ -35,10 +35,51 @@ export default function Pipelines() {
 
   const loadDatasets = async () => {
     try {
+      // First load from API
       const response = await api.get<any>('/datasets/');
-      setDatasets(response.items || []);
+      let apiDatasets = response.items || [];
+      
+      // Check localStorage for recent uploads
+      const savedDatasets = localStorage.getItem('availableDatasets');
+      if (savedDatasets) {
+        try {
+          const localDatasets = JSON.parse(savedDatasets);
+          // Merge with API datasets, avoiding duplicates
+          localDatasets.forEach((local: any) => {
+            if (!apiDatasets.find((api: any) => api.id === local.id)) {
+              apiDatasets.push({
+                id: local.id,
+                name: local.name,
+                dataset_type: local.type,
+                size: local.size,
+                created_at: local.uploadedAt
+              });
+            }
+          });
+        } catch (error) {
+          console.error('Error parsing saved datasets:', error);
+        }
+      }
+      
+      setDatasets(apiDatasets);
     } catch (error) {
       console.error('Failed to load datasets:', error);
+      // If API fails, try to load from localStorage only
+      const savedDatasets = localStorage.getItem('availableDatasets');
+      if (savedDatasets) {
+        try {
+          const localDatasets = JSON.parse(savedDatasets);
+          setDatasets(localDatasets.map((local: any) => ({
+            id: local.id,
+            name: local.name,
+            dataset_type: local.type,
+            size: local.size,
+            created_at: local.uploadedAt
+          })));
+        } catch (error) {
+          console.error('Error parsing saved datasets:', error);
+        }
+      }
     }
   };
 
@@ -105,11 +146,18 @@ export default function Pipelines() {
         test_size: 0.2,
         val_size: 0.1,
         optimize_hyperparams: true,
+        n_models: 3,
         generate_report: true
       };
 
       const job = await api.startWorkflow(config);
-      router.push(`/running/${job.id}`);
+      
+      if (job && job.job_id) {
+        router.push(`/running/${job.job_id}`);
+      } else {
+        console.error('Failed to start workflow: Invalid job response', job);
+        alert('Failed to start pipeline. Please try again.');
+      }
     } catch (error) {
       console.error('Failed to start pipeline:', error);
     } finally {
@@ -234,11 +282,26 @@ export default function Pipelines() {
               ) : (
                 <div className="text-center py-12">
                   <Folder className="w-12 h-12 text-zinc-500 mx-auto mb-4" />
-                  <h3 className="text-xl font-bold text-white mb-2">No datasets available</h3>
-                  <p className="text-zinc-400 mb-6">Upload a {selectedPipeline.type} dataset to get started.</p>
-                  <Button onClick={() => router.push('/upload')}>
-                    Upload Dataset
-                  </Button>
+                  <h3 className="text-xl font-bold text-white mb-2">No suitable datasets found</h3>
+                  <p className="text-zinc-400 mb-6">
+                    You need a {selectedPipeline.type === 'protein' ? 'protein sequence (FASTA)' : 'DNA sequence (FASTA)'} dataset for this pipeline.
+                  </p>
+                  <div className="space-y-3">
+                    <Button onClick={() => router.push('/upload')} size="lg">
+                      <Folder className="w-4 h-4 mr-2" />
+                      Upload {selectedPipeline.type === 'protein' ? 'Protein' : 'DNA'} Dataset
+                    </Button>
+                    <div className="text-sm text-zinc-500">
+                      <span>or</span>
+                    </div>
+                    <Button 
+                      variant="outline" 
+                      onClick={() => router.push('/datasets')} 
+                      size="sm"
+                    >
+                      View All Datasets
+                    </Button>
+                  </div>
                 </div>
               )}
 
@@ -292,9 +355,17 @@ export default function Pipelines() {
             <p className="text-xl text-zinc-300 max-w-4xl mx-auto leading-relaxed mb-4">
               Specialized bioinformatics pipelines with advanced ML models and biological embeddings
             </p>
-            <p className="text-lg text-zinc-400 max-w-3xl mx-auto">
+            <p className="text-lg text-zinc-400 max-w-3xl mx-auto mb-6">
               Choose your analysis type and follow our guided workflow - perfect for beginners!
             </p>
+            {datasets.length > 0 && (
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-900/50 border border-blue-500/30 rounded-full">
+                <span className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></span>
+                <span className="text-blue-300 font-medium text-sm">
+                  ✓ {datasets.length} dataset{datasets.length > 1 ? 's' : ''} available for analysis
+                </span>
+              </div>
+            )}
           </div>
 
           {/* Pipeline Selection */}
@@ -303,9 +374,12 @@ export default function Pipelines() {
               <Card 
                 key={pipeline.id}
                 className="p-8 border-zinc-700/50 hover:border-blue-500/50 transition-all cursor-pointer group hover:shadow-2xl hover:shadow-blue-500/10"
-                onClick={() => setSelectedPipeline(pipeline)}
               >
-                <div className="text-center mb-6">
+                <div 
+                  className="w-full h-full" 
+                  onClick={() => setSelectedPipeline(pipeline)}
+                >
+                  <div className="text-center mb-6">
                   <div className="mb-4">
                     {pipeline.icon === 'dna' ? (
                       <Dna className="w-16 h-16 text-green-400 mx-auto group-hover:scale-110 transition-transform" />
@@ -357,10 +431,11 @@ export default function Pipelines() {
                   </div>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-zinc-800/50">
-                  <Button size="lg" className="w-full text-lg py-4 bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-                    Choose {pipeline.type.toUpperCase()} Analysis →
-                  </Button>
+                  <div className="mt-8 pt-6 border-t border-zinc-800/50">
+                    <Button size="lg" className="w-full text-lg py-4 bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                      Choose {pipeline.type.toUpperCase()} Analysis →
+                    </Button>
+                  </div>
                 </div>
               </Card>
             ))}

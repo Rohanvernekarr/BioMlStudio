@@ -14,7 +14,7 @@ export default function RunningPage() {
   useAuth();
   const router = useRouter();
   const params = useParams();
-  const jobId = Number(params.id);
+  const jobId = params.id ? Number(params.id) : null;
 
   const [job, setJob] = useState<Job | null>(null);
   const [progress, setProgress] = useState(0);
@@ -27,6 +27,13 @@ export default function RunningPage() {
   ]);
 
   useEffect(() => {
+    // Don't start polling if jobId is invalid
+    if (!jobId || isNaN(jobId)) {
+      console.error('Invalid job ID:', params.id);
+      router.push('/dashboard');
+      return;
+    }
+
     const interval = setInterval(async () => {
       try {
         const jobData = await api.getWorkflowStatus(jobId);

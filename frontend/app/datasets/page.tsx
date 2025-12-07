@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Header } from '@/components/Header';
-import { api } from '@/lib/api';
+import { api, analyzeDataset, visualizeDataset } from '@/lib/api';
 import { useAuth } from '@/lib/useAuth';
 import { Folder, BarChart3, Rocket, Eye, ArrowLeft } from 'lucide-react';
 
@@ -16,6 +16,7 @@ export default function Datasets() {
   const [datasets, setDatasets] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedDataset, setSelectedDataset] = useState<any>(null);
+  const [analysisData, setAnalysisData] = useState<any>(null);
 
   useEffect(() => {
     loadDatasets();
@@ -40,6 +41,17 @@ export default function Datasets() {
       console.error('Failed to load datasets:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleAnalyzeDataset = async (dataset: any) => {
+    try {
+      // Use dataset preview to show basic analysis
+      const preview = await api.previewDataset(dataset.id, 10);
+      setSelectedDataset({ ...dataset, preview });
+    } catch (error) {
+      console.error('Failed to analyze dataset:', error);
+      alert('Failed to analyze dataset. Please try again.');
     }
   };
 
@@ -145,12 +157,12 @@ export default function Datasets() {
                         </div>
                         <div className="flex gap-2">
                           <Button
-                            onClick={() => router.push(`/analysis/${selectedDataset.id}`)}
+                            onClick={() => handleAnalyzeDataset(selectedDataset)}
                             size="sm"
                             className="flex items-center gap-2"
                           >
                             <BarChart3 className="w-4 h-4" />
-                            Full Analysis
+                            View Data
                           </Button>
                           <Button
                             onClick={() => router.push(`/configure/${selectedDataset.id}`)}
@@ -306,14 +318,27 @@ export default function Datasets() {
                       <div className="mt-6 pt-6 border-t border-zinc-700/50">
                         <div className="flex gap-4">
                           <Button
-                            onClick={() => router.push(`/analysis/${selectedDataset.id}`)}
+                            onClick={async () => {
+                              try {
+                                const analysis = await analyzeDataset(selectedDataset.id);
+                                setAnalysisData(analysis);
+                                // Show analysis results inline or expand current view
+                              } catch (error) {
+                                console.error('Analysis failed:', error);
+                                alert('Analysis currently unavailable');
+                              }
+                            }}
                             className="flex items-center gap-2"
                           >
                             <BarChart3 className="w-4 h-4" />
                             Detailed Analysis
                           </Button>
                           <Button
-                            onClick={() => router.push(`/configure/${selectedDataset.id}`)}
+                            onClick={() => {
+                              // Store dataset for pipeline use
+                              localStorage.setItem('selectedDataset', JSON.stringify(selectedDataset));
+                              router.push('/automl');
+                            }}
                             variant="outline"
                             className="flex items-center gap-2"
                           >
@@ -321,9 +346,16 @@ export default function Datasets() {
                             Train Model
                           </Button>
                           <Button
-                            onClick={() => {
-                              // Preview functionality
-                              alert('Dataset preview would open here');
+                            onClick={async () => {
+                              try {
+                                const preview = await visualizeDataset(selectedDataset.id);
+                                console.log('Dataset preview:', preview);
+                                // Could open a modal or navigate to preview page
+                                alert('Dataset visualization loaded - check console for details');
+                              } catch (error) {
+                                console.error('Preview failed:', error);
+                                alert('Preview currently unavailable');
+                              }
                             }}
                             variant="outline"
                             className="flex items-center gap-2"
