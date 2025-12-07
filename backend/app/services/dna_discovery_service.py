@@ -279,6 +279,7 @@ class DNADiscoveryService:
                                      analysis_config: Dict[str, Any] = None) -> Dict[str, Any]:
         """
         Perform comprehensive analysis combining all discovery methods
+        Optimized for performance with large datasets
         """
         if not analysis_config:
             analysis_config = {
@@ -291,50 +292,552 @@ class DNADiscoveryService:
                 'evolutionary_analysis': True
             }
         
+        # Batch processing configuration for massive datasets
+        BATCH_SIZE_SEQUENCES = 100  # Process in batches of 100 sequences
+        BATCH_SIZE_BP = 500000      # Process in batches of 500k bp
+        MAX_TOTAL_SEQUENCES = 1000  # Maximum sequences per analysis (can be increased)
+        MAX_TOTAL_BP = 10000000     # Maximum 10M bp per analysis (can be increased)
+        
+        original_count = len(sequences)
+        total_bp = sum(len(seq) for seq in sequences)
+        
+        # Check if we need batch processing
+        use_batch_processing = (len(sequences) > BATCH_SIZE_SEQUENCES or 
+                               total_bp > BATCH_SIZE_BP or
+                               analysis_config.get('force_batch_processing', False))
+        
+        if use_batch_processing:
+            logger.info(f"🔄 Large dataset detected ({len(sequences)} sequences, {total_bp:,} bp). Using batch processing.")
+            return self._batch_comprehensive_analysis(
+                sequences, sequence_ids, analysis_config, 
+                BATCH_SIZE_SEQUENCES, BATCH_SIZE_BP
+            )
+        
+        # For smaller datasets, use original logic with higher limits
+        if len(sequences) > MAX_TOTAL_SEQUENCES:
+            logger.warning(f"Dataset too large ({len(sequences)} sequences). Processing first {MAX_TOTAL_SEQUENCES} sequences.")
+            sequences = sequences[:MAX_TOTAL_SEQUENCES]
+            if sequence_ids:
+                sequence_ids = sequence_ids[:MAX_TOTAL_SEQUENCES]
+        
+        if total_bp > MAX_TOTAL_BP:
+            logger.warning(f"Dataset too large ({total_bp:,} bp). Truncating sequences to fit {MAX_TOTAL_BP:,} bp limit.")
+            truncated_sequences = []
+            current_bp = 0
+            for seq in sequences:
+                if current_bp + len(seq) <= MAX_TOTAL_BP:
+                    truncated_sequences.append(seq)
+                    current_bp += len(seq)
+                else:
+                    remaining_bp = MAX_TOTAL_BP - current_bp
+                    if remaining_bp > 100:  # Only add if at least 100bp remaining
+                        truncated_sequences.append(seq[:remaining_bp])
+                    break
+            sequences = truncated_sequences
+        
         results = {
             'summary': {
                 'total_sequences': len(sequences),
+                'original_sequence_count': original_count,
+                'total_base_pairs': sum(len(seq) for seq in sequences),
                 'analysis_timestamp': pd.Timestamp.now().isoformat(),
-                'sequence_ids': sequence_ids or [f'seq_{i}' for i in range(len(sequences))]
+                'sequence_ids': sequence_ids or [f'seq_{i}' for i in range(len(sequences))],
+                'performance_note': 'Dataset was limited for optimal performance' if (len(sequences) < original_count or total_bp > MAX_TOTAL_BP) else 'Full dataset processed'
             }
         }
         
-        # Gene Discovery
-        if analysis_config.get('gene_discovery', True):
-            logger.info("Performing gene discovery analysis...")
-            results['gene_discovery'] = self.discover_new_genes(sequences)
+        try:
+            # Gene Discovery - Fast ORF detection
+            if analysis_config.get('gene_discovery', True):
+                logger.info("Performing gene discovery analysis...")
+                results['gene_discovery'] = self.discover_new_genes(sequences)
+            
+            # Mutation Analysis - Pattern matching
+            if analysis_config.get('mutation_analysis', True):
+                logger.info("Analyzing mutations...")
+                results['mutation_analysis'] = self.identify_disease_mutations(sequences)
+            
+            # Drug Target Identification - Protein analysis (most intensive)
+            if analysis_config.get('drug_targets', True):
+                logger.info("Identifying drug targets...")
+                # Limit to first 20 sequences for drug target analysis (most compute-intensive)
+                drug_sequences = sequences[:20] if len(sequences) > 20 else sequences
+                results['drug_targets'] = self.find_drug_targets(drug_sequences)
+            
+            # Pathogen Detection - Signature matching
+            if analysis_config.get('pathogen_detection', True):
+                logger.info("Detecting pathogens...")
+                results['pathogen_detection'] = self.detect_pathogens(sequences)
+            
+            # Motif Analysis - Fast pattern detection
+            if analysis_config.get('motif_analysis', True):
+                logger.info("Analyzing functional motifs...")
+                results['motif_analysis'] = self.identify_functional_motifs(sequences)
+            
+            # Biomarker Generation - K-mer analysis
+            if analysis_config.get('biomarker_generation', True):
+                logger.info("Generating biomarkers...")
+                results['biomarker_generation'] = self.generate_biomarkers(sequences)
+            
+            # Evolutionary Analysis - Statistical analysis
+            if analysis_config.get('evolutionary_analysis', True):
+                logger.info("Performing evolutionary analysis...")
+                results['evolutionary_analysis'] = self.extract_evolutionary_features(sequences)
+            
+            logger.info(f"Comprehensive analysis completed for {len(sequences)} sequences ({sum(len(seq) for seq in sequences)} bp total)")
+            
+        except Exception as e:
+            logger.error(f"Error during comprehensive analysis: {e}")
+            results['error'] = f"Analysis partially failed: {str(e)}"
+            
+        return results
+    
+    def _batch_comprehensive_analysis(self, sequences: List[str], 
+                                    sequence_ids: List[str] = None,
+                                    analysis_config: Dict[str, Any] = None,
+                                    batch_size_seqs: int = 100,
+                                    batch_size_bp: int = 500000) -> Dict[str, Any]:
+        """
+        Process massive datasets in batches to handle millions of sequences
+        """
+        logger.info(f"📊 Starting batch processing for {len(sequences)} sequences ({sum(len(s) for s in sequences):,} bp)")
         
-        # Mutation Analysis
-        if analysis_config.get('mutation_analysis', True):
-            logger.info("Analyzing mutations...")
-            results['mutation_analysis'] = self.identify_disease_mutations(sequences)
+        # Initialize aggregated results
+        aggregated_results = {
+            'summary': {
+                'total_sequences': len(sequences),
+                'total_base_pairs': sum(len(seq) for seq in sequences),
+                'analysis_timestamp': pd.Timestamp.now().isoformat(),
+                'sequence_ids': sequence_ids or [f'seq_{i}' for i in range(len(sequences))],
+                'processing_mode': 'batch_processing',
+                'batch_count': 0
+            },
+            'batch_summaries': []
+        }
         
-        # Drug Target Identification
-        if analysis_config.get('drug_targets', True):
-            logger.info("Identifying drug targets...")
-            results['drug_targets'] = self.find_drug_targets(sequences)
+        # Create batches
+        batches = self._create_batches(sequences, sequence_ids, batch_size_seqs, batch_size_bp)
+        aggregated_results['summary']['batch_count'] = len(batches)
         
-        # Pathogen Detection
-        if analysis_config.get('pathogen_detection', True):
-            logger.info("Detecting pathogens...")
-            results['pathogen_detection'] = self.detect_pathogens(sequences)
+        logger.info(f"🔢 Created {len(batches)} batches for processing")
         
-        # Motif Analysis
-        if analysis_config.get('motif_analysis', True):
-            logger.info("Analyzing functional motifs...")
-            results['motif_analysis'] = self.identify_functional_motifs(sequences)
+        # Initialize analysis result containers
+        for analysis_type in ['gene_discovery', 'mutation_analysis', 'drug_targets', 
+                             'pathogen_detection', 'motif_analysis', 'biomarker_generation', 
+                             'evolutionary_analysis']:
+            if analysis_config.get(analysis_type, True):
+                aggregated_results[analysis_type] = {
+                    'batch_results': [],
+                    'aggregated_stats': {}
+                }
         
-        # Biomarker Generation
-        if analysis_config.get('biomarker_generation', True):
-            logger.info("Generating biomarkers...")
-            results['biomarker_generation'] = self.generate_biomarkers(sequences)
+        # Process each batch
+        for batch_idx, (batch_seqs, batch_ids) in enumerate(batches):
+            logger.info(f"⚙️  Processing batch {batch_idx + 1}/{len(batches)} ({len(batch_seqs)} sequences, {sum(len(s) for s in batch_seqs):,} bp)")
+            
+            try:
+                # Process batch with original method (but smaller dataset)
+                batch_results = self._process_single_batch(
+                    batch_seqs, batch_ids, analysis_config
+                )
+                
+                # Aggregate results
+                batch_summary = {
+                    'batch_id': batch_idx + 1,
+                    'sequence_count': len(batch_seqs),
+                    'base_pair_count': sum(len(s) for s in batch_seqs),
+                    'processing_time': batch_results.get('processing_time', 'unknown')
+                }
+                aggregated_results['batch_summaries'].append(batch_summary)
+                
+                # Merge batch results into aggregated results
+                self._merge_batch_results(aggregated_results, batch_results, batch_idx)
+                
+                # Log batch results for debugging
+                logger.debug(f"📋 Batch {batch_idx + 1} results: {list(batch_results.keys())}")
+                if 'gene_discovery' in batch_results:
+                    gene_count = len(batch_results['gene_discovery'].get('potential_genes', []))
+                    logger.debug(f"  🧬 Genes found in batch: {gene_count}")
+                
+            except Exception as e:
+                logger.error(f"❌ Error processing batch {batch_idx + 1}: {e}")
+                aggregated_results['batch_summaries'].append({
+                    'batch_id': batch_idx + 1,
+                    'error': str(e)
+                })
         
-        # Evolutionary Analysis
-        if analysis_config.get('evolutionary_analysis', True):
-            logger.info("Performing evolutionary analysis...")
-            results['evolutionary_analysis'] = self.extract_evolutionary_features(sequences)
+        # Calculate final aggregated statistics
+        self._calculate_aggregated_statistics(aggregated_results)
+        
+        # Create simplified results structure for frontend compatibility
+        simplified_results = self._create_simplified_results(aggregated_results)
+        
+        logger.info(f"✅ Batch processing completed. Processed {len(sequences)} sequences in {len(batches)} batches")
+        logger.info(f"📊 Final aggregated stats: {simplified_results.get('summary', {})}")
+        
+        return simplified_results
+    
+    def _create_batches(self, sequences: List[str], sequence_ids: List[str] = None, 
+                       batch_size_seqs: int = 100, batch_size_bp: int = 500000) -> List[Tuple[List[str], List[str]]]:
+        """Create batches of sequences based on count and base pair limits"""
+        batches = []
+        current_batch_seqs = []
+        current_batch_ids = []
+        current_bp = 0
+        
+        for i, seq in enumerate(sequences):
+            seq_id = sequence_ids[i] if sequence_ids else f'seq_{i}'
+            
+            # Handle massive individual sequences by splitting them
+            if len(seq) > batch_size_bp:
+                logger.info(f"🔪 Splitting large sequence {seq_id} ({len(seq):,} bp) into chunks")
+                
+                # Save current batch if not empty
+                if current_batch_seqs:
+                    batches.append((current_batch_seqs.copy(), current_batch_ids.copy()))
+                    current_batch_seqs = []
+                    current_batch_ids = []
+                    current_bp = 0
+                
+                # Split the large sequence into chunks
+                chunk_size = batch_size_bp
+                for chunk_start in range(0, len(seq), chunk_size):
+                    chunk_end = min(chunk_start + chunk_size, len(seq))
+                    chunk_seq = seq[chunk_start:chunk_end]
+                    chunk_id = f"{seq_id}_chunk_{chunk_start//chunk_size + 1}"
+                    
+                    batches.append(([chunk_seq], [chunk_id]))
+                    logger.debug(f"  Created chunk {chunk_id}: {len(chunk_seq):,} bp")
+                
+                continue  # Skip normal batching for this sequence
+            
+            # Normal batching logic for smaller sequences
+            # Check if adding this sequence would exceed limits
+            if (len(current_batch_seqs) >= batch_size_seqs or 
+                current_bp + len(seq) > batch_size_bp) and current_batch_seqs:
+                
+                # Save current batch and start new one
+                batches.append((current_batch_seqs.copy(), current_batch_ids.copy()))
+                current_batch_seqs = []
+                current_batch_ids = []
+                current_bp = 0
+            
+            current_batch_seqs.append(seq)
+            current_batch_ids.append(seq_id)
+            current_bp += len(seq)
+        
+        # Add final batch if not empty
+        if current_batch_seqs:
+            batches.append((current_batch_seqs, current_batch_ids))
+        
+        return batches
+    
+    def _process_single_batch(self, sequences: List[str], sequence_ids: List[str], 
+                            analysis_config: Dict[str, Any]) -> Dict[str, Any]:
+        """Process a single batch using the original comprehensive analysis"""
+        start_time = pd.Timestamp.now()
+        
+        # Use the original analysis logic but without batch processing
+        config_copy = analysis_config.copy()
+        config_copy['force_batch_processing'] = False  # Prevent recursive batching
+        
+        results = {
+            'summary': {
+                'total_sequences': len(sequences),
+                'total_base_pairs': sum(len(seq) for seq in sequences),
+                'analysis_timestamp': start_time.isoformat(),
+                'sequence_ids': sequence_ids
+            }
+        }
+        
+        # Run individual analyses
+        try:
+            if config_copy.get('gene_discovery', True):
+                results['gene_discovery'] = self.discover_new_genes(sequences)
+            if config_copy.get('mutation_analysis', True):
+                results['mutation_analysis'] = self.identify_disease_mutations(sequences)
+            if config_copy.get('drug_targets', True):
+                results['drug_targets'] = self.find_drug_targets(sequences[:20])  # Limit for performance
+            if config_copy.get('pathogen_detection', True):
+                results['pathogen_detection'] = self.detect_pathogens(sequences)
+            if config_copy.get('motif_analysis', True):
+                results['motif_analysis'] = self.identify_functional_motifs(sequences)
+            if config_copy.get('biomarker_generation', True):
+                results['biomarker_generation'] = self.generate_biomarkers(sequences)
+            if config_copy.get('evolutionary_analysis', True):
+                results['evolutionary_analysis'] = self.extract_evolutionary_features(sequences)
+        except Exception as e:
+            logger.error(f"Error in batch analysis: {e}")
+            results['error'] = str(e)
+        
+        end_time = pd.Timestamp.now()
+        results['processing_time'] = str(end_time - start_time)
         
         return results
+    
+    def _merge_batch_results(self, aggregated_results: Dict[str, Any], 
+                           batch_results: Dict[str, Any], batch_idx: int):
+        """Merge individual batch results into aggregated results"""
+        for analysis_type in ['gene_discovery', 'mutation_analysis', 'drug_targets', 
+                             'pathogen_detection', 'motif_analysis', 'biomarker_generation', 
+                             'evolutionary_analysis']:
+            if analysis_type in batch_results and analysis_type in aggregated_results:
+                # Merge results with chunk handling
+                batch_data = {
+                    'batch_id': batch_idx + 1,
+                    'results': batch_results[analysis_type],
+                    'sequence_ids': batch_results.get('summary', {}).get('sequence_ids', [])
+                }
+                
+                aggregated_results[analysis_type]['batch_results'].append(batch_data)
+    
+    def _calculate_aggregated_statistics(self, aggregated_results: Dict[str, Any]):
+        """Calculate final statistics across all batches"""
+        for analysis_type in ['gene_discovery', 'mutation_analysis', 'drug_targets', 
+                             'pathogen_detection', 'motif_analysis', 'biomarker_generation', 
+                             'evolutionary_analysis']:
+            if analysis_type in aggregated_results:
+                batch_results = aggregated_results[analysis_type]['batch_results']
+                
+                # Aggregate statistics based on analysis type
+                if analysis_type == 'gene_discovery':
+                    total_genes = sum(len(br['results'].get('potential_genes', [])) 
+                                    for br in batch_results)
+                    total_orfs = sum(br['results'].get('statistics', {}).get('total_orfs_found', 0)
+                                   for br in batch_results)
+                    
+                    aggregated_results[analysis_type]['aggregated_stats'] = {
+                        'total_potential_genes': total_genes,
+                        'total_orfs_found': total_orfs,
+                        'batches_processed': len(batch_results),
+                        'chunks_processed': len([br for br in batch_results if 'chunk' in str(br.get('sequence_ids', []))])
+                    }
+                
+                elif analysis_type == 'pathogen_detection':
+                    total_bacterial = sum(len(br['results'].get('bacterial_signatures', [])) 
+                                        for br in batch_results)
+                    total_viral = sum(len(br['results'].get('viral_signatures', [])) 
+                                    for br in batch_results)
+                    total_resistance = sum(len(br['results'].get('resistance_genes', [])) 
+                                         for br in batch_results)
+                    
+                    aggregated_results[analysis_type]['aggregated_stats'] = {
+                        'total_bacterial_signatures': total_bacterial,
+                        'total_viral_signatures': total_viral,
+                        'total_resistance_genes': total_resistance,
+                        'total_pathogen_signatures': total_bacterial + total_viral + total_resistance,
+                        'batches_processed': len(batch_results)
+                    }
+                
+                elif analysis_type == 'mutation_analysis':
+                    total_snvs = sum(br['results'].get('statistics', {}).get('total_snvs', 0)
+                                   for br in batch_results)
+                    total_indels = sum(br['results'].get('statistics', {}).get('total_indels', 0)
+                                     for br in batch_results)
+                    
+                    aggregated_results[analysis_type]['aggregated_stats'] = {
+                        'total_snvs': total_snvs,
+                        'total_indels': total_indels,
+                        'total_mutations': total_snvs + total_indels,
+                        'batches_processed': len(batch_results)
+                    }
+                
+                elif analysis_type == 'drug_targets':
+                    total_enzyme_sites = sum(len(br['results'].get('enzyme_sites', [])) 
+                                           for br in batch_results)
+                    total_binding_pockets = sum(len(br['results'].get('binding_pockets', [])) 
+                                              for br in batch_results)
+                    
+                    aggregated_results[analysis_type]['aggregated_stats'] = {
+                        'total_enzyme_sites': total_enzyme_sites,
+                        'total_binding_pockets': total_binding_pockets,
+                        'total_drug_targets': total_enzyme_sites + total_binding_pockets,
+                        'batches_processed': len(batch_results)
+                    }
+                
+                elif analysis_type == 'motif_analysis':
+                    total_promoters = sum(len(br['results'].get('promoters', [])) 
+                                        for br in batch_results)
+                    total_enhancers = sum(len(br['results'].get('enhancers', [])) 
+                                        for br in batch_results)
+                    total_tf_sites = sum(len(br['results'].get('tf_binding_sites', [])) 
+                                       for br in batch_results)
+                    
+                    aggregated_results[analysis_type]['aggregated_stats'] = {
+                        'total_promoters': total_promoters,
+                        'total_enhancers': total_enhancers,
+                        'total_tf_binding_sites': total_tf_sites,
+                        'total_regulatory_elements': total_promoters + total_enhancers + total_tf_sites,
+                        'batches_processed': len(batch_results)
+                    }
+                
+                # Add generic aggregation for other analysis types
+                else:
+                    aggregated_results[analysis_type]['aggregated_stats'] = {
+                        'batches_processed': len(batch_results),
+                        'note': f'Results available in {len(batch_results)} batches'
+                    }
+    
+    def _create_simplified_results(self, aggregated_results: Dict[str, Any]) -> Dict[str, Any]:
+        """Create simplified results structure that matches frontend expectations"""
+        simplified = {
+            'summary': aggregated_results.get('summary', {}),
+            'batch_info': {
+                'batch_count': aggregated_results['summary'].get('batch_count', 0),
+                'processing_mode': 'batch_processing'
+            }
+        }
+        
+        # Convert batch results to simplified format for each analysis type
+        for analysis_type in ['gene_discovery', 'mutation_analysis', 'drug_targets', 
+                             'pathogen_detection', 'motif_analysis', 'biomarker_generation', 
+                             'evolutionary_analysis']:
+            
+            if analysis_type in aggregated_results:
+                batch_data = aggregated_results[analysis_type]
+                aggregated_stats = batch_data.get('aggregated_stats', {})
+                
+                # Create simplified structure matching original format
+                if analysis_type == 'gene_discovery':
+                    # Combine all potential genes from all batches
+                    all_genes = []
+                    total_orfs = 0
+                    
+                    for batch_result in batch_data.get('batch_results', []):
+                        genes = batch_result.get('results', {}).get('potential_genes', [])
+                        all_genes.extend(genes)
+                        
+                        stats = batch_result.get('results', {}).get('statistics', {})
+                        total_orfs += stats.get('total_orfs_found', 0)
+                    
+                    simplified[analysis_type] = {
+                        'potential_genes': all_genes,
+                        'statistics': {
+                            'total_orfs_found': total_orfs,
+                            'protein_coding_orfs': len(all_genes),
+                            'long_orfs': len([g for g in all_genes if g.get('length', 0) >= 1000]),
+                            'average_orf_length': np.mean([g.get('length', 0) for g in all_genes]) if all_genes else 0,
+                            'batches_processed': aggregated_stats.get('batches_processed', 0)
+                        }
+                    }
+                
+                elif analysis_type == 'pathogen_detection':
+                    # Combine all pathogen signatures
+                    all_bacterial = []
+                    all_viral = []
+                    all_resistance = []
+                    
+                    for batch_result in batch_data.get('batch_results', []):
+                        results = batch_result.get('results', {})
+                        all_bacterial.extend(results.get('bacterial_signatures', []))
+                        all_viral.extend(results.get('viral_signatures', []))
+                        all_resistance.extend(results.get('resistance_genes', []))
+                    
+                    simplified[analysis_type] = {
+                        'bacterial_signatures': all_bacterial,
+                        'viral_signatures': all_viral,
+                        'resistance_genes': all_resistance,
+                        'pathogenicity_factors': [],
+                        'statistics': {
+                            'total_bacterial': len(all_bacterial),
+                            'total_viral': len(all_viral),
+                            'total_resistance': len(all_resistance),
+                            'batches_processed': aggregated_stats.get('batches_processed', 0)
+                        }
+                    }
+                
+                elif analysis_type == 'mutation_analysis':
+                    # Combine all mutations
+                    all_snvs = []
+                    all_insertions = []
+                    all_deletions = []
+                    all_oncogenic = []
+                    
+                    for batch_result in batch_data.get('batch_results', []):
+                        results = batch_result.get('results', {})
+                        all_snvs.extend(results.get('snvs', []))
+                        all_insertions.extend(results.get('insertions', []))
+                        all_deletions.extend(results.get('deletions', []))
+                        all_oncogenic.extend(results.get('oncogenic_patterns', []))
+                    
+                    simplified[analysis_type] = {
+                        'snvs': all_snvs,
+                        'insertions': all_insertions,
+                        'deletions': all_deletions,
+                        'oncogenic_patterns': all_oncogenic,
+                        'statistics': {
+                            'total_snvs': len(all_snvs),
+                            'total_indels': len(all_insertions) + len(all_deletions),
+                            'oncogenic_sites': len(all_oncogenic),
+                            'batches_processed': aggregated_stats.get('batches_processed', 0)
+                        }
+                    }
+                
+                elif analysis_type == 'drug_targets':
+                    # Combine all drug targets
+                    all_enzyme_sites = []
+                    all_binding_pockets = []
+                    all_conserved_domains = []
+                    all_druggable_proteins = []
+                    
+                    for batch_result in batch_data.get('batch_results', []):
+                        results = batch_result.get('results', {})
+                        all_enzyme_sites.extend(results.get('enzyme_sites', []))
+                        all_binding_pockets.extend(results.get('binding_pockets', []))
+                        all_conserved_domains.extend(results.get('conserved_domains', []))
+                        all_druggable_proteins.extend(results.get('druggable_proteins', []))
+                    
+                    simplified[analysis_type] = {
+                        'enzyme_sites': all_enzyme_sites,
+                        'binding_pockets': all_binding_pockets,
+                        'conserved_domains': all_conserved_domains,
+                        'druggable_proteins': all_druggable_proteins,
+                        'statistics': {
+                            'total_enzyme_sites': len(all_enzyme_sites),
+                            'total_binding_pockets': len(all_binding_pockets),
+                            'total_drug_targets': len(all_enzyme_sites) + len(all_binding_pockets),
+                            'batches_processed': aggregated_stats.get('batches_processed', 0)
+                        }
+                    }
+                
+                elif analysis_type == 'motif_analysis':
+                    # Combine all motifs
+                    all_promoters = []
+                    all_enhancers = []
+                    all_tf_sites = []
+                    all_cpg_islands = []
+                    all_splice_sites = []
+                    
+                    for batch_result in batch_data.get('batch_results', []):
+                        results = batch_result.get('results', {})
+                        all_promoters.extend(results.get('promoters', []))
+                        all_enhancers.extend(results.get('enhancers', []))
+                        all_tf_sites.extend(results.get('tf_binding_sites', []))
+                        all_cpg_islands.extend(results.get('cpg_islands', []))
+                        all_splice_sites.extend(results.get('splice_sites', []))
+                    
+                    simplified[analysis_type] = {
+                        'promoters': all_promoters,
+                        'enhancers': all_enhancers,
+                        'tf_binding_sites': all_tf_sites,
+                        'cpg_islands': all_cpg_islands,
+                        'splice_sites': all_splice_sites,
+                        'statistics': {
+                            'total_promoters': len(all_promoters),
+                            'total_enhancers': len(all_enhancers),
+                            'total_tf_sites': len(all_tf_sites),
+                            'batches_processed': aggregated_stats.get('batches_processed', 0)
+                        }
+                    }
+                
+                else:
+                    # For other analysis types, use aggregated stats
+                    simplified[analysis_type] = {
+                        'batch_results': batch_data.get('batch_results', []),
+                        'aggregated_stats': aggregated_stats
+                    }
+        
+        return simplified
     
     # Helper methods for specific analyses
     

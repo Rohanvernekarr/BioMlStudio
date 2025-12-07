@@ -25,7 +25,7 @@ class ApiClient {
     }
   }
 
-  private async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
+  private async request<T>(endpoint: string, options: RequestInit = {}, customTimeout?: number): Promise<T> {
     const token = this.getToken();
     const headers: Record<string, string> = {
       ...(options.headers as Record<string, string>),
@@ -39,9 +39,10 @@ class ApiClient {
       headers['Content-Type'] = 'application/json';
     }
 
-    // Add timeout for dashboard requests to prevent hanging
+    // Use custom timeout or default based on endpoint
+    const timeout = customTimeout || (endpoint.includes('/dna-discovery/') ? 300000 : 10000); // 5 minutes for DNA analysis, 10 seconds for others
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
 
     try {
       const response = await fetch(`${API_BASE}${API_PREFIX}${endpoint}`, {
@@ -61,7 +62,7 @@ class ApiClient {
     } catch (error) {
       clearTimeout(timeoutId);
       if (error instanceof Error && error.name === 'AbortError') {
-        throw new Error('Request timeout - server is taking too long to respond');
+        throw new Error('Request timeout - server is taking too long to respond. Try analyzing fewer sequences at once.');
       }
       throw error;
     }
@@ -228,10 +229,54 @@ class ApiClient {
     sequence_ids?: string[];
     analysis_config?: any;
   }) {
+    // Enhanced batch processing for massive datasets
+    const maxSequencesPerRequest = 1000;  // Increased limit
+    const maxBasePairsPerRequest = 10000000; // 10M bp limit
+    
+    const totalBP = data.sequences.reduce((sum, seq) => sum + seq.length, 0);
+    
+    // For truly massive datasets (like 22M bp), enable server-side batch processing
+    if (totalBP > 1000000) { // > 1M bp triggers batch processing
+      console.log(`🔄 Large dataset detected (${totalBP.toLocaleString()} bp). Enabling batch processing mode.`);
+      
+      // Add batch processing flag to analysis config
+      const batchConfig = {
+        ...data.analysis_config,
+        force_batch_processing: true,
+        batch_mode: 'streaming'
+      };
+      
+      return this.request<any>('/dna-discovery/analyze-comprehensive', {
+        method: 'POST',
+        body: JSON.stringify({
+          ...data,
+          analysis_config: batchConfig
+        }),
+      }, 1800000); // 30 minute timeout for massive datasets
+    }
+    
+    // For large but manageable datasets
+    if (data.sequences.length > maxSequencesPerRequest || totalBP > maxBasePairsPerRequest) {
+      console.warn(`⚠️ Dataset size (${data.sequences.length} sequences, ${totalBP.toLocaleString()} bp) exceeds recommended limits. Processing first portion.`);
+      
+      const limitedData = { 
+        ...data, 
+        sequences: data.sequences.slice(0, maxSequencesPerRequest)
+      };
+      if (data.sequence_ids) {
+        limitedData.sequence_ids = data.sequence_ids.slice(0, maxSequencesPerRequest);
+      }
+      
+      return this.request<any>('/dna-discovery/analyze-comprehensive', {
+        method: 'POST',
+        body: JSON.stringify(limitedData),
+      }, 900000); // 15 minute timeout
+    }
+    
     return this.request<any>('/dna-discovery/analyze-comprehensive', {
       method: 'POST',
       body: JSON.stringify(data),
-    });
+    }, 300000); // 5 minute timeout
   }
 
   async discoverGenes(data: { sequences: string[]; sequence_ids?: string[] }) {

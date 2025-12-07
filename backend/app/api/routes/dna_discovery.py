@@ -167,6 +167,15 @@ async def analyze_dna_comprehensive(
             analysis_config=request.analysis_config or {}
         )
         
+        # Log results summary for debugging
+        logger.info(f"🔍 Results keys: {list(results.keys())}")
+        if 'gene_discovery' in results:
+            gene_count = len(results['gene_discovery'].get('potential_genes', []))
+            logger.info(f"📊 Total genes discovered: {gene_count}")
+        if 'pathogen_detection' in results:
+            resistance_count = len(results['pathogen_detection'].get('resistance_genes', []))
+            logger.info(f"🦠 Total resistance genes: {resistance_count}")
+        
         # Format response
         response_data = DNAAnalysisResponse(
             analysis_id=f"dna_analysis_{pd.Timestamp.now().strftime('%Y%m%d_%H%M%S')}",

@@ -206,15 +206,15 @@ const DetailedResults: React.FC<DetailedResultsProps> = ({ analysisResults }) =>
                 </div>
 
                 {/* Detailed Results */}
-                <div className="space-y-4">
-                  <h4 className="text-lg font-semibold">🔬 Detailed Findings</h4>
+                <div className="space-y-4 text-black">
+                  <h4 className="text-lg font-semibold text-black">Detailed Findings</h4>
                   
                   {section.key === 'gene_discovery' && sectionData.potential_genes && (
                     <div className="space-y-3">
                       {sectionData.potential_genes.slice(0, 5).map((gene: any, idx: number) => (
                         <div key={idx} className="border rounded-lg p-4 bg-green-50">
                           <div className="flex justify-between items-start mb-2">
-                            <h5 className="font-medium">Gene Candidate #{idx + 1}</h5>
+                            <h5 className="font-medium text-black">Gene Candidate #{idx + 1}</h5>
                             <span className="text-xs bg-green-200 text-green-800 px-2 py-1 rounded">
                               Coding Potential: {(gene.coding_potential * 100).toFixed(1)}%
                             </span>

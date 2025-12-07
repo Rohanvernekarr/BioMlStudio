@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, ScatterPlot, Scatter } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, Scatter } from 'recharts'
 
 interface BioVisualizationProps {
   data: any
@@ -149,7 +149,7 @@ const BioVisualization: React.FC<BioVisualizationProps> = ({ data, type }) => {
                 cx="50%"
                 cy="50%"
                 labelLine={false}
-                label={({ type, percent }) => `${type}: ${(percent * 100).toFixed(0)}%`}
+                label={({ name, percent }) => `${name}: ${((percent ?? 0) * 100).toFixed(0)}%`}
                 outerRadius={80}
                 fill="#8884d8"
                 dataKey="count"

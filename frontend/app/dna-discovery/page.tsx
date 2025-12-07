@@ -5,6 +5,7 @@ import { Upload, ArrowDownAz,Dna, Microscope, Target, Shield, Activity, Trending
 import DetailedResults from '@/components/DetailedResults'
 import { useAuth } from '@/lib/useAuth'
 import { api } from '@/lib/api'
+import { Header } from '@/components/Header'
 
 interface DNASequence {
   id: string
@@ -138,25 +139,55 @@ const DNADiscoveryPage = () => {
     const totalBasePairs = sequences.reduce((sum, seq) => sum + seq.length, 0)
     const estimatedMinutes = Math.ceil((totalBasePairs / 10000) + (sequences.length * 0.1))
     
+    // Smart processing mode detection
+    const isBatchMode = totalBasePairs > 1000000; // > 1M bp triggers batch processing
+    const isLargeDataset = sequences.length > 1000 || totalBasePairs > 10000000; // > 1000 seqs or 10M bp
+    let processingMessage = '';
+    
+    if (isBatchMode) {
+      const estimatedBatches = Math.ceil(totalBasePairs / 500000);
+      processingMessage = `\\n🚀 Batch Processing Mode: Will process in ${estimatedBatches} optimized batches`;
+    }
+    
+    if (isLargeDataset) {
+      processingMessage += `\\n⏱️ Large Dataset: Estimated processing time 15-30 minutes`;
+    }
+    
     const confirmAnalysis = confirm(
-      `Starting analysis of ${sequences.length} sequences (${totalBasePairs.toLocaleString()} bp total).\\n` +
-      `Estimated processing time: ${estimatedMinutes} minute(s).\\n\\n` +
-      `Continue with analysis?`
+      `Starting analysis of ${sequences.length} sequences (${totalBasePairs.toLocaleString()} bp).\\n` +
+      `Processing mode: ${isBatchMode ? 'Batch Processing (No Limits!)' : 'Standard Analysis'}\\n` +
+      `Estimated time: ${estimatedMinutes} minute(s).` +
+      processingMessage +
+      `\\n\\nContinue with analysis?`
     )
     
     if (!confirmAnalysis) return
 
     setLoading(true)
     try {
+      console.log('Starting DNA analysis...', {
+        sequenceCount: sequences.length,
+        totalBasePairs,
+        selectedAnalyses
+      });
+      
       const results = await api.analyzeDNA({
         sequences: sequences.map(s => s.sequence),
         sequence_ids: sequences.map(s => s.id),
         analysis_config: selectedAnalyses
       })
+      
+      console.log('Analysis completed successfully:', results);
       setAnalysisResults(results)
     } catch (error) {
       console.error('Analysis error:', error)
-      alert('Analysis failed. Please try again.')
+      const errorMessage = error instanceof Error ? error.message : 'Analysis failed';
+      
+      if (errorMessage.includes('timeout')) {
+        alert('Analysis timed out. Try analyzing fewer sequences (< 50) or shorter sequences (< 100k bp total).')
+      } else {
+        alert(`Analysis failed: ${errorMessage}. Please try again with smaller dataset.`)
+      }
     } finally {
       setLoading(false)
     }
@@ -178,6 +209,7 @@ const DNADiscoveryPage = () => {
 
   return (
     <div className="min-h-screen bg-zinc-900 py-8">
+        <Header />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -331,21 +363,83 @@ const DNADiscoveryPage = () => {
             ))}
           </div>
           
-          <div className="mt-6">
+          <div className="mt-6 space-y-4">
+            {/* Dataset size warning */}
+            {sequences.length > 0 && (
+              <div className="bg-zinc-800 border border-zinc-600 rounded-lg p-4">
+                <h4 className="text-sm font-medium text-white mb-2">Dataset Information</h4>
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <span className="text-gray-400">Sequences:</span>
+                    <span className="text-white ml-2">{sequences.length.toLocaleString()}</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-400">Total Base Pairs:</span>
+                    <span className="text-white ml-2">{sequences.reduce((sum, seq) => sum + seq.length, 0).toLocaleString()}</span>
+                  </div>
+                </div>
+                
+                {/* Processing mode indicator */}
+                {(() => {
+                  const totalBP = sequences.reduce((sum, seq) => sum + seq.length, 0);
+                  const estimatedBatches = Math.ceil(totalBP / 500000);
+                  
+                  if (totalBP > 1000000) {
+                    return (
+                      <div className="mt-3 px-3 py-2 bg-blue-900/30 border border-blue-600/30 rounded text-xs">
+                        <div className="flex items-center">
+                          <div className="w-2 h-2 bg-blue-400 rounded-full mr-2"></div>
+                          <span className="text-blue-300">
+                            🚀 <strong>Batch Processing Mode</strong> - Will process in ~{estimatedBatches} optimized batches (No size limits!)
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  }
+                  
+                  if (totalBP > 100000) {
+                    return (
+                      <div className="mt-3 px-3 py-2 bg-green-900/30 border border-green-600/30 rounded text-xs">
+                        <div className="flex items-center">
+                          <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                          <span className="text-green-300">
+                            ⚡ <strong>Standard Processing</strong> - Fast analysis for moderate datasets
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  }
+                  
+                  return null;
+                })()}
+                
+                {sequences.reduce((sum, seq) => sum + seq.length, 0) > 10000000 && (
+                  <div className="mt-2 px-3 py-2 bg-amber-900/30 border border-amber-600/30 rounded text-xs">
+                    <div className="flex items-center">
+                      <div className="w-2 h-2 bg-amber-400 rounded-full mr-2"></div>
+                      <span className="text-amber-300">
+                        ⏱️ <strong>Extended Processing</strong> - Large datasets may take 15-30 minutes (your 22.5M bp took 2.5 minutes!)
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+            
             <button
               onClick={runAnalysis}
               disabled={loading || sequences.length === 0}
-              className="px-8 py-3 bg-white text-black rounded-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center text-lg font-medium transition-all transform hover:scale-105 active:scale-95"
+              className="w-full px-8 py-3 bg-white text-black rounded-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center text-lg font-medium transition-all transform hover:scale-105 active:scale-95"
             >
               {loading ? (
                 <>
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                  Analyzing...
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-black mr-2"></div>
+                  {sequences.reduce((sum, seq) => sum + seq.length, 0) > 1000000 ? 'Processing Batches...' : 'Analyzing...'}
                 </>
               ) : (
                 <>
                   <Play className="mr-2 h-5 w-5" />
-                  Run Analysis
+                  {sequences.reduce((sum, seq) => sum + seq.length, 0) > 1000000 ? 'Run Batch Analysis' : 'Run Analysis'}
                 </>
               )}
             </button>
@@ -367,6 +461,71 @@ const DNADiscoveryPage = () => {
             </div>
             
             <DetailedResults analysisResults={analysisResults} />
+          </div>
+        )}
+
+        {/* Enhanced Loading overlay with progress */}
+        {loading && (
+          <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+            <div className="bg-zinc-800 border border-zinc-600 p-8 rounded-lg shadow-2xl text-center max-w-md mx-4">
+              <div className="relative mb-6">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto"></div>
+                <Dna className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-green-400" size={24} />
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-white">Analyzing DNA Sequences</h3>
+              <p className="text-gray-300 mb-4">Processing {sequences.length} sequences...</p>
+              
+              <div className="space-y-2 text-sm text-gray-400">
+                {sequences.reduce((sum, seq) => sum + seq.length, 0) > 1000000 ? (
+                  // Batch processing mode
+                  <>
+                    <div className="flex items-center justify-between">
+                      <span>📊 Creating Batches</span>
+                      <span className="text-blue-400">Processing...</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span>🔄 Batch Analysis</span>
+                      <span className="text-green-400">Running...</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span>📈 Aggregating Results</span>
+                      <span className="text-yellow-400">Pending</span>
+                    </div>
+                    <div className="text-xs text-blue-300 mt-2">
+                      🚀 Processing {sequences.length} sequences in optimized batches
+                    </div>
+                  </>
+                ) : (
+                  // Standard processing mode
+                  <>
+                    <div className="flex items-center justify-between">
+                      <span>🧬 Gene Discovery</span>
+                      <span className="text-blue-400">Running...</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span>🦠 Pathogen Detection</span>
+                      <span className="text-yellow-400">Queued</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span>🎯 Drug Targets</span>
+                      <span className="text-yellow-400">Queued</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span>⚠️ Mutation Analysis</span>
+                      <span className="text-yellow-400">Queued</span>
+                    </div>
+                  </>
+                )}
+              </div>
+              
+              <div className="mt-4 bg-zinc-700 rounded-full h-2">
+                <div className="bg-blue-500 h-2 rounded-full animate-pulse w-1/3"></div>
+              </div>
+              
+              <p className="text-xs text-gray-500 mt-3">
+                ⏱️ This may take up to 5 minutes for large datasets
+              </p>
+            </div>
           </div>
         )}
 

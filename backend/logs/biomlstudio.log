@@ -40278,3 +40278,1034 @@ AttributeError: module 'bcrypt' has no attribute '__about__'
 {"timestamp": "2025-12-07 22:53:55", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
 {"timestamp": "2025-12-07 22:53:55", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
 {"timestamp": "2025-12-07 22:53:55", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-12-07 23:05:54", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/dna-discovery/analyze-comprehensive"}
+{"timestamp": "2025-12-07 23:05:54", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/dna-discovery/analyze-comprehensive - 200 - 0.0045s"}
+{"timestamp": "2025-12-07 23:05:54", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:57003 - "OPTIONS /api/v1/dna-discovery/analyze-comprehensive HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 23:05:54", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/dna-discovery/analyze-comprehensive"}
+{"timestamp": "2025-12-07 23:05:55", "name": "app.api.routes.dna_discovery", "level": "INFO", "message": "Starting comprehensive DNA analysis for user 2"}
+{"timestamp": "2025-12-07 23:05:55", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Performing gene discovery analysis..."}
+{"timestamp": "2025-12-07 23:05:55", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Analyzing mutations..."}
+{"timestamp": "2025-12-07 23:05:55", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Identifying drug targets..."}
+{"timestamp": "2025-12-07 23:05:55", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Detecting pathogens..."}
+{"timestamp": "2025-12-07 23:05:55", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Analyzing functional motifs..."}
+{"timestamp": "2025-12-07 23:05:55", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Generating biomarkers..."}
+{"timestamp": "2025-12-07 23:05:55", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Performing evolutionary analysis..."}
+{"timestamp": "2025-12-07 23:05:55", "name": "app.api.routes.dna_discovery", "level": "INFO", "message": "DNA analysis completed for user 2"}
+{"timestamp": "2025-12-07 23:05:55", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/dna-discovery/analyze-comprehensive - 200 - 0.8004s"}
+{"timestamp": "2025-12-07 23:05:55", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:57003 - "POST /api/v1/dna-discovery/analyze-comprehensive HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:04:38", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/dna-discovery/analyze-comprehensive"}
+{"timestamp": "2025-12-08 00:04:38", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/dna-discovery/analyze-comprehensive - 200 - 0.0550s"}
+{"timestamp": "2025-12-08 00:04:38", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:50637 - "OPTIONS /api/v1/dna-discovery/analyze-comprehensive HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:04:38", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/dna-discovery/analyze-comprehensive"}
+{"timestamp": "2025-12-08 00:04:39", "name": "app.api.deps", "level": "WARNING", "message": "JWT decode error: Signature has expired."}
+{"timestamp": "2025-12-08 00:04:39", "name": "app.api.deps", "level": "ERROR", "message": "Database session error: "}
+{"timestamp": "2025-12-08 00:04:39", "name": "app.main", "level": "WARNING", "message": "HTTP Exception: Could not validate credentials"}
+{"timestamp": "2025-12-08 00:04:39", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/dna-discovery/analyze-comprehensive - 401 - 0.2270s"}
+{"timestamp": "2025-12-08 00:04:39", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:50637 - "POST /api/v1/dna-discovery/analyze-comprehensive HTTP/1.1" 401"}
+{"timestamp": "2025-12-08 00:04:49", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/"}
+{"timestamp": "2025-12-08 00:04:49", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/ - 200 - 0.0035s"}
+{"timestamp": "2025-12-08 00:04:49", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:58545 - "OPTIONS /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:04:49", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/"}
+{"timestamp": "2025-12-08 00:04:49", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/ - 200 - 0.0020s"}
+{"timestamp": "2025-12-08 00:04:49", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:58545 - "OPTIONS /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:04:49", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-08 00:04:49", "name": "app.api.deps", "level": "WARNING", "message": "JWT decode error: Signature has expired."}
+{"timestamp": "2025-12-08 00:04:49", "name": "app.api.deps", "level": "ERROR", "message": "Database session error: "}
+{"timestamp": "2025-12-08 00:04:49", "name": "app.main", "level": "WARNING", "message": "HTTP Exception: Could not validate credentials"}
+{"timestamp": "2025-12-08 00:04:49", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 401 - 0.0167s"}
+{"timestamp": "2025-12-08 00:04:49", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:58545 - "GET /api/v1/datasets/?limit=10 HTTP/1.1" 401"}
+{"timestamp": "2025-12-08 00:04:49", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-08 00:04:49", "name": "app.api.deps", "level": "WARNING", "message": "JWT decode error: Signature has expired."}
+{"timestamp": "2025-12-08 00:04:49", "name": "app.api.deps", "level": "ERROR", "message": "Database session error: "}
+{"timestamp": "2025-12-08 00:04:49", "name": "app.main", "level": "WARNING", "message": "HTTP Exception: Could not validate credentials"}
+{"timestamp": "2025-12-08 00:04:49", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 401 - 0.0056s"}
+{"timestamp": "2025-12-08 00:04:49", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:58545 - "GET /api/v1/datasets/?limit=10 HTTP/1.1" 401"}
+{"timestamp": "2025-12-08 00:04:56", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/auth/login"}
+{"timestamp": "2025-12-08 00:04:58", "name": "passlib.handlers.bcrypt", "level": "WARNING", "message": "(trapped) error reading bcrypt version"}
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+{"timestamp": "2025-12-08 00:04:59", "name": "app.api.routes.auth", "level": "INFO", "message": "User logged in: rohanrv2004@gmail.com"}
+{"timestamp": "2025-12-08 00:04:59", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/auth/login - 200 - 2.5906s"}
+{"timestamp": "2025-12-08 00:04:59", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:60634 - "POST /api/v1/auth/login HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:04:59", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-08 00:05:00", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.4101s"}
+{"timestamp": "2025-12-08 00:05:00", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:60634 - "GET /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:05:00", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-08 00:05:00", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.7053s"}
+{"timestamp": "2025-12-08 00:05:00", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:58985 - "GET /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:05:00", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/jobs/"}
+{"timestamp": "2025-12-08 00:05:00", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/jobs/ - 200 - 0.0010s"}
+{"timestamp": "2025-12-08 00:05:00", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:60634 - "OPTIONS /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:05:00", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-08 00:05:01", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 0.8556s"}
+{"timestamp": "2025-12-08 00:05:01", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:60634 - "GET /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:05:01", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-08 00:05:02", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 0.8769s"}
+{"timestamp": "2025-12-08 00:05:02", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:58985 - "GET /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:05:53", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/dna-discovery/analyze-comprehensive"}
+{"timestamp": "2025-12-08 00:05:54", "name": "app.api.routes.dna_discovery", "level": "INFO", "message": "Starting comprehensive DNA analysis for user 2"}
+{"timestamp": "2025-12-08 00:05:54", "name": "app.api.routes.dna_discovery", "level": "WARNING", "message": "Sequence 0 detected as protein, converting for DNA analysis"}
+{"timestamp": "2025-12-08 00:05:54", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Performing gene discovery analysis..."}
+{"timestamp": "2025-12-08 00:06:27", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Analyzing mutations..."}
+{"timestamp": "2025-12-08 00:06:27", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Identifying drug targets..."}
+{"timestamp": "2025-12-08 00:06:50", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Detecting pathogens..."}
+{"timestamp": "2025-12-08 00:07:27", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Analyzing functional motifs..."}
+{"timestamp": "2025-12-08 00:07:30", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Generating biomarkers..."}
+{"timestamp": "2025-12-08 00:08:34", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Performing evolutionary analysis..."}
+{"timestamp": "2025-12-08 00:08:40", "name": "app.api.routes.dna_discovery", "level": "INFO", "message": "DNA analysis completed for user 2"}
+{"timestamp": "2025-12-08 00:08:55", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-12-08 00:08:55", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/dna-discovery/analyze-comprehensive - 200 - 181.5416s"}
+{"timestamp": "2025-12-08 00:08:55", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [30176]"}
+{"timestamp": "2025-12-08 00:08:55", "name": "uvicorn.error", "level": "ERROR", "message": "Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\routing.py", line 686, in lifespan
+    await receive()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError
+"}
+{"timestamp": "2025-12-08 00:09:03", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [28304]"}
+{"timestamp": "2025-12-08 00:09:03", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-08 00:09:03", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-08 00:09:05", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-08 00:09:05", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-08 00:09:05", "name": "uvicorn.error", "level": "ERROR", "message": "Traceback (most recent call last):
+  File "C:\Python312\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    await self.startup(sockets=sockets)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\server.py", line 89, in startup
+    await self.lifespan.startup()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
+    await self.startup_event.wait()
+  File "C:\Python312\Lib\asyncio\locks.py", line 212, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python312\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\routing.py", line 686, in lifespan
+    await receive()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError
+"}
+{"timestamp": "2025-12-08 00:09:14", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [16660]"}
+{"timestamp": "2025-12-08 00:09:14", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-08 00:09:14", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-08 00:09:16", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-08 00:09:16", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-08 00:09:16", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-12-08 00:09:26", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/auth/login"}
+{"timestamp": "2025-12-08 00:09:26", "name": "passlib.handlers.bcrypt", "level": "WARNING", "message": "(trapped) error reading bcrypt version"}
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+{"timestamp": "2025-12-08 00:09:27", "name": "app.api.routes.auth", "level": "INFO", "message": "User logged in: rohanrv2004@gmail.com"}
+{"timestamp": "2025-12-08 00:09:27", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/auth/login - 200 - 0.9405s"}
+{"timestamp": "2025-12-08 00:09:27", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59264 - "POST /api/v1/auth/login HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:09:27", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-08 00:09:28", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.3776s"}
+{"timestamp": "2025-12-08 00:09:28", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59264 - "GET /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:09:28", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-08 00:09:28", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.7389s"}
+{"timestamp": "2025-12-08 00:09:28", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59842 - "GET /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:09:28", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-08 00:09:29", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 0.8620s"}
+{"timestamp": "2025-12-08 00:09:29", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59264 - "GET /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:09:29", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-08 00:09:30", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 0.9430s"}
+{"timestamp": "2025-12-08 00:09:30", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59842 - "GET /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:09:34", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-08 00:09:34", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.3849s"}
+{"timestamp": "2025-12-08 00:09:34", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59842 - "GET /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:09:34", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-08 00:09:35", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.3235s"}
+{"timestamp": "2025-12-08 00:09:35", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59264 - "GET /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:09:35", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-08 00:09:36", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 0.8392s"}
+{"timestamp": "2025-12-08 00:09:36", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59842 - "GET /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:09:36", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-08 00:09:36", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 0.8218s"}
+{"timestamp": "2025-12-08 00:09:36", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59264 - "GET /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:09:55", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/dna-discovery/analyze-comprehensive"}
+{"timestamp": "2025-12-08 00:09:55", "name": "app.api.routes.dna_discovery", "level": "INFO", "message": "Starting comprehensive DNA analysis for user 2"}
+{"timestamp": "2025-12-08 00:09:55", "name": "app.api.routes.dna_discovery", "level": "WARNING", "message": "Sequence 0 detected as protein, converting for DNA analysis"}
+{"timestamp": "2025-12-08 00:09:55", "name": "app.services.dna_discovery_service", "level": "WARNING", "message": "Dataset too large (22510139 bp). Truncating sequences to fit 100000 bp limit."}
+{"timestamp": "2025-12-08 00:09:55", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Performing gene discovery analysis..."}
+{"timestamp": "2025-12-08 00:09:55", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Analyzing mutations..."}
+{"timestamp": "2025-12-08 00:09:55", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Identifying drug targets..."}
+{"timestamp": "2025-12-08 00:09:55", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Detecting pathogens..."}
+{"timestamp": "2025-12-08 00:09:56", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Analyzing functional motifs..."}
+{"timestamp": "2025-12-08 00:09:56", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Generating biomarkers..."}
+{"timestamp": "2025-12-08 00:09:56", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Performing evolutionary analysis..."}
+{"timestamp": "2025-12-08 00:09:56", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Comprehensive analysis completed for 1 sequences (100000 bp total)"}
+{"timestamp": "2025-12-08 00:09:56", "name": "app.api.routes.dna_discovery", "level": "INFO", "message": "DNA analysis completed for user 2"}
+{"timestamp": "2025-12-08 00:09:56", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/dna-discovery/analyze-comprehensive - 200 - 1.3206s"}
+{"timestamp": "2025-12-08 00:09:56", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:63787 - "POST /api/v1/dna-discovery/analyze-comprehensive HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:13:33", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-12-08 00:13:34", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application shutdown."}
+{"timestamp": "2025-12-08 00:13:34", "name": "app.main", "level": "INFO", "message": "🛑 Shutting down BioMLStudio API..."}
+{"timestamp": "2025-12-08 00:13:34", "name": "uvicorn.error", "level": "INFO", "message": "Application shutdown complete."}
+{"timestamp": "2025-12-08 00:13:34", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [16660]"}
+{"timestamp": "2025-12-08 00:13:39", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [10744]"}
+{"timestamp": "2025-12-08 00:13:39", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-08 00:13:39", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-08 00:13:40", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-08 00:13:40", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-08 00:13:40", "name": "uvicorn.error", "level": "ERROR", "message": "Traceback (most recent call last):
+  File "C:\Python312\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    await self.startup(sockets=sockets)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\server.py", line 89, in startup
+    await self.lifespan.startup()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
+    await self.startup_event.wait()
+  File "C:\Python312\Lib\asyncio\locks.py", line 212, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python312\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\routing.py", line 686, in lifespan
+    await receive()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError
+"}
+{"timestamp": "2025-12-08 00:13:45", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [34516]"}
+{"timestamp": "2025-12-08 00:13:45", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-08 00:13:45", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-08 00:13:47", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-08 00:13:47", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-08 00:13:47", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-12-08 00:14:41", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/dna-discovery/analyze-comprehensive"}
+{"timestamp": "2025-12-08 00:14:41", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/dna-discovery/analyze-comprehensive - 200 - 0.0015s"}
+{"timestamp": "2025-12-08 00:14:41", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64826 - "OPTIONS /api/v1/dna-discovery/analyze-comprehensive HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:14:41", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/dna-discovery/analyze-comprehensive"}
+{"timestamp": "2025-12-08 00:14:42", "name": "app.api.routes.dna_discovery", "level": "INFO", "message": "Starting comprehensive DNA analysis for user 2"}
+{"timestamp": "2025-12-08 00:14:42", "name": "app.api.routes.dna_discovery", "level": "WARNING", "message": "Sequence 0 detected as protein, converting for DNA analysis"}
+{"timestamp": "2025-12-08 00:14:42", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "🔄 Large dataset detected (1 sequences, 22,510,139 bp). Using batch processing."}
+{"timestamp": "2025-12-08 00:14:42", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "📊 Starting batch processing for 1 sequences (22,510,139 bp)"}
+{"timestamp": "2025-12-08 00:14:42", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "🔢 Created 1 batches for processing"}
+{"timestamp": "2025-12-08 00:14:42", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 1/1 (1 sequences, 22,510,139 bp)"}
+{"timestamp": "2025-12-08 00:17:29", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "✅ Batch processing completed. Processed 1 sequences in 1 batches"}
+{"timestamp": "2025-12-08 00:17:29", "name": "app.api.routes.dna_discovery", "level": "INFO", "message": "DNA analysis completed for user 2"}
+{"timestamp": "2025-12-08 00:17:41", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-12-08 00:17:41", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/dna-discovery/analyze-comprehensive - 200 - 180.2074s"}
+{"timestamp": "2025-12-08 00:17:41", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64826 - "POST /api/v1/dna-discovery/analyze-comprehensive HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:17:41", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/"}
+{"timestamp": "2025-12-08 00:17:41", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/"}
+{"timestamp": "2025-12-08 00:17:41", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/ - 200 - 0.0168s"}
+{"timestamp": "2025-12-08 00:17:41", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/ - 200 - 0.0342s"}
+{"timestamp": "2025-12-08 00:17:41", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64536 - "OPTIONS /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:17:41", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:50568 - "OPTIONS /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:17:41", "name": "app.main", "level": "ERROR", "message": "Unexpected error: (psycopg2.OperationalError) server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"}
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1119, in _rollback_impl
+    self.engine.dialect.do_rollback(self.connection)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 692, in do_rollback
+    dbapi_connection.rollback()
+psycopg2.OperationalError: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 109, in __call__
+    await response(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\responses.py", line 270, in __call__
+    async with anyio.create_task_group() as task_group:
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 597, in __aexit__
+    raise exceptions[0]
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\responses.py", line 273, in wrap
+    await func()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 134, in stream_response
+    return await super().stream_response(send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\responses.py", line 262, in stream_response
+    async for chunk in self.body_iterator:
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 98, in body_stream
+    raise app_exc
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 70, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 79, in __call__
+    raise exc
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 14, in __call__
+    async with AsyncExitStack() as stack:
+  File "C:\Python312\Lib\contextlib.py", line 754, in __aexit__
+    raise exc_details[1]
+  File "C:\Python312\Lib\contextlib.py", line 737, in __aexit__
+    cb_suppress = await cb(*exc_details)
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\contextlib.py", line 217, in __aexit__
+    await anext(self.gen)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\concurrency.py", line 38, in contextmanager_in_threadpool
+    await anyio.to_thread.run_sync(
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\anyio\to_thread.py", line 33, in run_sync
+    return await get_asynclib().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 877, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 807, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\contextlib.py", line 144, in __exit__
+    next(self.gen)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\app\api\deps.py", line 38, in get_db
+    db.close()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2468, in close
+    self._close_impl(invalidate=False)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2537, in _close_impl
+    transaction.close(invalidate)
+  File "<string>", line 2, in close
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 1362, in close
+    transaction.close()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2576, in close
+    self._do_close()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2714, in _do_close
+    self._close_impl()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2700, in _close_impl
+    self._connection_rollback_impl()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2692, in _connection_rollback_impl
+    self.connection._rollback_impl()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1121, in _rollback_impl
+    self._handle_dbapi_exception(e, None, None, None, None)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2343, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1119, in _rollback_impl
+    self.engine.dialect.do_rollback(self.connection)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 692, in do_rollback
+    dbapi_connection.rollback()
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+{"timestamp": "2025-12-08 00:17:42", "name": "uvicorn.error", "level": "ERROR", "message": "Exception in ASGI application
+"}
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1119, in _rollback_impl
+    self.engine.dialect.do_rollback(self.connection)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 692, in do_rollback
+    dbapi_connection.rollback()
+psycopg2.OperationalError: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py", line 426, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 84, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\applications.py", line 1106, in __call__
+    await super().__call__(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\applications.py", line 122, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\errors.py", line 184, in __call__
+    raise exc
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 109, in __call__
+    await response(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\responses.py", line 270, in __call__
+    async with anyio.create_task_group() as task_group:
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 597, in __aexit__
+    raise exceptions[0]
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\responses.py", line 273, in wrap
+    await func()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 134, in stream_response
+    return await super().stream_response(send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\responses.py", line 262, in stream_response
+    async for chunk in self.body_iterator:
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 98, in body_stream
+    raise app_exc
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 70, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 79, in __call__
+    raise exc
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 14, in __call__
+    async with AsyncExitStack() as stack:
+  File "C:\Python312\Lib\contextlib.py", line 754, in __aexit__
+    raise exc_details[1]
+  File "C:\Python312\Lib\contextlib.py", line 737, in __aexit__
+    cb_suppress = await cb(*exc_details)
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\contextlib.py", line 217, in __aexit__
+    await anext(self.gen)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\concurrency.py", line 38, in contextmanager_in_threadpool
+    await anyio.to_thread.run_sync(
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\anyio\to_thread.py", line 33, in run_sync
+    return await get_asynclib().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 877, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 807, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\contextlib.py", line 144, in __exit__
+    next(self.gen)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\app\api\deps.py", line 38, in get_db
+    db.close()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2468, in close
+    self._close_impl(invalidate=False)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2537, in _close_impl
+    transaction.close(invalidate)
+  File "<string>", line 2, in close
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 1362, in close
+    transaction.close()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2576, in close
+    self._do_close()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2714, in _do_close
+    self._close_impl()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2700, in _close_impl
+    self._connection_rollback_impl()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2692, in _connection_rollback_impl
+    self.connection._rollback_impl()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1121, in _rollback_impl
+    self._handle_dbapi_exception(e, None, None, None, None)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2343, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1119, in _rollback_impl
+    self.engine.dialect.do_rollback(self.connection)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 692, in do_rollback
+    dbapi_connection.rollback()
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+{"timestamp": "2025-12-08 00:17:46", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [34516]"}
+{"timestamp": "2025-12-08 00:17:46", "name": "uvicorn.error", "level": "ERROR", "message": "Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\routing.py", line 686, in lifespan
+    await receive()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError
+"}
+{"timestamp": "2025-12-08 00:17:56", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [9228]"}
+{"timestamp": "2025-12-08 00:17:56", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-08 00:17:56", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-08 00:17:57", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-08 00:17:57", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-08 00:17:57", "name": "uvicorn.error", "level": "ERROR", "message": "Traceback (most recent call last):
+  File "C:\Python312\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    await self.startup(sockets=sockets)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\server.py", line 89, in startup
+    await self.lifespan.startup()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
+    await self.startup_event.wait()
+  File "C:\Python312\Lib\asyncio\locks.py", line 212, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python312\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\routing.py", line 686, in lifespan
+    await receive()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError
+"}
+{"timestamp": "2025-12-08 00:18:06", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [31032]"}
+{"timestamp": "2025-12-08 00:18:06", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-08 00:18:06", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-08 00:18:09", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-08 00:18:09", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-08 00:18:09", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-12-08 00:18:15", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/auth/login"}
+{"timestamp": "2025-12-08 00:18:15", "name": "passlib.handlers.bcrypt", "level": "WARNING", "message": "(trapped) error reading bcrypt version"}
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+{"timestamp": "2025-12-08 00:18:16", "name": "app.api.routes.auth", "level": "INFO", "message": "User logged in: rohanrv2004@gmail.com"}
+{"timestamp": "2025-12-08 00:18:16", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/auth/login - 200 - 1.0468s"}
+{"timestamp": "2025-12-08 00:18:16", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:51784 - "POST /api/v1/auth/login HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:18:16", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-08 00:18:17", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.3234s"}
+{"timestamp": "2025-12-08 00:18:17", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:51784 - "GET /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:18:17", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-08 00:18:17", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.7491s"}
+{"timestamp": "2025-12-08 00:18:17", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:54223 - "GET /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:18:17", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/jobs/"}
+{"timestamp": "2025-12-08 00:18:17", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/jobs/ - 200 - 0.0005s"}
+{"timestamp": "2025-12-08 00:18:17", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:51784 - "OPTIONS /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:18:17", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-08 00:18:18", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 0.9149s"}
+{"timestamp": "2025-12-08 00:18:18", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:51784 - "GET /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:18:18", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-08 00:18:19", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 0.8586s"}
+{"timestamp": "2025-12-08 00:18:19", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:54223 - "GET /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:18:41", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/dna-discovery/analyze-comprehensive"}
+{"timestamp": "2025-12-08 00:18:41", "name": "app.api.routes.dna_discovery", "level": "INFO", "message": "Starting comprehensive DNA analysis for user 2"}
+{"timestamp": "2025-12-08 00:18:41", "name": "app.api.routes.dna_discovery", "level": "WARNING", "message": "Sequence 0 detected as protein, converting for DNA analysis"}
+{"timestamp": "2025-12-08 00:18:41", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "🔄 Large dataset detected (1 sequences, 22,510,139 bp). Using batch processing."}
+{"timestamp": "2025-12-08 00:18:41", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "📊 Starting batch processing for 1 sequences (22,510,139 bp)"}
+{"timestamp": "2025-12-08 00:18:41", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "🔪 Splitting large sequence CP012524.1 (22,510,139 bp) into chunks"}
+{"timestamp": "2025-12-08 00:18:41", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "🔢 Created 46 batches for processing"}
+{"timestamp": "2025-12-08 00:18:41", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 1/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:18:44", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 2/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:18:47", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 3/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:18:50", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 4/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:18:53", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 5/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:18:56", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 6/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:18:59", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 7/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:19:02", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 8/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:19:05", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 9/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:19:08", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 10/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:19:11", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 11/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:19:14", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 12/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:19:16", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 13/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:19:19", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 14/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:19:22", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 15/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:19:25", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 16/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:19:28", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 17/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:19:31", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 18/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:19:34", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 19/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:19:37", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 20/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:19:40", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 21/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:19:42", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 22/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:19:46", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 23/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:19:50", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 24/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:19:52", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 25/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:19:55", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 26/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:19:58", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 27/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:20:01", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 28/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:20:05", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 29/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:20:09", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 30/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:20:11", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 31/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:20:15", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 32/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:20:18", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 33/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:20:21", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 34/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:20:24", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 35/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:20:27", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 36/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:20:31", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 37/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:20:34", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 38/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:20:37", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 39/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:20:40", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 40/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:20:43", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 41/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:20:46", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 42/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:20:49", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 43/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:20:52", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 44/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:20:55", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 45/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:20:58", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 46/46 (1 sequences, 10,139 bp)"}
+{"timestamp": "2025-12-08 00:20:58", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "✅ Batch processing completed. Processed 1 sequences in 46 batches"}
+{"timestamp": "2025-12-08 00:20:58", "name": "app.api.routes.dna_discovery", "level": "INFO", "message": "DNA analysis completed for user 2"}
+{"timestamp": "2025-12-08 00:21:10", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/dna-discovery/analyze-comprehensive - 200 - 149.4363s"}
+{"timestamp": "2025-12-08 00:21:10", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:55773 - "POST /api/v1/dna-discovery/analyze-comprehensive HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:22:46", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/dna-discovery/analyze-comprehensive"}
+{"timestamp": "2025-12-08 00:22:46", "name": "app.api.routes.dna_discovery", "level": "INFO", "message": "Starting comprehensive DNA analysis for user 2"}
+{"timestamp": "2025-12-08 00:22:46", "name": "app.api.routes.dna_discovery", "level": "WARNING", "message": "Sequence 0 detected as protein, converting for DNA analysis"}
+{"timestamp": "2025-12-08 00:22:46", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "🔄 Large dataset detected (1 sequences, 22,510,139 bp). Using batch processing."}
+{"timestamp": "2025-12-08 00:22:46", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "📊 Starting batch processing for 1 sequences (22,510,139 bp)"}
+{"timestamp": "2025-12-08 00:22:46", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "🔪 Splitting large sequence CP012524.1 (22,510,139 bp) into chunks"}
+{"timestamp": "2025-12-08 00:22:46", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "🔢 Created 46 batches for processing"}
+{"timestamp": "2025-12-08 00:22:46", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 1/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:22:50", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 2/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:22:53", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 3/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:22:55", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 4/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:22:58", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 5/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:23:01", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 6/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:23:04", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 7/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:23:07", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 8/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:23:10", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 9/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:23:13", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 10/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:23:16", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 11/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:23:19", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 12/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:23:21", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 13/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:23:24", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 14/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:23:27", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 15/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:23:30", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 16/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:23:33", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 17/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:23:36", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 18/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:23:39", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 19/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:23:42", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 20/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:23:45", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 21/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:23:48", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 22/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:23:51", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 23/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:23:55", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 24/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:23:59", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 25/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:24:02", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 26/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:24:05", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 27/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:24:08", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 28/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:24:11", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 29/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:24:13", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 30/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:24:17", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 31/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:24:20", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 32/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:24:24", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 33/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:24:27", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 34/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:24:31", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 35/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:24:34", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 36/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:24:37", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 37/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:24:40", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 38/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:24:43", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 39/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:24:47", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 40/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:24:50", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 41/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:24:53", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 42/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:24:56", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 43/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:24:59", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 44/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:25:02", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 45/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:25:05", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 46/46 (1 sequences, 10,139 bp)"}
+{"timestamp": "2025-12-08 00:25:05", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "✅ Batch processing completed. Processed 1 sequences in 46 batches"}
+{"timestamp": "2025-12-08 00:25:05", "name": "app.api.routes.dna_discovery", "level": "INFO", "message": "DNA analysis completed for user 2"}
+{"timestamp": "2025-12-08 00:25:20", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/dna-discovery/analyze-comprehensive - 200 - 153.8365s"}
+{"timestamp": "2025-12-08 00:25:20", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:50301 - "POST /api/v1/dna-discovery/analyze-comprehensive HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:28:02", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-12-08 00:28:02", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application shutdown."}
+{"timestamp": "2025-12-08 00:28:02", "name": "app.main", "level": "INFO", "message": "🛑 Shutting down BioMLStudio API..."}
+{"timestamp": "2025-12-08 00:28:02", "name": "uvicorn.error", "level": "INFO", "message": "Application shutdown complete."}
+{"timestamp": "2025-12-08 00:28:02", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [31032]"}
+{"timestamp": "2025-12-08 00:28:09", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [21200]"}
+{"timestamp": "2025-12-08 00:28:09", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-08 00:28:09", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-08 00:28:11", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-08 00:28:11", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-08 00:28:11", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-12-08 00:28:20", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-12-08 00:28:21", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application shutdown."}
+{"timestamp": "2025-12-08 00:28:21", "name": "app.main", "level": "INFO", "message": "🛑 Shutting down BioMLStudio API..."}
+{"timestamp": "2025-12-08 00:28:21", "name": "uvicorn.error", "level": "INFO", "message": "Application shutdown complete."}
+{"timestamp": "2025-12-08 00:28:21", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [21200]"}
+{"timestamp": "2025-12-08 00:28:29", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [19444]"}
+{"timestamp": "2025-12-08 00:28:29", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-08 00:28:29", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-08 00:28:31", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-08 00:28:31", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-08 00:28:31", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-12-08 00:28:36", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/auth/login"}
+{"timestamp": "2025-12-08 00:28:36", "name": "passlib.handlers.bcrypt", "level": "WARNING", "message": "(trapped) error reading bcrypt version"}
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+{"timestamp": "2025-12-08 00:28:37", "name": "app.api.routes.auth", "level": "INFO", "message": "User logged in: rohanrv2004@gmail.com"}
+{"timestamp": "2025-12-08 00:28:37", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/auth/login - 200 - 0.9425s"}
+{"timestamp": "2025-12-08 00:28:37", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:57916 - "POST /api/v1/auth/login HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:28:37", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/"}
+{"timestamp": "2025-12-08 00:28:37", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/"}
+{"timestamp": "2025-12-08 00:28:37", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/ - 200 - 0.0037s"}
+{"timestamp": "2025-12-08 00:28:37", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:57916 - "OPTIONS /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:28:37", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/ - 200 - 0.0020s"}
+{"timestamp": "2025-12-08 00:28:37", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64013 - "OPTIONS /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:28:37", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-08 00:28:37", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.3637s"}
+{"timestamp": "2025-12-08 00:28:37", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64013 - "GET /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:28:37", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-08 00:28:38", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.6322s"}
+{"timestamp": "2025-12-08 00:28:38", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:57916 - "GET /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:28:38", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/jobs/"}
+{"timestamp": "2025-12-08 00:28:38", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/jobs/ - 200 - 0.0012s"}
+{"timestamp": "2025-12-08 00:28:38", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64013 - "OPTIONS /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:28:38", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-08 00:28:39", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 1.0498s"}
+{"timestamp": "2025-12-08 00:28:39", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64013 - "GET /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:28:39", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-08 00:28:40", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 0.7966s"}
+{"timestamp": "2025-12-08 00:28:40", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:57916 - "GET /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:29:05", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/dna-discovery/analyze-comprehensive"}
+{"timestamp": "2025-12-08 00:29:05", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/dna-discovery/analyze-comprehensive - 200 - 0.0010s"}
+{"timestamp": "2025-12-08 00:29:05", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64768 - "OPTIONS /api/v1/dna-discovery/analyze-comprehensive HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:29:05", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/dna-discovery/analyze-comprehensive"}
+{"timestamp": "2025-12-08 00:29:06", "name": "app.api.routes.dna_discovery", "level": "INFO", "message": "Starting comprehensive DNA analysis for user 2"}
+{"timestamp": "2025-12-08 00:29:06", "name": "app.api.routes.dna_discovery", "level": "WARNING", "message": "Sequence 0 detected as protein, converting for DNA analysis"}
+{"timestamp": "2025-12-08 00:29:06", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "🔄 Large dataset detected (1 sequences, 22,510,139 bp). Using batch processing."}
+{"timestamp": "2025-12-08 00:29:06", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "📊 Starting batch processing for 1 sequences (22,510,139 bp)"}
+{"timestamp": "2025-12-08 00:29:06", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "🔪 Splitting large sequence CP012524.1 (22,510,139 bp) into chunks"}
+{"timestamp": "2025-12-08 00:29:06", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "🔢 Created 46 batches for processing"}
+{"timestamp": "2025-12-08 00:29:06", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 1/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:29:09", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 2/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:29:12", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 3/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:29:15", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 4/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:29:18", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 5/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:29:21", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 6/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:29:24", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 7/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:29:27", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 8/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:29:30", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 9/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:29:33", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 10/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:29:35", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 11/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:29:38", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 12/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:29:41", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 13/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:29:44", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 14/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:29:47", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 15/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:29:49", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 16/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:29:52", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 17/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:29:55", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 18/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:29:58", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 19/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:30:01", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 20/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:30:04", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 21/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:30:07", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 22/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:30:09", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 23/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:30:12", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 24/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:30:15", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 25/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:30:18", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 26/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:30:21", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 27/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:30:24", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 28/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:30:27", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 29/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:30:30", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 30/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:30:33", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 31/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:30:36", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 32/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:30:39", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 33/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:30:42", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 34/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:30:45", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 35/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:30:48", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 36/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:30:51", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 37/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:30:54", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 38/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:30:57", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 39/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:31:00", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 40/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:31:03", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 41/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:31:06", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 42/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:31:09", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 43/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:31:12", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 44/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:31:15", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 45/46 (1 sequences, 500,000 bp)"}
+{"timestamp": "2025-12-08 00:31:18", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "⚙️  Processing batch 46/46 (1 sequences, 10,139 bp)"}
+{"timestamp": "2025-12-08 00:31:18", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "✅ Batch processing completed. Processed 1 sequences in 46 batches"}
+{"timestamp": "2025-12-08 00:31:18", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "📊 Final aggregated stats: {'total_sequences': 1, 'total_base_pairs': 22510139, 'analysis_timestamp': '2025-12-08T00:29:06.569266', 'sequence_ids': ['CP012524.1'], 'processing_mode': 'batch_processing', 'batch_count': 46}"}
+{"timestamp": "2025-12-08 00:31:18", "name": "app.api.routes.dna_discovery", "level": "INFO", "message": "🔍 Results keys: ['summary', 'batch_info', 'gene_discovery', 'mutation_analysis', 'drug_targets', 'pathogen_detection', 'motif_analysis', 'biomarker_generation', 'evolutionary_analysis']"}
+{"timestamp": "2025-12-08 00:31:18", "name": "app.api.routes.dna_discovery", "level": "INFO", "message": "📊 Total genes discovered: 88163"}
+{"timestamp": "2025-12-08 00:31:18", "name": "app.api.routes.dna_discovery", "level": "INFO", "message": "🦠 Total resistance genes: 316"}
+{"timestamp": "2025-12-08 00:31:18", "name": "app.api.routes.dna_discovery", "level": "INFO", "message": "DNA analysis completed for user 2"}
+{"timestamp": "2025-12-08 00:31:33", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/dna-discovery/analyze-comprehensive - 200 - 147.8345s"}
+{"timestamp": "2025-12-08 00:31:33", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:64768 - "POST /api/v1/dna-discovery/analyze-comprehensive HTTP/1.1" 200"}
+{"timestamp": "2025-12-08 00:31:33", "name": "app.main", "level": "ERROR", "message": "Unexpected error: (psycopg2.OperationalError) server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"}
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1119, in _rollback_impl
+    self.engine.dialect.do_rollback(self.connection)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 692, in do_rollback
+    dbapi_connection.rollback()
+psycopg2.OperationalError: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 109, in __call__
+    await response(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\responses.py", line 270, in __call__
+    async with anyio.create_task_group() as task_group:
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 597, in __aexit__
+    raise exceptions[0]
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\responses.py", line 273, in wrap
+    await func()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 134, in stream_response
+    return await super().stream_response(send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\responses.py", line 262, in stream_response
+    async for chunk in self.body_iterator:
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 98, in body_stream
+    raise app_exc
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 70, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 79, in __call__
+    raise exc
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 14, in __call__
+    async with AsyncExitStack() as stack:
+  File "C:\Python312\Lib\contextlib.py", line 754, in __aexit__
+    raise exc_details[1]
+  File "C:\Python312\Lib\contextlib.py", line 737, in __aexit__
+    cb_suppress = await cb(*exc_details)
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\contextlib.py", line 217, in __aexit__
+    await anext(self.gen)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\concurrency.py", line 38, in contextmanager_in_threadpool
+    await anyio.to_thread.run_sync(
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\anyio\to_thread.py", line 33, in run_sync
+    return await get_asynclib().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 877, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 807, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\contextlib.py", line 144, in __exit__
+    next(self.gen)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\app\api\deps.py", line 38, in get_db
+    db.close()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2468, in close
+    self._close_impl(invalidate=False)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2537, in _close_impl
+    transaction.close(invalidate)
+  File "<string>", line 2, in close
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 1362, in close
+    transaction.close()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2576, in close
+    self._do_close()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2714, in _do_close
+    self._close_impl()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2700, in _close_impl
+    self._connection_rollback_impl()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2692, in _connection_rollback_impl
+    self.connection._rollback_impl()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1121, in _rollback_impl
+    self._handle_dbapi_exception(e, None, None, None, None)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2343, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1119, in _rollback_impl
+    self.engine.dialect.do_rollback(self.connection)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 692, in do_rollback
+    dbapi_connection.rollback()
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+{"timestamp": "2025-12-08 00:31:33", "name": "uvicorn.error", "level": "ERROR", "message": "Exception in ASGI application
+"}
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1119, in _rollback_impl
+    self.engine.dialect.do_rollback(self.connection)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 692, in do_rollback
+    dbapi_connection.rollback()
+psycopg2.OperationalError: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\protocols\http\httptools_impl.py", line 426, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 84, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\applications.py", line 1106, in __call__
+    await super().__call__(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\applications.py", line 122, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\errors.py", line 184, in __call__
+    raise exc
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 109, in __call__
+    await response(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\responses.py", line 270, in __call__
+    async with anyio.create_task_group() as task_group:
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 597, in __aexit__
+    raise exceptions[0]
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\responses.py", line 273, in wrap
+    await func()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 134, in stream_response
+    return await super().stream_response(send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\responses.py", line 262, in stream_response
+    async for chunk in self.body_iterator:
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 98, in body_stream
+    raise app_exc
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\base.py", line 70, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\cors.py", line 91, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\cors.py", line 146, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 79, in __call__
+    raise exc
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 14, in __call__
+    async with AsyncExitStack() as stack:
+  File "C:\Python312\Lib\contextlib.py", line 754, in __aexit__
+    raise exc_details[1]
+  File "C:\Python312\Lib\contextlib.py", line 737, in __aexit__
+    cb_suppress = await cb(*exc_details)
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\contextlib.py", line 217, in __aexit__
+    await anext(self.gen)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\fastapi\concurrency.py", line 38, in contextmanager_in_threadpool
+    await anyio.to_thread.run_sync(
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\anyio\to_thread.py", line 33, in run_sync
+    return await get_asynclib().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 877, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 807, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\contextlib.py", line 144, in __exit__
+    next(self.gen)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\app\api\deps.py", line 38, in get_db
+    db.close()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2468, in close
+    self._close_impl(invalidate=False)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2537, in _close_impl
+    transaction.close(invalidate)
+  File "<string>", line 2, in close
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 1362, in close
+    transaction.close()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2576, in close
+    self._do_close()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2714, in _do_close
+    self._close_impl()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2700, in _close_impl
+    self._connection_rollback_impl()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2692, in _connection_rollback_impl
+    self.connection._rollback_impl()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1121, in _rollback_impl
+    self._handle_dbapi_exception(e, None, None, None, None)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2343, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1119, in _rollback_impl
+    self.engine.dialect.do_rollback(self.connection)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 692, in do_rollback
+    dbapi_connection.rollback()
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
