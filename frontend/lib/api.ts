@@ -221,6 +221,39 @@ class ApiClient {
   async delete<T>(endpoint: string): Promise<T> {
     return this.request<T>(endpoint, { method: 'DELETE' });
   }
+
+  // DNA Discovery methods
+  async analyzeDNA(data: {
+    sequences: string[];
+    sequence_ids?: string[];
+    analysis_config?: any;
+  }) {
+    return this.request<any>('/dna-discovery/analyze-comprehensive', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async discoverGenes(data: { sequences: string[]; sequence_ids?: string[] }) {
+    return this.request<any>('/dna-discovery/discover-genes', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async identifyMutations(data: { sequences: string[]; sequence_ids?: string[] }) {
+    return this.request<any>('/dna-discovery/identify-mutations', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async detectPathogens(data: { sequences: string[]; sequence_ids?: string[] }) {
+    return this.request<any>('/dna-discovery/detect-pathogens', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
 }
 
 export const api = new ApiClient();

@@ -39893,3 +39893,388 @@ AttributeError: module 'bcrypt' has no attribute '__about__'
 {"timestamp": "2025-12-07 22:11:50", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
 {"timestamp": "2025-12-07 22:11:51", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 1.1451s"}
 {"timestamp": "2025-12-07 22:11:51", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:50930 - "GET /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:13:30", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-12-07 22:13:30", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application shutdown."}
+{"timestamp": "2025-12-07 22:13:30", "name": "app.main", "level": "INFO", "message": "🛑 Shutting down BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:13:30", "name": "uvicorn.error", "level": "INFO", "message": "Application shutdown complete."}
+{"timestamp": "2025-12-07 22:13:30", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [36008]"}
+{"timestamp": "2025-12-07 22:13:44", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [35024]"}
+{"timestamp": "2025-12-07 22:13:44", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-07 22:13:44", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:13:46", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-07 22:13:46", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-07 22:13:46", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-12-07 22:21:10", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-12-07 22:21:10", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application shutdown."}
+{"timestamp": "2025-12-07 22:21:10", "name": "app.main", "level": "INFO", "message": "🛑 Shutting down BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:21:10", "name": "uvicorn.error", "level": "INFO", "message": "Application shutdown complete."}
+{"timestamp": "2025-12-07 22:21:10", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [35024]"}
+{"timestamp": "2025-12-07 22:21:22", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [35376]"}
+{"timestamp": "2025-12-07 22:21:22", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-07 22:21:22", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:21:24", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-07 22:21:24", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-07 22:21:24", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-12-07 22:25:34", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-12-07 22:25:34", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application shutdown."}
+{"timestamp": "2025-12-07 22:25:34", "name": "app.main", "level": "INFO", "message": "🛑 Shutting down BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:25:34", "name": "uvicorn.error", "level": "INFO", "message": "Application shutdown complete."}
+{"timestamp": "2025-12-07 22:25:34", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [35376]"}
+{"timestamp": "2025-12-07 22:31:29", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [25996]"}
+{"timestamp": "2025-12-07 22:31:29", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-07 22:31:29", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:31:31", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-07 22:31:31", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-07 22:31:31", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-12-07 22:31:54", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-12-07 22:31:55", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application shutdown."}
+{"timestamp": "2025-12-07 22:31:55", "name": "app.main", "level": "INFO", "message": "🛑 Shutting down BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:31:55", "name": "uvicorn.error", "level": "INFO", "message": "Application shutdown complete."}
+{"timestamp": "2025-12-07 22:31:55", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [25996]"}
+{"timestamp": "2025-12-07 22:32:01", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [34980]"}
+{"timestamp": "2025-12-07 22:32:01", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-07 22:32:01", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:32:03", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-07 22:32:03", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-07 22:32:03", "name": "uvicorn.error", "level": "ERROR", "message": "Traceback (most recent call last):
+  File "C:\Python312\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    await self.startup(sockets=sockets)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\server.py", line 89, in startup
+    await self.lifespan.startup()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
+    await self.startup_event.wait()
+  File "C:\Python312\Lib\asyncio\locks.py", line 212, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python312\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\routing.py", line 686, in lifespan
+    await receive()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError
+"}
+{"timestamp": "2025-12-07 22:32:12", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [35484]"}
+{"timestamp": "2025-12-07 22:32:12", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-07 22:32:12", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:32:14", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-07 22:32:14", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-07 22:32:14", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-12-07 22:32:21", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/auth/login"}
+{"timestamp": "2025-12-07 22:32:21", "name": "passlib.handlers.bcrypt", "level": "WARNING", "message": "(trapped) error reading bcrypt version"}
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+{"timestamp": "2025-12-07 22:32:22", "name": "app.api.routes.auth", "level": "INFO", "message": "User logged in: rohanrv2004@gmail.com"}
+{"timestamp": "2025-12-07 22:32:22", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/auth/login - 200 - 0.9904s"}
+{"timestamp": "2025-12-07 22:32:22", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59287 - "POST /api/v1/auth/login HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:32:23", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:32:23", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:32:23", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/ - 200 - 0.0015s"}
+{"timestamp": "2025-12-07 22:32:23", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59287 - "OPTIONS /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:32:23", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/ - 200 - 0.0024s"}
+{"timestamp": "2025-12-07 22:32:23", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:51997 - "OPTIONS /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:32:23", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:32:23", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.2876s"}
+{"timestamp": "2025-12-07 22:32:23", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:51997 - "GET /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:32:23", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:32:24", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.6269s"}
+{"timestamp": "2025-12-07 22:32:24", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59287 - "GET /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:32:24", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:32:24", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/jobs/ - 200 - 0.0015s"}
+{"timestamp": "2025-12-07 22:32:24", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:51997 - "OPTIONS /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:32:24", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:32:25", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 1.0601s"}
+{"timestamp": "2025-12-07 22:32:25", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:51997 - "GET /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:32:25", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:32:26", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 1.3730s"}
+{"timestamp": "2025-12-07 22:32:26", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59287 - "GET /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:32:29", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/143"}
+{"timestamp": "2025-12-07 22:32:29", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/143"}
+{"timestamp": "2025-12-07 22:32:29", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/143 - 200 - 0.0063s"}
+{"timestamp": "2025-12-07 22:32:29", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59287 - "OPTIONS /api/v1/datasets/143 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:32:29", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/143 - 200 - 0.0105s"}
+{"timestamp": "2025-12-07 22:32:29", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:51997 - "OPTIONS /api/v1/datasets/143 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:32:29", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/143"}
+{"timestamp": "2025-12-07 22:32:29", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/143 - 200 - 0.2059s"}
+{"timestamp": "2025-12-07 22:32:29", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59287 - "GET /api/v1/datasets/143 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:32:29", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/143"}
+{"timestamp": "2025-12-07 22:32:29", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/143 - 200 - 0.2025s"}
+{"timestamp": "2025-12-07 22:32:29", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59287 - "GET /api/v1/datasets/143 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:32:29", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/143/analyze"}
+{"timestamp": "2025-12-07 22:32:29", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/143/analyze - 200 - 0.0010s"}
+{"timestamp": "2025-12-07 22:32:29", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59287 - "OPTIONS /api/v1/datasets/143/analyze HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:32:29", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/143/analyze"}
+{"timestamp": "2025-12-07 22:32:29", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/143/analyze"}
+{"timestamp": "2025-12-07 22:32:30", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/143/analyze - 200 - 0.0015s"}
+{"timestamp": "2025-12-07 22:32:30", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:52208 - "OPTIONS /api/v1/datasets/143/analyze HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:32:30", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/143/analyze - 200 - 0.4604s"}
+{"timestamp": "2025-12-07 22:32:30", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59287 - "GET /api/v1/datasets/143/analyze HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:32:30", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/143/analyze"}
+{"timestamp": "2025-12-07 22:32:31", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/143/analyze - 200 - 0.5971s"}
+{"timestamp": "2025-12-07 22:32:31", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:52208 - "GET /api/v1/datasets/143/analyze HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:32:31", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/143/visualize"}
+{"timestamp": "2025-12-07 22:32:31", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/143/visualize - 200 - 0.0014s"}
+{"timestamp": "2025-12-07 22:32:31", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59287 - "OPTIONS /api/v1/datasets/143/visualize HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:32:31", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/143/visualize"}
+{"timestamp": "2025-12-07 22:32:31", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/143/visualize - 200 - 0.0020s"}
+{"timestamp": "2025-12-07 22:32:31", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59287 - "OPTIONS /api/v1/datasets/143/visualize HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:32:31", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/143/visualize"}
+{"timestamp": "2025-12-07 22:32:32", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/143/visualize - 200 - 1.3465s"}
+{"timestamp": "2025-12-07 22:32:32", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:52208 - "GET /api/v1/datasets/143/visualize HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:32:32", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/143/visualize"}
+{"timestamp": "2025-12-07 22:32:33", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/143/visualize - 200 - 1.1634s"}
+{"timestamp": "2025-12-07 22:32:33", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59287 - "GET /api/v1/datasets/143/visualize HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:37:38", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/dna-discovery/"}
+{"timestamp": "2025-12-07 22:37:38", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/dna-discovery/ - 404 - 0.0041s"}
+{"timestamp": "2025-12-07 22:37:38", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:53518 - "GET /api/v1/dna-discovery/ HTTP/1.1" 404"}
+{"timestamp": "2025-12-07 22:37:46", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1"}
+{"timestamp": "2025-12-07 22:37:46", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1 - 200 - 0.0012s"}
+{"timestamp": "2025-12-07 22:37:46", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:53520 - "GET /api/v1 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:38:09", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/dna-discovery/analyze-comprehensive"}
+{"timestamp": "2025-12-07 22:38:09", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/dna-discovery/analyze-comprehensive - 404 - 0.0000s"}
+{"timestamp": "2025-12-07 22:38:09", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:57672 - "POST /api/v1/dna-discovery/analyze-comprehensive HTTP/1.1" 404"}
+{"timestamp": "2025-12-07 22:38:50", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/dna-discovery/"}
+{"timestamp": "2025-12-07 22:38:50", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/dna-discovery/ - 404 - 0.0040s"}
+{"timestamp": "2025-12-07 22:38:50", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:52836 - "GET /api/v1/dna-discovery/ HTTP/1.1" 404"}
+{"timestamp": "2025-12-07 22:38:50", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-12-07 22:38:50", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application shutdown."}
+{"timestamp": "2025-12-07 22:38:50", "name": "app.main", "level": "INFO", "message": "🛑 Shutting down BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:38:50", "name": "uvicorn.error", "level": "INFO", "message": "Application shutdown complete."}
+{"timestamp": "2025-12-07 22:38:50", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [35484]"}
+{"timestamp": "2025-12-07 22:38:56", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [37236]"}
+{"timestamp": "2025-12-07 22:38:56", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-07 22:38:56", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:38:59", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-07 22:38:59", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-07 22:38:59", "name": "uvicorn.error", "level": "ERROR", "message": "Traceback (most recent call last):
+  File "C:\Python312\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\server.py", line 78, in serve
+    await self.startup(sockets=sockets)
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\server.py", line 89, in startup
+    await self.lifespan.startup()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\lifespan\on.py", line 54, in startup
+    await self.startup_event.wait()
+  File "C:\Python312\Lib\asyncio\locks.py", line 212, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python312\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\starlette\routing.py", line 686, in lifespan
+    await receive()
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\uvicorn\lifespan\on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\asyncio\queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError
+"}
+{"timestamp": "2025-12-07 22:39:04", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [5320]"}
+{"timestamp": "2025-12-07 22:39:04", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-07 22:39:04", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:39:05", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-07 22:39:05", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-07 22:39:05", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-12-07 22:41:56", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/dna-discovery/analyze-comprehensive"}
+{"timestamp": "2025-12-07 22:41:56", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/dna-discovery/analyze-comprehensive - 200 - 0.0015s"}
+{"timestamp": "2025-12-07 22:41:56", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:57081 - "OPTIONS /api/v1/dna-discovery/analyze-comprehensive HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:41:56", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/dna-discovery/analyze-comprehensive"}
+{"timestamp": "2025-12-07 22:41:56", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/dna-discovery/analyze-comprehensive - 404 - 0.0000s"}
+{"timestamp": "2025-12-07 22:41:56", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:57081 - "POST /api/v1/dna-discovery/analyze-comprehensive HTTP/1.1" 404"}
+{"timestamp": "2025-12-07 22:43:04", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/dna-discovery/analyze-comprehensive"}
+{"timestamp": "2025-12-07 22:43:04", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/dna-discovery/analyze-comprehensive - 404 - 0.0014s"}
+{"timestamp": "2025-12-07 22:43:04", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:52242 - "POST /api/v1/dna-discovery/analyze-comprehensive HTTP/1.1" 404"}
+{"timestamp": "2025-12-07 22:44:00", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-12-07 22:44:00", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application shutdown."}
+{"timestamp": "2025-12-07 22:44:00", "name": "app.main", "level": "INFO", "message": "🛑 Shutting down BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:44:00", "name": "uvicorn.error", "level": "INFO", "message": "Application shutdown complete."}
+{"timestamp": "2025-12-07 22:44:00", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [5320]"}
+{"timestamp": "2025-12-07 22:44:08", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [13808]"}
+{"timestamp": "2025-12-07 22:44:08", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-07 22:44:08", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:44:09", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-07 22:44:09", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-07 22:44:09", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-12-07 22:44:17", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/dna-discovery/analyze-comprehensive"}
+{"timestamp": "2025-12-07 22:44:17", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/dna-discovery/analyze-comprehensive - 404 - 0.0020s"}
+{"timestamp": "2025-12-07 22:44:17", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:55509 - "POST /api/v1/dna-discovery/analyze-comprehensive HTTP/1.1" 404"}
+{"timestamp": "2025-12-07 22:44:40", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/dna-discovery/analyze-comprehensive"}
+{"timestamp": "2025-12-07 22:44:40", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/dna-discovery/analyze-comprehensive - 404 - 0.0011s"}
+{"timestamp": "2025-12-07 22:44:40", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:61163 - "POST /api/v1/dna-discovery/analyze-comprehensive HTTP/1.1" 404"}
+{"timestamp": "2025-12-07 22:45:03", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/dna-discovery/"}
+{"timestamp": "2025-12-07 22:45:03", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/dna-discovery/ - 404 - 0.0013s"}
+{"timestamp": "2025-12-07 22:45:03", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:63108 - "GET /api/v1/dna-discovery/ HTTP/1.1" 404"}
+{"timestamp": "2025-12-07 22:45:22", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/dna-discovery/"}
+{"timestamp": "2025-12-07 22:45:22", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/dna-discovery/ - 404 - 0.0020s"}
+{"timestamp": "2025-12-07 22:45:22", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:65039 - "GET /api/v1/dna-discovery/ HTTP/1.1" 404"}
+{"timestamp": "2025-12-07 22:45:22", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-12-07 22:45:22", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application shutdown."}
+{"timestamp": "2025-12-07 22:45:22", "name": "app.main", "level": "INFO", "message": "🛑 Shutting down BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:45:22", "name": "uvicorn.error", "level": "INFO", "message": "Application shutdown complete."}
+{"timestamp": "2025-12-07 22:45:22", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [13808]"}
+{"timestamp": "2025-12-07 22:45:27", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [31160]"}
+{"timestamp": "2025-12-07 22:45:27", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-07 22:45:27", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:45:31", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-07 22:45:31", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-07 22:45:31", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-12-07 22:45:31", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1"}
+{"timestamp": "2025-12-07 22:45:31", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1 - 200 - 0.0010s"}
+{"timestamp": "2025-12-07 22:45:31", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:65046 - "GET /api/v1 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:45:45", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/dna-discovery/test"}
+{"timestamp": "2025-12-07 22:45:45", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/dna-discovery/test - 404 - 0.0000s"}
+{"timestamp": "2025-12-07 22:45:45", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:65053 - "GET /api/v1/dna-discovery/test HTTP/1.1" 404"}
+{"timestamp": "2025-12-07 22:45:45", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-12-07 22:45:46", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application shutdown."}
+{"timestamp": "2025-12-07 22:45:46", "name": "app.main", "level": "INFO", "message": "🛑 Shutting down BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:45:46", "name": "uvicorn.error", "level": "INFO", "message": "Application shutdown complete."}
+{"timestamp": "2025-12-07 22:45:46", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [31160]"}
+{"timestamp": "2025-12-07 22:45:51", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [30684]"}
+{"timestamp": "2025-12-07 22:45:51", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-07 22:45:51", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:45:52", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-07 22:45:52", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-07 22:45:52", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-12-07 22:46:00", "name": "app.main", "level": "INFO", "message": "🔄 GET /docs"}
+{"timestamp": "2025-12-07 22:46:00", "name": "app.main", "level": "INFO", "message": "✅ GET /docs - 404 - 0.0025s"}
+{"timestamp": "2025-12-07 22:46:00", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:65066 - "GET /docs HTTP/1.1" 404"}
+{"timestamp": "2025-12-07 22:46:05", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/docs"}
+{"timestamp": "2025-12-07 22:46:05", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/docs - 200 - 0.0035s"}
+{"timestamp": "2025-12-07 22:46:05", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:65067 - "GET /api/v1/docs HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:46:43", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-12-07 22:46:43", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application shutdown."}
+{"timestamp": "2025-12-07 22:46:43", "name": "app.main", "level": "INFO", "message": "🛑 Shutting down BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:46:43", "name": "uvicorn.error", "level": "INFO", "message": "Application shutdown complete."}
+{"timestamp": "2025-12-07 22:46:43", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [30684]"}
+{"timestamp": "2025-12-07 22:46:53", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [17768]"}
+{"timestamp": "2025-12-07 22:46:53", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-07 22:46:53", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:46:54", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-07 22:46:54", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-07 22:46:54", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
+{"timestamp": "2025-12-07 22:47:15", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:47:15", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/datasets/ - 200 - 0.0010s"}
+{"timestamp": "2025-12-07 22:47:15", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:53642 - "OPTIONS /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:47:15", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:47:16", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.8618s"}
+{"timestamp": "2025-12-07 22:47:16", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:53642 - "GET /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:47:16", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:47:16", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/jobs/ - 200 - 0.0015s"}
+{"timestamp": "2025-12-07 22:47:16", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:53642 - "OPTIONS /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:47:16", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:47:18", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 2.0792s"}
+{"timestamp": "2025-12-07 22:47:18", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:53642 - "GET /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:47:30", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/auth/login"}
+{"timestamp": "2025-12-07 22:47:30", "name": "passlib.handlers.bcrypt", "level": "WARNING", "message": "(trapped) error reading bcrypt version"}
+Traceback (most recent call last):
+  File "D:\Pablo\fullstac\Final project\BioMlStudio\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+{"timestamp": "2025-12-07 22:47:31", "name": "app.api.routes.auth", "level": "INFO", "message": "User logged in: rohanrv2004@gmail.com"}
+{"timestamp": "2025-12-07 22:47:31", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/auth/login - 200 - 0.6274s"}
+{"timestamp": "2025-12-07 22:47:31", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:62506 - "POST /api/v1/auth/login HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:47:31", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:47:32", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.3933s"}
+{"timestamp": "2025-12-07 22:47:32", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:62506 - "GET /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:47:32", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/datasets/"}
+{"timestamp": "2025-12-07 22:47:32", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/datasets/ - 200 - 0.5654s"}
+{"timestamp": "2025-12-07 22:47:32", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:62506 - "GET /api/v1/datasets/?limit=10 HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:47:32", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:47:36", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 3.5140s"}
+{"timestamp": "2025-12-07 22:47:36", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:50293 - "GET /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:47:36", "name": "app.main", "level": "INFO", "message": "🔄 GET /api/v1/jobs/"}
+{"timestamp": "2025-12-07 22:47:38", "name": "app.main", "level": "INFO", "message": "✅ GET /api/v1/jobs/ - 200 - 2.1834s"}
+{"timestamp": "2025-12-07 22:47:38", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:62506 - "GET /api/v1/jobs/?limit=10&sort_by=created_at&sort_order=desc HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:47:50", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/dna-discovery/analyze-comprehensive"}
+{"timestamp": "2025-12-07 22:47:50", "name": "app.api.routes.dna_discovery", "level": "INFO", "message": "Starting comprehensive DNA analysis for user 2"}
+{"timestamp": "2025-12-07 22:47:50", "name": "app.api.routes.dna_discovery", "level": "WARNING", "message": "Sequence 4 detected as protein, converting for DNA analysis"}
+{"timestamp": "2025-12-07 22:47:50", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Performing gene discovery analysis..."}
+{"timestamp": "2025-12-07 22:47:50", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Analyzing mutations..."}
+{"timestamp": "2025-12-07 22:47:50", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Identifying drug targets..."}
+{"timestamp": "2025-12-07 22:47:50", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Detecting pathogens..."}
+{"timestamp": "2025-12-07 22:47:50", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Analyzing functional motifs..."}
+{"timestamp": "2025-12-07 22:47:50", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Generating biomarkers..."}
+{"timestamp": "2025-12-07 22:47:50", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Performing evolutionary analysis..."}
+{"timestamp": "2025-12-07 22:47:50", "name": "app.api.routes.dna_discovery", "level": "INFO", "message": "DNA analysis completed for user 2"}
+{"timestamp": "2025-12-07 22:47:50", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/dna-discovery/analyze-comprehensive - 200 - 0.1719s"}
+{"timestamp": "2025-12-07 22:47:50", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:59404 - "POST /api/v1/dna-discovery/analyze-comprehensive HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:48:08", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/dna-discovery/analyze-comprehensive"}
+{"timestamp": "2025-12-07 22:48:08", "name": "app.api.routes.dna_discovery", "level": "INFO", "message": "Starting comprehensive DNA analysis for user 2"}
+{"timestamp": "2025-12-07 22:48:08", "name": "app.api.routes.dna_discovery", "level": "WARNING", "message": "Sequence 4 detected as protein, converting for DNA analysis"}
+{"timestamp": "2025-12-07 22:48:08", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Performing gene discovery analysis..."}
+{"timestamp": "2025-12-07 22:48:08", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Analyzing mutations..."}
+{"timestamp": "2025-12-07 22:48:08", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Identifying drug targets..."}
+{"timestamp": "2025-12-07 22:48:08", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Detecting pathogens..."}
+{"timestamp": "2025-12-07 22:48:08", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Analyzing functional motifs..."}
+{"timestamp": "2025-12-07 22:48:08", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Generating biomarkers..."}
+{"timestamp": "2025-12-07 22:48:08", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Performing evolutionary analysis..."}
+{"timestamp": "2025-12-07 22:48:08", "name": "app.api.routes.dna_discovery", "level": "INFO", "message": "DNA analysis completed for user 2"}
+{"timestamp": "2025-12-07 22:48:08", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/dna-discovery/analyze-comprehensive - 200 - 0.1740s"}
+{"timestamp": "2025-12-07 22:48:08", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:56087 - "POST /api/v1/dna-discovery/analyze-comprehensive HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:53:09", "name": "app.main", "level": "INFO", "message": "🔄 OPTIONS /api/v1/dna-discovery/analyze-comprehensive"}
+{"timestamp": "2025-12-07 22:53:09", "name": "app.main", "level": "INFO", "message": "✅ OPTIONS /api/v1/dna-discovery/analyze-comprehensive - 200 - 0.0013s"}
+{"timestamp": "2025-12-07 22:53:09", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:57518 - "OPTIONS /api/v1/dna-discovery/analyze-comprehensive HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:53:09", "name": "app.main", "level": "INFO", "message": "🔄 POST /api/v1/dna-discovery/analyze-comprehensive"}
+{"timestamp": "2025-12-07 22:53:09", "name": "app.api.routes.dna_discovery", "level": "INFO", "message": "Starting comprehensive DNA analysis for user 2"}
+{"timestamp": "2025-12-07 22:53:09", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Performing gene discovery analysis..."}
+{"timestamp": "2025-12-07 22:53:09", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Analyzing mutations..."}
+{"timestamp": "2025-12-07 22:53:09", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Identifying drug targets..."}
+{"timestamp": "2025-12-07 22:53:09", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Detecting pathogens..."}
+{"timestamp": "2025-12-07 22:53:09", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Analyzing functional motifs..."}
+{"timestamp": "2025-12-07 22:53:09", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Generating biomarkers..."}
+{"timestamp": "2025-12-07 22:53:09", "name": "app.services.dna_discovery_service", "level": "INFO", "message": "Performing evolutionary analysis..."}
+{"timestamp": "2025-12-07 22:53:09", "name": "app.api.routes.dna_discovery", "level": "INFO", "message": "DNA analysis completed for user 2"}
+{"timestamp": "2025-12-07 22:53:09", "name": "app.main", "level": "INFO", "message": "✅ POST /api/v1/dna-discovery/analyze-comprehensive - 200 - 0.2645s"}
+{"timestamp": "2025-12-07 22:53:09", "name": "uvicorn.access", "level": "INFO", "message": "127.0.0.1:57518 - "POST /api/v1/dna-discovery/analyze-comprehensive HTTP/1.1" 200"}
+{"timestamp": "2025-12-07 22:53:45", "name": "uvicorn.error", "level": "INFO", "message": "Shutting down"}
+{"timestamp": "2025-12-07 22:53:45", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application shutdown."}
+{"timestamp": "2025-12-07 22:53:45", "name": "app.main", "level": "INFO", "message": "🛑 Shutting down BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:53:45", "name": "uvicorn.error", "level": "INFO", "message": "Application shutdown complete."}
+{"timestamp": "2025-12-07 22:53:45", "name": "uvicorn.error", "level": "INFO", "message": "Finished server process [17768]"}
+{"timestamp": "2025-12-07 22:53:52", "name": "uvicorn.error", "level": "INFO", "message": "Started server process [30176]"}
+{"timestamp": "2025-12-07 22:53:52", "name": "uvicorn.error", "level": "INFO", "message": "Waiting for application startup."}
+{"timestamp": "2025-12-07 22:53:52", "name": "app.main", "level": "INFO", "message": "🚀 Starting BioMLStudio API..."}
+{"timestamp": "2025-12-07 22:53:55", "name": "app.main", "level": "INFO", "message": "✅ Database tables created/verified"}
+{"timestamp": "2025-12-07 22:53:55", "name": "app.main", "level": "INFO", "message": "🎉 BioMLStudio API started successfully"}
+{"timestamp": "2025-12-07 22:53:55", "name": "uvicorn.error", "level": "INFO", "message": "Application startup complete."}
