@@ -168,6 +168,18 @@ export default function DatasetDetailPage() {
         </Button>
 
         <Button
+          onClick={() => router.push(`/analysis/${datasetId}`)}
+          className="flex items-center gap-2 h-auto p-4"
+          variant="outline"
+        >
+          <FileText className="w-5 h-5" />
+          <div className="text-left">
+            <div className="font-medium">Full Analysis Report</div>
+            <div className="text-sm text-zinc-400">Complete insights</div>
+          </div>
+        </Button>
+
+        <Button
           onClick={() => {
             localStorage.setItem('selectedDataset', JSON.stringify(dataset));
             router.push('/automl');
@@ -200,7 +212,7 @@ export default function DatasetDetailPage() {
     }
 
     return (
-      <div className="space-y-6">
+      <div className=" space-y-6">
         <Card className="p-6 border-zinc-700/50">
           <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
             <TrendingUp className="w-5 h-5" />
@@ -303,7 +315,7 @@ export default function DatasetDetailPage() {
             <AlertTriangle className="w-12 h-12 text-red-400 mx-auto mb-4" />
             <h3 className="text-xl text-white mb-2">Error Loading Dataset</h3>
             <p className="text-zinc-400 mb-4">{error}</p>
-            <Button onClick={() => router.push('/datasets')} variant="outline">
+            <Button onClick={() => router.push('/upload')} variant="outline">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Datasets
             </Button>
@@ -316,17 +328,17 @@ export default function DatasetDetailPage() {
   return (
     <>
       <Header />
-      <div className="min-h-[calc(100vh-64px)] bg-gradient-to-b from-black via-zinc-950/80 to-black">
+      <div className="min-h-[calc(100vh-64px)] page-container">
         <div className="container mx-auto px-4 py-8">
           {/* Header */}
           <div className="mb-8">
             <Button 
-              onClick={() => router.push('/datasets')} 
+              onClick={() => router.push('/upload')} 
               variant="ghost" 
               className="mb-4 text-zinc-400 hover:text-white"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Datasets
+              Back to upload
             </Button>
             
             <h1 className="text-4xl font-bold text-white mb-2">

@@ -132,11 +132,11 @@ export default function Dashboard() {
               </Card>
             </div>
 
-            {/* Core Modules - The 8 Essential Features */}
-            <div className="section-spacing">
+            
+            {/* <div className="section-spacing">
               <h2 className="text-3xl font-bold text-white mb-8 text-center">Core Platform Modules</h2>
               <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-6">
-                {/* Module 1: Dataset Upload & Preprocessing */}
+               
                 <Card className="p-6 hover:bg-zinc-800/40 transition-all cursor-pointer group border-zinc-700/50 hover:border-zinc-600/70" 
                       onClick={() => router.push('/upload')}>
                   <div className="mb-4 group-hover:scale-110 transition-transform">
@@ -148,7 +148,7 @@ export default function Dashboard() {
                   </p>
                 </Card>
 
-                {/* Module 2: Domain-Specific Pipelines */}
+               
                 <Card className="p-6 hover:bg-zinc-800/40 transition-all cursor-pointer group border-zinc-700/50 hover:border-zinc-600/70"
                       onClick={() => router.push('/pipelines')}>
                   <div className="mb-4 group-hover:scale-110 transition-transform">
@@ -160,7 +160,7 @@ export default function Dashboard() {
                   </p>
                 </Card>
 
-                {/* Module 3: Automated ML Builder */}
+               
                 <Card className="p-6 hover:bg-zinc-800/40 transition-all cursor-pointer group border-zinc-700/50 hover:border-zinc-600/70"
                       onClick={() => router.push('/automl')}>
                   <div className="mb-4 group-hover:scale-110 transition-transform">
@@ -172,7 +172,6 @@ export default function Dashboard() {
                   </p>
                 </Card>
 
-                {/* Module 4: Model Explorer */}
                 <Card className="p-6 hover:bg-zinc-800/40 transition-all cursor-pointer group border-zinc-700/50 hover:border-zinc-600/70"
                       onClick={() => router.push('/model-explorer')}>
                   <div className="mb-4 group-hover:scale-110 transition-transform">
@@ -184,7 +183,6 @@ export default function Dashboard() {
                   </p>
                 </Card>
 
-                {/* Module 5: Results & Visualization Dashboard */}
                 <Card className="p-6 hover:bg-zinc-800/40 transition-all cursor-pointer group border-zinc-700/50 hover:border-zinc-600/70"
                       onClick={() => router.push('/results')}>
                   <div className="mb-4 group-hover:scale-110 transition-transform">
@@ -196,7 +194,6 @@ export default function Dashboard() {
                   </p>
                 </Card>
 
-                {/* Module 6: Inference & Deployment */}
                 <Card className="p-6 hover:bg-zinc-800/40 transition-all cursor-pointer group border-zinc-700/50 hover:border-zinc-600/70"
                       onClick={() => router.push('/inference')}>
                   <div className="mb-4 group-hover:scale-110 transition-transform">
@@ -208,7 +205,6 @@ export default function Dashboard() {
                   </p>
                 </Card>
 
-                {/* Module 7: Dataset Analysis Module */}
                 <div onClick={() => router.push('/datasets')} className="cursor-pointer">
                   <Card className="p-6 hover:bg-zinc-800/40 transition-all group border-zinc-700/50 hover:border-zinc-600/70">
                     <div className="mb-4 group-hover:scale-110 transition-transform">
@@ -221,7 +217,6 @@ export default function Dashboard() {
                   </Card>
                 </div>
 
-                {/* Module 8: Test Cases & Reports */}
                 <Card className="p-6 hover:bg-zinc-800/40 transition-all cursor-pointer group border-zinc-700/50 hover:border-zinc-600/70"
                       onClick={() => router.push('/reports')}>
                   <div className="mb-4 group-hover:scale-110 transition-transform">
@@ -233,7 +228,7 @@ export default function Dashboard() {
                   </p>
                 </Card>
               </div>
-            </div>
+            </div> */}
 
             {/* Recent Activity */}
             <div className="grid lg:grid-cols-2 gap-8 section-spacing">

@@ -316,22 +316,13 @@ export default function Datasets() {
                       )}
 
                       <div className="mt-6 pt-6 border-t border-zinc-700/50">
-                        <div className="flex gap-4">
+                        <div className="flex flex-wrap gap-3">
                           <Button
-                            onClick={async () => {
-                              try {
-                                const analysis = await analyzeDataset(selectedDataset.id);
-                                setAnalysisData(analysis);
-                                // Show analysis results inline or expand current view
-                              } catch (error) {
-                                console.error('Analysis failed:', error);
-                                alert('Analysis currently unavailable');
-                              }
-                            }}
+                            onClick={() => router.push(`/analysis/${selectedDataset.id}`)}
                             className="flex items-center gap-2"
                           >
                             <BarChart3 className="w-4 h-4" />
-                            Detailed Analysis
+                            View Analysis Report
                           </Button>
                           <Button
                             onClick={() => {
@@ -346,22 +337,12 @@ export default function Datasets() {
                             Train Model
                           </Button>
                           <Button
-                            onClick={async () => {
-                              try {
-                                const preview = await visualizeDataset(selectedDataset.id);
-                                console.log('Dataset preview:', preview);
-                                // Could open a modal or navigate to preview page
-                                alert('Dataset visualization loaded - check console for details');
-                              } catch (error) {
-                                console.error('Preview failed:', error);
-                                alert('Preview currently unavailable');
-                              }
-                            }}
+                            onClick={() => router.push(`/datasets/${selectedDataset.id}`)}
                             variant="outline"
                             className="flex items-center gap-2"
                           >
                             <Eye className="w-4 h-4" />
-                            Preview Data
+                            Dataset Details
                           </Button>
                         </div>
                       </div>

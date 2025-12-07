@@ -169,7 +169,7 @@ export default function Pipelines() {
     return (
       <>
         <Header />
-        <div className="min-h-[calc(100vh-64px)] bg-linear-to-b from-black via-zinc-950/80 to-black">
+        <div className="min-h-[calc(100vh-64px)] page-container bg-linear-to-b from-black via-zinc-950/80 to-black">
           <div className="max-w-4xl mx-auto px-6 py-16">
             {/* Back Button */}
             <Button
@@ -338,7 +338,7 @@ export default function Pipelines() {
   return (
     <>
       <Header />
-        <div className="min-h-[calc(100vh-64px)] bg-linear-to-b from-black via-zinc-950/80 to-black">
+        <div className="min-h-[calc(100vh-64px)] page-container bg-linear-to-b from-black via-zinc-950/80 to-black">
           <div className="max-w-6xl mx-auto px-6 py-16 padding-section">
           {/* Header */}
           <div className="text-center mb-16">
