@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Header } from '@/components/Header';
@@ -30,6 +30,7 @@ interface AutoMLConfig {
 export default function AutoML() {
   useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
   
   const [datasets, setDatasets] = useState<any[]>([]);
   const [selectedDataset, setSelectedDataset] = useState<number | null>(null);
@@ -57,6 +58,19 @@ export default function AutoML() {
   useEffect(() => {
     loadDatasets();
   }, []);
+
+  useEffect(() => {
+    // Check for datasetId parameter in URL to auto-select dataset
+    const datasetIdParam = searchParams.get('datasetId');
+    if (datasetIdParam && datasets.length > 0) {
+      const datasetId = parseInt(datasetIdParam);
+      const foundDataset = datasets.find((d: any) => d.id === datasetId);
+      if (foundDataset) {
+        setSelectedDataset(datasetId);
+        setConfig(prev => ({ ...prev, dataset_id: datasetId }));
+      }
+    }
+  }, [searchParams, datasets]);
 
   useEffect(() => {
     if (selectedDataset) {
@@ -94,14 +108,15 @@ export default function AutoML() {
       
       setDatasets(apiDatasets);
       
-      // Check for dataset parameter in URL
+      // Check for datasetId parameter in URL
       const urlParams = new URLSearchParams(window.location.search);
-      const datasetParam = urlParams.get('dataset');
+      const datasetParam = urlParams.get('datasetId');
       if (datasetParam) {
         const datasetId = parseInt(datasetParam);
         const foundDataset = apiDatasets.find((d: any) => d.id === datasetId);
         if (foundDataset) {
           setSelectedDataset(datasetId);
+          setConfig(prev => ({ ...prev, dataset_id: datasetId }));
         }
       } else {
         // Auto-select most recent dataset if available
@@ -151,6 +166,8 @@ export default function AutoML() {
     setLoading(true);
     try {
       const preview = await api.previewDataset(selectedDataset, 5);
+      console.log('Preview response:', preview);
+      console.log('Available columns:', preview.columns);
       setDatasetColumns(preview.columns || []);
     } catch (error) {
       console.error('Failed to load dataset columns:', error);
@@ -204,8 +221,8 @@ export default function AutoML() {
   return (
     <>
       <Header />
-      <div className="min-h-[calc(100vh-64px)] bg-gradient-to-b from-black via-zinc-950/80 to-black">
-        <div className="page-container padding-section">
+      <div className="min-h-[calc(100vh-64px)] bg-linear-to-b from-black via-zinc-950/80 to-black">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 padding-section">
           {/* Header */}
           <div className="section-spacing text-center-wrapper">
             <Button
@@ -215,10 +232,10 @@ export default function AutoML() {
             >
               ← Back to Dashboard
             </Button>
-            <h1 className="text-5xl sm:text-6xl font-bold mb-6 bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">
+            <h1 className="text-5xl sm:text-6xl font-bold mb-6 bg-linear-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">
               Automated ML Model Builder
             </h1>
-            <p className="text-xl text-zinc-300 max-w-4xl leading-relaxed">
+            <p className="text-xl text-zinc-300 max-w-7xl leading-relaxed">
               One-click machine learning with automatic model selection, hyperparameter tuning, and live training visualization
             </p>
           </div>

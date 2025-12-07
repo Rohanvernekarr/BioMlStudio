@@ -3,10 +3,12 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
-import { Card } from '@/components/ui/Card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
+import { Label } from '@/components/ui/Label';
+import { Separator } from '@/components/ui/Separator';
 import { api } from '@/lib/api';
-import { AlertTriangle, Loader2, LogIn, Sparkles } from 'lucide-react';
+import { AlertTriangle, Loader2, LogIn, Sparkles, Dna } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -38,93 +40,122 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-zinc-950 to-black flex-center-col px-4 sm:px-6 lg:px-8 padding-section">
-      <div className="centered-card">
-        <div className="text-center-wrapper section-spacing">
-          <div className="inline-flex items-center gap-3 mb-8">
-            <div className="w-16 h-16 bg-gradient-to-br from-white to-zinc-300 rounded-2xl flex items-center justify-center shadow-2xl">
-              <span className="text-black font-bold text-2xl">BM</span>
-            </div>
-          </div>
-          <h1 className="text-5xl sm:text-6xl font-bold mb-6 tracking-tight bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">
-            BioMLStudio
-          </h1>
-          <p className="text-zinc-400 text-xl font-light">
-            {isLogin ? 'Welcome back' : 'Create your account'}
-          </p>
+    <div className="max-w-7xl mx-auto relative min-h-screen flex-col items-center justify-center grid lg:max-w-7xl lg:grid-cols-2 lg:px-0">
+      <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
+        <div className="absolute inset-0 bg-zinc-900" />
+        <div className="relative z-20 flex items-center text-lg font-medium">
+          <Dna className="mr-2 h-6 w-6" />
+          BioMLStudio
         </div>
-
-        <Card className="!p-10 lg:!p-12 card-spacing">
-          <form onSubmit={handleSubmit} className="gap-component flex flex-col">
-            {!isLogin && (
-              <Input
-                label="Full Name"
-                type="text"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                placeholder="John Doe"
-                required
-              />
-            )}
-
-            <Input
-              label="Email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@example.com"
-              required
-            />
-
-            <Input
-              label="Password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              required
-            />
-
-            {error && (
-              <div className="p-6 bg-red-950/40 border border-red-800/60 rounded-xl text-red-300 text-sm font-medium flex items-center gap-2">
-                <AlertTriangle className="w-5 h-5" />
-                {error}
-              </div>
-            )}
-
-            <Button type="submit" disabled={loading} className="w-full !py-4 !text-lg font-semibold mt-2 flex items-center justify-center gap-2" size="lg">
-              {loading ? (
-                <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                  Please wait...
-                </>
-              ) : isLogin ? (
-                <>
-                  <LogIn className="w-5 h-5" />
-                  Sign In
-                </>
-              ) : (
-                <>
-                  <Sparkles className="w-5 h-5" />
-                  Create Account
-                </>
-              )}
-            </Button>
-          </form>
-
-          <div className="mt-8 pt-8 border-t border-zinc-800 text-center element-spacing">
-            <button
-              type="button"
-              onClick={() => {
-                setIsLogin(!isLogin);
-                setError('');
-              }}
-              className="text-sm text-zinc-400 hover:text-white transition-colors"
-            >
-              {isLogin ? "Don't have an account? Sign up" : 'Already have an account? Sign in'}
-            </button>
+        <div className="relative z-20 mt-auto">
+          <blockquote className="space-y-2">
+            <p className="text-lg">
+              "This platform has revolutionized how we approach bioinformatics research. 
+              The no-code ML capabilities save us countless hours."
+            </p>
+            <footer className="text-sm">Dr. Sofia Rodriguez, Computational Biology Lab</footer>
+          </blockquote>
+        </div>
+      </div>
+      <div className="lg:p-8">
+        <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+          <div className="flex flex-col space-y-2 text-center">
+            <h1 className="text-2xl font-semibold tracking-tight">
+              {isLogin ? 'Welcome back' : 'Create an account'}
+            </h1>
+            <p className="text-sm text-muted-foreground">
+              {isLogin ? 'Enter your credentials to access your account' : 'Enter your details to create your account'}
+            </p>
           </div>
-        </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>{isLogin ? 'Sign In' : 'Sign Up'}</CardTitle>
+              <CardDescription>
+                {isLogin ? 'Access your BioMLStudio dashboard' : 'Join the no-code bioinformatics revolution'}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                {!isLogin && (
+                  <div className="space-y-2">
+                    <Label htmlFor="fullName">Full Name</Label>
+                    <Input
+                      id="fullName"
+                      type="text"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      placeholder="John Doe"
+                      required
+                    />
+                  </div>
+                )}
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="you@example.com"
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="password">Password</Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="••••••••"
+                    required
+                  />
+                </div>
+
+                {error && (
+                  <div className="flex items-center space-x-2 text-sm text-destructive">
+                    <AlertTriangle className="h-4 w-4" />
+                    <span>{error}</span>
+                  </div>
+                )}
+
+                <Button type="submit" disabled={loading} className="w-full">
+                  {loading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Please wait...
+                    </>
+                  ) : isLogin ? (
+                    <>
+                      <LogIn className="mr-2 h-4 w-4" />
+                      Sign In
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="mr-2 h-4 w-4" />
+                      Create Account
+                    </>
+                  )}
+                </Button>
+              </form>
+
+              <Separator className="my-4" />
+              
+              <div className="text-center text-sm">
+                <Button
+                  variant="link"
+                  onClick={() => {
+                    setIsLogin(!isLogin);
+                    setError('');
+                  }}
+                  className="px-0"
+                >
+                  {isLogin ? "Don't have an account? Sign up" : 'Already have an account? Sign in'}
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );

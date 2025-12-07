@@ -141,7 +141,7 @@ export default function ModelExplorer() {
             <h1 className="text-5xl sm:text-6xl font-bold mb-6 bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">
               Model Explorer
             </h1>
-            <p className="text-xl text-zinc-300 max-w-4xl leading-relaxed">
+            <p className="text-xl text-zinc-300 max-w-7xl leading-relaxed">
               Visualize model architecture, explore layers, analyze parameters, and understand how your models work internally
             </p>
           </div>
@@ -155,7 +155,7 @@ export default function ModelExplorer() {
             <Card className="p-12 text-center border-zinc-700/50">
               <Bot className="w-16 h-16 text-zinc-500 mx-auto mb-6" />
               <h2 className="text-2xl font-bold text-white mb-4">No Trained Models Yet</h2>
-              <p className="text-zinc-300 mb-8 max-w-2xl mx-auto">
+              <p className="text-zinc-300 mb-8 max-w-7xl mx-auto">
                 Train your first model to explore its architecture and internal structure.
               </p>
               <div className="flex gap-4 justify-center">

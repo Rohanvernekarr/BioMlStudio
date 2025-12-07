@@ -88,7 +88,7 @@ export default function ResultsPage() {
     <>
       <Header />
       <div className="min-h-[calc(100vh-64px)] bg-gradient-to-b from-black via-zinc-950/90 to-black">
-        <div className="page-container page-section padding-section">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 page-section padding-section">
           <div className="gap-section flex flex-col">
             {/* Page Header */}
             <div className="flex flex-col lg:flex-row justify-between items-start gap-6 lg:gap-8 section-spacing">

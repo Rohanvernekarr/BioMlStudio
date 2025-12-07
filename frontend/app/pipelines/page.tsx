@@ -170,7 +170,7 @@ export default function Pipelines() {
       <>
         <Header />
         <div className="min-h-[calc(100vh-64px)] page-container bg-linear-to-b from-black via-zinc-950/80 to-black">
-          <div className="max-w-4xl mx-auto px-6 py-16">
+          <div className="max-w-7xl mx-auto px-6 py-16">
             {/* Back Button */}
             <Button
               variant="ghost"
@@ -190,7 +190,7 @@ export default function Pipelines() {
                 )}
               </div>
               <h1 className="text-4xl font-bold text-white mb-4">{selectedPipeline.name}</h1>
-              <p className="text-xl text-zinc-300 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-xl text-zinc-300 max-w-7xl mx-auto leading-relaxed">
                 {selectedPipeline.description}
               </p>
             </div>
@@ -339,7 +339,7 @@ export default function Pipelines() {
     <>
       <Header />
         <div className="min-h-[calc(100vh-64px)] page-container bg-linear-to-b from-black via-zinc-950/80 to-black">
-          <div className="max-w-6xl mx-auto px-6 py-16 padding-section">
+          <div className="max-w-7xl mx-auto px-6 py-16 padding-section">
           {/* Header */}
           <div className="text-center mb-16">
             <Button
@@ -352,10 +352,10 @@ export default function Pipelines() {
             <h1 className="text-6xl font-bold mb-8 bg-linear-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">
               Domain-Specific Pipelines
             </h1>
-            <p className="text-xl text-zinc-300 max-w-4xl mx-auto leading-relaxed mb-4">
+            <p className="text-xl text-zinc-300 max-w-7xl mx-auto leading-relaxed mb-4">
               Specialized bioinformatics pipelines with advanced ML models and biological embeddings
             </p>
-            <p className="text-lg text-zinc-400 max-w-3xl mx-auto mb-6">
+            <p className="text-lg text-zinc-400 max-w-7xl mx-auto mb-6">
               Choose your analysis type and follow our guided workflow - perfect for beginners!
             </p>
             {datasets.length > 0 && (

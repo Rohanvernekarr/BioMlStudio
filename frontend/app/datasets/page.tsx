@@ -68,8 +68,8 @@ export default function Datasets() {
   return (
     <>
       <Header />
-      <div className="min-h-[calc(100vh-64px)] bg-gradient-to-b from-black via-zinc-950/80 to-black">
-        <div className="page-container padding-section">
+      <div className="min-h-[calc(100vh-64px)]  bg-gradient-to-b from-black via-zinc-950/80 to-black">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 padding-section">
           <div className="section-spacing text-center-wrapper">
             <Button
               variant="ghost"
@@ -81,7 +81,7 @@ export default function Datasets() {
             <h1 className="text-5xl sm:text-6xl font-bold mb-6 bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">
               Dataset Analysis
             </h1>
-            <p className="text-xl text-zinc-300 max-w-4xl leading-relaxed">
+            <p className="text-xl text-zinc-300 max-w-7xl leading-relaxed">
               Quality metrics, sequence statistics, and comprehensive data visualizations
             </p>
           </div>
@@ -95,7 +95,7 @@ export default function Datasets() {
             <Card className="p-12 text-center border-zinc-700/50">
               <Folder className="w-16 h-16 text-zinc-500 mx-auto mb-6" />
               <h2 className="text-2xl font-bold text-white mb-4">No Datasets Found</h2>
-              <p className="text-zinc-300 mb-8 max-w-2xl mx-auto">
+              <p className="text-zinc-300 mb-8 max-w-7xl mx-auto">
                 Upload your first dataset to start analyzing your biological data.
               </p>
               <Button onClick={() => router.push('/upload')} className="flex items-center gap-2 mx-auto">
@@ -165,7 +165,7 @@ export default function Datasets() {
                             View Data
                           </Button>
                           <Button
-                            onClick={() => router.push(`/configure/${selectedDataset.id}`)}
+                            onClick={() => router.push(`/automl?datasetId=${selectedDataset.id}`)}
                             size="sm"
                             variant="outline"
                             className="flex items-center gap-2"

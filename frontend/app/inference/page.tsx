@@ -240,7 +240,7 @@ export default function Inference() {
             <h1 className="text-5xl sm:text-6xl font-bold mb-6 bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">
               Inference & Deployment
             </h1>
-            <p className="text-xl text-zinc-300 max-w-4xl leading-relaxed">
+            <p className="text-xl text-zinc-300 max-w-7xl leading-relaxed">
               Upload new sequences, run predictions with confidence scores, and get biological interpretations
             </p>
           </div>
@@ -249,7 +249,7 @@ export default function Inference() {
             <Card className="p-12 text-center border-zinc-700/50">
               <Bot className="w-16 h-16 text-zinc-500 mx-auto mb-6" />
               <h2 className="text-2xl font-bold text-white mb-4">No Trained Models Available</h2>
-              <p className="text-zinc-300 mb-8 max-w-2xl mx-auto">
+              <p className="text-zinc-300 mb-8 max-w-7xl mx-auto">
                 You need to train at least one model before you can run inference. Train a model using our AutoML or bioinformatics pipelines.
               </p>
               <div className="flex gap-4 justify-center">

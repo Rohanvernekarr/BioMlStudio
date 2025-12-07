@@ -725,7 +725,7 @@ export default function AnalysisPage() {
     <>
       <Header />
       <div className="min-h-screen bg-gradient-to-b from-black via-zinc-950 to-black page-section">
-        <div className="page-container">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="section-spacing text-center-wrapper">
             <Button
               variant="ghost"
@@ -1095,9 +1095,9 @@ export default function AnalysisPage() {
 
           {/* Action Buttons */}
           <div className="component-spacing flex flex-col sm:flex-row gap-4 justify-center pt-6">
-            <Button onClick={() => router.push(`/configure/${datasetId}`)} size="lg" className="px-8 flex items-center gap-2">
+            <Button onClick={() => router.push(`/automl?datasetId=${datasetId}`)} size="lg" className="px-8 flex items-center gap-2">
               <Rocket className="w-4 h-4" />
-              Continue to Model Configuration
+              Start AutoML Training
             </Button>
             <Button variant="outline" onClick={loadAnalysisData} size="lg" className="px-8 flex items-center gap-2">
               <RotateCcw className="w-4 h-4" />

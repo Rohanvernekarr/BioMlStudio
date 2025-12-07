@@ -279,9 +279,17 @@ class DatasetService:
         Returns:
             List: Preview data records
         """
+        from app.core.config import settings
+        
         file_path = Path(file_path)
         
-        self.logger.info(f"Preview called: file={file_path.name}, dataset_type={dataset_type}, suffix={file_path.suffix}")
+        # If path is relative, make it absolute relative to the backend directory
+        if not file_path.is_absolute():
+            # Get the backend directory (where the app is running)
+            backend_dir = Path(__file__).parent.parent.parent
+            file_path = backend_dir / file_path
+        
+        self.logger.info(f"Preview called: file={file_path.name}, dataset_type={dataset_type}, suffix={file_path.suffix}, absolute_path={file_path}")
         
         try:
             if dataset_type in ['dna', 'rna', 'protein']:
@@ -330,9 +338,16 @@ class DatasetService:
                     df = pd.read_csv(temp_csv_path)
                     self.logger.info(f"DataFrame loaded: shape={df.shape}, columns={list(df.columns)}")
                     
-                    # Drop metadata columns for preview
-                    df = df.drop(columns=['sequence_id', 'sequence', 'sequence_type'], errors='ignore')
-                    self.logger.info(f"After dropping metadata: columns={list(df.columns)}")
+                    # Keep sequence_id and sequence_type for potential target columns
+                    # Only drop the actual sequence data to save space
+                    df = df.drop(columns=['sequence'], errors='ignore')
+                    self.logger.info(f"After dropping sequence: columns={list(df.columns)}")
+                    
+                    # For biological data, add a sample class column if not present
+                    if 'class' not in df.columns and 'label' not in df.columns and 'target' not in df.columns:
+                        # Extract potential class from sequence_id (common pattern)
+                        if 'sequence_id' in df.columns:
+                            df['class'] = df['sequence_id'].str.extract(r'([a-zA-Z_]+)', expand=False).fillna('unknown')
                     
                     # Replace NaN with None for JSON serialization
                     df = df.fillna(0)  # Fill NaN with 0 for numeric k-mer counts

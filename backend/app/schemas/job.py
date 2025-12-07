@@ -21,16 +21,17 @@ class JobStatus(str, Enum):
 
 class JobType(str, Enum):
     """Job type enumeration"""
-    TRAINING = "training"
-    PREPROCESSING = "preprocessing"
-    EVALUATION = "evaluation"
-    PREDICTION = "prediction"
-    DATA_ANALYSIS = "data_analysis"
+    TRAINING = "TRAINING"
+    PREPROCESSING = "PREPROCESSING"
+    EVALUATION = "EVALUATION"
+    PREDICTION = "PREDICTION"
+    DATA_ANALYSIS = "DATA_ANALYSIS"
+    ML_WORKFLOW = "ML_WORKFLOW"
 
 
 class JobBase(BaseModel):
     """Base job schema"""
-    name: str = Field(..., min_length=1, max_length=255)
+    name: Optional[str] = Field(None, max_length=255)
     description: Optional[str] = Field(None, max_length=1000)
     job_type: JobType
     config: Dict[str, Any]
@@ -38,6 +39,7 @@ class JobBase(BaseModel):
 
 class JobCreate(JobBase):
     """Schema for job creation"""
+    name: str = Field(..., min_length=1, max_length=255)  # Required for creation
     dataset_id: Optional[int] = None
     priority: int = Field(5, ge=1, le=10)
     scheduled_at: Optional[datetime] = None

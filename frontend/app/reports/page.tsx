@@ -73,7 +73,7 @@ export default function Reports() {
             <h1 className="text-5xl sm:text-6xl font-bold mb-6 bg-gradient-to-br from-white via-zinc-100 to-zinc-400 bg-clip-text text-transparent">
               Reports & Testing
             </h1>
-            <p className="text-xl text-zinc-300 max-w-4xl leading-relaxed">
+            <p className="text-xl text-zinc-300 max-w-7xl leading-relaxed">
               Test cases, model comparison, training logs, and exportable reports
             </p>
           </div>
@@ -90,7 +90,7 @@ export default function Reports() {
                 <Button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  variant={activeTab === tab.id ? 'primary' : 'outline'}
+                  variant={activeTab === tab.id ? 'default' : 'outline'}
                   size="sm"
                   className="flex items-center gap-2"
                 >

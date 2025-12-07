@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
-import { ProgressBar } from '@/components/ui/ProgressBar';
+import { Progress } from '@/components/ui/ProgressBar';
 import { api } from '@/lib/api';
 import { useAuth } from '@/lib/useAuth';
 import { Job } from '@/types/api';
@@ -149,7 +149,7 @@ export default function RunningPage() {
             </p>
           </div>
 
-          <ProgressBar value={progress} className="mb-10" />
+          <Progress value={progress} className="mb-10" />
 
           <div className="gap-component flex flex-col mt-6">{steps.map((step, i) => (
               <div key={i} className="flex items-center gap-4 p-5 rounded-xl bg-zinc-950/50 border border-zinc-800/50">
