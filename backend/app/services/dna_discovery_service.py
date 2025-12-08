@@ -49,13 +49,24 @@ class DNADiscoveryService:
         Discover potential new genes by identifying Open Reading Frames (ORFs)
         and analyzing their coding potential
         """
+        # Adaptive minimum length based on dataset size
+        total_bp = sum(len(seq) for seq in sequences)
+        avg_seq_length = total_bp / len(sequences) if sequences else 0
+        
+        # Use smaller minimum length for small datasets
+        adaptive_min_length = min_length
+        if total_bp < 50000:  # Small dataset
+            adaptive_min_length = max(60, int(avg_seq_length * 0.3))  # At least 60bp or 30% of avg sequence
+            logger.info(f"📊 Small dataset detected. Using adaptive min_length: {adaptive_min_length} bp")
+        
         results = {
             'potential_genes': [],
             'statistics': {
                 'total_orfs_found': 0,
                 'protein_coding_orfs': 0,
                 'long_orfs': 0,
-                'average_orf_length': 0
+                'average_orf_length': 0,
+                'adaptive_min_length': adaptive_min_length
             }
         }
         
@@ -75,17 +86,17 @@ class DNADiscoveryService:
                 orfs = self._find_orfs(rev_seq[frame:], -(frame + 1), seq_idx)
                 all_orfs.extend(orfs)
         
-        # Filter and analyze ORFs
+        # Filter and analyze ORFs with adaptive threshold
         for orf in all_orfs:
-            if orf['length'] >= min_length:
+            if orf['length'] >= adaptive_min_length:
                 orf['coding_potential'] = self._calculate_coding_potential(orf['sequence'])
                 orf['gene_prediction'] = self._predict_gene_function(orf['protein_seq'])
                 results['potential_genes'].append(orf)
         
-        # Calculate statistics
+        # Calculate statistics with adaptive thresholds
         results['statistics']['total_orfs_found'] = len(all_orfs)
-        results['statistics']['protein_coding_orfs'] = len([o for o in all_orfs if o['length'] >= min_length])
-        results['statistics']['long_orfs'] = len([o for o in all_orfs if o['length'] >= 1000])
+        results['statistics']['protein_coding_orfs'] = len([o for o in all_orfs if o['length'] >= adaptive_min_length])
+        results['statistics']['long_orfs'] = len([o for o in all_orfs if o['length'] >= max(adaptive_min_length * 2, 200)])
         if all_orfs:
             results['statistics']['average_orf_length'] = np.mean([o['length'] for o in all_orfs])
         
@@ -141,9 +152,12 @@ class DNADiscoveryService:
             proteins = self._translate_all_frames(sequence)
             
             for frame, protein in proteins.items():
-                if len(protein) > 50:  # Minimum protein length
+                # Adaptive minimum protein length for small datasets
+                min_length = 20 if len(sequence) < 500 else 50
+                
+                if len(protein) > min_length:
                     # Analyze for druggable features
-                    drug_analysis = self._analyze_druggability(protein, seq_idx, frame)
+                    drug_analysis = self._analyze_druggability(protein, seq_idx, frame, len(sequence) < 500)
                     
                     if drug_analysis['enzyme_sites']:
                         targets['enzyme_sites'].extend(drug_analysis['enzyme_sites'])
@@ -151,12 +165,16 @@ class DNADiscoveryService:
                         targets['binding_pockets'].extend(drug_analysis['binding_pockets'])
                     if drug_analysis['conserved_domains']:
                         targets['conserved_domains'].extend(drug_analysis['conserved_domains'])
-                    if drug_analysis['druggability_score'] > 0.7:
+                    
+                    # Lower threshold for small datasets
+                    threshold = 0.4 if len(sequence) < 500 else 0.7
+                    if drug_analysis['druggability_score'] > threshold:
                         targets['druggable_proteins'].append({
                             'sequence_id': seq_idx,
                             'frame': frame,
-                            'protein': protein,
-                            'druggability_score': drug_analysis['druggability_score']
+                            'protein': protein[:50] + '...' if len(protein) > 50 else protein,  # Truncate for display
+                            'druggability_score': drug_analysis['druggability_score'],
+                            'length': len(protein)
                         })
         
         return targets
@@ -1004,8 +1022,8 @@ class DNADiscoveryService:
         
         return proteins
     
-    def _analyze_druggability(self, protein: str, seq_idx: int, frame: str) -> Dict[str, Any]:
-        """Analyze protein druggability"""
+    def _analyze_druggability(self, protein: str, seq_idx: int, frame: str, is_small_dataset: bool = False) -> Dict[str, Any]:
+        """Analyze protein druggability with adaptive thresholds"""
         analysis = {
             'enzyme_sites': [],
             'binding_pockets': [],
@@ -1013,13 +1031,22 @@ class DNADiscoveryService:
             'druggability_score': 0.0
         }
         
-        # Look for enzyme active sites
+        # Primary enzyme active sites
         enzyme_motifs = {
             'SERINE_PROTEASE': 'HDS',
             'KINASE_DOMAIN': 'DFG',
             'ZINC_FINGER': 'CxxC'
         }
         
+        # Secondary patterns for small datasets
+        if is_small_dataset:
+            flexible_motifs = {
+                'CATALYTIC_TRIAD': ['HD', 'DS', 'HG'],
+                'METAL_BINDING': ['CC', 'HH', 'CG'],
+                'ATP_BINDING': ['GK', 'MG', 'DG']
+            }
+        
+        # Check primary motifs
         for motif_name, pattern in enzyme_motifs.items():
             if pattern in protein:
                 analysis['enzyme_sites'].append({
@@ -1030,29 +1057,63 @@ class DNADiscoveryService:
                     'druggability': 0.9
                 })
         
+        # Check flexible motifs for small datasets
+        if is_small_dataset and not analysis['enzyme_sites']:
+            for motif_class, patterns in flexible_motifs.items():
+                for pattern in patterns:
+                    if pattern in protein:
+                        analysis['enzyme_sites'].append({
+                            'sequence_id': seq_idx,
+                            'frame': frame,
+                            'motif_type': f'{motif_class}_PARTIAL',
+                            'position': protein.find(pattern),
+                            'druggability': 0.6
+                        })
+                        break
+        
         # Calculate overall druggability score
         hydrophobic_aa = 'AILMFWYV'
         charged_aa = 'DEKR'
+        polar_aa = 'STNQ'
         
-        hydrophobic_ratio = sum(1 for aa in protein if aa in hydrophobic_aa) / len(protein)
-        charged_ratio = sum(1 for aa in protein if aa in charged_aa) / len(protein)
-        
-        # Good drug targets have moderate hydrophobicity and some charged residues
-        analysis['druggability_score'] = min(hydrophobic_ratio * 2, 1.0) * min(charged_ratio * 3, 1.0)
+        if len(protein) > 0:
+            hydrophobic_ratio = sum(1 for aa in protein if aa in hydrophobic_aa) / len(protein)
+            charged_ratio = sum(1 for aa in protein if aa in charged_aa) / len(protein)
+            polar_ratio = sum(1 for aa in protein if aa in polar_aa) / len(protein)
+            
+            # Enhanced druggability calculation
+            diversity_score = len(set(protein)) / 20.0  # Amino acid diversity
+            
+            # Balanced composition indicates druggability
+            composition_score = min(hydrophobic_ratio * 1.5, 1.0) * min(charged_ratio * 2, 1.0) * min(polar_ratio * 2, 1.0)
+            
+            analysis['druggability_score'] = (composition_score + diversity_score) / 2
+            
+            # Bonus for enzyme sites
+            if analysis['enzyme_sites']:
+                analysis['druggability_score'] = min(analysis['druggability_score'] + 0.2, 1.0)
         
         return analysis
     
     def _detect_bacterial_signatures(self, sequence: str, seq_idx: int) -> List[Dict[str, Any]]:
-        """Detect bacterial signature sequences"""
+        """Detect bacterial signature sequences with flexible matching"""
         signatures = []
         
-        # 16S rRNA signatures (simplified)
+        # Primary bacterial motifs (strict matching)
         bacterial_motifs = {
             'RIBOSOMAL_16S': 'ACCTGGTTGATCCTGCCAG',
             'BACTERIAL_PROMOTER': 'TTGACA',
             'SHINE_DALGARNO': 'AGGAGG'
         }
         
+        # Secondary patterns for small datasets (more flexible)
+        flexible_motifs = {
+            'RIBOSOMAL_PARTIAL': ['ACCTGG', 'GATCCT', 'TGCCAG'],
+            'PROMOTER_LIKE': ['TTGAC', 'TGACA', 'GACAA'],
+            'RBS_LIKE': ['AGGAG', 'GGAGG', 'GAGG']
+        }
+        
+        # Check strict patterns first
         for motif_name, pattern in bacterial_motifs.items():
             if pattern in sequence:
                 signatures.append({
@@ -1062,6 +1123,20 @@ class DNADiscoveryService:
                     'confidence': 0.8,
                     'organism_type': 'bacteria'
                 })
+        
+        # If no strict matches, try flexible patterns for small datasets
+        if not signatures and len(sequence) < 500:
+            for motif_class, patterns in flexible_motifs.items():
+                for pattern in patterns:
+                    if pattern in sequence:
+                        signatures.append({
+                            'sequence_id': seq_idx,
+                            'signature_type': f'{motif_class}_PARTIAL',
+                            'position': sequence.find(pattern),
+                            'confidence': 0.6,
+                            'organism_type': 'bacteria_potential'
+                        })
+                        break  # Only add one per class
         
         return signatures
     
@@ -1091,29 +1166,55 @@ class DNADiscoveryService:
         return signatures
     
     def _detect_resistance_genes(self, sequence: str, seq_idx: int) -> List[Dict[str, Any]]:
-        """Detect antibiotic resistance genes"""
+        """Detect antibiotic resistance genes with flexible matching"""
         resistance_genes = []
         
-        # Resistance gene patterns (simplified)
+        # Primary resistance gene patterns (strict)
         resistance_motifs = {
             'BETA_LACTAMASE': 'SXXK',
             'AMINOGLYCOSIDE': 'APH',
             'TETRACYCLINE': 'TETM'
         }
         
-        # Translate sequence to look for protein patterns
-        proteins = self._translate_all_frames(sequence)
+        # DNA-level patterns for small datasets
+        dna_resistance_patterns = {
+            'BETA_LACTAM_DNA': ['TCGAAANNNAAG', 'SERINE_ACTIVE'],  # Serine-based motifs
+            'AMINOGLYCOSIDE_DNA': ['GCCCAC', 'PHOSPHOTRANS'],
+            'EFFLUX_PUMP': ['ATGAAA', 'EFFLUX_PROTEIN']
+        }
         
-        for frame, protein in proteins.items():
-            for gene_name, pattern in resistance_motifs.items():
-                if pattern in protein:
-                    resistance_genes.append({
-                        'sequence_id': seq_idx,
-                        'resistance_type': gene_name,
-                        'frame': frame,
-                        'position': protein.find(pattern),
-                        'antibiotic_class': self._get_antibiotic_class(gene_name)
-                    })
+        # Translate sequence to look for protein patterns
+        try:
+            proteins = self._translate_all_frames(sequence)
+            
+            for frame, protein in proteins.items():
+                # Check strict protein patterns
+                for gene_name, pattern in resistance_motifs.items():
+                    if pattern.replace('X', '[A-Z]') in protein or pattern in protein:
+                        resistance_genes.append({
+                            'sequence_id': seq_idx,
+                            'resistance_type': gene_name,
+                            'frame': frame,
+                            'position': protein.find(pattern) if pattern in protein else 0,
+                            'antibiotic_class': self._get_antibiotic_class(gene_name),
+                            'confidence': 0.8
+                        })
+                
+                # For small sequences, look for resistance-like patterns
+                if len(sequence) < 1000:
+                    # Look for conserved amino acid patterns
+                    if 'S' in protein and 'K' in protein:  # Basic serine-lysine pattern
+                        if abs(protein.find('S') - protein.find('K')) < 10:
+                            resistance_genes.append({
+                                'sequence_id': seq_idx,
+                                'resistance_type': 'POTENTIAL_BETA_LACTAMASE',
+                                'frame': frame,
+                                'position': min(protein.find('S'), protein.find('K')),
+                                'antibiotic_class': 'beta_lactams',
+                                'confidence': 0.5
+                            })
+        except:
+            pass  # Skip if translation fails
         
         return resistance_genes
     

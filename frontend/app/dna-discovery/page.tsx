@@ -1,8 +1,9 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import { Upload, ArrowDownAz,Dna, Microscope, Target, Shield, Activity, TrendingUp, Download, Play } from 'lucide-react'
+import { Upload, ArrowDownAz,Dna, Microscope, Target, Shield, Activity, TrendingUp, Download, Play, Bot, X, AlertTriangle } from 'lucide-react'
 import DetailedResults from '@/components/DetailedResults'
+import AIAssistant from '@/components/AIAssistant'
 import { useAuth } from '@/lib/useAuth'
 import { api } from '@/lib/api'
 import { Header } from '@/components/Header'
@@ -18,8 +19,15 @@ interface AnalysisResult {
   analysis_id: string
   summary: {
     total_sequences: number
+    total_base_pairs: number
+    processing_mode: string
     analysis_timestamp: string
     sequence_ids: string[]
+  }
+  batch_info?: {
+    total_batches: number
+    batch_size: number
+    processing_time: number
   }
   gene_discovery?: any
   mutation_analysis?: any
@@ -36,6 +44,14 @@ const DNADiscoveryPage = () => {
   const [inputSequence, setInputSequence] = useState('')
   const [analysisResults, setAnalysisResults] = useState<AnalysisResult | null>(null)
   const [loading, setLoading] = useState(false)
+  const [showAIAssistant, setShowAIAssistant] = useState(false)
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false)
+  const [confirmDialogData, setConfirmDialogData] = useState<{
+    title: string
+    message: string
+    onConfirm: () => void
+  } | null>(null)
+
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedAnalyses, setSelectedAnalyses] = useState({
     gene_discovery: true,
@@ -83,7 +99,12 @@ const DNADiscoveryPage = () => {
       setSequences([...sequences, ...fastaSequences])
     } catch (error) {
       console.error('Error reading file:', error)
-      alert('Error reading file. Please ensure it is a valid FASTA format.')
+      setConfirmDialogData({
+        title: 'File Error',
+        message: 'Error reading file. Please ensure it is a valid FASTA format.',
+        onConfirm: () => setShowConfirmDialog(false)
+      })
+      setShowConfirmDialog(true)
     }
   }
 
@@ -131,7 +152,12 @@ const DNADiscoveryPage = () => {
 
   const runAnalysis = async () => {
     if (sequences.length === 0) {
-      alert('Please add sequences first')
+      setConfirmDialogData({
+        title: 'No Sequences',
+        message: 'Please add sequences first before running analysis.',
+        onConfirm: () => setShowConfirmDialog(false)
+      })
+      setShowConfirmDialog(true)
       return
     }
 
@@ -146,24 +172,29 @@ const DNADiscoveryPage = () => {
     
     if (isBatchMode) {
       const estimatedBatches = Math.ceil(totalBasePairs / 500000);
-      processingMessage = `\\n🚀 Batch Processing Mode: Will process in ${estimatedBatches} optimized batches`;
+      processingMessage = `\\n Batch Processing Mode: Will process in ${estimatedBatches} optimized batches`;
     }
     
     if (isLargeDataset) {
-      processingMessage += `\\n⏱️ Large Dataset: Estimated processing time 15-30 minutes`;
+      processingMessage += `\\n⏱Large Dataset: Estimated processing time 15-30 minutes`;
     }
     
-    const confirmAnalysis = confirm(
-      `Starting analysis of ${sequences.length} sequences (${totalBasePairs.toLocaleString()} bp).\\n` +
-      `Processing mode: ${isBatchMode ? 'Batch Processing (No Limits!)' : 'Standard Analysis'}\\n` +
-      `Estimated time: ${estimatedMinutes} minute(s).` +
-      processingMessage +
-      `\\n\\nContinue with analysis?`
-    )
-    
-    if (!confirmAnalysis) return
+    // Show confirmation dialog
+    setConfirmDialogData({
+      title: 'Start DNA Analysis?',
+      message: `Starting analysis of ${sequences.length} sequences (${totalBasePairs.toLocaleString()} bp).\n\nProcessing mode: ${isBatchMode ? 'Batch Processing (No Limits!)' : 'Standard Analysis'}\nEstimated time: ${estimatedMinutes} minute(s).${processingMessage}`,
+      onConfirm: () => {
+        setShowConfirmDialog(false)
+        setLoading(true)
+        performAnalysis()
+      }
+    })
+    setShowConfirmDialog(true)
+  }
 
-    setLoading(true)
+  const performAnalysis = async () => {
+    const totalBasePairs = sequences.reduce((sum, seq) => sum + seq.length, 0)
+    
     try {
       console.log('Starting DNA analysis...', {
         sequenceCount: sequences.length,
@@ -184,9 +215,21 @@ const DNADiscoveryPage = () => {
       const errorMessage = error instanceof Error ? error.message : 'Analysis failed';
       
       if (errorMessage.includes('timeout')) {
-        alert('Analysis timed out. Try analyzing fewer sequences (< 50) or shorter sequences (< 100k bp total).')
+        // Show error dialog instead of alert
+        setConfirmDialogData({
+          title: 'Analysis Timeout',
+          message: 'Analysis timed out. Try analyzing fewer sequences (< 50) or shorter sequences (< 100k bp total).',
+          onConfirm: () => setShowConfirmDialog(false)
+        })
+        setShowConfirmDialog(true)
       } else {
-        alert(`Analysis failed: ${errorMessage}. Please try again with smaller dataset.`)
+        // Show error dialog instead of alert
+        setConfirmDialogData({
+          title: 'Analysis Failed',
+          message: `Analysis failed: ${errorMessage}. Please try again with smaller dataset.`,
+          onConfirm: () => setShowConfirmDialog(false)
+        })
+        setShowConfirmDialog(true)
       }
     } finally {
       setLoading(false)
@@ -208,8 +251,10 @@ const DNADiscoveryPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-900 py-8">
-        <Header />
+    <>
+    <Header />
+    <div className="min-h-screen bg-zinc-950 py-8">
+        
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -319,7 +364,7 @@ const DNADiscoveryPage = () => {
                 {sequences.length > 100 && (
                   <div className="p-3 bg-yellow-900 bg-opacity-50 border border-yellow-700 rounded-lg text-center">
                     <span className="text-yellow-300 text-sm">
-                      📊 Displaying first 100 of {sequences.length} sequences for performance. All {sequences.length} sequences will be included in analysis.
+                       Displaying first 100 of {sequences.length} sequences for performance. All {sequences.length} sequences will be included in analysis.
                     </span>
                   </div>
                 )}
@@ -390,7 +435,7 @@ const DNADiscoveryPage = () => {
                         <div className="flex items-center">
                           <div className="w-2 h-2 bg-blue-400 rounded-full mr-2"></div>
                           <span className="text-blue-300">
-                            🚀 <strong>Batch Processing Mode</strong> - Will process in ~{estimatedBatches} optimized batches (No size limits!)
+                             <strong>Batch Processing Mode</strong> - Will process in ~{estimatedBatches} optimized batches (No size limits!)
                           </span>
                         </div>
                       </div>
@@ -403,7 +448,7 @@ const DNADiscoveryPage = () => {
                         <div className="flex items-center">
                           <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
                           <span className="text-green-300">
-                            ⚡ <strong>Standard Processing</strong> - Fast analysis for moderate datasets
+                             <strong>Standard Processing</strong> - Fast analysis for moderate datasets
                           </span>
                         </div>
                       </div>
@@ -451,16 +496,45 @@ const DNADiscoveryPage = () => {
           <div className="mb-8">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-semibold text-white">Analysis Results</h2>
-              <button
-                onClick={downloadResults}
-                className="px-4 py-2 bg-white text-black rounded-lg flex items-center transition-colors"
-              >
-                <Download className="mr-2 h-4 w-4" />
-                Download Results
-              </button>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setShowAIAssistant(!showAIAssistant)}
+                  className={`px-4 py-2 rounded-lg flex items-center transition-colors ${
+                    showAIAssistant 
+                      ? 'bg-green-600 text-white hover:bg-green-700' 
+                      : 'bg-zinc-600 text-zinc-300 hover:bg-zinc-500'
+                  }`}
+                  title={showAIAssistant ? "Hide AI Assistant" : "Show AI Assistant"}
+                >
+                  <Bot className="mr-2 h-4 w-4" />
+                  AI Assistant
+                </button>
+                <button
+                  onClick={downloadResults}
+                  className="px-4 py-2 bg-white text-black rounded-lg flex items-center transition-colors"
+                >
+                  <Download className="mr-2 h-4 w-4" />
+                  Download Results
+                </button>
+              </div>
             </div>
             
-            <DetailedResults analysisResults={analysisResults} />
+            <div className={`flex gap-6 ${showAIAssistant ? '' : 'justify-center'}`}>
+              {/* Main Results Content */}
+              <div className="flex-1">
+                <DetailedResults analysisResults={analysisResults} />
+              </div>
+              
+              {/* AI Assistant Sidebar */}
+              {showAIAssistant && (
+                <div className="w-96 h-[600px]">
+                  <AIAssistant
+                    analysisResults={analysisResults}
+                    isAnalyzing={loading}
+                  />
+                </div>
+              )}
+            </div>
           </div>
         )}
 
@@ -480,38 +554,38 @@ const DNADiscoveryPage = () => {
                   // Batch processing mode
                   <>
                     <div className="flex items-center justify-between">
-                      <span>📊 Creating Batches</span>
+                      <span>Creating Batches</span>
                       <span className="text-blue-400">Processing...</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span>🔄 Batch Analysis</span>
+                      <span>Batch Analysis</span>
                       <span className="text-green-400">Running...</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span>📈 Aggregating Results</span>
+                      <span>Aggregating Results</span>
                       <span className="text-yellow-400">Pending</span>
                     </div>
                     <div className="text-xs text-blue-300 mt-2">
-                      🚀 Processing {sequences.length} sequences in optimized batches
+                       Processing {sequences.length} sequences in optimized batches
                     </div>
                   </>
                 ) : (
                   // Standard processing mode
                   <>
                     <div className="flex items-center justify-between">
-                      <span>🧬 Gene Discovery</span>
+                      <span> Gene Discovery</span>
                       <span className="text-blue-400">Running...</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span>🦠 Pathogen Detection</span>
+                      <span>Pathogen Detection</span>
                       <span className="text-yellow-400">Queued</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span>🎯 Drug Targets</span>
+                      <span> Drug Targets</span>
                       <span className="text-yellow-400">Queued</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span>⚠️ Mutation Analysis</span>
+                      <span> Mutation Analysis</span>
                       <span className="text-yellow-400">Queued</span>
                     </div>
                   </>
@@ -523,14 +597,60 @@ const DNADiscoveryPage = () => {
               </div>
               
               <p className="text-xs text-gray-500 mt-3">
-                ⏱️ This may take up to 5 minutes for large datasets
+                ⏱This may take up to 5 minutes for large datasets
               </p>
+            </div>
+          </div>
+        )}
+
+        {/* Custom Confirmation Dialog */}
+        {showConfirmDialog && confirmDialogData && (
+          <div className="fixed inset-0 bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-zinc-800 border border-zinc-600 rounded-lg shadow-2xl max-w-md mx-4 p-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10  rounded-full flex items-center justify-center">
+                  <AlertTriangle className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-white">{confirmDialogData.title}</h3>
+                </div>
+                <button
+                  onClick={() => setShowConfirmDialog(false)}
+                  className="ml-auto text-zinc-400 hover:text-white transition-colors"
+                  title="Close dialog"
+                  aria-label="Close dialog"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              
+              <div className="mb-6">
+                <p className="text-zinc-300 whitespace-pre-line leading-relaxed">
+                  {confirmDialogData.message}
+                </p>
+              </div>
+              
+              <div className="flex gap-3 justify-end">
+                <button
+                  onClick={() => setShowConfirmDialog(false)}
+                  className="px-4 py-2 bg-zinc-600 text-zinc-300 rounded-lg hover:bg-zinc-500 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={confirmDialogData.onConfirm}
+                  className="px-4 py-2 bg-white text-black rounded-lg transition-colors"
+                >
+                  Continue
+                </button>
+              </div>
             </div>
           </div>
         )}
 
       </div>
     </div>
+    </>
   )
 }
 

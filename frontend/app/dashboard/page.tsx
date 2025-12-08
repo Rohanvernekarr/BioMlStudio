@@ -21,7 +21,8 @@ import {
   FileText,
   Activity,
   Zap,
-  Plus
+  Plus,
+  RefreshCw
 } from 'lucide-react';
 
 interface DashboardStats {
@@ -46,6 +47,7 @@ export default function Dashboard() {
     recentJobs: []
   });
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   console.log('Dashboard component rendering, auth:', authResult);
@@ -54,8 +56,18 @@ export default function Dashboard() {
     loadDashboardData();
   }, []);
 
-  const loadDashboardData = async () => {
-    console.log('Loading dashboard data...');
+  const refreshData = () => {
+    loadDashboardData(true);
+  };
+
+  const loadDashboardData = async (isRefresh = false) => {
+    console.log(isRefresh ? 'Refreshing dashboard data...' : 'Loading dashboard data...');
+    
+    if (isRefresh) {
+      setRefreshing(true);
+      setError(null);
+    }
+    
     try {
       // Load datasets with limit for faster loading
       console.log('Loading datasets...');
@@ -89,7 +101,11 @@ export default function Dashboard() {
       setError(error instanceof Error ? error.message : 'Failed to load dashboard data');
     } finally {
       console.log('Dashboard loading complete');
-      setLoading(false);
+      if (isRefresh) {
+        setRefreshing(false);
+      } else {
+        setLoading(false);
+      }
     }
   };
 
@@ -122,7 +138,7 @@ export default function Dashboard() {
                   <p className="text-lg font-semibold">Failed to load dashboard</p>
                 </div>
                 <p className="text-muted-foreground mb-4">{error}</p>
-                <Button onClick={() => { setError(null); setLoading(true); loadDashboardData(); }}>
+                <Button onClick={refreshData}>
                   Try Again
                 </Button>
               </div>
@@ -137,9 +153,17 @@ export default function Dashboard() {
     <>
       <Header />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-1 space-y-4 p-8 pt-6">
-        <div className=" flex items-center justify-between space-y-2">
+        <div className="flex items-center justify-between space-y-2">
           <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
           <div className="flex items-center space-x-2">
+            <Button 
+              variant="outline" 
+              onClick={refreshData}
+              disabled={refreshing}
+            >
+              <RefreshCw className={`mr-2 h-4 w-4 ${refreshing ? 'animate-spin' : ''}`} />
+              {refreshing ? 'Refreshing...' : 'Refresh'}
+            </Button>
             <Button onClick={() => router.push('/upload')}>
               <Plus className="mr-2 h-4 w-4" />
               Upload Dataset
@@ -148,7 +172,12 @@ export default function Dashboard() {
         </div>
 
         {/* Stats Overview */}
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 relative">
+          {refreshing && (
+            <div className="absolute inset-0  backdrop-blur-sm z-10 flex items-center justify-center rounded-lg">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+            </div>
+          )}
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
@@ -256,7 +285,12 @@ export default function Dashboard() {
         {/* Recent Activity */}
         <div className="grid gap-4 md:grid-cols-2">
           {/* Recent Datasets */}
-          <Card>
+          <Card className="relative">
+            {refreshing && (
+              <div className="absolute inset-0 backdrop-blur-sm z-10 flex items-center justify-center rounded-lg">
+                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
+              </div>
+            )}
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle>Recent Datasets</CardTitle>
@@ -299,7 +333,12 @@ export default function Dashboard() {
           </Card>
 
           {/* Recent Jobs */}
-          <Card>
+          <Card className="relative">
+            {refreshing && (
+              <div className="absolute inset-0 backdrop-blur-sm z-10 flex items-center justify-center rounded-lg">
+                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
+              </div>
+            )}
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle>Recent Jobs</CardTitle>

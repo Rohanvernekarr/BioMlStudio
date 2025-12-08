@@ -48,43 +48,43 @@ const DetailedResults: React.FC<DetailedResultsProps> = ({ analysisResults }) =>
     {
       key: 'gene_discovery',
       title: 'Gene Discovery & ORF Analysis',
-      icon: '🧬',
+      icon: '',
       description: 'Newly identified genes and their coding potential'
     },
     {
       key: 'mutation_analysis',
       title: 'Disease Mutation Analysis',
-      icon: '⚠️',
+      icon: '',
       description: 'Disease-causing mutations and oncogenic patterns'
     },
     {
       key: 'drug_targets',
       title: 'Drug Target Identification',
-      icon: '🎯',
+      icon: '',
       description: 'Potential therapeutic targets and binding sites'
     },
     {
       key: 'pathogen_detection',
       title: 'Pathogen & Resistance Detection',
-      icon: '🦠',
+      icon: '',
       description: 'Infectious agents and antibiotic resistance'
     },
     {
       key: 'motif_analysis',
       title: 'Functional Motif Analysis',
-      icon: '🔍',
+      icon: '',
       description: 'Regulatory elements and functional sequences'
     },
     {
       key: 'biomarker_generation',
       title: 'Biomarker Discovery',
-      icon: '📊',
+      icon: '',
       description: 'Diagnostic signatures and disease markers'
     },
     {
       key: 'evolutionary_analysis',
       title: 'Evolutionary Analysis',
-      icon: '🌲',
+      icon: '',
       description: 'Phylogenetic signals and evolutionary pressure'
     }
   ]
@@ -94,7 +94,7 @@ const DetailedResults: React.FC<DetailedResultsProps> = ({ analysisResults }) =>
       
       {/* Executive Summary */}
       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-200">
-        <h2 className="text-2xl font-bold text-blue-900 mb-4">🧬 Biological Discovery Summary</h2>
+        <h2 className="text-2xl font-bold text-blue-900 mb-4"> Biological Discovery Summary</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           <div className="bg-white rounded-lg p-4 shadow-sm">
@@ -128,7 +128,7 @@ const DetailedResults: React.FC<DetailedResultsProps> = ({ analysisResults }) =>
 
         {/* Key Biological Insights */}
         <div className="space-y-3">
-          <h3 className="text-lg font-semibold text-blue-800">🔬 Key Biological Insights</h3>
+          <h3 className="text-lg font-semibold text-blue-800"> Key Biological Insights</h3>
           
           {analysisResults.gene_discovery?.potential_genes?.length > 0 && (
             <BiologicalInsightCard
@@ -196,7 +196,7 @@ const DetailedResults: React.FC<DetailedResultsProps> = ({ analysisResults }) =>
                 
                 {/* Visualization */}
                 <div className="mb-6">
-                  <h4 className="text-lg font-semibold mb-3">📈 Data Visualization</h4>
+                  <h4 className="text-lg font-semibold mb-3"> Data Visualization</h4>
                   <div className="bg-gray-50 rounded-lg p-4">
                     <BioVisualization 
                       data={sectionData} 
@@ -298,7 +298,7 @@ const DetailedResults: React.FC<DetailedResultsProps> = ({ analysisResults }) =>
                   {section.key === 'pathogen_detection' && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <h5 className="font-medium mb-2">🦠 Pathogen Signatures</h5>
+                        <h5 className="font-medium mb-2"> Pathogen Signatures</h5>
                         {(sectionData.bacterial_signatures || []).concat(sectionData.viral_signatures || []).slice(0, 3).map((sig: any, idx: number) => (
                           <div key={idx} className="border rounded p-3 mb-2 bg-orange-50">
                             <div className="text-sm">
@@ -310,7 +310,7 @@ const DetailedResults: React.FC<DetailedResultsProps> = ({ analysisResults }) =>
                         ))}
                       </div>
                       <div>
-                        <h5 className="font-medium mb-2">💊 Resistance Genes</h5>
+                        <h5 className="font-medium mb-2"> Resistance Genes</h5>
                         {(sectionData.resistance_genes || []).slice(0, 3).map((gene: any, idx: number) => (
                           <div key={idx} className="border rounded p-3 mb-2 bg-red-50">
                             <div className="text-sm">
@@ -327,7 +327,7 @@ const DetailedResults: React.FC<DetailedResultsProps> = ({ analysisResults }) =>
                   {section.key === 'motif_analysis' && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <h5 className="font-medium mb-2">🔰 Regulatory Elements</h5>
+                        <h5 className="font-medium mb-2"> Regulatory Elements</h5>
                         {(sectionData.promoters || []).concat(sectionData.enhancers || []).slice(0, 3).map((motif: any, idx: number) => (
                           <div key={idx} className="border rounded p-3 mb-2 bg-indigo-50">
                             <div className="text-sm">
@@ -339,7 +339,7 @@ const DetailedResults: React.FC<DetailedResultsProps> = ({ analysisResults }) =>
                         ))}
                       </div>
                       <div>
-                        <h5 className="font-medium mb-2">🧬 CpG Islands</h5>
+                        <h5 className="font-medium mb-2"> CpG Islands</h5>
                         {(sectionData.cpg_islands || []).slice(0, 3).map((island: any, idx: number) => (
                           <div key={idx} className="border rounded p-3 mb-2 bg-teal-50">
                             <div className="text-sm">
@@ -355,7 +355,7 @@ const DetailedResults: React.FC<DetailedResultsProps> = ({ analysisResults }) =>
 
                   {section.key === 'biomarker_generation' && (
                     <div className="space-y-3">
-                      <h5 className="font-medium">🧬 Discriminative K-mers</h5>
+                      <h5 className="font-medium"> Discriminative K-mers</h5>
                       {(sectionData.discriminative_kmers || []).slice(0, 5).map((kmer: any, idx: number) => (
                         <div key={idx} className="border rounded-lg p-4 bg-cyan-50">
                           <div className="flex justify-between items-start mb-2">
@@ -378,7 +378,7 @@ const DetailedResults: React.FC<DetailedResultsProps> = ({ analysisResults }) =>
 
                 {/* Clinical Relevance */}
                 <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-                  <h4 className="text-lg font-semibold text-blue-800 mb-2">🏥 Clinical Relevance</h4>
+                  <h4 className="text-lg font-semibold text-blue-800 mb-2"> Clinical Relevance</h4>
                   <div className="text-sm text-gray-700">
                     {section.key === 'gene_discovery' && (
                       <p>Novel gene discoveries may lead to new therapeutic targets and biomarkers. Validation through functional studies is recommended.</p>
@@ -409,7 +409,7 @@ const DetailedResults: React.FC<DetailedResultsProps> = ({ analysisResults }) =>
 
       {/* Research Recommendations */}
       <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-6 border border-green-200">
-        <h2 className="text-xl font-bold text-green-900 mb-4">🎯 Research & Development Recommendations</h2>
+        <h2 className="text-xl font-bold text-green-900 mb-4"> Research & Development Recommendations</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
