@@ -286,7 +286,7 @@ const DNADiscoveryPage = () => {
                 value={inputSequence}
                 onChange={(e) => setInputSequence(e.target.value)}
                 placeholder="Paste your DNA sequence here (ATCG format)..."
-                className="w-full h-32 p-3 bg-gray-700 border border-gray-600 rounded-md focus:border-transparent text-white placeholder-gray-400"
+                className="w-full h-32 p-3 bg-zinc-900 border border-gray-600 rounded-md focus:border-transparent text-white placeholder-gray-400"
               />
               <button
                 onClick={handleAddSequence}

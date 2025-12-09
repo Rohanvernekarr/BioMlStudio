@@ -47,15 +47,7 @@ export default function LoginPage() {
           <Dna className="mr-2 h-6 w-6" />
           BioMLStudio
         </div>
-        <div className="relative z-20 mt-auto">
-          <blockquote className="space-y-2">
-            <p className="text-lg">
-              "This platform has revolutionized how we approach bioinformatics research. 
-              The no-code ML capabilities save us countless hours."
-            </p>
-            <footer className="text-sm">Dr. Sofia Rodriguez, Computational Biology Lab</footer>
-          </blockquote>
-        </div>
+       
       </div>
       <div className="lg:p-8">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">

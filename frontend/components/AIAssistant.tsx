@@ -132,7 +132,7 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ analysisResults, isAnalyzing 
       <div className="flex items-center gap-2 mb-4 pb-2 border-b border-zinc-700">
         <Bot className="w-5 h-5 text-blue-400" />
         <h3 className="text-white font-semibold">AI Assistant</h3>
-        <span className="text-xs text-zinc-400 ml-auto">Powered by Gemini 2.0 Flash</span>
+
       </div>
 
       {/* Messages */}
