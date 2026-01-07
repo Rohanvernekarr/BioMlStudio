@@ -3,8 +3,6 @@
 ## Overview
 This document describes the completed end-to-end ML workflow integration for BioMLStudio, combining all services into a unified API that handles the complete pipeline from data upload to model export.
 
-## Architecture
-
 ### Backend Services (Completed)
 1. **PreprocessingService** (`app/services/preprocessing_service.py`)
    - Data loading and cleaning
