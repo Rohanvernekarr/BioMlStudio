@@ -6,7 +6,6 @@ AI-powered no-code platform for bioinformatics, built with Next.js (frontend) an
 - `frontend/` : Next.js React UI
 - `backend/`  : FastAPI for ML workflows and bioinformatics logic
 
-## Getting Started
 
 1. See `frontend/README.md` for React app setup.
 2. See `backend/README.md` for Python API setup.

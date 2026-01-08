@@ -3,7 +3,6 @@
 ## Project Overview
 BioMLStudio has been successfully transformed into a comprehensive no-code AI platform for bioinformatics with exactly 8 core modules as requested.
 
-## Completed Modules
 
 ### ✅ 1. Dashboard (`/dashboard`)
 - **File**: `app/dashboard/page.tsx`
